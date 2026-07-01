@@ -198,32 +198,54 @@
         
         .preloader-text {
             font-size: 28px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            color: #0f0; margin-bottom: 8px; font-family: 'Courier New', Courier, monospace;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
-            min-height: 34px;
+            color: #fff; margin-bottom: 8px; font-family: monospace; display: flex; align-items: center; gap: 12px;
         }
+        
         .preloader-subtitle {
-            font-size: 14px; font-weight: 500; text-transform: uppercase;
-            color: #00ff00; margin-bottom: 32px; font-family: 'Courier New', Courier, monospace;
-            border-right: 10px solid #0f0; padding-right: 8px;
-            animation: blink-caret 0.75s step-end infinite;
-            min-height: 20px;
+            font-size: 14px; color: #0f0; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 32px; font-family: monospace;
         }
+        
+        .terminal-box {
+            background: rgba(0,255,0,0.05); border: 1px solid rgba(0,255,0,0.2); padding: 16px; border-radius: 4px;
+            width: 100%; font-family: monospace; font-size: 12px; color: #0f0;
+        }
+        .terminal-line { margin-bottom: 8px; opacity: 0; }
+        .terminal-line.show { opacity: 1; }
         
         @keyframes glitch {
             2%, 64% { transform: translate(2px,0) skew(0deg); }
             4%, 60% { transform: translate(-2px,0) skew(0deg); }
             62% { transform: translate(0,0) skew(5deg); }
         }
-        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #0f0; } }
 
-        .preloader-status {
-            font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #0f0;
-            line-height: 1.8; text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-            min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; width: 100%;
+        /* Advanced Glitch Effect */
+        .glitch-wrapper { position: relative; display: inline-block; }
+        .glitch-wrapper::before, .glitch-wrapper::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; pointer-events: none;
         }
-        .log-line { opacity: 0; transform: translateY(10px); animation: logAppear 0.2s forwards; }
-        @keyframes logAppear { to { opacity: 1; transform: translateY(0); } }
+        .glitch-wrapper::before {
+            left: 2px; text-shadow: -2px 0 #ff00c1; animation: glitch-anim-1 2s infinite linear alternate-reverse; color: var(--text-primary);
+        }
+        .glitch-wrapper::after {
+            left: -2px; text-shadow: -2px 0 #00fff9; animation: glitch-anim-2 3s infinite linear alternate-reverse; color: var(--text-primary);
+        }
+        .hacker-logo.glitch-wrapper::before, .hacker-logo.glitch-wrapper::after { color: #0f0; }
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(20% 0 80% 0); }
+            20% { clip-path: inset(60% 0 10% 0); }
+            40% { clip-path: inset(40% 0 50% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            80% { clip-path: inset(10% 0 70% 0); }
+            100% { clip-path: inset(30% 0 20% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(10% 0 60% 0); }
+            20% { clip-path: inset(30% 0 20% 0); }
+            40% { clip-path: inset(70% 0 10% 0); }
+            60% { clip-path: inset(20% 0 50% 0); }
+            80% { clip-path: inset(50% 0 30% 0); }
+            100% { clip-path: inset(5% 0 80% 0); }
+        }
 
         .nav-links { display: none; gap: 32px; align-items: center; }
         .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s ease; }
@@ -385,20 +407,51 @@
         .stat-number span { color: var(--text-secondary); }
         .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* Marquee */
-        .marquee-container { 
-            overflow: hidden; white-space: nowrap; padding: 32px 0; 
+        /* 3D Giant Marquee */
+        .marquee-section {
+            padding: 80px 0; overflow: hidden; background: var(--bg-base);
             border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
-            transition: border-color 0.5s ease;
+            position: relative; display: flex; flex-direction: column; gap: 24px;
+            transform: rotate(-5deg) scale(1.1); transform-origin: center; margin: 120px 0;
+            box-shadow: inset 0 20px 50px rgba(0,0,0,0.5), inset 0 -20px 50px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+        [data-theme="light"] .marquee-section { box-shadow: inset 0 20px 50px rgba(0,0,0,0.05), inset 0 -20px 50px rgba(0,0,0,0.05); }
+        .marquee-container { 
+            overflow: hidden; white-space: nowrap; display: flex; width: 100vw;
         }
         .marquee-content { 
-            display: inline-block; animation: marquee 30s linear infinite; 
-            font-size: 20px; font-weight: 500; color: var(--text-secondary); letter-spacing: 1px; 
+            display: inline-flex; animation: marquee-left 40s linear infinite; 
+            align-items: center; padding-right: 48px;
         }
-        .marquee-content span { display: inline-block; transition: color 0.3s; }
-        .marquee-content span:hover { color: var(--text-primary); }
-        .separator { color: var(--border-color); margin: 0 32px; font-weight: 300; transition: color 0.5s ease;}
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .marquee-content.reverse { animation: marquee-right 40s linear infinite; }
+        
+        .marquee-item {
+            font-size: 5vw; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;
+            margin-right: 48px; line-height: 1; font-family: 'Inter', sans-serif; font-style: italic;
+            color: transparent; -webkit-text-stroke: 2px var(--text-secondary); opacity: 0.5;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, text-shadow 0.3s ease; cursor: default;
+        }
+        .marquee-item.solid {
+            color: var(--text-primary); -webkit-text-stroke: 0px; opacity: 1;
+        }
+        .marquee-item:hover {
+            color: var(--text-primary); -webkit-text-stroke: 0px; opacity: 1;
+            transform: scale(1.1) rotate(2deg); text-shadow: 0 10px 30px var(--accent-glow);
+        }
+        
+        @keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+        /* Marquee Brand Hover Colors */
+        .marquee-item { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, text-shadow 0.3s ease; cursor: default; }
+        .marquee-item[data-skill="laravel"]:hover { color: #FF2D20 !important; text-shadow: 0 0 15px rgba(255,45,32,0.6) !important; }
+        .marquee-item[data-skill="react native"]:hover { color: #61DAFB !important; text-shadow: 0 0 15px rgba(97,218,251,0.6) !important; }
+        .marquee-item[data-skill="typescript"]:hover { color: #3178C6 !important; text-shadow: 0 0 15px rgba(49,120,198,0.6) !important; }
+        .marquee-item[data-skill="mysql"]:hover { color: #4479A1 !important; text-shadow: 0 0 15px rgba(68,121,161,0.6) !important; }
+        .marquee-item[data-skill="php"]:hover { color: #777BB4 !important; text-shadow: 0 0 15px rgba(119,123,180,0.6) !important; }
+        .marquee-item[data-skill="tailwindcss"]:hover { color: #06B6D4 !important; text-shadow: 0 0 15px rgba(6,182,212,0.6) !important; }
+        .marquee-item[data-skill="interface design"]:hover { color: #F24E1E !important; text-shadow: 0 0 15px rgba(242,78,30,0.6) !important; }
 
         /* About Section */
         .about { padding-top: 120px; padding-bottom: 60px; }
@@ -600,6 +653,40 @@
         .footer-links a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; font-weight: 500;}
         .footer-links a:hover { color: var(--text-primary); }
 
+        /* Command Palette (Ctrl+K) */
+        .cmd-palette-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(8px);
+            z-index: 9999999; display: flex; justify-content: center; align-items: flex-start;
+            padding-top: 15vh; opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cmd-palette-overlay.active { opacity: 1; visibility: visible; }
+        .cmd-palette {
+            background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px;
+            width: 90%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            overflow: hidden; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-theme="light"] .cmd-palette { box-shadow: 0 20px 40px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8); }
+        .cmd-palette-overlay.active .cmd-palette { transform: scale(1); }
+        
+        .cmd-input-container { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px; }
+        .cmd-input-container svg { color: var(--text-secondary); width: 20px; height: 20px; }
+        .cmd-input {
+            background: transparent; border: none; outline: none; width: 100%; color: var(--text-primary);
+            font-size: 18px; font-family: var(--font-family);
+        }
+        .cmd-input::placeholder { color: var(--text-secondary); }
+        
+        .cmd-list { max-height: 300px; overflow-y: auto; padding: 12px; }
+        .cmd-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 8px;
+            cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
+        }
+        .cmd-item svg { width: 18px; height: 18px; }
+        .cmd-item.active { background: var(--accent-glow); color: var(--text-primary); }
+        .cmd-item-shortcut { margin-left: auto; font-size: 12px; font-weight: 600; padding: 4px 8px; background: var(--border-color); border-radius: 4px; color: var(--text-secondary); }
+
+
         /* Custom Cursor */
         @media (pointer: fine) {
             body { cursor: none; }
@@ -651,10 +738,16 @@
     <!-- Hacker Preloader -->
     <div class="preloader" id="preloader">
         <div class="preloader-content">
-            <div class="hacker-logo">AW_</div>
-            <h2 class="preloader-text" id="hackerName"></h2>
-            <div class="preloader-subtitle" id="hackerTitle"></div>
-            <div class="preloader-status" id="hackerLogs"></div>
+            <div class="hacker-logo glitch-wrapper" data-text="AW_">AW_</div>
+            <h2 class="preloader-text"><span class="glitch-wrapper" data-text="SYSTEM_BOOT">SYSTEM_BOOT</span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-unlock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg></h2>
+            <div class="preloader-subtitle">Establishing secure connection...</div>
+            
+            <div class="terminal-box" id="terminalBox">
+                <div class="terminal-line">Wait, initializing core modules... [OK]</div>
+                <div class="terminal-line">Loading neural pathways... [OK]</div>
+                <div class="terminal-line">Bypassing mainframe security... [OK]</div>
+                <div class="terminal-line" style="color: #fff;">ACCESS GRANTED.</div>
+            </div>
         </div>
     </div>
 
@@ -687,6 +780,11 @@
         </nav>
 
         <div class="nav-actions">
+            <!-- Command Palette Trigger -->
+            <button class="theme-toggle" id="cmdKTrigger" aria-label="Search" style="width: auto; padding: 0 12px; gap: 6px; font-size: 12px; font-weight: 600; border-radius: 8px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span style="opacity: 0.7;">Ctrl K</span>
+            </button>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
                 <!-- Sun Icon (shows in dark mode) -->
                 <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -753,16 +851,28 @@
         @endforeach
     </section>
 
-    <div class="marquee-container reveal delay-1">
-        <div class="marquee-content">
-            @foreach($skills as $skill)
-            <span data-skill="{{ strtolower($skill->name) }}">{{ $skill->name }}</span>
-            <span class="separator">+</span>
-            @endforeach
-            @foreach($skills as $skill)
-            <span data-skill="{{ strtolower($skill->name) }}">{{ $skill->name }}</span>
-            <span class="separator">+</span>
-            @endforeach
+    <div class="marquee-section reveal delay-1">
+        <!-- Row 1: Left to Right -->
+        <div class="marquee-container">
+            <div class="marquee-content">
+                @foreach($skills as $index => $skill)
+                <span class="marquee-item {{ $index % 2 == 0 ? 'solid' : '' }}" data-skill="{{ strtolower($skill->name) }}">{{ $skill->name }}</span>
+                @endforeach
+                @foreach($skills as $index => $skill)
+                <span class="marquee-item {{ $index % 2 == 0 ? 'solid' : '' }}" data-skill="{{ strtolower($skill->name) }}">{{ $skill->name }}</span>
+                @endforeach
+            </div>
+        </div>
+        <!-- Row 2: Right to Left -->
+        <div class="marquee-container">
+            <div class="marquee-content reverse">
+                @foreach($skills as $index => $skill)
+                <span class="marquee-item {{ $index % 2 != 0 ? 'solid' : '' }}" data-skill="{{ strtolower($skill->name) }}">{{ $skill->name }}</span>
+                @endforeach
+                @foreach($skills as $index => $skill)
+                <span class="marquee-item {{ $index % 2 != 0 ? 'solid' : '' }}" data-skill="{{ strtolower($skill->name) }}">{{ $skill->name }}</span>
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -898,78 +1008,38 @@
         </svg>
     </div>
 
+    <!-- Command Palette (Ctrl+K) -->
+    <div class="cmd-palette-overlay" id="cmdPalette">
+        <div class="cmd-palette">
+            <div class="cmd-input-container">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command or search..." autocomplete="off">
+            </div>
+            <div class="cmd-list" id="cmdList">
+                <!-- Items generated via JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Hacker Preloader Logic
+            // Preloader Logic
             const preloader = document.getElementById('preloader');
-            const logsContainer = document.getElementById('hackerLogs');
-            const hackerName = document.getElementById('hackerName');
-            const hackerTitle = document.getElementById('hackerTitle');
+            const terminalLines = document.querySelectorAll('.terminal-line');
             
-            const logs = [
-                "[ OK ] Initializing core systems...",
-                "[ OK ] Bypassing mainframe security protocols...",
-                "[ OK ] Decrypting portfolio assets...",
-                "[ OK ] Establishing secure connection...",
-                "[ OK ] Access Granted. Welcome."
-            ];
-
-            let logIndex = 0;
-            
-            class TextScramble {
-              constructor(el) {
-                this.el = el; this.chars = '!<>-_\\\\/[]{}—=+*^?#________'; this.update = this.update.bind(this);
-              }
-              setText(newText) {
-                const oldText = this.el.innerText; const length = Math.max(oldText.length, newText.length);
-                const promise = new Promise((resolve) => this.resolve = resolve); this.queue = [];
-                for (let i = 0; i < length; i++) {
-                  const from = oldText[i] || ''; const to = newText[i] || '';
-                  const start = Math.floor(Math.random() * 40); const end = start + Math.floor(Math.random() * 40);
-                  this.queue.push({ from, to, start, end });
-                }
-                cancelAnimationFrame(this.frameRequest); this.frame = 0; this.update(); return promise;
-              }
-              update() {
-                let output = ''; let complete = 0;
-                for (let i = 0, n = this.queue.length; i < n; i++) {
-                  let { from, to, start, end, char } = this.queue[i];
-                  if (this.frame >= end) { complete++; output += to; } 
-                  else if (this.frame >= start) {
-                    if (!char || Math.random() < 0.28) { char = this.randomChar(); this.queue[i].char = char; }
-                    output += `<span style="opacity:0.5">${char}</span>`;
-                  } else { output += from; }
-                }
-                this.el.innerHTML = output;
-                if (complete === this.queue.length) { this.resolve(); } else {
-                  this.frameRequest = requestAnimationFrame(this.update); this.frame++;
-                }
-              }
-              randomChar() { return this.chars[Math.floor(Math.random() * this.chars.length)]; }
-            }
-
-            if(preloader) {
-                const fxName = new TextScramble(hackerName);
-                const fxTitle = new TextScramble(hackerTitle);
-
-                setTimeout(() => { fxName.setText("ANGGA WIRANATA"); }, 100);
-                setTimeout(() => { fxTitle.setText("WEB DEVELOPER"); }, 800);
-
-                const logInterval = setInterval(() => {
-                    if (logIndex < logs.length) {
-                        const line = document.createElement('div');
-                        line.className = 'log-line';
-                        line.innerText = logs[logIndex];
-                        logsContainer.appendChild(line);
-                        logIndex++;
-                    } else {
-                        clearInterval(logInterval);
-                        setTimeout(() => {
-                            preloader.style.opacity = '0';
-                            preloader.style.visibility = 'hidden';
-                        }, 800);
-                    }
-                }, 500); // 500ms per log = 2.5s total animation + 0.8s fade
+            if (preloader && terminalLines.length > 0) {
+                let delay = 300;
+                terminalLines.forEach((line, index) => {
+                    setTimeout(() => {
+                        line.classList.add('show');
+                    }, delay);
+                    delay += 600; 
+                });
+                
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    preloader.style.visibility = 'hidden';
+                }, delay + 600);
             }
 
             // Global Mouse Tracker for Grid Background
@@ -1240,6 +1310,124 @@
                     btn.style.transform = `translate(0, 0)`;
                 });
             });
+
+            // Command Palette Logic
+            const cmdPalette = document.getElementById('cmdPalette');
+            const cmdInput = document.getElementById('cmdInput');
+            const cmdList = document.getElementById('cmdList');
+            const cmdKTrigger = document.getElementById('cmdKTrigger');
+            
+            const commands = [
+                { id: 'home', title: 'Go to Home', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>', action: () => window.scrollTo({top: 0, behavior: 'smooth'}) },
+                { id: 'about', title: 'Go to About', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>', action: () => document.getElementById('about').scrollIntoView({behavior: 'smooth'}) },
+                { id: 'projects', title: 'Go to Projects', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>', action: () => document.getElementById('projects').scrollIntoView({behavior: 'smooth'}) },
+                { id: 'skills', title: 'Go to Skills', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>', action: () => document.getElementById('skills').scrollIntoView({behavior: 'smooth'}) },
+                { id: 'contact', title: 'Say Hello (Email)', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>', action: () => window.location.href = 'mailto:anggawiranatafti@gmail.com' },
+                { id: 'theme', title: 'Toggle Dark/Light Mode', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>', action: () => document.getElementById('themeToggle').click() },
+                { id: 'admin', title: 'Login to Admin Panel', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>', action: () => window.location.href = '/admin' }
+            ];
+
+            let activeCmdIndex = 0;
+            let filteredCommands = [...commands];
+
+            function renderCommands() {
+                cmdList.innerHTML = '';
+                if(filteredCommands.length === 0) {
+                    cmdList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary); font-size: 14px;">No commands found.</div>';
+                    return;
+                }
+                filteredCommands.forEach((cmd, index) => {
+                    const item = document.createElement('div');
+                    item.className = `cmd-item ${index === activeCmdIndex ? 'active' : ''}`;
+                    item.innerHTML = `${cmd.icon} <span>${cmd.title}</span> <span class="cmd-item-shortcut">↵</span>`;
+                    
+                    item.addEventListener('mouseenter', () => { 
+                        activeCmdIndex = index; 
+                        updateActiveItem(); 
+                    });
+                    
+                    item.addEventListener('click', () => { 
+                        executeCommand(index); 
+                    });
+                    
+                    cmdList.appendChild(item);
+                });
+                updateActiveItem();
+            }
+
+            function updateActiveItem() {
+                const items = cmdList.querySelectorAll('.cmd-item');
+                items.forEach((item, index) => {
+                    if(index === activeCmdIndex) {
+                        item.classList.add('active');
+                        item.scrollIntoView({ block: 'nearest' });
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+
+            function executeCommand(index) {
+                if(filteredCommands[index]) {
+                    closePalette();
+                    filteredCommands[index].action();
+                }
+            }
+
+            function openPalette() {
+                cmdPalette.classList.add('active');
+                cmdInput.value = '';
+                filteredCommands = [...commands];
+                activeCmdIndex = 0;
+                renderCommands();
+                setTimeout(() => cmdInput.focus(), 50);
+            }
+
+            function closePalette() {
+                cmdPalette.classList.remove('active');
+                cmdInput.blur();
+            }
+
+            if(cmdKTrigger) cmdKTrigger.addEventListener('click', openPalette);
+
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    if (cmdPalette) cmdPalette.classList.contains('active') ? closePalette() : openPalette();
+                }
+                if (e.key === 'Escape' && cmdPalette && cmdPalette.classList.contains('active')) {
+                    closePalette();
+                }
+                if (cmdPalette && cmdPalette.classList.contains('active')) {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        activeCmdIndex = (activeCmdIndex + 1) % filteredCommands.length;
+                        updateActiveItem();
+                    }
+                    if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        activeCmdIndex = (activeCmdIndex - 1 + filteredCommands.length) % filteredCommands.length;
+                        updateActiveItem();
+                    }
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        executeCommand(activeCmdIndex);
+                    }
+                }
+            });
+
+            cmdInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                filteredCommands = commands.filter(cmd => cmd.title.toLowerCase().includes(query) || cmd.id.includes(query));
+                activeCmdIndex = 0;
+                renderCommands();
+            });
+
+            if (cmdPalette) {
+                cmdPalette.addEventListener('click', (e) => {
+                    if(e.target === cmdPalette) closePalette();
+                });
+            }
 
         });
     </script>
