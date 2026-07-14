@@ -1273,20 +1273,20 @@
         .contact-card {
             background: var(--bg-surface); border: 1px solid var(--border-color);
             border-radius: 24px; padding: 64px; position: relative; overflow: hidden;
-            display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 40px;
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px;
             transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         .contact-card::before {
-            content: ''; position: absolute; top: -50%; right: -20%; width: 60%; height: 200%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 100%; height: 200%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
             opacity: 0.5; pointer-events: none; transition: background 0.5s ease;
         }
-        .contact-content { flex: 1; min-width: 320px; max-width: 600px; position: relative; z-index: 1; }
+        .contact-content { flex: 1; min-width: 320px; max-width: 800px; position: relative; z-index: 1; text-align: center; margin: 0 auto; }
         
         /* Contact Form Styles */
-        .contact-layout { display: flex; flex-direction: column; gap: 32px; margin-top: 40px; width: 100%; margin-left: 0; }
-        .telegram-form { display: flex; flex-direction: column; gap: 20px; width: 100%; }
-        .contact-sidebar { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 24px; width: 100%; flex-wrap: wrap; }
+        .contact-layout { display: flex; flex-direction: column; gap: 32px; margin-top: 40px; width: 100%; margin-left: 0; align-items: center; }
+        .telegram-form { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 600px; }
+        .contact-sidebar { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 24px; width: 100%; flex-wrap: wrap; }
         
         /* Contact Terminal */
         .contact-terminal-wrapper {
@@ -2074,20 +2074,7 @@
                 </div>
             </div>
             
-            <!-- Fake Terminal Element -->
-            <div class="contact-terminal-wrapper">
-                <div class="contact-terminal">
-                    <div class="c-term-header">
-                        <div class="c-term-buttons">
-                            <span></span><span></span><span></span>
-                        </div>
-                        <div class="c-term-title">guest@angga-server:~</div>
-                    </div>
-                    <div class="c-term-body" id="contactTerminalBody">
-                        <!-- Typed by JS -->
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
 
@@ -2698,61 +2685,6 @@
                 }
             })();
 
-            // ===== CONTACT TERMINAL =====
-            (function initContactTerminal() {
-                const termBody = document.getElementById('contactTerminalBody');
-                if (!termBody) return;
-                
-                const isMobile = window.innerWidth <= 1024;
-                const awaitMsg = isMobile ? "Awaiting your message above..." : "Awaiting your message on the left...";
-                
-                const lines = [
-                    "Establishing secure connection...",
-                    "Handshake successful. [OK]",
-                    "Authenticating session...",
-                    "Access granted.",
-                    "Loading communication protocols...",
-                    "System ready.",
-                    awaitMsg
-                ];
-                let lineIdx = 0;
-                let started = false;
-                
-                const typeNextLine = () => {
-                    if (lineIdx < lines.length) {
-                        const div = document.createElement('div');
-                        div.className = 'c-term-line';
-                        div.innerHTML = `<span class="c-term-prompt">&gt;</span><span class="c-term-text">${lines[lineIdx]}</span>`;
-                        termBody.appendChild(div);
-                        termBody.scrollTop = termBody.scrollHeight;
-                        lineIdx++;
-                        setTimeout(typeNextLine, Math.random() * 600 + 300);
-                    } else {
-                        const curLine = document.createElement('div');
-                        curLine.className = 'c-term-line';
-                        curLine.innerHTML = `<span class="c-term-prompt">&gt;</span><span class="c-term-cursor"></span>`;
-                        termBody.appendChild(curLine);
-                        termBody.scrollTop = termBody.scrollHeight;
-                    }
-                };
-
-                const termWrapper = document.querySelector('.contact-terminal');
-                if (termWrapper) {
-                    termWrapper.addEventListener('mouseenter', () => {
-                        if (!started) {
-                            started = true;
-                            // Add an initial empty cursor blinking before typing starts
-                            termBody.innerHTML = `<div class="c-term-line"><span class="c-term-prompt">&gt;</span><span class="c-term-cursor" id="tempCursor"></span></div>`;
-                            
-                            setTimeout(() => {
-                                const temp = document.getElementById('tempCursor');
-                                if (temp) temp.parentElement.remove();
-                                typeNextLine();
-                            }, 600);
-                        }
-                    });
-                }
-            })();
 
             function runCounters() {
                 hasCounted = false;
