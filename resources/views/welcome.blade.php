@@ -1458,19 +1458,8 @@
     <div class="preloader" id="preloader">
         <canvas id="matrixCanvas"></canvas>
         <div class="preloader-percentage-new" id="preloaderPerc" data-text="0%">0%</div>
-        <div id="initWrapper" style="display: none; position: absolute; z-index: 100; text-align: center; flex-direction: column; align-items: center; justify-content: center;">
-            <div style="font-family: 'Courier New', monospace; font-size: 16px; color: var(--text-primary); letter-spacing: 2px; margin-bottom: 16px; animation: pulseBtn 1s infinite;">> SYSTEM LOADED 100%_</div>
-            <button id="initSystemBtn" class="init-btn" style="font-family: 'Courier New', monospace; font-size: 24px; font-weight: bold; color: var(--text-primary); background: transparent; border: 2px solid var(--text-primary); padding: 16px 32px; cursor: pointer; text-transform: uppercase; letter-spacing: 4px; border-radius: 4px; box-shadow: 0 0 20px rgba(16,185,129,0.4), inset 0 0 20px rgba(16,185,129,0.2); transition: all 0.3s ease;">INITIALIZE SYSTEM</button>
-            <div style="font-family: 'Courier New', monospace; font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 1px; margin-top: 16px;">(Click to unlock portfolio)</div>
-        </div>
     </div>
     
-    <style>
-        .init-btn:hover { background: var(--text-primary) !important; color: #000 !important; box-shadow: 0 0 40px rgba(16,185,129,0.8), inset 0 0 20px rgba(16,185,129,0.8) !important; transform: scale(1.05); }
-        .init-btn { animation: pulseBtn 1.5s infinite; }
-        @keyframes pulseBtn { 0% { opacity: 0.8; } 50% { opacity: 1; text-shadow: 0 0 10px var(--text-primary); } 100% { opacity: 0.8; } }
-    </style>
-
     <!-- Interactive Grid Background -->
     <div class="grid-background" id="gridBackground"></div>
 
@@ -2108,28 +2097,18 @@
                             
                             if (preloaderPerc) preloaderPerc.style.display = 'none';
                             
-                            const initWrapper = document.getElementById('initWrapper');
-                            const initBtn = document.getElementById('initSystemBtn');
-                            if (initWrapper && initBtn) {
-                                initWrapper.style.display = 'flex';
-                                initBtn.addEventListener('click', () => {
-                                    initWrapper.style.display = 'none';
-                                    playStartupSound();
-                                    
-                                    isOverloaded = true;
-                                    preloader.classList.add('overload');
-                                    
-                                    setTimeout(() => {
-                                        preloader.classList.add('fade-out');
-                                        setTimeout(() => {
-                                            preloader.style.display = 'none';
-                                            document.querySelectorAll('.reveal').forEach((el, index) => {
-                                                setTimeout(() => { el.classList.add('active'); }, index * 100);
-                                            });
-                                        }, 1500);
-                                    }, 500);
-                                });
-                            }
+                            isOverloaded = true;
+                            preloader.classList.add('overload');
+                            
+                            setTimeout(() => {
+                                preloader.classList.add('fade-out');
+                                setTimeout(() => {
+                                    preloader.style.display = 'none';
+                                    document.querySelectorAll('.reveal').forEach((el, index) => {
+                                        setTimeout(() => { el.classList.add('active'); }, index * 100);
+                                    });
+                                }, 1500);
+                            }, 500);
                         }
                         if(preloaderPerc && progress < 100) {
                             preloaderPerc.innerText = progress + '%';
