@@ -1954,7 +1954,7 @@
             <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $project->category }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
                 <style>
                     .project-card:hover .project-img { transform: scale(1.05); }
-                    .has-hover-img:hover .project-img { opacity: 0; }
+                    .project-card:hover .has-hover-img .project-img { opacity: 0; }
                     .project-card:hover .project-img-hover { opacity: 1; transform: scale(1.05); }
                     .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
                 </style>
