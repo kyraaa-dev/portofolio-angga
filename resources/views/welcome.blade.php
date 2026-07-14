@@ -1971,10 +1971,10 @@
                             $hoverImageName = 'duta-korpri-2026.png';
                         }
                     @endphp
-                    <img src="{{ asset('images/' . $imageName) }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    <img src="{{ asset('images/' . $imageName) }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: 100%; object-fit: contain; background: rgba(0,0,0,0.2); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     @if($hoverImageName)
-                        <img src="{{ asset('images/' . $hoverImageName) }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                        <img src="{{ asset('images/' . $hoverImageName) }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: rgba(0,0,0,0.2); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     @endif
                     <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%); pointer-events: none;"></div>
                     @php
