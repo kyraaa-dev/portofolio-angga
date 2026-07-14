@@ -2013,16 +2013,18 @@
                         elseif($project->category == 'Selesai') $catI18n = 'proj_comp';
                         elseif($project->category == 'Unggulan') $catI18n = 'proj_feat';
                     @endphp
-                    <div class="project-tag" style="position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); border: 1px solid var(--accent-color); color: var(--accent-color); box-shadow: 0 0 10px rgba(16,185,129,0.2); border-radius: 20px; display: flex; align-items: center; gap: 6px; padding: 4px 12px; z-index: 20; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
-                        <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
-                    </div>
                 </div>
                 
                 <div class="project-footer" style="padding-top: 0; border-top: none;">
                     <div>
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">{{ $project->title }}</h3>
-                        <p style="font-size: 14px; color: var(--accent-color); margin-top: 6px; margin-bottom: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+                            <div class="project-tag" style="background: rgba(16,185,129,0.1); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                                <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
+                            </div>
+                            <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
+                        </div>
                     </div>
                     <a href="{{ $project->link }}" class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
