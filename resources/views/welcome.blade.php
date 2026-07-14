@@ -2009,7 +2009,7 @@
                     <!-- Bottom Gradient -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%); pointer-events: none; z-index: 4;"></div>
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
-                    <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.5) 0%, transparent 45%); pointer-events: none; z-index: 4;"></div>
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
                     @php
                         $catI18n = '';
                         if($project->category == 'Berjalan') $catI18n = 'proj_prog';
