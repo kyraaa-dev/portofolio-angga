@@ -581,6 +581,31 @@
             0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 249, 0.8), 0 0 20px rgba(0, 255, 249, 0.4); }
             20%, 24%, 55% { opacity: 0.8; text-shadow: none; }
         }
+        
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+            animation: glitchTextFlicker 3s infinite alternate;
+        }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .glitch-text::before {
+            left: 2px; text-shadow: -1px 0 rgba(255,0,0,0.7);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px; text-shadow: -1px 0 rgba(0,0,255,0.7);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitchTextFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.8; }
+        }
+
         .digital-id-footer {
             margin-top: auto; display: flex; justify-content: space-between; align-items: center;
             transform: translateZ(20px);
@@ -1580,7 +1605,7 @@
     <section class="hero container">
         <div id="particles-js"></div>
         <h1 class="hero-title reveal active delay-1">{!! str_replace(' ', '<br>', $settings['name'] ?? 'ANGGA WIRANATA') !!}</h1>
-        <div class="hero-badge reveal active delay-1" data-i18n="hero_badge">PENGEMBANG WEB</div>
+        <div class="hero-badge reveal active delay-1"><span class="glitch-text" data-text="PENGEMBANG WEB" data-i18n="hero_badge" id="heroBadgeText">PENGEMBANG WEB</span></div>
         <p class="hero-description reveal active delay-2" data-i18n="hero_desc">
             {{ $settings['description'] ?? 'Membangun aplikasi web yang efisien dan tangguh dengan estetika modern.' }}
         </p>
@@ -2926,6 +2951,21 @@
                     el.innerHTML = translations[key][lang] + " " + badgeHtml;
                 }
             });
+
+            // Fix glitch text data attribute when translating
+            const heroBadgeText = document.getElementById('heroBadgeText');
+            if (heroBadgeText) {
+                heroBadgeText.setAttribute('data-text', translations['hero_badge'][lang] || translations['hero_badge']['id']);
+            }
+            
+            const digitalIdRole = document.querySelector('.digital-id-role.glitch-role');
+            if (digitalIdRole) {
+                const roleData = translations['hero_badge'][lang] || translations['hero_badge']['id'];
+                digitalIdRole.setAttribute('data-text', roleData);
+                digitalIdRole.innerHTML = roleData;
+            }
+            
+            localStorage.setItem('lang', lang);
         }
 
         if (langToggleBtn) {
