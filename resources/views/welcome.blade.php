@@ -1954,16 +1954,24 @@
             <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $project->category }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
                 <style>
                     .project-card:hover .project-img { transform: scale(1.05); }
+                    .has-hover-img:hover .project-img { opacity: 0; }
+                    .project-card:hover .project-img-hover { opacity: 1; transform: scale(1.05); }
                     .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
                 </style>
-                <div class="project-image-wrapper" style="width: calc(100% + 64px); height: 220px; margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
+                <div class="project-image-wrapper {{ str_contains(strtolower($project->title), 'duta') ? 'has-hover-img' : '' }}" style="width: calc(100% + 64px); height: 220px; margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
                         $imageName = 'project-korpri.png';
+                        $hoverImageName = null;
                         if (str_contains(strtolower($project->title), 'duta')) {
                             $imageName = 'duta-korpri.png';
+                            $hoverImageName = 'duta-korpri-2026.png';
                         }
                     @endphp
-                    <img src="{{ asset('images/' . $imageName) }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    <img src="{{ asset('images/' . $imageName) }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s ease;">
+                    
+                    @if($hoverImageName)
+                        <img src="{{ asset('images/' . $hoverImageName) }}" alt="{{ $project->title }} Alternate" class="project-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.5s ease; pointer-events: none;">
+                    @endif
                     <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%); pointer-events: none;"></div>
                     @php
                         $catI18n = '';
