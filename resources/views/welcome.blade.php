@@ -1226,11 +1226,15 @@
         .project-card { 
             background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; 
             padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
-            transition: all 0.3s ease, background-color 0.5s ease, border-color 0.5s ease; position: relative; overflow: hidden; 
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; 
+            transform-style: preserve-3d;
+        }
+        .project-card > * {
+            transform: translateZ(30px);
         }
         .project-card:hover { 
-            border-color: var(--border-hover); background: var(--bg-surface-hover);
-            transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: var(--accent-color); background: var(--bg-surface-hover);
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3), inset 0 0 20px rgba(16, 185, 129, 0.1);
         }
         /* Flashlight Effect */
         .project-card::after {
@@ -1947,7 +1951,7 @@
 
         <div class="project-grid">
             @foreach($projects as $index => $project)
-            <div class="project-card reveal delay-{{ $index % 3 }}" data-category="{{ $project->category }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
+            <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $project->category }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
                 <style>
                     .project-card:hover .project-img { transform: scale(1.05); }
                     .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
@@ -2775,6 +2779,9 @@
         });
     </script>
     
+    <!-- Vanilla Tilt 3D Effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script>
