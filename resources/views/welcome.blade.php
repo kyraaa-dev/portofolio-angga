@@ -2006,8 +2006,7 @@
                     @if($hoverImageName)
                         <img src="{{ asset('images/' . $hoverImageName) }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     @endif
-                    <!-- Bottom Gradient -->
-                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%); pointer-events: none; z-index: 4;"></div>
+
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
                     @php
