@@ -538,8 +538,48 @@
             color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .digital-id-role {
-            font-size: 12px; font-weight: 600; color: #00fff9;
-            text-transform: uppercase; letter-spacing: 3px;
+            font-size: 13px; font-weight: 700; color: #00fff9;
+            text-transform: uppercase; letter-spacing: 4px;
+        }
+        .glitch-role {
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(0, 255, 249, 0.8);
+            animation: textFlicker 3s infinite alternate;
+        }
+        .glitch-role::before, .glitch-role::after {
+            content: attr(data-text);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .glitch-role::before {
+            left: 2px; text-shadow: -1px 0 rgba(255,0,0,0.7);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch-role::after {
+            left: -2px; text-shadow: -1px 0 rgba(0,0,255,0.7);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 8px, 0); }
+            20% { clip: rect(32px, 9999px, 86px, 0); }
+            40% { clip: rect(65px, 9999px, 12px, 0); }
+            60% { clip: rect(12px, 9999px, 90px, 0); }
+            80% { clip: rect(78px, 9999px, 43px, 0); }
+            100% { clip: rect(3px, 9999px, 25px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            20% { clip: rect(10px, 9999px, 32px, 0); }
+            40% { clip: rect(45px, 9999px, 73px, 0); }
+            60% { clip: rect(87px, 9999px, 12px, 0); }
+            80% { clip: rect(34px, 9999px, 56px, 0); }
+            100% { clip: rect(12px, 9999px, 89px, 0); }
+        }
+        @keyframes textFlicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 249, 0.8), 0 0 20px rgba(0, 255, 249, 0.4); }
+            20%, 24%, 55% { opacity: 0.8; text-shadow: none; }
         }
         .digital-id-footer {
             margin-top: auto; display: flex; justify-content: space-between; align-items: center;
@@ -1573,7 +1613,7 @@
                 
                 <div class="digital-id-info">
                     <h4 class="digital-id-name">{{ $settings['name'] ?? 'ANGGA WIRANATA' }}</h4>
-                    <p class="digital-id-role">{{ $settings['title'] ?? 'WEB DEVELOPER' }}</p>
+                    <p class="digital-id-role glitch-role" data-text="{{ $settings['title'] ?? 'WEB DEVELOPER' }}">{{ $settings['title'] ?? 'WEB DEVELOPER' }}</p>
                 </div>
 
                 <div class="digital-id-footer">
