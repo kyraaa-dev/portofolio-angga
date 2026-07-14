@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>OG Banner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            width: 1200px;
+            height: 630px;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        /* ===== DEEP SPACE BACKGROUND ===== */
+        .bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 80% at 85% 50%, #0a1628 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 15% 50%, #050e1a 0%, transparent 60%),
+                #020b14;
+        }
+
+        /* Diagonal beam of light */
+        .beam {
+            position: absolute;
+            width: 400px;
+            height: 900px;
+            background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.06) 30%, rgba(16, 185, 129, 0.04) 70%, transparent);
+            transform: rotate(-30deg);
+            top: -200px;
+            left: 300px;
+            pointer-events: none;
+        }
+        .beam2 {
+            position: absolute;
+            width: 200px;
+            height: 900px;
+            background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.04) 30%, rgba(99, 102, 241, 0.03) 70%, transparent);
+            transform: rotate(-30deg);
+            top: -200px;
+            left: 600px;
+            pointer-events: none;
+        }
+
+        /* Fine dot grid */
+        .dots {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Noise overlay */
+        .noise {
+            position: absolute;
+            inset: 0;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 200px 200px;
+        }
+
+        /* ===== PHOTO PANEL (LEFT HALF) ===== */
+        .photo-panel {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 500px;
+            height: 630px;
+            overflow: hidden;
+        }
+
+        .photo {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: grayscale(20%) contrast(1.1) brightness(0.85);
+        }
+
+        /* Diagonal clip mask over photo */
+        .photo-mask {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                transparent 0%,
+                transparent 55%,
+                #020b14 72%,
+                #020b14 100%
+            );
+        }
+
+        /* Top dark gradient on photo */
+        .photo-top {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #020b14, transparent);
+        }
+
+        /* Bottom dark gradient on photo */
+        .photo-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 200px;
+            background: linear-gradient(to top, #020b14, transparent);
+        }
+
+        /* Green tint on photo */
+        .photo-tint {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 60%, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+        }
+
+        /* ===== CIRCUIT DECORATION ===== */
+        .circuit {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* ===== CONTENT (RIGHT SIDE) ===== */
+        .content {
+            position: absolute;
+            left: 480px;
+            top: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 64px 60px 40px;
+            gap: 0;
+        }
+
+        /* Availability chip */
+        .avail {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 7px 16px;
+            border-radius: 100px;
+            width: fit-content;
+            margin-bottom: 28px;
+        }
+        .avail-dot {
+            width: 7px;
+            height: 7px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #10b981;
+        }
+        .avail-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Name */
+        .name-block {
+            margin-bottom: 24px;
+        }
+        .name-first {
+            display: block;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 38px;
+            letter-spacing: 16px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .name-last {
+            display: block;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 86px;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+            line-height: 0.88;
+            /* Split color effect */
+            background: linear-gradient(
+                100deg,
+                #ffffff 0%,
+                #e2e8f0 30%,
+                #10b981 55%,
+                #34d399 70%,
+                #a7f3d0 85%,
+                #ffffff 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Title tag */
+        .title-tag {
+            font-size: 16px;
+            font-weight: 400;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .title-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(71,85,105,0.4), transparent);
+        }
+
+        /* Description */
+        .desc {
+            font-size: 17px;
+            font-weight: 300;
+            color: #64748b;
+            line-height: 1.65;
+            margin-bottom: 32px;
+            max-width: 380px;
+        }
+        .desc strong {
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        /* Tech stack */
+        .stack {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        .stack-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #64748b;
+            letter-spacing: 0.5px;
+        }
+        .stack-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        /* URL bar */
+        .url-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 12px;
+            width: fit-content;
+        }
+        .url-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .url-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #94a3b8;
+            letter-spacing: 0.3px;
+        }
+        .url-text span {
+            color: #10b981;
+        }
+
+        /* ===== DECORATIVE CORNER ELEMENTS ===== */
+        .corner-tr {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.1);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        .corner-br {
+            position: absolute;
+            bottom: 28px;
+            right: 28px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.1);
+            letter-spacing: 2px;
+        }
+
+        /* Thin horizontal rule at top */
+        .top-rule {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent 0%, transparent 35%, #10b981 50%, rgba(16,185,129,0.3) 70%, transparent 100%);
+        }
+        .bottom-rule {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(16,185,129,0.15) 50%, transparent);
+        }
+
+        /* Vertical photo edge glow */
+        .photo-edge-glow {
+            position: absolute;
+            left: 450px;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(16,185,129,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background layers -->
+    <div class="bg"></div>
+    <div class="dots"></div>
+    <div class="beam"></div>
+    <div class="beam2"></div>
+    <div class="noise"></div>
+
+    <!-- Top & bottom rules -->
+    <div class="top-rule"></div>
+    <div class="bottom-rule"></div>
+
+    <!-- Photo Panel -->
+    <div class="photo-panel">
+        <img src="./public/images/profile.jpg" alt="Angga Wiranata" class="photo">
+        <div class="photo-top"></div>
+        <div class="photo-bottom"></div>
+        <div class="photo-mask"></div>
+        <div class="photo-tint"></div>
+    </div>
+
+    <!-- Edge glow between photo and content -->
+    <div class="photo-edge-glow"></div>
+
+    <!-- SVG Circuit Lines (decorative) -->
+    <svg class="circuit" width="500" height="630" viewBox="0 0 500 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top-left corner bracket -->
+        <path d="M20 20 L20 60" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
+        <path d="M20 20 L60 20" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
+        <!-- Dot at corner -->
+        <circle cx="20" cy="20" r="3" fill="#10b981" opacity="0.6"/>
+
+        <!-- Bottom-left corner bracket -->
+        <path d="M20 610 L20 570" stroke="rgba(16,185,129,0.25)" stroke-width="1.5"/>
+        <path d="M20 610 L60 610" stroke="rgba(16,185,129,0.25)" stroke-width="1.5"/>
+        <circle cx="20" cy="610" r="2" fill="#10b981" opacity="0.4"/>
+
+        <!-- Horizontal connector lines (circuit-style) -->
+        <path d="M40 120 L100 120 L100 110 L160 110" stroke="rgba(16,185,129,0.12)" stroke-width="1"/>
+        <circle cx="40" cy="120" r="2" fill="rgba(16,185,129,0.3)"/>
+        <circle cx="160" cy="110" r="2" fill="rgba(16,185,129,0.2)"/>
+
+        <path d="M30 500 L80 500 L80 490 L140 490" stroke="rgba(16,185,129,0.1)" stroke-width="1"/>
+
+        <!-- Scan line -->
+        <line x1="0" y1="315" x2="480" y2="315" stroke="rgba(16,185,129,0.04)" stroke-width="1"/>
+    </svg>
+
+    <!-- Content Panel -->
+    <div class="content">
+
+        <!-- Availability -->
+        <div class="avail">
+            <span class="avail-dot"></span>
+            <span class="avail-text">Open to Work</span>
+        </div>
+
+        <!-- Name -->
+        <div class="name-block">
+            <span class="name-first">Angga</span>
+            <span class="name-last">Wiranata</span>
+        </div>
+
+        <!-- Title -->
+        <div class="title-tag">
+            Web Developer
+            <div class="title-line"></div>
+        </div>
+
+        <!-- Description -->
+        <p class="desc">
+            Crafting <strong>modern digital experiences</strong> with clean code,
+            pixel-perfect UI, and high-performance architecture.
+        </p>
+
+        <!-- Tech Stack -->
+        <div class="stack">
+            <div class="stack-item"><span class="stack-dot" style="background:#ff4e29;"></span>Laravel</div>
+            <div class="stack-item"><span class="stack-dot" style="background:#61dafb;"></span>React</div>
+            <div class="stack-item"><span class="stack-dot" style="background:#f0db4f;"></span>JavaScript</div>
+            <div class="stack-item"><span class="stack-dot" style="background:#06b6d4;"></span>Tailwind</div>
+            <div class="stack-item"><span class="stack-dot" style="background:#10b981;"></span>UI/UX</div>
+        </div>
+
+        <!-- URL -->
+        <div class="url-bar">
+            <div class="url-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <span class="url-text"><span>kyraaa</span>.pages.dev</span>
+        </div>
+    </div>
+
+    <!-- Corner labels -->
+    <div class="corner-tr">Portfolio · 2026</div>
+    <div class="corner-br">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="rgba(255,255,255,0.15)" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Full-Stack Dev
+    </div>
+
+</body>
+</html>
