@@ -1958,9 +1958,36 @@
                         50%, 95% { opacity: 1; transform: scale(1.05); }
                         100% { opacity: 0; transform: scale(1); }
                     }
+                    @keyframes scanline {
+                        0% { top: -10%; }
+                        50% { top: 110%; }
+                        100% { top: -10%; }
+                    }
+                    @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+                    
                     .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
                     .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
                     .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
+                    
+                    /* Holographic Scanline Overlay */
+                    .project-image-wrapper::before {
+                        content: ''; position: absolute; left: 0; right: 0; top: -10%; height: 2px;
+                        background: var(--accent-color);
+                        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+                        z-index: 10; pointer-events: none; opacity: 0;
+                        transition: opacity 0.3s;
+                    }
+                    .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
+                    
+                    /* Cyberpunk Tech Grid Overlay */
+                    .project-image-wrapper::after {
+                        content: ''; position: absolute; inset: 0;
+                        background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
+                        background-size: 100% 4px, 3px 100%;
+                        z-index: 5; pointer-events: none; opacity: 0;
+                        transition: opacity 0.5s;
+                    }
+                    .project-card:hover .project-image-wrapper::after { opacity: 1; }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); height: 220px; margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
@@ -1976,14 +2003,17 @@
                     @if($hoverImageName)
                         <img src="{{ asset('images/' . $hoverImageName) }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; background: rgba(0,0,0,0.2); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     @endif
-                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%); pointer-events: none;"></div>
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-surface) 0%, transparent 60%); pointer-events: none; z-index: 4;"></div>
                     @php
                         $catI18n = '';
                         if($project->category == 'Berjalan') $catI18n = 'proj_prog';
                         elseif($project->category == 'Selesai') $catI18n = 'proj_comp';
                         elseif($project->category == 'Unggulan') $catI18n = 'proj_feat';
                     @endphp
-                    <div class="project-tag" @if($catI18n) data-i18n="{{ $catI18n }}" @endif style="position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">{{ $project->category }}</div>
+                    <div class="project-tag" style="position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); border: 1px solid var(--accent-color); color: var(--accent-color); box-shadow: 0 0 10px rgba(16,185,129,0.2); border-radius: 20px; display: flex; align-items: center; gap: 6px; padding: 4px 12px; z-index: 20; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                        <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
+                    </div>
                 </div>
                 
                 <div class="project-footer" style="padding-top: 0; border-top: none;">
