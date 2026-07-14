@@ -1567,24 +1567,7 @@
             </a>
         </div>
 
-        <!-- 🎙️ Voice Introduction (Bilingual) -->
-        <div class="voice-intro reveal active delay-2">
-            <audio id="voiceAudio" preload="none"></audio>
-            <div class="voice-lang-group">
-                <button class="voice-lang-btn active" id="langEn" data-lang="en">🇬🇧 EN</button>
-                <button class="voice-lang-btn" id="langId" data-lang="id">🇮🇩 ID</button>
-            </div>
-            <button class="voice-btn" id="voiceBtn">
-                <div class="voice-icon-wrap">
-                    <div class="voice-pulse"></div>
-                    <svg class="mic-icon" id="micIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
-                    <div class="equalizer" id="equalizer" style="display:none;">
-                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
-                    </div>
-                </div>
-                <span class="voice-label" id="voiceLabel">Hear My Story</span>
-            </button>
-        </div>
+
 
 
         <div class="digital-id-perspective reveal active delay-2">
@@ -2112,74 +2095,7 @@
                 
                 // Cinematic Cyberpunk Startup Sound (Web Audio API Synthesizer)
                 function playStartupSound() {
-                    try {
-                        const AudioContext = window.AudioContext || window.webkitAudioContext;
-                        if (!AudioContext) return;
-                        const ctx = new AudioContext();
-                        const now = ctx.currentTime;
-                        
-                        const masterGain = ctx.createGain();
-                        masterGain.gain.value = 0.5;
-                        masterGain.connect(ctx.destination);
-                        
-                        // 1. Deep Sub-Bass Drop (Impact)
-                        const subOsc = ctx.createOscillator();
-                        const subGain = ctx.createGain();
-                        subOsc.type = 'sine';
-                        subOsc.frequency.setValueAtTime(150, now);
-                        subOsc.frequency.exponentialRampToValueAtTime(20, now + 0.8);
-                        subGain.gain.setValueAtTime(0, now);
-                        subGain.gain.linearRampToValueAtTime(1, now + 0.05);
-                        subGain.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
-                        subOsc.connect(subGain);
-                        subGain.connect(masterGain);
-                        subOsc.start(now);
-                        subOsc.stop(now + 1.2);
-                        
-                        // 2. Power Up Swell (Futuristic Synthesizer Chord)
-                        const chord = [261.63, 311.13, 392.00, 466.16]; // C minor 7
-                        chord.forEach((freq, index) => {
-                            const osc = ctx.createOscillator();
-                            const gain = ctx.createGain();
-                            osc.type = 'sawtooth';
-                            osc.frequency.value = freq * 0.5; // octave down
-                            
-                            gain.gain.setValueAtTime(0, now);
-                            gain.gain.linearRampToValueAtTime(0.15, now + 0.5 + (index * 0.1));
-                            gain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
-                            
-                            const filter = ctx.createBiquadFilter();
-                            filter.type = 'lowpass';
-                            filter.frequency.setValueAtTime(100, now);
-                            filter.frequency.exponentialRampToValueAtTime(4000, now + 1.2);
-                            
-                            osc.connect(filter);
-                            filter.connect(gain);
-                            gain.connect(masterGain);
-                            osc.start(now);
-                            osc.stop(now + 2.5);
-                        });
-                        
-                        // 3. Glitch / Data Stream Processing (Random high-tech beeps)
-                        for(let i = 0; i < 15; i++) {
-                            const beepOsc = ctx.createOscillator();
-                            const beepGain = ctx.createGain();
-                            beepOsc.type = 'square';
-                            beepOsc.frequency.value = 1000 + Math.random() * 4000;
-                            
-                            const startTime = now + 0.1 + (i * 0.05);
-                            beepGain.gain.setValueAtTime(0, startTime);
-                            beepGain.gain.setValueAtTime(0.05, startTime + 0.01);
-                            beepGain.gain.setValueAtTime(0, startTime + 0.04);
-                            
-                            beepOsc.connect(beepGain);
-                            beepGain.connect(masterGain);
-                            beepOsc.start(startTime);
-                            beepOsc.stop(startTime + 0.05);
-                        }
-                    } catch(e) {
-                        console.log("Audio skipped");
-                    }
+                    // Sound removed per user request
                 }
 
                 setTimeout(() => {
@@ -2812,60 +2728,6 @@
             }
 
             if (replaySkip) replaySkip.addEventListener('click', skipReplay);
-
-            // 🎙️ Voice Introduction Logic (Bilingual)
-            const voiceBtn = document.getElementById('voiceBtn');
-            const voiceAudio = document.getElementById('voiceAudio');
-            const voiceLabel = document.getElementById('voiceLabel');
-            const micIcon = document.getElementById('micIcon');
-            const equalizer = document.getElementById('equalizer');
-            const langBtns = document.querySelectorAll('.voice-lang-btn');
-
-            const audioSources = {
-                en: './audio/greeting-en.mp3',
-                id: './audio/greeting-id.mp3'
-            };
-            const labels = { en: 'Hear My Story', id: 'Dengarkan Cerita Saya' };
-            let currentLang = 'en';
-            voiceAudio.src = audioSources[currentLang];
-
-            function resetVoice() {
-                voiceAudio.pause();
-                voiceAudio.currentTime = 0;
-                voiceBtn.classList.remove('playing');
-                voiceLabel.textContent = labels[currentLang];
-                micIcon.style.display = '';
-                equalizer.style.display = 'none';
-            }
-
-            // Language selector
-            langBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    resetVoice();
-                    currentLang = btn.getAttribute('data-lang');
-                    voiceAudio.src = audioSources[currentLang];
-                    voiceLabel.textContent = labels[currentLang];
-                    langBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                });
-            });
-
-            if (voiceBtn && voiceAudio) {
-                voiceBtn.addEventListener('click', () => {
-                    if (voiceAudio.paused) {
-                        voiceAudio.play();
-                        voiceBtn.classList.add('playing');
-                        voiceLabel.textContent = 'Playing...';
-                        micIcon.style.display = 'none';
-                        equalizer.style.display = 'flex';
-                    } else {
-                        resetVoice();
-                    }
-                });
-
-                voiceAudio.addEventListener('ended', resetVoice);
-            }
-
         });
     </script>
     
