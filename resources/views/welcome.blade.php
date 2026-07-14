@@ -885,43 +885,6 @@
         }
         .replay-skip:hover { background: rgba(255,255,255,0.2); }
 
-        /* 👨‍💻 Easter Egg Terminal */
-        .easter-egg-terminal {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95);
-            width: 700px; max-width: 95vw; height: 450px; max-height: 85vh;
-            background: rgba(5,5,5,0.95); border: 1px solid var(--accent-color);
-            box-shadow: 0 0 50px rgba(16,185,129,0.15); z-index: 999999;
-            display: flex; flex-direction: column; opacity: 0; pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-radius: 8px; overflow: hidden; backdrop-filter: blur(10px);
-        }
-        .easter-egg-terminal.open { opacity: 1; pointer-events: all; transform: translate(-50%, -50%) scale(1); }
-        .ee-term-header {
-            background: #111; padding: 12px 16px; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 1px solid #333; color: #888; font-size: 14px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        .ee-term-close {
-            background: transparent; color: #888; border: none; font-size: 20px; cursor: pointer;
-            transition: 0.2s; padding: 0; line-height: 1; width: 24px; height: 24px;
-            display: flex; align-items: center; justify-content: center; border-radius: 4px;
-        }
-        .ee-term-close:hover { background: #f44336; color: #fff; }
-        .ee-term-body {
-            padding: 20px; flex: 1; overflow-y: auto; color: #10b981; font-size: 14px;
-            display: flex; flex-direction: column; gap: 8px; font-family: 'Courier New', Courier, monospace;
-        }
-        .ee-term-body::-webkit-scrollbar { width: 6px; }
-        .ee-term-body::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
-        .ee-input-line { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
-        .ee-input-line span { color: #fff; font-weight: bold; }
-        .ee-input-line input {
-            background: transparent; border: none; color: #10b981; font-family: 'Courier New', Courier, monospace;
-            font-size: 15px; outline: none; flex: 1; caret-color: #10b981;
-        }
-        .ee-cmd-err { color: #ef4444; }
-        .ee-cmd-succ { color: #3b82f6; }
-
         /* Replay animation classes */
         .replay-hiding .reveal { opacity: 0 !important; transform: translateY(30px) !important; transition: all 0.5s ease !important; }
         .replay-hiding .reveal.active { opacity: 0 !important; transform: translateY(30px) !important; }
@@ -2022,23 +1985,6 @@
         </div>
     </footer>
 
-    <!-- 👨‍💻 Easter Egg Terminal -->
-    <div class="easter-egg-terminal" id="eeTerminal">
-        <div class="ee-term-header">
-            <span>root@angga-os:~</span>
-            <button id="eeCloseBtn" class="ee-term-close">&times;</button>
-        </div>
-        <div class="ee-term-body" id="eeTermBody">
-            <div style="color:#fff">> GUEST SYSTEM ACCESS GRANTED.</div>
-            <div>> TYPE <span style="color:#fff">'help'</span> FOR A LIST OF COMMANDS.</div>
-            <div id="eeOutput"></div>
-            <div class="ee-input-line">
-                <span>guest@angga:~#</span>
-                <input type="text" id="eeInput" autocomplete="off" spellcheck="false">
-            </div>
-        </div>
-    </div>
-
     <!-- Terminal Panel for Replay -->
     <div class="replay-terminal" id="replayTerminal">
         <div class="replay-terminal-header">
@@ -3088,93 +3034,6 @@
                 }
             }
         }
-
-            // 👨‍💻 Easter Egg Terminal Logic
-            const eeTerminal = document.getElementById('eeTerminal');
-            const eeCloseBtn = document.getElementById('eeCloseBtn');
-            const eeInput = document.getElementById('eeInput');
-            const eeOutput = document.getElementById('eeOutput');
-            const eeTermBody = document.getElementById('eeTermBody');
-
-            // Trigger terminal with backtick/tilde
-            window.addEventListener('keydown', (e) => {
-                if (e.key === '`' || e.key === '~') {
-                    e.preventDefault();
-                    toggleEETerminal();
-                }
-            });
-            
-            // Or double click on footer text (for mobile/no keyboard)
-            const copyrightText = document.querySelector('.footer-text');
-            if (copyrightText) {
-                copyrightText.addEventListener('dblclick', (e) => {
-                    e.preventDefault();
-                    toggleEETerminal();
-                });
-            }
-
-            function toggleEETerminal() {
-                eeTerminal.classList.toggle('open');
-                if (eeTerminal.classList.contains('open')) {
-                    setTimeout(() => eeInput.focus(), 100);
-                } else {
-                    eeInput.blur();
-                }
-            }
-
-            eeCloseBtn.addEventListener('click', () => eeTerminal.classList.remove('open'));
-
-            eeInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const cmd = eeInput.value.trim().toLowerCase();
-                    if (!cmd) return;
-                    
-                    let response = '';
-                    switch(cmd) {
-                        case 'help': 
-                            response = `<span class="ee-cmd-succ">AVAILABLE COMMANDS:</span><br>
-                                        &nbsp;&nbsp;whoami&nbsp;&nbsp;&nbsp;&nbsp;- Show identity info<br>
-                                        &nbsp;&nbsp;skills&nbsp;&nbsp;&nbsp;&nbsp;- List technical stack<br>
-                                        &nbsp;&nbsp;projects&nbsp;&nbsp;- View top projects<br>
-                                        &nbsp;&nbsp;sudo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Grant root access<br>
-                                        &nbsp;&nbsp;clear&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear console output<br>
-                                        &nbsp;&nbsp;exit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Close terminal`; 
-                            break;
-                        case 'whoami': 
-                            response = `Name: Angga Wiranata<br>Role: Full-Stack Web Developer<br>Location: Indonesia<br>Status: Available for work`; 
-                            break;
-                        case 'skills': 
-                            response = `Laravel, PHP, Vue.js, React, Tailwind CSS, MySQL, Git`; 
-                            break;
-                        case 'projects': 
-                            response = `1. SILUKOR (Sistem Informasi Layanan Usulan Keanggotaan KORPRI)<br>2. SISDUKOR (Sistem Informasi Duta KORPRI)<br>-> Scroll the main UI to interact with them!`; 
-                            break;
-                        case 'sudo': 
-                            response = `<span class="ee-cmd-err">Access Denied. This incident will be reported to the sysadmin.</span>`; 
-                            break;
-                        case 'clear': 
-                            eeOutput.innerHTML = ''; 
-                            eeInput.value = ''; 
-                            return;
-                        case 'exit': 
-                            toggleEETerminal();
-                            eeInput.value = ''; 
-                            return;
-                        default: 
-                            response = `<span class="ee-cmd-err">Command not found: ${cmd}</span>. Type 'help' for available commands.`;
-                    }
-                    
-                    const cmdStr = `<div><span style="color:#fff; font-weight:bold;">guest@angga:~#</span> ${cmd}</div>`;
-                    const resStr = `<div style="margin-bottom: 12px; line-height:1.5; color:#10b981;">${response}</div>`;
-                    
-                    eeOutput.innerHTML += cmdStr + resStr;
-                    eeInput.value = '';
-                    
-                    setTimeout(() => {
-                        eeTermBody.scrollTop = eeTermBody.scrollHeight;
-                    }, 50);
-                }
-            });
 
     </script>
 </body>
