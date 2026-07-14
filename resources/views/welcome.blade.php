@@ -1965,8 +1965,6 @@
                     }
                     @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
                     
-                    .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
-                    .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
                     .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
                     
                     /* Holographic Scanline Overlay */
@@ -1977,7 +1975,6 @@
                         z-index: 10; pointer-events: none; opacity: 0;
                         transition: opacity 0.3s;
                     }
-                    .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
                     
                     /* Cyberpunk Tech Grid Overlay */
                     .project-image-wrapper::after {
@@ -1987,7 +1984,13 @@
                         z-index: 5; pointer-events: none; opacity: 0;
                         transition: opacity 0.5s;
                     }
-                    .project-card:hover .project-image-wrapper::after { opacity: 1; }
+
+                    @media (hover: hover) and (pointer: fine) {
+                        .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
+                        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
+                        .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
+                        .project-card:hover .project-image-wrapper::after { opacity: 1; }
+                    }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); height: 220px; margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
