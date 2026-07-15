@@ -2029,6 +2029,8 @@
                         if (str_contains(strtolower($project->title), 'duta')) {
                             $imageName = 'duta-korpri.png';
                             $hoverImageName = 'duta-korpri-2026.png';
+                        } elseif (str_contains(strtolower($project->title), 'kasflow')) {
+                            $imageName = 'kasflow-app.png';
                         }
                     @endphp
                     <img src="{{ asset('images/' . $imageName) }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
