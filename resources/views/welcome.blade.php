@@ -1506,7 +1506,23 @@
             .stats { grid-template-columns: repeat(2, 1fr); }
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
             .services-grid { grid-template-columns: 1fr; }
-            .project-grid { grid-template-columns: 1fr; }
+            
+            /* Swipeable Project Cards */
+            .project-grid { 
+                display: flex !important; 
+                flex-wrap: nowrap !important;
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                gap: 16px !important; 
+                padding-bottom: 24px;
+                scrollbar-width: none; 
+                -ms-overflow-style: none;
+                margin-right: -24px;
+                padding-right: 24px;
+            }
+            .project-grid::-webkit-scrollbar { display: none; }
+            .project-card { flex: 0 0 85% !important; scroll-snap-align: center; }
+
             .contact-card { padding: 32px; flex-direction: column; align-items: stretch; gap: 32px; }
             .contact-content { max-width: 100%; min-width: 100%; }
             .contact-layout { gap: 24px; margin-top: 24px; }
