@@ -2057,7 +2057,14 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
                             </div>
-                            <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
+                            @if(str_contains(strtolower($project->title), 'kasflow'))
+                                <a href="{{ $project->link }}" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                                    Klik untuk Demo
+                                </a>
+                            @else
+                                <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
+                            @endif
                         </div>
                     </div>
                     <a href="{{ $project->link }}" class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
