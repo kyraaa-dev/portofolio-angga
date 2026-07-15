@@ -145,6 +145,20 @@
         .btn-primary:hover { 
             background: transparent; color: var(--text-primary);
         }
+        
+        /* Radar Pulse Effect */
+        .btn-radar { position: relative; z-index: 1; }
+        .btn-radar::after {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 100%; height: 100%; background: var(--text-primary); border-radius: 8px;
+            z-index: -1; pointer-events: none;
+            animation: radar-pulse 2.5s infinite cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        @keyframes radar-pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.4, 1.7); opacity: 0; }
+        }
+
         .btn-outline { 
             background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); 
         }
@@ -1615,7 +1629,7 @@
         </p>
         
         <div class="hero-buttons reveal active delay-2" style="display: flex; gap: 16px; margin-bottom: 100px;">
-            <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_work">
+            <a href="#projects" class="btn btn-primary btn-radar" data-i18n="hero_btn_work">
                 Lihat Karya
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
             </a>
