@@ -1973,15 +1973,20 @@
         </div>
         
         <div class="filters reveal delay-1">
-            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">2</span></button>
-            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">2</span></button>
-            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">2</span></button>
-            <button class="filter-btn" data-filter="Berjalan" data-i18n-btn="proj_prog">In Progress <span class="badge">2</span></button>
+            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">3</span></button>
+            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">3</span></button>
+            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">1</span></button>
         </div>
 
         <div class="project-grid">
             @foreach($projects as $index => $project)
-            <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $project->category }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
+            @php
+                $filterCategories = 'Unggulan';
+                if(str_contains(strtolower($project->title), 'kasflow')) {
+                    $filterCategories = 'Unggulan, Selesai';
+                }
+            @endphp
+            <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $filterCategories }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
                 <style>
                     @keyframes autoCrossfade {
                         0%, 45% { opacity: 0; transform: scale(1); }
@@ -2428,7 +2433,8 @@
                     const filter = e.currentTarget.getAttribute('data-filter');
                     
                     projectCards.forEach(card => {
-                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        const categories = card.getAttribute('data-category');
+                        if (filter === 'all' || categories.includes(filter)) {
                             card.style.display = 'flex';
                             setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
                         } else {
