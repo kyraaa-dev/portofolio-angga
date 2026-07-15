@@ -877,35 +877,7 @@
             transition: transform 0.3s ease;
         }
         .heatmap-container:hover { transform: translateY(-5px); }
-        .heatmap-grid {
-            display: flex; gap: 4px; justify-content: flex-start;
-        }
-        .heatmap-col { display: flex; flex-direction: column; gap: 4px; }
-        .heatmap-cell {
-            width: 12px; height: 12px; border-radius: 2px;
-            background-color: var(--heatmap-0);
-            transition: all 0.2s ease;
-        }
-        .heatmap-cell:hover { transform: scale(1.3); box-shadow: 0 0 5px currentColor; z-index: 10; }
-        .heatmap-cell[data-level="1"] { background-color: var(--heatmap-1); }
-        .heatmap-cell[data-level="2"] { background-color: var(--heatmap-2); }
-        .heatmap-cell[data-level="3"] { background-color: var(--heatmap-3); }
-        .heatmap-cell[data-level="4"] { background-color: var(--heatmap-4); }
-
-        [data-theme="dark"] .heatmap-container {
-            --heatmap-0: #161b22;
-            --heatmap-1: #0e4429;
-            --heatmap-2: #006d32;
-            --heatmap-3: #26a641;
-            --heatmap-4: #39d353;
-        }
-        [data-theme="light"] .heatmap-container {
-            --heatmap-0: #ebedf0;
-            --heatmap-1: #9be9a8;
-            --heatmap-2: #40c463;
-            --heatmap-3: #30a14e;
-            --heatmap-4: #216e39;
-        }
+        .heatmap-container img { max-width: 100%; height: auto; display: block; }
         
         /* Services Section */
         .services { padding-top: 120px; padding-bottom: 60px; }
@@ -1910,51 +1882,7 @@
         <div class="github-heatmap reveal delay-2">
             <h3>GitHub Activity</h3>
             <div class="heatmap-container">
-                <div id="custom-github-heatmap" class="heatmap-grid"></div>
-                <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                        const heatmap = document.getElementById('custom-github-heatmap');
-                        if(!heatmap) return;
-                        
-                        const today = new Date();
-                        const currentYear = today.getFullYear();
-                        const currentMonth = today.getMonth(); // 0-indexed
-                        
-                        for (let i = 0; i < 52; i++) {
-                            const col = document.createElement('div');
-                            col.className = 'heatmap-col';
-                            
-                            for (let j = 0; j < 7; j++) {
-                                const cell = document.createElement('div');
-                                cell.className = 'heatmap-cell';
-                                
-                                const daysAgo = (51 - i) * 7 + (6 - j);
-                                const cellDate = new Date(today);
-                                cellDate.setDate(today.getDate() - daysAgo);
-                                
-                                let level = 0;
-                                // Random greens ONLY if in the current year AND up to current month
-                                if (cellDate.getFullYear() === currentYear && cellDate.getMonth() <= currentMonth) {
-                                    const rand = Math.random();
-                                    // Make it not fully green (many empty days, few high intensity days)
-                                    if (rand > 0.45) { // 45% chance of being 0
-                                        if (rand > 0.9) level = 4;
-                                        else if (rand > 0.75) level = 3;
-                                        else if (rand > 0.6) level = 2;
-                                        else level = 1;
-                                    }
-                                }
-                                
-                                cell.setAttribute('data-level', level);
-                                const dateStr = cellDate.toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'});
-                                cell.title = level > 0 ? `${Math.floor(Math.random() * 5 + level * 3)} contributions on ${dateStr}` : `No contributions on ${dateStr}`;
-                                
-                                col.appendChild(cell);
-                            }
-                            heatmap.appendChild(col);
-                        }
-                    });
-                </script>
+                <img src="https://ghchart.rshah.org/kyraaa-dev" alt="Angga Wiranata Github Chart" loading="lazy">
             </div>
         </div>
     </section>
