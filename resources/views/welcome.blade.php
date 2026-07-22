@@ -1437,7 +1437,122 @@
         }
 
         /* Footer */
-        .footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 60px; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
+        /* Certificates */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .cert-card {
+            position: relative;
+            background: linear-gradient(145deg, var(--bg-surface) 0%, rgba(10,10,10,0.4) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255,255,255,0.06), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+        .cert-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
+        }
+        [data-theme="light"] .cert-card:hover {
+            border-color: rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 20px var(--accent-glow);
+        }
+        .cert-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.4s ease;
+        }
+        .cert-card:hover .cert-icon-wrapper {
+            background: #10b981;
+            color: #000;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+        .cert-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+        .cert-issuer {
+            font-size: 14px;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cert-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        .cert-date {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+        .cert-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .cert-link:hover {
+            color: var(--accent-color);
+        }
+        .cert-link svg {
+            transition: transform 0.3s ease;
+        }
+        .cert-link:hover svg {
+            transform: translateX(4px) translateY(-4px);
+        }
+
+        .footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 60px; background: var(--glass-bg); backdrop-filter: blur(10px); }
+        [data-theme="light"] .footer { background: #ffffff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-top-color: rgba(0,0,0,0.05); }
         .footer-content { display: flex; justify-content: space-between; align-items: center; }
         .footer-brand { display: flex; align-items: center; gap: 12px; }
         .footer-logo { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; font-size: 14px; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; box-shadow: 0 0 10px rgba(16,185,129,0.2); letter-spacing: 2px; }
@@ -1536,6 +1651,22 @@
                 transform: translateY(-5px);
             }
             .footer-content { flex-direction: column; gap: 16px; text-align: center; }
+            
+            /* Swipeable Certificates */
+            .certificates-grid {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 16px !important;
+                padding-bottom: 24px;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                margin-right: -24px;
+                padding-right: 24px;
+            }
+            .certificates-grid::-webkit-scrollbar { display: none; }
+            .cert-card { flex: 0 0 85% !important; scroll-snap-align: center; }
         }
     </style>
 
@@ -2078,6 +2209,60 @@
                 </div>
             </div>
             @endforeach
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates container reveal">
+        <div class="section-header reveal">
+            <h2 class="section-title" data-i18n="cert_title">Certifications & Awards</h2>
+            <p class="section-description" data-i18n="cert_desc">Professional certifications and recognitions that validate my expertise.</p>
+        </div>
+        
+        <!-- Style moved to main CSS block -->
+
+        <div class="certificates-grid">
+            <!-- Certificate 1 -->
+            <div class="cert-card reveal delay-1">
+                <div class="cert-icon-wrapper">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-2-2"></path><path d="M12 15l2-2"></path><path d="M12 15v-6"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                </div>
+                <h3 class="cert-title" data-i18n="cert_1_title">AWS Certified Solutions Architect</h3>
+                <div class="cert-issuer" data-i18n="cert_1_issuer">Amazon Web Services</div>
+                <p class="cert-desc" data-i18n="cert_1_desc">Validated expertise in designing distributed systems on AWS, ensuring high availability, security, and scalability for cloud-based applications.</p>
+                <div class="cert-footer">
+                    <span class="cert-date" data-i18n="cert_1_date">Issued: 2023</span>
+                    <a href="#" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                </div>
+            </div>
+
+            <!-- Certificate 2 -->
+            <div class="cert-card reveal delay-2">
+                <div class="cert-icon-wrapper">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </div>
+                <h3 class="cert-title" data-i18n="cert_2_title">Laravel Advanced Architect</h3>
+                <div class="cert-issuer" data-i18n="cert_2_issuer">Laravel Certifications</div>
+                <p class="cert-desc" data-i18n="cert_2_desc">Official certification demonstrating advanced knowledge of the Laravel framework, including architecture, testing, and deployment best practices.</p>
+                <div class="cert-footer">
+                    <span class="cert-date" data-i18n="cert_2_date">Issued: 2024</span>
+                    <a href="#" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                </div>
+            </div>
+
+            <!-- Certificate 3 -->
+            <div class="cert-card reveal delay-3">
+                <div class="cert-icon-wrapper">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                </div>
+                <h3 class="cert-title" data-i18n="cert_3_title">React Native Specialist</h3>
+                <div class="cert-issuer" data-i18n="cert_3_issuer">Meta (Facebook)</div>
+                <p class="cert-desc" data-i18n="cert_3_desc">Proven ability to build cross-platform mobile applications with native performance using React Native and modern JavaScript ecosystem.</p>
+                <div class="cert-footer">
+                    <span class="cert-date" data-i18n="cert_3_date">Issued: 2025</span>
+                    <a href="#" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2936,6 +3121,22 @@
                 id: "Ini adalah proyek komprehensif yang dibangun untuk memecahkan logika bisnis yang kompleks. Arsitekturnya melibatkan integrasi API backend kustom, pengalaman pengguna frontend yang mulus, dan optimasi kueri database untuk memastikan waktu muat yang cepat serta skalabilitas tinggi.", 
                 en: "This is a comprehensive project built to solve complex business logic. The architecture involves custom backend API integration, seamless frontend user experience, and optimized database queries ensuring fast load times and scalability." 
             },
+
+            "cert_title": { id: "Sertifikasi & Penghargaan", en: "Certifications & Awards" },
+            "cert_desc": { id: "Sertifikasi dan pengakuan profesional yang memvalidasi keahlian saya.", en: "Professional certifications and recognitions that validate my expertise." },
+            "cert_1_title": { id: "AWS Certified Solutions Architect", en: "AWS Certified Solutions Architect" },
+            "cert_1_issuer": { id: "Amazon Web Services", en: "Amazon Web Services" },
+            "cert_1_desc": { id: "Keahlian tervalidasi dalam merancang sistem terdistribusi di AWS, memastikan ketersediaan tinggi, keamanan, dan skalabilitas untuk aplikasi berbasis cloud.", en: "Validated expertise in designing distributed systems on AWS, ensuring high availability, security, and scalability for cloud-based applications." },
+            "cert_1_date": { id: "Diterbitkan: 2023", en: "Issued: 2023" },
+            "cert_2_title": { id: "Laravel Advanced Architect", en: "Laravel Advanced Architect" },
+            "cert_2_issuer": { id: "Sertifikasi Laravel", en: "Laravel Certifications" },
+            "cert_2_desc": { id: "Sertifikasi resmi yang menunjukkan pengetahuan tingkat lanjut tentang framework Laravel, termasuk arsitektur, pengujian, dan praktik terbaik penerapan.", en: "Official certification demonstrating advanced knowledge of the Laravel framework, including architecture, testing, and deployment best practices." },
+            "cert_2_date": { id: "Diterbitkan: 2024", en: "Issued: 2024" },
+            "cert_3_title": { id: "React Native Specialist", en: "React Native Specialist" },
+            "cert_3_issuer": { id: "Meta (Facebook)", en: "Meta (Facebook)" },
+            "cert_3_desc": { id: "Kemampuan yang terbukti dalam membangun aplikasi seluler lintas platform dengan performa native menggunakan React Native dan ekosistem JavaScript modern.", en: "Proven ability to build cross-platform mobile applications with native performance using React Native and modern JavaScript ecosystem." },
+            "cert_3_date": { id: "Diterbitkan: 2025", en: "Issued: 2025" },
+            "cert_btn": { id: "Lihat Detail", en: "View Details" },
 
             "contact_title": { id: "Mari berkolaborasi bersama.", en: "Let's build something great." },
             "contact_desc": { id: "Tersedia untuk pekerjaan freelance dan peluang penuh waktu. Jika Anda memiliki proyek yang membutuhkan rekayasa kreatif, mari bicara.", en: "Available for freelance work and full-time opportunities. If you have a project that needs some creative engineering, let's talk." },
