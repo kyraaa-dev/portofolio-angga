@@ -1472,6 +1472,25 @@
             border-color: rgba(0,0,0,0.3);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 20px var(--accent-glow);
         }
+        .cert-image-wrapper {
+            width: 100%;
+            height: 180px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+        .cert-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .cert-card:hover .cert-img {
+            transform: scale(1.05);
+        }
         .cert-icon-wrapper {
             width: 56px;
             height: 56px;
@@ -2272,8 +2291,8 @@
         <div class="certificates-grid">
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
-                <div class="cert-icon-wrapper">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <div class="cert-image-wrapper">
+                    <img src="/images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">RevoU Coding Camp</div>
