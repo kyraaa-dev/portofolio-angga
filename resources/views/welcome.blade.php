@@ -2292,7 +2292,7 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-image-wrapper">
-                    <img src="/images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
+                    <img src="/images/cert-revou-thumb.png" alt="Sertifikat RevoU" class="cert-img">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">RevoU Coding Camp</div>
