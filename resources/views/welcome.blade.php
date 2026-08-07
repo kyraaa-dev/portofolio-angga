@@ -1055,29 +1055,6 @@
                 padding: 40px 0;
             }
         }
-        @media (max-width: 480px) {
-            .orbit-container {
-                transform: scale(0.65);
-                margin: -40px auto;
-            }
-            .digital-id-card {
-                width: 260px;
-                min-height: 360px;
-                padding: 20px;
-            }
-            .digital-id-image-wrapper {
-                width: 100px;
-                height: 130px;
-                border-radius: 14px;
-                margin: 0 auto 20px;
-            }
-            .digital-id-image {
-                border-radius: 10px;
-            }
-            .digital-id-name {
-                font-size: 18px;
-            }
-        }
 
         /* Project Modal */
         .project-modal-overlay {
@@ -1716,6 +1693,29 @@
             .certificates-grid::-webkit-scrollbar { display: none; }
             .cert-card { flex: 0 0 85% !important; scroll-snap-align: center; }
         }
+        @media (max-width: 480px) {
+            .orbit-container {
+                transform: scale(0.65);
+                margin: -40px auto;
+            }
+            .digital-id-card {
+                width: 260px;
+                min-height: 360px;
+                padding: 20px;
+            }
+            .digital-id-image-wrapper {
+                width: 100px;
+                height: 130px;
+                border-radius: 14px;
+                margin: 0 auto 20px;
+            }
+            .digital-id-image {
+                border-radius: 10px;
+            }
+            .digital-id-name {
+                font-size: 18px;
+            }
+        }
     </style>
 
     <!-- Prevent Theme Flash -->
@@ -1846,7 +1846,7 @@
                 </div>
                 
                 <div class="digital-id-image-wrapper">
-                    <img src="{{ asset('images/profile.jpg') }}" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop'" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
+                    <img src="{{ asset('images/profile.jpg') }}" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
                 </div>
                 
                 <div class="digital-id-info">
