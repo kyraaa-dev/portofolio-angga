@@ -1648,12 +1648,12 @@
             }
             .digital-id-image-wrapper {
                 width: 120px;
-                height: 150px;
-                border-radius: 16px;
+                height: 120px;
+                border-radius: 50%;
                 margin: 0 auto 24px;
             }
             .digital-id-image {
-                border-radius: 12px;
+                border-radius: 50%;
             }
             .digital-id-header {
                 margin-bottom: 28px;
@@ -1724,12 +1724,12 @@
             }
             .digital-id-image-wrapper {
                 width: 100px;
-                height: 130px;
-                border-radius: 14px;
+                height: 100px;
+                border-radius: 50%;
                 margin: 0 auto 20px;
             }
             .digital-id-image {
-                border-radius: 10px;
+                border-radius: 50%;
             }
             .digital-id-name {
                 font-size: 18px;
