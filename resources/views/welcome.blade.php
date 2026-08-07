@@ -2292,11 +2292,11 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-image-wrapper">
-                    <img src="/images/cert-revou-thumb.png" alt="Sertifikat RevoU" class="cert-img">
+                    <img src="/images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
-                <div class="cert-issuer" data-i18n="cert_1_issuer">RevoU Coding Camp</div>
-                <p class="cert-desc" data-i18n="cert_1_desc">Program sertifikasi intensif 1 minggu yang mencakup dasar-dasar Software Engineering dan praktik terbaik dalam pengembangan aplikasi web.</p>
+                <div class="cert-issuer" data-i18n="cert_1_issuer">PT Revolusi Cita Edukasi</div>
+                <p class="cert-desc" data-i18n="cert_1_desc">A 1-week certified online course offered by RevoU. Has been awarded a certificate of attendance for the Intro to Software Engineering.</p>
                 <div class="cert-footer">
                     <span class="cert-date" data-i18n="cert_1_date">Issued: 24 July 2026</span>
                     <a href="/images/cert-revou.png" target="_blank" class="cert-link"><span data-i18n="cert_btn">Lihat Sertifikat</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
@@ -3179,10 +3179,10 @@
 
             "cert_title": { id: "Sertifikasi & Penghargaan", en: "Certifications & Awards" },
             "cert_desc": { id: "Sertifikasi dan pengakuan profesional yang memvalidasi keahlian saya.", en: "Professional certifications and recognitions that validate my expertise." },
-            "cert_1_title": { id: "AWS Certified Solutions Architect", en: "AWS Certified Solutions Architect" },
-            "cert_1_issuer": { id: "Amazon Web Services", en: "Amazon Web Services" },
-            "cert_1_desc": { id: "Keahlian tervalidasi dalam merancang sistem terdistribusi di AWS, memastikan ketersediaan tinggi, keamanan, dan skalabilitas untuk aplikasi berbasis cloud.", en: "Validated expertise in designing distributed systems on AWS, ensuring high availability, security, and scalability for cloud-based applications." },
-            "cert_1_date": { id: "Diterbitkan: 2023", en: "Issued: 2023" },
+            "cert_1_title": { id: "Intro to Software Engineering", en: "Intro to Software Engineering" },
+            "cert_1_issuer": { id: "PT Revolusi Cita Edukasi", en: "PT Revolusi Cita Edukasi" },
+            "cert_1_desc": { id: "Telah dianugerahkan sertifikat kehadiran untuk kursus online bersertifikat 1 minggu yang diselenggarakan oleh RevoU.", en: "Has been awarded a certificate of attendance for a 1-week certified online course offered by RevoU." },
+            "cert_1_date": { id: "Diterbitkan: 24 Juli 2026", en: "Issued: 24 July 2026" },
             "cert_2_title": { id: "Laravel Advanced Architect", en: "Laravel Advanced Architect" },
             "cert_2_issuer": { id: "Sertifikasi Laravel", en: "Laravel Certifications" },
             "cert_2_desc": { id: "Sertifikasi resmi yang menunjukkan pengetahuan tingkat lanjut tentang framework Laravel, termasuk arsitektur, pengujian, dan praktik terbaik penerapan.", en: "Official certification demonstrating advanced knowledge of the Laravel framework, including architecture, testing, and deployment best practices." },
