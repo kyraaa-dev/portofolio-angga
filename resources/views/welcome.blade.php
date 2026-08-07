@@ -55,8 +55,8 @@
     <meta property="twitter:image" content="https://kyraaa.pages.dev/images/og-image.png">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="apple-touch-icon" href="/images/logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1756,7 +1756,7 @@
     <header class="navbar container reveal active">
         <div class="logo">
             <div class="logo-img-wrapper">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="logo-img">
+                <img src="/images/logo.png" alt="Logo" class="logo-img">
             </div>
             <span class="logo-text">{{ $settings['name'] ?? 'Angga Wiranata' }}</span>
         </div>
@@ -1846,7 +1846,7 @@
                 </div>
                 
                 <div class="digital-id-image-wrapper">
-                    <img src="{{ asset('images/profile.jpg') }}" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
+                    <img src="/images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
                 </div>
                 
                 <div class="digital-id-info">
@@ -2217,10 +2217,10 @@
                             $imageName = 'kasflow-app.png';
                         }
                     @endphp
-                    <img src="{{ asset('images/' . $imageName) }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    <img src="/images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     @if($hoverImageName)
-                        <img src="{{ asset('images/' . $hoverImageName) }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                        <img src="/images/{{ $hoverImageName }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     @endif
 
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2273,14 +2273,14 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-icon-wrapper">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-2-2"></path><path d="M12 15l2-2"></path><path d="M12 15v-6"></path><circle cx="12" cy="12" r="10"></circle></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                 </div>
-                <h3 class="cert-title" data-i18n="cert_1_title">AWS Certified Solutions Architect</h3>
-                <div class="cert-issuer" data-i18n="cert_1_issuer">Amazon Web Services</div>
-                <p class="cert-desc" data-i18n="cert_1_desc">Validated expertise in designing distributed systems on AWS, ensuring high availability, security, and scalability for cloud-based applications.</p>
+                <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
+                <div class="cert-issuer" data-i18n="cert_1_issuer">RevoU Coding Camp</div>
+                <p class="cert-desc" data-i18n="cert_1_desc">Program sertifikasi intensif 1 minggu yang mencakup dasar-dasar Software Engineering dan praktik terbaik dalam pengembangan aplikasi web.</p>
                 <div class="cert-footer">
-                    <span class="cert-date" data-i18n="cert_1_date">Issued: 2023</span>
-                    <a href="#" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                    <span class="cert-date" data-i18n="cert_1_date">Issued: 24 July 2026</span>
+                    <a href="/images/cert-revou.png" target="_blank" class="cert-link"><span data-i18n="cert_btn">Lihat Sertifikat</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
                 </div>
             </div>
 
