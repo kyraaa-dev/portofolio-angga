@@ -1060,6 +1060,23 @@
                 transform: scale(0.65);
                 margin: -40px auto;
             }
+            .digital-id-card {
+                width: 260px;
+                min-height: 360px;
+                padding: 20px;
+            }
+            .digital-id-image-wrapper {
+                width: 100px;
+                height: 130px;
+                border-radius: 14px;
+                margin: 0 auto 20px;
+            }
+            .digital-id-image {
+                border-radius: 10px;
+            }
+            .digital-id-name {
+                font-size: 18px;
+            }
         }
 
         /* Project Modal */
@@ -1622,6 +1639,37 @@
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
             .services-grid { grid-template-columns: 1fr; }
             
+            /* Digital ID Card - Mobile Fix */
+            .digital-id-card {
+                width: 280px;
+                height: auto;
+                min-height: 400px;
+                padding: 24px;
+                margin: 0 auto;
+            }
+            .digital-id-perspective {
+                margin-bottom: 40px;
+            }
+            .digital-id-image-wrapper {
+                width: 120px;
+                height: 150px;
+                border-radius: 16px;
+                margin: 0 auto 24px;
+            }
+            .digital-id-image {
+                border-radius: 12px;
+            }
+            .digital-id-header {
+                margin-bottom: 28px;
+            }
+            .digital-id-name {
+                font-size: 20px;
+            }
+            .digital-id-role {
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
             /* Swipeable Project Cards */
             .project-grid { 
                 display: flex !important; 
