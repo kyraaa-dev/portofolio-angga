@@ -2317,19 +2317,7 @@
                 </div>
             </div>
 
-            <!-- Certificate 3 -->
-            <div class="cert-card reveal delay-3">
-                <div class="cert-icon-wrapper">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                </div>
-                <h3 class="cert-title" data-i18n="cert_3_title">React Native Specialist</h3>
-                <div class="cert-issuer" data-i18n="cert_3_issuer">Meta (Facebook)</div>
-                <p class="cert-desc" data-i18n="cert_3_desc">Proven ability to build cross-platform mobile applications with native performance using React Native and modern JavaScript ecosystem.</p>
-                <div class="cert-footer">
-                    <span class="cert-date" data-i18n="cert_3_date">Issued: 2025</span>
-                    <a href="#" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
-                </div>
-            </div>
+
         </div>
     </section>
 
