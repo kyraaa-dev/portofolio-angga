@@ -2117,6 +2117,30 @@
                 <h3 class="service-title" data-i18n="srv_backend_title">Backend Integration</h3>
                 <p class="service-desc" data-i18n="srv_backend_desc">Menghubungkan antarmuka dengan sistem database dan API layanan pihak ketiga untuk fungsionalitas yang terpadu.</p>
             </div>
+            
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                </div>
+                <h3 class="service-title" data-i18n="srv_api_title">API Development</h3>
+                <p class="service-desc" data-i18n="srv_api_desc">Merancang dan membangun RESTful API yang aman, cepat, dan mudah diintegrasikan dengan berbagai platform klien.</p>
+            </div>
+
+            <div class="service-card reveal delay-1">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                </div>
+                <h3 class="service-title" data-i18n="srv_uiux_title">UI/UX Prototyping</h3>
+                <p class="service-desc" data-i18n="srv_uiux_desc">Menerjemahkan desain dari Figma atau Adobe XD ke dalam kode yang bersih (*pixel-perfect*) dengan interaksi yang mulus.</p>
+            </div>
+
+            <div class="service-card reveal delay-2">
+                <div class="service-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <h3 class="service-title" data-i18n="srv_perf_title">Performance Tuning</h3>
+                <p class="service-desc" data-i18n="srv_perf_desc">Mengoptimalkan kecepatan muat halaman (*Core Web Vitals*) dan menerapkan praktik SEO terbaik agar situs Anda lebih bersinar.</p>
+            </div>
         </div>
     </section>
 
@@ -3150,6 +3174,12 @@
             "srv_responsive_desc": { id: "Memastikan aplikasi web Anda tampil sempurna dan berfungsi optimal di berbagai perangkat (Mobile, Tablet, Desktop).", en: "Ensuring your web application looks perfect and functions optimally across all devices (Mobile, Tablet, Desktop)." },
             "srv_backend_title": { id: "Backend Integration", en: "Backend Integration" },
             "srv_backend_desc": { id: "Menghubungkan antarmuka dengan sistem database dan API layanan pihak ketiga untuk fungsionalitas yang terpadu.", en: "Connecting interfaces with database systems and third-party APIs for cohesive functionality." },
+            "srv_api_title": { id: "API Development", en: "API Development" },
+            "srv_api_desc": { id: "Merancang dan membangun RESTful API yang aman, cepat, dan mudah diintegrasikan dengan berbagai platform klien.", en: "Designing and building secure, fast, and easily integrable RESTful APIs for various client platforms." },
+            "srv_uiux_title": { id: "UI/UX Prototyping", en: "UI/UX Prototyping" },
+            "srv_uiux_desc": { id: "Menerjemahkan desain dari Figma atau Adobe XD ke dalam kode yang bersih (pixel-perfect) dengan interaksi yang mulus.", en: "Translating designs from Figma or Adobe XD into clean, pixel-perfect code with smooth interactions." },
+            "srv_perf_title": { id: "Performance Tuning", en: "Performance Tuning" },
+            "srv_perf_desc": { id: "Mengoptimalkan kecepatan muat halaman (Core Web Vitals) dan menerapkan praktik SEO terbaik agar situs Anda lebih bersinar.", en: "Optimizing page load speeds (Core Web Vitals) and implementing SEO best practices so your site shines." },
 
             "exp_title": { id: `Perjalanan <span class="highlight">Karir</span>`, en: `My <span class="highlight">Journey</span>` },
             "exp_desc": { id: "Pengalaman Karir & Pendidikan", en: "Career & Education Experience" },
