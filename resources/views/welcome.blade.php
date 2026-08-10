@@ -2082,29 +2082,17 @@
             color: var(--text-primary);
         }
         .audio-toggle-btn {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: rgba(220, 31, 38, 0.1);
-            border: 1px solid rgba(220, 31, 38, 0.2);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            cursor: pointer;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
+            background: none; border: 1px solid var(--border-color); color: var(--text-primary);
+            font-size: 14px; cursor: pointer; border-radius: 8px; padding: 4px 8px;
+            align-items: center; justify-content: center;
+            transition: all 0.3s ease; min-width: 40px; margin-right: 4px;
             display: none;
-            z-index: 10;
         }
         [data-merdeka="true"] .audio-toggle-btn {
             display: flex;
         }
         .audio-toggle-btn:hover {
-            background: rgba(220, 31, 38, 0.3);
+            background: var(--bg-surface-hover);
         }
         .countdown-title {
             font-size: 11px;
@@ -2256,6 +2244,9 @@
             <button class="lang-toggle" id="langToggle" aria-label="Toggle Language" style="background: none; border: 1px solid var(--border-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 4px 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; min-width: 40px; margin-right: 4px;">
                 ID
             </button>
+
+            <!-- Merdeka Audio Toggle -->
+            <button class="audio-toggle-btn" id="merdekaAudioToggle" aria-label="Toggle Audio" title="Mute/Unmute Music">🔊</button>
 
             <!-- Merdeka Mode Toggle 🇮🇩 -->
             <button class="merdeka-toggle" id="merdekaToggle" aria-label="Toggle Merdeka Mode" title="🇮🇩 Merdeka Mode">
@@ -2900,7 +2891,6 @@
 
     <!-- Merdeka Countdown -->
     <div class="merdeka-countdown" id="merdekaCountdown">
-        <button id="merdekaAudioToggle" class="audio-toggle-btn" aria-label="Toggle Audio" title="Mute/Unmute Music">🔊</button>
         <div class="countdown-title" id="cdTitle">Menuju HUT RI ke-81</div>
         <div class="countdown-timer" id="cdTimer">
             <div class="cd-item"><span class="cd-val" id="cdDays">00</span><span class="cd-lbl">Hari</span></div>
@@ -4025,7 +4015,7 @@
         if (!merdekaToggle || !confettiCanvas) return;
 
         // ===== AUDIO LOGIC =====
-        const merdekaAudio = new Audio('/audio/indonesia-raya.ogg');
+        const merdekaAudio = new Audio('/audio/indonesia-raya.mp3');
         merdekaAudio.loop = true;
         merdekaAudio.volume = 0.4;
         let isAudioPlaying = false;
