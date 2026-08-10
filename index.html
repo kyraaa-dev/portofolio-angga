@@ -1935,6 +1935,10 @@
             background: #f0f0f0;
             border-bottom: 1px solid #ddd;
         }
+        [data-merdeka="true"] .merdeka-toggle .merdeka-flag {
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        }
         /* Active state glow */
         [data-merdeka="true"] .merdeka-toggle {
             border-color: #DC1F26;
