@@ -1877,10 +1877,16 @@
             color: #ffffff !important;
             box-shadow: 0 4px 15px rgba(220, 31, 38, 0.4) !important;
         }
+        [data-merdeka="true"] .btn-collab * {
+            color: #ffffff !important;
+        }
         [data-merdeka="true"] .btn-collab:hover {
             background: #ffffff !important;
             border-color: #DC1F26 !important;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(220, 31, 38, 0.4) !important;
+            color: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-collab:hover * {
             color: #DC1F26 !important;
         }
         [data-merdeka="true"] .btn-collab .collab-dot {
