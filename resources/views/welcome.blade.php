@@ -1754,6 +1754,20 @@
             --border-hover: rgba(220, 31, 38, 0.25);
         }
 
+        /* Merdeka Button Overrides */
+        [data-merdeka="true"] .btn-radar {
+            background: #DC1F26 !important;
+            border-color: #DC1F26 !important;
+            color: #ffffff !important;
+        }
+        [data-merdeka="true"] .btn-radar:hover {
+            background: rgba(220, 31, 38, 0.1) !important;
+            color: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-radar::after {
+            background: #DC1F26 !important;
+        }
+
         /* Merdeka scroll progress bar override */
         [data-merdeka="true"] .scroll-progress-bar {
             background: linear-gradient(90deg, #DC1F26 0%, #ff4444 30%, #ffffff 50%, #ff4444 70%, #DC1F26 100%) !important;
@@ -2049,17 +2063,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            pointer-events: none;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px -10px rgba(220, 31, 38, 0.3);
-            color: var(--text-primary);
-        }
-        [data-merdeka="true"] .merdeka-countdown {
             opacity: 1;
             transform: translateY(0) scale(1);
             pointer-events: auto;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px -10px rgba(220, 31, 38, 0.3);
+            color: var(--text-primary);
         }
         .countdown-title {
             font-size: 11px;
