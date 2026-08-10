@@ -1778,13 +1778,14 @@
         [data-merdeka="true"] .btn-outline {
             background: #ffffff !important;
             color: #DC1F26 !important;
-            border-color: #ffffff !important;
-            font-weight: 600;
+            border-color: #DC1F26 !important;
+            font-weight: 700 !important;
         }
         [data-merdeka="true"] .btn-outline:hover {
-            background: transparent !important;
+            background: #DC1F26 !important;
             color: #ffffff !important;
-            border-color: #ffffff !important;
+            border-color: #DC1F26 !important;
+            box-shadow: 0 4px 15px rgba(220, 31, 38, 0.4) !important;
         }
 
         /* Merdeka scroll progress bar override */
