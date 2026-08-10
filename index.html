@@ -1636,6 +1636,14 @@
             .about-grid { grid-template-columns: 1fr; gap: 40px; }
             .services-grid { grid-template-columns: 1fr; }
             
+            /* Navbar Mobile Fixes */
+            .nav-actions { gap: 8px; flex: none; }
+            .logo { flex: 1; min-width: 0; }
+            .logo-text { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: none; } /* Hide text to save space for toggles on very small screens */
+            .theme-toggle, .merdeka-toggle, .audio-toggle-btn { width: 32px; height: 32px; min-width: 32px; padding: 0; display: flex; align-items: center; justify-content: center; }
+            .theme-toggle svg { width: 16px; height: 16px; }
+            .lang-toggle { font-size: 11px; padding: 2px 6px; min-width: 30px; height: 32px; }
+
             /* Digital ID Card - Mobile Fix */
             .digital-id-card {
                 width: 280px;
@@ -1834,6 +1842,30 @@
         [data-merdeka="true"] .hero-badge::before {
             background: #DC1F26 !important;
             box-shadow: 0 0 10px #DC1F26 !important;
+        }
+
+        /* Merdeka Navbar */
+        [data-merdeka="true"] .navbar {
+            background: rgba(220, 31, 38, 0.95) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 4px 20px rgba(220, 31, 38, 0.3) !important;
+        }
+        [data-merdeka="true"] .logo-text, 
+        [data-merdeka="true"] .nav-link,
+        [data-merdeka="true"] .theme-toggle,
+        [data-merdeka="true"] .audio-toggle-btn,
+        [data-merdeka="true"] .lang-toggle {
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+        }
+        [data-merdeka="true"] .theme-toggle:hover,
+        [data-merdeka="true"] .audio-toggle-btn:hover,
+        [data-merdeka="true"] .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: #ffffff !important;
+        }
+        [data-merdeka="true"] .nav-link:hover {
+            color: #ffcccc !important;
         }
 
         /* Merdeka collab button override */
