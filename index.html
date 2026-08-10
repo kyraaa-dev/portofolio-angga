@@ -1908,62 +1908,11 @@
             transform: scale(1) rotate(0deg);
             pointer-events: auto;
         }
-        .hut-ri-badge-inner {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #b8860b 0%, #ffd700 30%, #daa520 60%, #b8860b 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 
-                0 0 20px rgba(255, 215, 0, 0.3),
-                0 0 40px rgba(255, 215, 0, 0.15),
-                inset 0 0 20px rgba(255, 255, 255, 0.15);
-            position: relative;
+        .hut-ri-badge-img {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
             animation: badgeFloat 3s ease-in-out infinite;
-            border: 2px solid rgba(255, 215, 0, 0.5);
-        }
-        .hut-ri-badge-inner::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 1px dashed rgba(255, 215, 0, 0.4);
-            animation: badgeRotate 20s linear infinite;
-        }
-        .hut-ri-text-hut {
-            font-size: 8px;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            letter-spacing: 3px;
-            line-height: 1;
-        }
-        .hut-ri-text-ri {
-            font-size: 14px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-            letter-spacing: 2px;
-            line-height: 1.1;
-        }
-        .hut-ri-text-num {
-            font-size: 20px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            line-height: 1;
-            font-family: 'Inter', sans-serif;
-        }
-        .hut-ri-text-year {
-            font-size: 7px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.85);
-            letter-spacing: 1px;
-            line-height: 1;
-            margin-top: 1px;
         }
         @keyframes badgeFloat {
             0%, 100% { transform: translateY(0); }
@@ -2099,14 +2048,9 @@
         }
 
         @media (max-width: 640px) {
-            .hut-ri-badge-inner {
-                width: 60px;
-                height: 60px;
+            .hut-ri-badge-img {
+                height: 80px;
             }
-            .hut-ri-text-hut { font-size: 6px; letter-spacing: 2px; }
-            .hut-ri-text-ri { font-size: 11px; }
-            .hut-ri-text-num { font-size: 15px; }
-            .hut-ri-text-year { font-size: 5px; }
             .hut-ri-badge { bottom: 80px; right: 16px; }
             .batik-corner { width: 80px; height: 80px; }
         }
@@ -3031,12 +2975,7 @@
 
     <!-- HUT RI ke-81 Badge -->
     <div class="hut-ri-badge" id="hutRiBadge">
-        <div class="hut-ri-badge-inner">
-            <span class="hut-ri-text-hut">HUT</span>
-            <span class="hut-ri-text-ri">RI</span>
-            <span class="hut-ri-text-num">81</span>
-            <span class="hut-ri-text-year">2026</span>
-        </div>
+        <img src="http://127.0.0.1:8002/images/81.png" alt="HUT RI 81" class="hut-ri-badge-img">
     </div>
 
     <!-- Merdeka Toast Notification -->
