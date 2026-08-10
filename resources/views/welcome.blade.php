@@ -1639,7 +1639,7 @@
             /* Navbar Mobile Fixes */
             .nav-actions { gap: 8px; flex: none; }
             .logo { flex: 1; min-width: 0; }
-            .logo-text { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: none; } /* Hide text to save space for toggles on very small screens */
+            .logo-text { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
             .theme-toggle, .merdeka-toggle, .audio-toggle-btn { width: 32px; height: 32px; min-width: 32px; padding: 0; display: flex; align-items: center; justify-content: center; }
             .theme-toggle svg { width: 16px; height: 16px; }
             .lang-toggle { font-size: 11px; padding: 2px 6px; min-width: 30px; height: 32px; }
