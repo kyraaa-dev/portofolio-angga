@@ -2081,6 +2081,31 @@
             box-shadow: 0 10px 30px -10px rgba(220, 31, 38, 0.3);
             color: var(--text-primary);
         }
+        .audio-toggle-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(220, 31, 38, 0.1);
+            border: 1px solid rgba(220, 31, 38, 0.2);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: none;
+            z-index: 10;
+        }
+        [data-merdeka="true"] .audio-toggle-btn {
+            display: flex;
+        }
+        .audio-toggle-btn:hover {
+            background: rgba(220, 31, 38, 0.3);
+        }
         .countdown-title {
             font-size: 11px;
             font-weight: 600;
@@ -3001,6 +3026,7 @@
 
     <!-- Merdeka Countdown -->
     <div class="merdeka-countdown" id="merdekaCountdown">
+        <button id="merdekaAudioToggle" class="audio-toggle-btn" aria-label="Toggle Audio" title="Mute/Unmute Music">🔊</button>
         <div class="countdown-title" id="cdTitle">Menuju HUT RI ke-81</div>
         <div class="countdown-timer" id="cdTimer">
             <div class="cd-item"><span class="cd-val" id="cdDays">00</span><span class="cd-lbl">Hari</span></div>
@@ -4124,6 +4150,27 @@
         
         if (!merdekaToggle || !confettiCanvas) return;
 
+        // ===== AUDIO LOGIC =====
+        const merdekaAudio = new Audio('/audio/indonesia-raya.ogg');
+        merdekaAudio.loop = true;
+        merdekaAudio.volume = 0.4;
+        let isAudioPlaying = false;
+        const audioToggleBtn = document.getElementById('merdekaAudioToggle');
+        
+        if (audioToggleBtn) {
+            audioToggleBtn.addEventListener('click', () => {
+                if (isAudioPlaying) {
+                    merdekaAudio.pause();
+                    audioToggleBtn.innerText = '🔇';
+                    isAudioPlaying = false;
+                } else {
+                    merdekaAudio.play().catch(e => console.log('Audio play failed', e));
+                    audioToggleBtn.innerText = '🔊';
+                    isAudioPlaying = true;
+                }
+            });
+        }
+
         // Countdown Logic
         const cdDays = document.getElementById('cdDays');
         const cdHours = document.getElementById('cdHours');
@@ -4244,6 +4291,77 @@
             }
         }
 
+        class FireworkRocket {
+            constructor() {
+                this.x = Math.random() * confettiCanvas.width;
+                this.y = confettiCanvas.height;
+                this.targetY = Math.random() * (confettiCanvas.height * 0.4) + confettiCanvas.height * 0.1;
+                this.speed = Math.random() * 4 + 5;
+                this.color = Math.random() > 0.5 ? '#DC1F26' : '#ffffff';
+                this.exploded = false;
+                this.opacity = 1;
+            }
+            update() {
+                if (!this.exploded) {
+                    this.y -= this.speed;
+                    this.speed *= 0.98;
+                    if (this.speed < 1 || this.y <= this.targetY) {
+                        this.explode();
+                    }
+                }
+                return this.opacity > 0;
+            }
+            explode() {
+                this.exploded = true;
+                this.opacity = 0;
+                const numParticles = 40 + Math.random() * 20;
+                for(let i=0; i<numParticles; i++) {
+                    confettiParticles.push(new FireworkParticle(this.x, this.y, this.color));
+                }
+            }
+            draw(ctx) {
+                if(!this.exploded) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 2, 0, Math.PI*2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+        }
+        
+        class FireworkParticle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 1;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.gravity = 0.05;
+                this.opacity = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+            }
+            update() {
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.opacity -= this.decay;
+                return this.opacity > 0;
+            }
+            draw(ctx) {
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 1.5, 0, Math.PI*2);
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = 6;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 0;
+            }
+        }
+
         function burstConfetti() {
             const centerX = confettiCanvas.width / 2;
             const centerY = confettiCanvas.height * 0.35;
@@ -4257,8 +4375,17 @@
         }
 
         function addContinuousConfetti() {
-            if (isMerdekaActive && Math.random() > 0.85) {
-                confettiParticles.push(new ConfettiPiece());
+            if (isMerdekaActive) {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    if (Math.random() > 0.96) {
+                        confettiParticles.push(new FireworkRocket());
+                    }
+                } else {
+                    if (Math.random() > 0.85) {
+                        confettiParticles.push(new ConfettiPiece());
+                    }
+                }
             }
         }
 
@@ -4319,9 +4446,19 @@
                 burstConfetti();
                 startConfettiLoop();
                 if (showToastNotif) showMerdekaToast(true);
+                
+                // Play Audio
+                merdekaAudio.play().catch(e => console.log('Audio autoplay prevented'));
+                isAudioPlaying = true;
+                if(audioToggleBtn) audioToggleBtn.innerText = '🔊';
             } else {
                 stopConfetti();
                 if (showToastNotif) showMerdekaToast(false);
+                
+                // Pause Audio
+                merdekaAudio.pause();
+                isAudioPlaying = false;
+                if(audioToggleBtn) audioToggleBtn.innerText = '🔇';
             }
         }
 
