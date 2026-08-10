@@ -1872,22 +1872,27 @@
 
         /* Merdeka collab button override */
         [data-merdeka="true"] .btn-collab {
-            border-color: rgba(220, 31, 38, 0.4) !important;
-            background: linear-gradient(135deg, rgba(220,31,38,0.08) 0%, rgba(255,68,68,0.04) 100%) !important;
-            color: #DC1F26 !important;
+            border-color: rgba(255, 255, 255, 0.8) !important;
+            background: #DC1F26 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(220, 31, 38, 0.4) !important;
         }
         [data-merdeka="true"] .btn-collab:hover {
-            background: linear-gradient(135deg, rgba(220,31,38,0.18) 0%, rgba(255,68,68,0.1) 100%) !important;
-            border-color: rgba(220, 31, 38, 0.8) !important;
-            box-shadow: 0 0 20px rgba(220, 31, 38, 0.3), 0 0 40px rgba(220, 31, 38, 0.1) !important;
-            color: #ff4444 !important;
+            background: #ffffff !important;
+            border-color: #DC1F26 !important;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(220, 31, 38, 0.4) !important;
+            color: #DC1F26 !important;
         }
         [data-merdeka="true"] .btn-collab .collab-dot {
+            background: #ffffff !important;
+            box-shadow: 0 0 6px #ffffff !important;
+        }
+        [data-merdeka="true"] .btn-collab:hover .collab-dot {
             background: #DC1F26 !important;
             box-shadow: 0 0 6px #DC1F26 !important;
         }
         [data-merdeka="true"] .btn-collab::after {
-            border-color: rgba(220, 31, 38, 0.3) !important;
+            border-color: rgba(220, 31, 38, 0.6) !important;
         }
 
         /* ===== MERDEKA TOGGLE BUTTON ===== */
