@@ -1736,6 +1736,380 @@
                 font-size: 18px;
             }
         }
+
+        /* ===== MERDEKA MODE ===== */
+        
+        /* Merdeka Color Overrides - Dark Mode */
+        [data-merdeka="true"] {
+            --accent-color: #DC1F26;
+            --accent-glow: rgba(220, 31, 38, 0.3);
+            --border-color: rgba(220, 31, 38, 0.15);
+            --border-hover: rgba(220, 31, 38, 0.3);
+        }
+        /* Merdeka Color Overrides - Light Mode */
+        [data-merdeka="true"][data-theme="light"] {
+            --accent-color: #DC1F26;
+            --accent-glow: rgba(220, 31, 38, 0.15);
+            --border-color: rgba(220, 31, 38, 0.12);
+            --border-hover: rgba(220, 31, 38, 0.25);
+        }
+
+        /* Merdeka scroll progress bar override */
+        [data-merdeka="true"] .scroll-progress-bar {
+            background: linear-gradient(90deg, #DC1F26 0%, #ff4444 30%, #ffffff 50%, #ff4444 70%, #DC1F26 100%) !important;
+            box-shadow: 0 0 8px rgba(220, 31, 38, 0.8), 0 0 20px rgba(220, 31, 38, 0.4) !important;
+        }
+        [data-merdeka="true"] .scroll-progress-bar::after {
+            background: #fff !important;
+            box-shadow: 0 0 6px #DC1F26, 0 0 12px #DC1F26 !important;
+        }
+
+        /* Merdeka hero gradient */
+        [data-merdeka="true"] .hero-title {
+            background: linear-gradient(135deg, #DC1F26 0%, #ff6b6b 25%, #ffffff 50%, #ff6b6b 75%, #DC1F26 100%) !important;
+            background-size: 200% auto !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            animation: merdekaGradient 4s linear infinite !important;
+        }
+        @keyframes merdekaGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Merdeka badge glow on hero badge */
+        [data-merdeka="true"] .hero-badge::before {
+            background: #DC1F26 !important;
+            box-shadow: 0 0 10px #DC1F26 !important;
+        }
+
+        /* Merdeka collab button override */
+        [data-merdeka="true"] .btn-collab {
+            border-color: rgba(220, 31, 38, 0.4) !important;
+            background: linear-gradient(135deg, rgba(220,31,38,0.08) 0%, rgba(255,68,68,0.04) 100%) !important;
+            color: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-collab:hover {
+            background: linear-gradient(135deg, rgba(220,31,38,0.18) 0%, rgba(255,68,68,0.1) 100%) !important;
+            border-color: rgba(220, 31, 38, 0.8) !important;
+            box-shadow: 0 0 20px rgba(220, 31, 38, 0.3), 0 0 40px rgba(220, 31, 38, 0.1) !important;
+            color: #ff4444 !important;
+        }
+        [data-merdeka="true"] .btn-collab .collab-dot {
+            background: #DC1F26 !important;
+            box-shadow: 0 0 6px #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-collab::after {
+            border-color: rgba(220, 31, 38, 0.3) !important;
+        }
+
+        /* ===== MERDEKA TOGGLE BUTTON ===== */
+        .merdeka-toggle {
+            position: relative;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 4px;
+            overflow: hidden;
+        }
+        .merdeka-toggle:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--text-secondary);
+            transform: scale(1.1);
+        }
+        .merdeka-toggle .merdeka-flag {
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .merdeka-toggle:hover .merdeka-flag {
+            animation: flagWave 0.6s ease-in-out;
+        }
+        .merdeka-flag-red {
+            width: 100%;
+            height: 50%;
+            background: #DC1F26;
+        }
+        .merdeka-flag-white {
+            width: 100%;
+            height: 50%;
+            background: #ffffff;
+        }
+        [data-theme="light"] .merdeka-flag-white {
+            background: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        /* Active state glow */
+        [data-merdeka="true"] .merdeka-toggle {
+            border-color: #DC1F26;
+            box-shadow: 0 0 12px rgba(220, 31, 38, 0.4), 0 0 24px rgba(220, 31, 38, 0.15);
+            background: rgba(220, 31, 38, 0.08);
+        }
+        [data-merdeka="true"] .merdeka-toggle::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            border: 1px solid rgba(220, 31, 38, 0.4);
+            animation: merdekaRing 2s ease-out infinite;
+            pointer-events: none;
+        }
+        @keyframes merdekaRing {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes flagWave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* ===== CONFETTI CANVAS ===== */
+        #merdekaConfettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        [data-merdeka="true"] #merdekaConfettiCanvas {
+            opacity: 1;
+        }
+
+        /* ===== HUT RI BADGE ===== */
+        .hut-ri-badge {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 998;
+            opacity: 0;
+            transform: scale(0.5) rotate(-15deg);
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        [data-merdeka="true"] .hut-ri-badge {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            pointer-events: auto;
+        }
+        .hut-ri-badge-inner {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b8860b 0%, #ffd700 30%, #daa520 60%, #b8860b 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 20px rgba(255, 215, 0, 0.3),
+                0 0 40px rgba(255, 215, 0, 0.15),
+                inset 0 0 20px rgba(255, 255, 255, 0.15);
+            position: relative;
+            animation: badgeFloat 3s ease-in-out infinite;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+        .hut-ri-badge-inner::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 215, 0, 0.4);
+            animation: badgeRotate 20s linear infinite;
+        }
+        .hut-ri-text-hut {
+            font-size: 8px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+        .hut-ri-text-ri {
+            font-size: 14px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+        .hut-ri-text-num {
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+        .hut-ri-text-year {
+            font-size: 7px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 1px;
+            line-height: 1;
+            margin-top: 1px;
+        }
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes badgeRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== BATIK ORNAMENT ===== */
+        .batik-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        [data-merdeka="true"] .batik-overlay {
+            opacity: 1;
+        }
+
+        /* Batik corner ornaments */
+        .batik-corner {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            pointer-events: none;
+            z-index: 997;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        [data-merdeka="true"] .batik-corner {
+            opacity: 0.15;
+        }
+        .batik-corner-tl {
+            top: 0;
+            left: 0;
+        }
+        .batik-corner-tr {
+            top: 0;
+            right: 0;
+            transform: scaleX(-1);
+        }
+        .batik-corner-bl {
+            bottom: 0;
+            left: 0;
+            transform: scaleY(-1);
+        }
+        .batik-corner-br {
+            bottom: 0;
+            right: 0;
+            transform: scale(-1, -1);
+        }
+
+        /* Merdeka toast notification */
+        .merdeka-toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            z-index: 10000;
+            padding: 14px 28px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .merdeka-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .merdeka-toast-on {
+            background: linear-gradient(135deg, rgba(220, 31, 38, 0.9), rgba(180, 20, 25, 0.95));
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(220, 31, 38, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+            backdrop-filter: blur(12px);
+        }
+        .merdeka-toast-off {
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .merdeka-toast-off {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Batik section divider */
+        .batik-divider {
+            width: 100%;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            background-repeat: repeat-x;
+            background-size: 60px 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath d='M30 0 Q35 15 30 30 Q25 15 30 0Z' fill='%23DC1F26' opacity='0.15'/%3E%3Cpath d='M15 0 Q20 15 15 30 Q10 15 15 0Z' fill='%23DC1F26' opacity='0.1'/%3E%3Cpath d='M45 0 Q50 15 45 30 Q40 15 45 0Z' fill='%23DC1F26' opacity='0.1'/%3E%3Ccircle cx='30' cy='15' r='3' fill='%23DC1F26' opacity='0.12'/%3E%3Ccircle cx='0' cy='15' r='2' fill='%23DC1F26' opacity='0.08'/%3E%3Ccircle cx='60' cy='15' r='2' fill='%23DC1F26' opacity='0.08'/%3E%3C/svg%3E");
+        }
+        [data-merdeka="true"] .batik-divider {
+            opacity: 1;
+        }
+
+        /* Merdeka banner ribbon */
+        .merdeka-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 10001;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background: linear-gradient(90deg, #DC1F26 50%, #ffffff 50%);
+            background-size: 40px 4px;
+        }
+        [data-merdeka="true"] .merdeka-banner {
+            opacity: 1;
+        }
+
+        @media (max-width: 640px) {
+            .hut-ri-badge-inner {
+                width: 60px;
+                height: 60px;
+            }
+            .hut-ri-text-hut { font-size: 6px; letter-spacing: 2px; }
+            .hut-ri-text-ri { font-size: 11px; }
+            .hut-ri-text-num { font-size: 15px; }
+            .hut-ri-text-year { font-size: 5px; }
+            .hut-ri-badge { bottom: 80px; right: 16px; }
+            .batik-corner { width: 80px; height: 80px; }
+        }
     </style>
 
     <!-- Prevent Theme Flash -->
@@ -1801,6 +2175,14 @@
             <!-- Language Toggle -->
             <button class="lang-toggle" id="langToggle" aria-label="Toggle Language" style="background: none; border: 1px solid var(--border-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 4px 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; min-width: 40px; margin-right: 4px;">
                 ID
+            </button>
+
+            <!-- Merdeka Mode Toggle 🇮🇩 -->
+            <button class="merdeka-toggle" id="merdekaToggle" aria-label="Toggle Merdeka Mode" title="🇮🇩 Merdeka Mode">
+                <div class="merdeka-flag">
+                    <div class="merdeka-flag-red"></div>
+                    <div class="merdeka-flag-white"></div>
+                </div>
             </button>
 
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
@@ -2430,6 +2812,109 @@
             </div>
         </div>
     </div>
+
+    <!-- ===== MERDEKA MODE ELEMENTS ===== -->
+    
+    <!-- Merdeka Confetti Canvas -->
+    <canvas id="merdekaConfettiCanvas"></canvas>
+
+    <!-- Merdeka Banner Ribbon (top bar) -->
+    <div class="merdeka-banner" id="merdekaBanner"></div>
+
+    <!-- Batik Corner Ornaments -->
+    <svg class="batik-corner batik-corner-tl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="batikGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#DC1F26;stop-opacity:0.6"/>
+                <stop offset="100%" style="stop-color:#DC1F26;stop-opacity:0.1"/>
+            </linearGradient>
+        </defs>
+        <!-- Kawung-inspired pattern -->
+        <circle cx="20" cy="20" r="18" fill="none" stroke="url(#batikGrad)" stroke-width="1"/>
+        <circle cx="20" cy="20" r="8" fill="url(#batikGrad)" opacity="0.3"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="url(#batikGrad)" stroke-width="0.8"/>
+        <circle cx="50" cy="15" r="5" fill="url(#batikGrad)" opacity="0.2"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="url(#batikGrad)" stroke-width="0.8"/>
+        <circle cx="15" cy="50" r="5" fill="url(#batikGrad)" opacity="0.2"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="url(#batikGrad)" stroke-width="0.6"/>
+        <circle cx="42" cy="42" r="4" fill="url(#batikGrad)" opacity="0.15"/>
+        <!-- Connecting lines (parang-style) -->
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="url(#batikGrad)" stroke-width="0.8" opacity="0.5"/>
+        <path d="M 5 35 Q 30 60 55 40 Q 80 20 105 45" fill="none" stroke="url(#batikGrad)" stroke-width="0.6" opacity="0.3"/>
+        <path d="M 35 5 Q 60 30 85 10" fill="none" stroke="url(#batikGrad)" stroke-width="0.6" opacity="0.3"/>
+        <!-- Diamond accents -->
+        <rect x="70" cy="30" width="6" height="6" transform="rotate(45, 73, 33)" fill="url(#batikGrad)" opacity="0.2"/>
+        <rect x="30" cy="70" width="6" height="6" transform="rotate(45, 33, 73)" fill="url(#batikGrad)" opacity="0.2"/>
+        <!-- Mega mendung inspired curves -->
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80 Q 100 65 120 80" fill="none" stroke="url(#batikGrad)" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 80 0 Q 65 20 80 40 Q 95 60 80 80" fill="none" stroke="url(#batikGrad)" stroke-width="0.5" opacity="0.25"/>
+    </svg>
+    <svg class="batik-corner batik-corner-tr" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#DC1F26" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="#DC1F26" opacity="0.15"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="50" cy="15" r="5" fill="#DC1F26" opacity="0.1"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="15" cy="50" r="5" fill="#DC1F26" opacity="0.1"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="#DC1F26" stroke-width="0.6" opacity="0.2"/>
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80 Q 100 65 120 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+        <path d="M 80 0 Q 65 20 80 40 Q 95 60 80 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+    </svg>
+    <svg class="batik-corner batik-corner-bl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#DC1F26" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="#DC1F26" opacity="0.15"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="#DC1F26" stroke-width="0.6" opacity="0.2"/>
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+    </svg>
+    <svg class="batik-corner batik-corner-br" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#DC1F26" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="#DC1F26" opacity="0.15"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="#DC1F26" stroke-width="0.6" opacity="0.2"/>
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+    </svg>
+
+    <!-- Batik background overlay -->
+    <div class="batik-overlay" id="batikOverlay">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="batikPattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+                    <!-- Kawung motif -->
+                    <ellipse cx="40" cy="40" rx="15" ry="15" fill="none" stroke="#DC1F26" stroke-width="0.4" opacity="0.06"/>
+                    <ellipse cx="40" cy="40" rx="6" ry="6" fill="#DC1F26" opacity="0.03"/>
+                    <ellipse cx="40" cy="20" rx="8" ry="12" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <ellipse cx="40" cy="60" rx="8" ry="12" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <ellipse cx="20" cy="40" rx="12" ry="8" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <ellipse cx="60" cy="40" rx="12" ry="8" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <!-- Connecting dots -->
+                    <circle cx="0" cy="0" r="2" fill="#DC1F26" opacity="0.04"/>
+                    <circle cx="80" cy="0" r="2" fill="#DC1F26" opacity="0.04"/>
+                    <circle cx="0" cy="80" r="2" fill="#DC1F26" opacity="0.04"/>
+                    <circle cx="80" cy="80" r="2" fill="#DC1F26" opacity="0.04"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#batikPattern)"/>
+        </svg>
+    </div>
+
+    <!-- HUT RI ke-81 Badge -->
+    <div class="hut-ri-badge" id="hutRiBadge">
+        <div class="hut-ri-badge-inner">
+            <span class="hut-ri-text-hut">HUT</span>
+            <span class="hut-ri-text-ri">RI</span>
+            <span class="hut-ri-text-num">81</span>
+            <span class="hut-ri-text-year">2026</span>
+        </div>
+    </div>
+
+    <!-- Merdeka Toast Notification -->
+    <div class="merdeka-toast" id="merdekaToast"></div>
 
     <!-- Back to Top Progress Ring -->
     <div class="back-to-top" id="backToTop">
@@ -3435,6 +3920,207 @@
             }
         }
 
+    </script>
+
+    <!-- ===== MERDEKA MODE JAVASCRIPT ===== -->
+    <script>
+    (function() {
+        'use strict';
+
+        const html = document.documentElement;
+        const merdekaToggle = document.getElementById('merdekaToggle');
+        const confettiCanvas = document.getElementById('merdekaConfettiCanvas');
+        const merdekaToast = document.getElementById('merdekaToast');
+        
+        if (!merdekaToggle || !confettiCanvas) return;
+
+        const ctx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let confettiAnimId = null;
+        let isMerdekaActive = false;
+
+        // ===== CONFETTI SYSTEM =====
+        function resizeConfettiCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        resizeConfettiCanvas();
+        window.addEventListener('resize', resizeConfettiCanvas);
+
+        class ConfettiPiece {
+            constructor(x, y, isBurst = false) {
+                this.x = x || Math.random() * confettiCanvas.width;
+                this.y = y || (isBurst ? confettiCanvas.height * 0.4 : -10);
+                this.size = Math.random() * 6 + 3;
+                this.speedY = isBurst ? (Math.random() * -12 - 4) : (Math.random() * 1.5 + 0.5);
+                this.speedX = isBurst ? (Math.random() * 10 - 5) : (Math.random() * 2 - 1);
+                this.gravity = isBurst ? 0.15 : 0;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 8;
+                this.opacity = isBurst ? 1 : (Math.random() * 0.5 + 0.3);
+                this.color = Math.random() > 0.5 ? '#DC1F26' : '#ffffff';
+                this.shape = Math.floor(Math.random() * 3); // 0: rect, 1: circle, 2: diamond
+                this.width = this.size * (Math.random() * 1.5 + 0.5);
+                this.height = this.size * (Math.random() * 0.5 + 0.5);
+                this.wobble = Math.random() * Math.PI * 2;
+                this.wobbleSpeed = Math.random() * 0.05 + 0.02;
+                this.life = isBurst ? 180 : 500;
+                this.maxLife = this.life;
+            }
+
+            update() {
+                this.speedY += this.gravity;
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.wobble) * 0.5;
+                this.wobble += this.wobbleSpeed;
+                this.rotation += this.rotationSpeed;
+                this.life--;
+
+                if (this.life < 30) {
+                    this.opacity *= 0.95;
+                }
+
+                return this.y < confettiCanvas.height + 20 && this.life > 0 && this.opacity > 0.01;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                if (this.color === '#ffffff') {
+                    ctx.shadowColor = 'rgba(0,0,0,0.15)';
+                    ctx.shadowBlur = 2;
+                }
+
+                switch (this.shape) {
+                    case 0: // Rectangle
+                        ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+                        break;
+                    case 1: // Circle
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                    case 2: // Diamond
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size / 2);
+                        ctx.lineTo(this.size / 3, 0);
+                        ctx.lineTo(0, this.size / 2);
+                        ctx.lineTo(-this.size / 3, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                }
+                ctx.restore();
+            }
+        }
+
+        function burstConfetti() {
+            const centerX = confettiCanvas.width / 2;
+            const centerY = confettiCanvas.height * 0.35;
+            for (let i = 0; i < 120; i++) {
+                confettiParticles.push(new ConfettiPiece(
+                    centerX + (Math.random() - 0.5) * 200,
+                    centerY + (Math.random() - 0.5) * 100,
+                    true
+                ));
+            }
+        }
+
+        function addContinuousConfetti() {
+            if (isMerdekaActive && Math.random() > 0.85) {
+                confettiParticles.push(new ConfettiPiece());
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+            confettiParticles = confettiParticles.filter(p => {
+                p.draw(ctx);
+                return p.update();
+            });
+
+            addContinuousConfetti();
+
+            if (isMerdekaActive || confettiParticles.length > 0) {
+                confettiAnimId = requestAnimationFrame(animateConfetti);
+            } else {
+                confettiAnimId = null;
+            }
+        }
+
+        function startConfettiLoop() {
+            if (!confettiAnimId) {
+                animateConfetti();
+            }
+        }
+
+        function stopConfetti() {
+            // Let existing particles finish naturally, stop adding new ones
+            // The animation loop will auto-stop when all particles are gone
+        }
+
+        // ===== TOAST NOTIFICATION =====
+        let toastTimeout = null;
+        function showMerdekaToast(isOn) {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            
+            merdekaToast.className = 'merdeka-toast ' + (isOn ? 'merdeka-toast-on' : 'merdeka-toast-off');
+            merdekaToast.innerHTML = isOn 
+                ? '🇮🇩 <span>Merdeka Mode Aktif! Dirgahayu RI ke-81</span> 🎉'
+                : '🌙 <span>Merdeka Mode Dinonaktifkan</span>';
+            
+            requestAnimationFrame(() => {
+                merdekaToast.classList.add('show');
+            });
+
+            toastTimeout = setTimeout(() => {
+                merdekaToast.classList.remove('show');
+            }, 3500);
+        }
+
+        // ===== TOGGLE MERDEKA MODE =====
+        function setMerdekaMode(active, showToastNotif = true) {
+            isMerdekaActive = active;
+            html.setAttribute('data-merdeka', active ? 'true' : 'false');
+            localStorage.setItem('merdekaMode', active ? 'true' : 'false');
+
+            if (active) {
+                burstConfetti();
+                startConfettiLoop();
+                if (showToastNotif) showMerdekaToast(true);
+            } else {
+                stopConfetti();
+                if (showToastNotif) showMerdekaToast(false);
+            }
+        }
+
+        merdekaToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-merdeka') === 'true';
+            setMerdekaMode(!current);
+        });
+
+        // ===== AUTO-DETECT & RESTORE STATE =====
+        function initMerdekaMode() {
+            const saved = localStorage.getItem('merdekaMode');
+            const now = new Date();
+            const isAugust = now.getMonth() === 7; // August is month 7 (0-indexed)
+
+            if (saved === 'true') {
+                setMerdekaMode(true, false);
+            } else if (saved === null && isAugust) {
+                // Auto-activate during August if user hasn't explicitly toggled
+                setMerdekaMode(true, true);
+            }
+        }
+
+        // Initialize after a short delay to avoid interfering with preloader
+        setTimeout(initMerdekaMode, 2500);
+    })();
     </script>
 </body>
 </html>
