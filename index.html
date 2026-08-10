@@ -1799,15 +1799,15 @@
 
         /* Merdeka Digital ID Card */
         [data-merdeka="true"] .digital-id-card {
-            background: linear-gradient(135deg, rgba(220, 31, 38, 0.95) 0%, rgba(220, 31, 38, 0.95) 45%, rgba(255, 255, 255, 0.95) 55%, rgba(255, 255, 255, 0.95) 100%) !important;
+            background: linear-gradient(180deg, rgba(220, 31, 38, 0.95) 0%, rgba(220, 31, 38, 0.95) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%) !important;
             border-color: rgba(220, 31, 38, 0.5) !important;
         }
         [data-merdeka="true"] .digital-id-name {
-            color: #DC1F26 !important;
-            text-shadow: none !important;
+            color: #ffffff !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
         }
         [data-merdeka="true"] .digital-id-role {
-            color: #111111 !important;
+            color: #ffcccc !important;
             text-shadow: none !important;
             animation: none !important;
         }
