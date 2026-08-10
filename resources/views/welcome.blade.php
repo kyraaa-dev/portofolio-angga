@@ -2849,7 +2849,7 @@
 
     <!-- HUT RI ke-81 Badge -->
     <div class="hut-ri-badge" id="hutRiBadge">
-        <img src="{{ asset('images/81.png') }}" alt="HUT RI 81" class="hut-ri-badge-img">
+        <img src="/images/81.png" alt="HUT RI 81" class="hut-ri-badge-img">
     </div>
 
     <!-- Merdeka Toast Notification -->
