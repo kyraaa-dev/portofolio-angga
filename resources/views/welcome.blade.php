@@ -1799,25 +1799,26 @@
 
         /* Merdeka Digital ID Card */
         [data-merdeka="true"] .digital-id-card {
-            background: linear-gradient(180deg, rgba(220, 31, 38, 0.95) 0%, rgba(220, 31, 38, 0.95) 68%, rgba(255, 255, 255, 0.95) 68%, rgba(255, 255, 255, 0.95) 100%) !important;
-            border-color: rgba(220, 31, 38, 0.5) !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 2px solid #DC1F26 !important;
+            box-shadow: 0 10px 30px rgba(220, 31, 38, 0.25), inset 0 0 20px rgba(220, 31, 38, 0.05) !important;
         }
         [data-merdeka="true"] .digital-id-name {
-            color: #ffffff !important;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+            color: #DC1F26 !important;
+            text-shadow: none !important;
         }
         [data-merdeka="true"] .digital-id-role {
-            color: #FFD700 !important;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
+            color: #333333 !important;
+            text-shadow: none !important;
             animation: none !important;
             font-weight: 800 !important;
         }
         [data-merdeka="true"] .id-logo {
-            color: #ffffff !important; 
+            color: #DC1F26 !important; 
         }
         [data-merdeka="true"] .id-barcode {
             background: repeating-linear-gradient(90deg, #DC1F26, #DC1F26 2px, transparent 2px, transparent 4px, #DC1F26 4px, #DC1F26 5px, transparent 5px, transparent 8px) !important;
-            opacity: 0.8 !important;
+            opacity: 0.9 !important;
         }
         [data-merdeka="true"] .id-access {
             color: #ffffff !important;
