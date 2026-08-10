@@ -1807,9 +1807,10 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
         }
         [data-merdeka="true"] .digital-id-role {
-            color: #ffcccc !important;
-            text-shadow: none !important;
+            color: #FFD700 !important;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4) !important;
             animation: none !important;
+            font-weight: 800 !important;
         }
         [data-merdeka="true"] .id-logo {
             color: #ffffff !important; 
