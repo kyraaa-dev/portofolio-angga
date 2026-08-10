@@ -1767,6 +1767,17 @@
         [data-merdeka="true"] .btn-radar::after {
             background: #DC1F26 !important;
         }
+        [data-merdeka="true"] .btn-outline {
+            background: #ffffff !important;
+            color: #DC1F26 !important;
+            border-color: #ffffff !important;
+            font-weight: 600;
+        }
+        [data-merdeka="true"] .btn-outline:hover {
+            background: transparent !important;
+            color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
 
         /* Merdeka scroll progress bar override */
         [data-merdeka="true"] .scroll-progress-bar {
