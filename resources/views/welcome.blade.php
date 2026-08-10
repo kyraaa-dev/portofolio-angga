@@ -4113,6 +4113,14 @@
                 if(cdTimer) cdTimer.style.display = 'none';
                 if(cdTitle) cdTitle.style.display = 'none';
                 if(cdCelebrate) cdCelebrate.style.display = 'flex';
+                
+                // Automatically activate Merdeka Mode when countdown hits zero
+                if (html.getAttribute('data-merdeka') !== 'true') {
+                    // Only auto-activate if the user hasn't explicitly turned it off
+                    if (localStorage.getItem('merdekaMode') !== 'false' && typeof setMerdekaMode === 'function') {
+                        setMerdekaMode(true);
+                    }
+                }
                 return;
             }
 
