@@ -1911,8 +1911,12 @@
         .hut-ri-badge-img {
             height: 100px;
             width: auto;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
             animation: badgeFloat 3s ease-in-out infinite;
+            background-color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 31, 38, 0.3);
         }
         @keyframes badgeFloat {
             0%, 100% { transform: translateY(0); }
@@ -2135,6 +2139,8 @@
 
             .hut-ri-badge-img {
                 height: 80px;
+                padding: 6px 10px;
+                border-radius: 10px;
             }
             .hut-ri-badge { bottom: 80px; right: 16px; }
             .batik-corner { width: 80px; height: 80px; }
