@@ -1919,14 +1919,7 @@
             pointer-events: none;
             transition: opacity 1s ease;
             opacity: 0.15;
-        }
-        [data-merdeka="true"][data-theme="dark"] body::after {
-            filter: brightness(0) invert(1);
-            opacity: 0.12;
-        }
-        [data-merdeka="true"][data-theme="light"] body::after {
-            filter: grayscale(1) opacity(0.8);
-            opacity: 0.12;
+            filter: none;
         }
 
         /* ===== MERDEKA PROJECT RIBBON ===== */
