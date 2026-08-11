@@ -1922,29 +1922,7 @@
             filter: none;
         }
 
-        /* ===== MERDEKA PROJECT RIBBON ===== */
-        [data-merdeka="true"] .project-card {
-            position: relative;
-            overflow: hidden;
-            border-color: rgba(220, 31, 38, 0.3) !important;
-        }
-        [data-merdeka="true"] .project-card::after {
-            content: "MERDEKA 🇮🇩";
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: rgba(220, 31, 38, 0.95);
-            color: #ffffff !important;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            padding: 5px 12px;
-            border-radius: 6px;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 4px 12px rgba(220, 31, 38, 0.2);
-        }
+
 
         /* ===== MERDEKA TOGGLE BUTTON ===== */
         .merdeka-toggle {
