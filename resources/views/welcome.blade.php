@@ -1929,24 +1929,21 @@
             border-color: rgba(220, 31, 38, 0.3) !important;
         }
         [data-merdeka="true"] .project-card::after {
-            content: "MERDEKA";
+            content: "MERDEKA 🇮🇩";
             position: absolute;
-            top: 25px;
-            right: -35px;
-            background: linear-gradient(180deg, #DC1F26 50%, #ffffff 50%);
-            color: #111;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            padding: 6px 40px;
-            transform: rotate(45deg);
+            top: 16px;
+            right: 16px;
+            background: rgba(220, 31, 38, 0.95);
+            color: #ffffff !important;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 6px;
             z-index: 10;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-        [data-merdeka="true"][data-theme="dark"] .project-card::after {
-            color: #000;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 12px rgba(220, 31, 38, 0.2);
         }
 
         /* ===== MERDEKA TOGGLE BUTTON ===== */
