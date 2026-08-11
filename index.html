@@ -1917,16 +1917,16 @@
             background-position: center;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.03;
             transition: opacity 1s ease;
+            opacity: 0.15;
         }
         [data-merdeka="true"][data-theme="dark"] body::after {
             filter: brightness(0) invert(1);
-            opacity: 0.05;
+            opacity: 0.12;
         }
         [data-merdeka="true"][data-theme="light"] body::after {
-            filter: grayscale(1);
-            opacity: 0.04;
+            filter: grayscale(1) opacity(0.8);
+            opacity: 0.12;
         }
 
         /* ===== MERDEKA PROJECT RIBBON ===== */
