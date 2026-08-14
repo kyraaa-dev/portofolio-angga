@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'title' => 'Jelajahin - AI Travel Assistant & Itinerary Planner',
             'category' => 'Selesai',
             'logo_svg' => '<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>',
-            'link' => 'https://github.com/kyraaa-dev/project-travel'
+            'link' => 'https://project-travel-six.vercel.app/'
         ]);
     }
 }
