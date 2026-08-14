@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Setting::create(['key' => 'logo_initials', 'value' => 'AW']);
         
         // Seed Stats
-        \App\Models\Stat::create(['number' => '1+', 'label' => 'TAHUN PENGALAMAN']);
-        \App\Models\Stat::create(['number' => '1+', 'label' => 'PROJEK DISELESAIKAN']);
+        \App\Models\Stat::create(['number' => '2+', 'label' => 'TAHUN PENGALAMAN']);
+        \App\Models\Stat::create(['number' => '4', 'label' => 'PROJEK DISELESAIKAN']);
         \App\Models\Stat::create(['number' => '1+', 'label' => 'KLIEN']);
         \App\Models\Stat::create(['number' => '95%', 'label' => 'TINGKAT KEBERHASILAN']);
 
@@ -35,10 +35,28 @@ class DatabaseSeeder extends Seeder
 
         // Seed Projects
         \App\Models\Project::create([
-            'title' => 'Korpri Application System',
+            'title' => 'SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI',
             'category' => 'Unggulan',
             'logo_svg' => '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>',
             'link' => '#'
+        ]);
+        \App\Models\Project::create([
+            'title' => 'SISDUKOR SISTEM INFORMASI DUTA KORPRI',
+            'category' => 'Unggulan',
+            'logo_svg' => '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>',
+            'link' => '#'
+        ]);
+        \App\Models\Project::create([
+            'title' => 'KasFlow - Personal Cash Flow Manager',
+            'category' => 'Selesai',
+            'logo_svg' => '<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>',
+            'link' => 'https://kyraaa-dev.github.io/kasflow-app/'
+        ]);
+        \App\Models\Project::create([
+            'title' => 'Jelajahin - AI Travel Assistant & Itinerary Planner',
+            'category' => 'Selesai',
+            'logo_svg' => '<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>',
+            'link' => 'https://github.com/kyraaa-dev/project-travel'
         ]);
     }
 }

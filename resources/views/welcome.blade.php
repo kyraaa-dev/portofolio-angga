@@ -2319,7 +2319,7 @@
     <header class="navbar container reveal active">
         <div class="logo">
             <div class="logo-img-wrapper">
-                <img src="/images/logo.png" alt="Logo" class="logo-img">
+                <img src="images/logo.png" alt="Logo" class="logo-img">
             </div>
             <span class="logo-text">{{ $settings['name'] ?? 'Angga Wiranata' }}</span>
         </div>
@@ -2420,7 +2420,7 @@
                 </div>
                 
                 <div class="digital-id-image-wrapper">
-                    <img src="/images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
+                    <img src="images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
                 </div>
                 
                 <div class="digital-id-info">
@@ -2750,20 +2750,29 @@
         </div>
         
         <div class="filters reveal delay-1">
-            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">3</span></button>
-            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">3</span></button>
-            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">1</span></button>
+            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">4</span></button>
+            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">4</span></button>
+            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">2</span></button>
         </div>
 
         <div class="project-grid">
             @foreach($projects as $index => $project)
             @php
                 $filterCategories = 'Unggulan';
-                if(str_contains(strtolower($project->title), 'kasflow')) {
+                if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
                     $filterCategories = 'Unggulan, Selesai';
                 }
+
+                $cardDesc = 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).';
+                if(str_contains(strtolower($project->title), 'duta')) {
+                    $cardDesc = 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.';
+                } elseif(str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
+                    $cardDesc = 'Jelajahin adalah asisten perjalanan cerdas bertenaga AI yang dirancang untuk memandu wisatawan menjelajahi Indonesia, dilengkapi fitur AI Travel Assistant, Itinerary Studio interaktif, ekspor PDF, eksplorasi destinasi, hingga perkiraan cuaca real-time.';
+                } elseif(str_contains(strtolower($project->title), 'kasflow')) {
+                    $cardDesc = 'KasFlow adalah aplikasi manajemen arus kas pribadi yang intuitif dan modern untuk mencatat pemasukan, pengeluaran, serta melacak kesehatan finansial secara real-time.';
+                }
             @endphp
-            <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $filterCategories }}" data-desc="{{ str_contains(strtolower($project->title), 'duta') ? 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.' : 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).' }}">
+            <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $filterCategories }}" data-desc="{{ $cardDesc }}">
                 <style>
                     @keyframes autoCrossfade {
                         0%, 45% { opacity: 0; transform: scale(1); }
@@ -2813,12 +2822,14 @@
                             $hoverImageName = 'duta-korpri-2026.png';
                         } elseif (str_contains(strtolower($project->title), 'kasflow')) {
                             $imageName = 'kasflow-app.png';
+                        } elseif (str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
+                            $imageName = 'project-travel.png';
                         }
                     @endphp
-                    <img src="/images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     @if($hoverImageName)
-                        <img src="/images/{{ $hoverImageName }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                        <img src="images/{{ $hoverImageName }}" alt="{{ $project->title }} Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     @endif
 
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2839,17 +2850,17 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
                             </div>
-                            @if(str_contains(strtolower($project->title), 'kasflow'))
-                                <a href="{{ $project->link }}" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                            @if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel'))
+                                <a href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
-                                    Klik untuk Demo
+                                    {{ str_contains($project->link, 'github.com') ? 'Lihat Project' : 'Klik untuk Demo' }}
                                 </a>
                             @else
                                 <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
                             @endif
                         </div>
                     </div>
-                    <a href="{{ $project->link }}" class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="{{ $project->link }}" @if($project->link != '#') target="_blank" rel="noopener noreferrer" @endif class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2871,14 +2882,14 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-image-wrapper">
-                    <img src="/images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
+                    <img src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">PT Revolusi Cita Edukasi</div>
                 <p class="cert-desc" data-i18n="cert_1_desc">A 1-week certified online course offered by RevoU. Has been awarded a certificate of attendance for the Intro to Software Engineering.</p>
                 <div class="cert-footer">
                     <span class="cert-date" data-i18n="cert_1_date">Issued: 24 July 2026</span>
-                    <a href="/images/cert-revou.png" target="_blank" class="cert-link"><span data-i18n="cert_btn">Lihat Sertifikat</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                    <a href="images/cert-revou.png" target="_blank" class="cert-link"><span data-i18n="cert_btn">Lihat Sertifikat</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
                 </div>
             </div>
 
@@ -3091,7 +3102,7 @@
 
     <!-- HUT RI ke-81 Badge -->
     <div class="hut-ri-badge" id="hutRiBadge">
-        <img src="/images/81.png" alt="HUT RI 81" class="hut-ri-badge-img">
+        <img src="images/81.png" alt="HUT RI 81" class="hut-ri-badge-img">
     </div>
 
     <!-- Merdeka Toast Notification -->
@@ -3362,6 +3373,8 @@
                     e.currentTarget.classList.add('active');
 
                     const filter = e.currentTarget.getAttribute('data-filter');
+                    const pGrid = document.querySelector('.project-grid');
+                    if (pGrid) pGrid.scrollTo({ left: 0, behavior: 'smooth' });
                     
                     projectCards.forEach(card => {
                         const categories = card.getAttribute('data-category');
@@ -3442,7 +3455,22 @@
                     }
                     
                     document.getElementById('modalLogo').innerHTML = logoHtml;
-                    document.getElementById('modalLink').setAttribute('href', link);
+                    const modalLinkContainer = document.getElementById('modalLink');
+                    if (modalLinkContainer) {
+                        if (link && link !== '#') {
+                            const linkLabel = link.includes('github.com')
+                                ? (currentLang === 'en' ? 'View Project on GitHub' : 'Lihat Proyek di GitHub')
+                                : (currentLang === 'en' ? 'Open Live Demo' : 'Buka Live Demo');
+                            modalLinkContainer.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg> ${linkLabel}</a>`;
+                            modalLinkContainer.style.background = 'rgba(16, 185, 129, 0.1)';
+                            modalLinkContainer.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                        } else {
+                            const devText = translations['proj_dev_status'] ? translations['proj_dev_status'][currentLang] : 'Tahap Pengembangan (Coming Soon)';
+                            modalLinkContainer.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; margin-top: -2px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span data-i18n="proj_dev_status">${devText}</span>`;
+                            modalLinkContainer.style.background = 'rgba(255, 189, 46, 0.1)';
+                            modalLinkContainer.style.borderColor = 'rgba(255, 189, 46, 0.3)';
+                        }
+                    }
                     
                     projectModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
