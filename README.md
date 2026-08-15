@@ -52,8 +52,14 @@ Repositori resmi **Personal Portfolio Website** milik **Angga Wiranata**. Mengom
 ### 📊 Statistik GitHub
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=kyraaa-dev&show_icons=true&theme=radical&bg_color=0d1117&title_color=dc2626&text_color=ffffff&icon_color=ef4444&border_color=dc2626" height="150" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=kyraaa-dev&layout=compact&theme=radical&bg_color=0d1117&title_color=dc2626&text_color=ffffff&border_color=dc2626" height="150" alt="Top Langs" />
+
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=kyraaa-dev&theme=radical" height="150" alt="GitHub Profile Details" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=kyraaa-dev&theme=radical" height="150" alt="Top Languages" />
+
+  <br/><br/>
+
+  <img src="https://streak-stats.demolab.com/?user=kyraaa-dev&theme=tokyonight&background=0D1117&ring=DC1F26&fire=DC1F26&currStreakLabel=DC1F26" alt="GitHub Streak" />
+
 </div>
 
 ---
