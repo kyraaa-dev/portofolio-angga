@@ -2750,16 +2750,16 @@
         </div>
         
         <div class="filters reveal delay-1">
-            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">4</span></button>
-            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">4</span></button>
-            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">2</span></button>
+            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">5</span></button>
+            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">5</span></button>
+            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">3</span></button>
         </div>
 
         <div class="project-grid">
             @foreach($projects as $index => $project)
             @php
                 $filterCategories = 'Unggulan';
-                if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
+                if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel') || str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
                     $filterCategories = 'Unggulan, Selesai';
                 }
 
@@ -2770,6 +2770,8 @@
                     $cardDesc = 'Jelajahin adalah asisten perjalanan cerdas bertenaga AI yang dirancang untuk memandu wisatawan menjelajahi Indonesia, dilengkapi fitur AI Travel Assistant, Itinerary Studio interaktif, ekspor PDF, eksplorasi destinasi, hingga perkiraan cuaca real-time.';
                 } elseif(str_contains(strtolower($project->title), 'kasflow')) {
                     $cardDesc = 'KasFlow adalah aplikasi manajemen arus kas pribadi yang intuitif dan modern untuk mencatat pemasukan, pengeluaran, serta melacak kesehatan finansial secara real-time.';
+                } elseif(str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
+                    $cardDesc = 'E-MutZ KORPRI adalah sistem informasi manajemen dan rekapitulasi pemesanan seragam/atribut Mutz KORPRI untuk seluruh SKPD / ASN, mencakup pencatatan pesanan per SKPD, manajemen stok & retur, statistik pemesanan real-time, cetak kwitansi, hingga export laporan data.';
                 }
             @endphp
             <div class="project-card reveal delay-{{ $index % 3 }}" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="{{ $filterCategories }}" data-desc="{{ $cardDesc }}">
@@ -2824,6 +2826,8 @@
                             $imageName = 'kasflow-app.png';
                         } elseif (str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
                             $imageName = 'project-travel.png';
+                        } elseif (str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
+                            $imageName = 'project-mutz.png';
                         }
                     @endphp
                     <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
@@ -2850,7 +2854,7 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
                             </div>
-                            @if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel'))
+                            @if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel') || str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap'))
                                 <a href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                     {{ str_contains($project->link, 'github.com') ? 'Lihat Project' : 'Klik untuk Demo' }}
@@ -3380,6 +3384,7 @@
                         const categories = card.getAttribute('data-category');
                         if (filter === 'all' || categories.includes(filter)) {
                             card.style.display = 'flex';
+                            card.classList.add('active');
                             setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
                         } else {
                             card.style.opacity = '0';
@@ -4164,6 +4169,11 @@
             });
         }
 
+        const ctx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let confettiAnimId = null;
+        let isMerdekaActive = false;
+
         // Countdown Logic
         const cdDays = document.getElementById('cdDays');
         const cdHours = document.getElementById('cdHours');
@@ -4204,14 +4214,6 @@
             if (cdMins) cdMins.innerText = minutes.toString().padStart(2, '0');
             if (cdSecs) cdSecs.innerText = seconds.toString().padStart(2, '0');
         }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        const ctx = confettiCanvas.getContext('2d');
-        let confettiParticles = [];
-        let confettiAnimId = null;
-        let isMerdekaActive = false;
 
         // ===== CONFETTI SYSTEM =====
         function resizeConfettiCanvas() {
@@ -4481,6 +4483,10 @@
             const current = html.getAttribute('data-merdeka') === 'true';
             setMerdekaMode(!current);
         });
+
+        // Start countdown
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
         // ===== AUTO-DETECT & RESTORE STATE =====
         function initMerdekaMode() {

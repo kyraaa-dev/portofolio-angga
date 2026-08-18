@@ -67,16 +67,29 @@ const anggaWiranata = {
   </tr>
   <tr>
     <td width="50%" valign="top">
+      <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan"><img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-mutz.png" alt="E-MutZ KORPRI" width="100%"/></a>
+      <h3 align="center"><a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan">🎖️ E-MutZ KORPRI</a></h3>
+      <p align="center"><i>Sistem Rekapitulasi Pemesanan Mutz ASN</i></p>
+      <p align="center">
+        <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=flat-square&logo=github" alt="Code"/></a>
+      </p>
+      <p><code>PHP</code> <code>MySQL</code> <code>Chart.js</code> <code>Bootstrap</code></p>
+    </td>
+    <td width="50%" valign="top">
       <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-korpri.png" alt="SILUKOR" width="100%"/>
       <h3 align="center">🏛️ SILUKOR</h3>
       <p align="center"><i>KORPRI membership management portal</i></p>
       <p><code>Laravel</code> <code>MySQL</code> <code>Tailwind</code> <code>REST API</code></p>
     </td>
+  </tr>
+  <tr>
     <td width="50%" valign="top">
       <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/duta-korpri.png" alt="SISDUKOR" width="100%"/>
       <h3 align="center">👑 SISDUKOR</h3>
       <p align="center"><i>Ambassador competition judging platform</i></p>
       <p><code>Laravel 11</code> <code>Livewire</code> <code>Alpine</code> <code>MySQL</code></p>
+    </td>
+    <td width="50%" valign="top">
     </td>
   </tr>
 </table>
