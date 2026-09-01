@@ -5,7 +5,7 @@
 
 <!-- ═══════════════ 🚀 BADGES ═══════════════ -->
 <p align="center">
-  <a href="https://kyraaa.pages.dev" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Live%20Portfolio-kyraaa.pages.dev-8B5CF6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
+  <a href="https://anggawiranata.my.id" target="_blank"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Live%20Portfolio-anggawiranata.my.id-8B5CF6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
   <img src="https://komarev.com/ghpvc/?username=kyraaa-dev-portfolio&label=Portfolio%20Views&color=6366F1&style=for-the-badge" alt="Portfolio Views"/>
   <a href="https://laravel.com"><img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"/></a>
   <a href="https://react.dev"><img src="https://img.shields.io/badge/React-18.x-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React"/></a>
@@ -13,7 +13,7 @@
 </p>
 
 <!-- ═══════════════ ⚡ DYNAMIC TYPING SUBTITLE ═══════════════ -->
-<a href="https://kyraaa.pages.dev">
+<a href="https://anggawiranata.my.id">
   <img src="https://readme-typing-svg.demolab.com?font=Outfit&weight=600&size=19&duration=2500&pause=1000&color=8B5CF6&center=true&vCenter=true&width=800&lines=Full+Stack+Web+Developer+%E2%80%A2+Laravel+%26+React;Creator+of+Jelajahin+%E2%80%94+AI+Travel+Companion+%F0%9F%8C%B4;Creator+of+KasFlow+%E2%80%94+Personal+Cash+Flow+Manager;Building+modern%2C+interactive+%26+high-performance+web+apps;Passionate+about+UI%2FUX+design+%26+clean+code+%E2%9C%A8" alt="Typing SVG" />
 </a>
 
@@ -150,7 +150,7 @@ php artisan serve
 ### 📬 Connect with Me
 
 <p align="center">
-  <a href="https://kyraaa.pages.dev" target="_blank"><img src="https://img.shields.io/badge/Website-kyraaa.pages.dev-8B5CF6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
+  <a href="https://anggawiranata.my.id" target="_blank"><img src="https://img.shields.io/badge/Website-anggawiranata.my.id-8B5CF6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
   <a href="https://github.com/kyraaa-dev" target="_blank"><img src="https://img.shields.io/badge/GitHub-kyraaa--dev-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/></a>
   <a href="mailto:anggawiranatafti@gmail.com"><img src="https://img.shields.io/badge/Email-anggawiranatafti%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
 </p>

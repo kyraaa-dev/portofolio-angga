@@ -11,7 +11,7 @@
     <meta name="keywords" content="Web Developer, Software Engineer, Frontend Developer, Laravel, React, Portfolio, Angga Wiranata, Programmer Indonesia">
     <meta name="author" content="{{ $settings['name'] ?? 'Angga Wiranata' }}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://kyraaa.pages.dev/">
+    <link rel="canonical" href="https://anggawiranata.my.id/">
     <meta name="theme-color" content="#000000">
 
     <!-- Schema.org JSON-LD for Google -->
@@ -23,8 +23,8 @@
         "@@type": "Person",
         "name": "{{ $settings['name'] ?? 'Angga Wiranata' }}",
         "jobTitle": "Web Developer",
-        "url": "https://kyraaa.pages.dev/",
-        "image": "https://kyraaa.pages.dev/images/profile.jpg",
+        "url": "https://anggawiranata.my.id/",
+        "image": "https://anggawiranata.my.id/images/profile.jpg",
         "sameAs": [
           "https://github.com/kyraaa-dev",
           "https://www.linkedin.com/in/angga-wiranata-320837420"
@@ -36,11 +36,11 @@
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kyraaa.pages.dev/">
+    <meta property="og:url" content="https://anggawiranata.my.id/">
     <meta property="og:site_name" content="Angga Wiranata Portfolio">
     <meta property="og:title" content="{{ $settings['name'] ?? 'Angga Wiranata' }} | {{ $settings['title'] ?? 'Professional Web Developer' }}">
     <meta property="og:description" content="{{ $settings['description'] ?? 'Saya adalah seorang Web Developer yang bersemangat dalam membangun antarmuka web yang modern, cepat, dan mudah diakses.' }}">
-    <meta property="og:image" content="https://kyraaa.pages.dev/images/og-image.png">
+    <meta property="og:image" content="https://anggawiranata.my.id/images/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -52,7 +52,7 @@
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="{{ $settings['name'] ?? 'Angga Wiranata' }} | {{ $settings['title'] ?? 'Professional Web Developer' }}">
     <meta property="twitter:description" content="{{ $settings['description'] ?? 'Saya adalah seorang Web Developer yang bersemangat dalam membangun antarmuka web yang modern, cepat, dan mudah diakses.' }}">
-    <meta property="twitter:image" content="https://kyraaa.pages.dev/images/og-image.png">
+    <meta property="twitter:image" content="https://anggawiranata.my.id/images/og-image.png">
 
     <!-- Favicon & Search Icons (Google SEO Optimized) -->
     <link rel="shortcut icon" href="/favicon.ico">

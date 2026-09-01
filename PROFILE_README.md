@@ -5,13 +5,13 @@
 
 <!-- ═══════════════ 🏷️ STATUS BADGES ═══════════════ -->
 <p>
-  <a href="https://kyraaa.pages.dev"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Portfolio-kyraaa.pages.dev-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
+  <a href="https://anggawiranata.my.id"><img src="https://img.shields.io/badge/%F0%9F%8C%90%20Portfolio-anggawiranata.my.id-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"/></a>
   <img src="https://komarev.com/ghpvc/?username=kyraaa-dev&label=Profile+Views&color=06b6d4&style=for-the-badge" alt="Views"/>
   <a href="mailto:anggawiranatafti@gmail.com"><img src="https://img.shields.io/badge/Status-Open%20for%20Work-10B981?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/></a>
 </p>
 
 <!-- ═══════════════ ⚡ ANIMATED TYPING ═══════════════ -->
-<a href="https://kyraaa.pages.dev">
+<a href="https://anggawiranata.my.id">
   <img src="https://readme-typing-svg.demolab.com?font=Outfit&weight=700&size=22&duration=2500&pause=1200&color=7C3AED&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=70&lines=Building+beautiful%2C+high-performance+web+experiences+%E2%9C%A8;Laravel+%E2%80%A2+React+%E2%80%A2+TypeScript+%E2%80%A2+Tailwind+%E2%80%A2+Vite" alt="Typing"/>
 </a>
 
@@ -145,7 +145,7 @@ const anggaWiranata = {
 
 ### 📬 Let's Connect
 
-<a href="https://kyraaa.pages.dev"><img src="https://img.shields.io/badge/Website-kyraaa.pages.dev-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white"/></a>
+<a href="https://anggawiranata.my.id"><img src="https://img.shields.io/badge/Website-anggawiranata.my.id-7C3AED?style=for-the-badge&logo=googlechrome&logoColor=white"/></a>
 <a href="https://github.com/kyraaa-dev"><img src="https://img.shields.io/badge/GitHub-kyraaa--dev-181717?style=for-the-badge&logo=github&logoColor=white"/></a>
 <a href="mailto:anggawiranatafti@gmail.com"><img src="https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge&logo=gmail&logoColor=white"/></a>
 

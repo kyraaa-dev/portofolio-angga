@@ -9,8 +9,8 @@ old_schema = """    <!-- Schema.org JSON-LD for Google -->
         "@type": "Person",
         "name": "ANGGA WIRANATA",
         "jobTitle": "Web Developer",
-        "url": "https://kyraaa.pages.dev/",
-        "image": "https://kyraaa.pages.dev/images/profile.jpg",
+        "url": "https://anggawiranata.my.id/",
+        "image": "https://anggawiranata.my.id/images/profile.jpg",
         "sameAs": [
           "https://github.com/kyraaa-dev",
           "https://www.linkedin.com/in/angga-wiranata-320837420"
@@ -28,7 +28,7 @@ new_schema = """    <!-- Schema.org JSON-LD for Google -->
         "@type": "WebSite",
         "name": "Angga Wiranata",
         "alternateName": "Portfolio Angga Wiranata",
-        "url": "https://kyraaa.pages.dev/"
+        "url": "https://anggawiranata.my.id/"
       },
       {
         "@context": "https://schema.org",
@@ -37,8 +37,8 @@ new_schema = """    <!-- Schema.org JSON-LD for Google -->
           "@type": "Person",
           "name": "ANGGA WIRANATA",
           "jobTitle": "Web Developer",
-          "url": "https://kyraaa.pages.dev/",
-          "image": "https://kyraaa.pages.dev/images/profile.jpg",
+          "url": "https://anggawiranata.my.id/",
+          "image": "https://anggawiranata.my.id/images/profile.jpg",
           "sameAs": [
             "https://github.com/kyraaa-dev",
             "https://www.linkedin.com/in/angga-wiranata-320837420"
