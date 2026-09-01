@@ -353,35 +353,8 @@
         }
 
         /* Cinematic Preloader */
-        .preloader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #050505; z-index: 999999; display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
-            transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
-        }
-        .preloader.fade-out {
-            opacity: 0; visibility: hidden;
-        }
-        .preloader::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #fff; z-index: 100; opacity: 0; pointer-events: none;
-            transition: opacity 0.2s ease-out;
-        }
-        .preloader.overload::after { opacity: 1; }
 
-        .preloader-percentage-new {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 8vw; font-weight: 900; color: transparent;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); z-index: 10;
-            font-family: 'Inter', sans-serif; pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-        .preloader-percentage-new::before {
-            content: attr(data-text); position: absolute; top: 0; left: 0; color: #fff;
-            width: var(--progress, 0%); overflow: hidden; white-space: nowrap;
-        }
-        .preloader.slide-up .preloader-percentage-new { opacity: 0; }
-        
+        .preloader.slide-up        
         @keyframes fadeIn {
             to { opacity: 1; }
         }
@@ -1772,10 +1745,6 @@
     </script>
 </head>
 <body>
-    <!-- The Matrix Code Rain Preloader -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-percentage-new" id="preloaderPerc" data-text="0%">0%</div>
-    </div>
     
     <!-- Interactive Grid Background -->
     <div class="grid-background" id="gridBackground"></div>
@@ -2728,52 +2697,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Matrix Preloader Logic
-            const preloader = document.getElementById('preloader');
-            const preloaderPerc = document.getElementById('preloaderPerc');
-            
-            
-            if (preloader) {
-                
-
-                let progress = 0;
-                
-                // Cinematic Cyberpunk Startup Sound (Web Audio API Synthesizer)
-                function playStartupSound() {
-                    // Sound removed per user request
-                }
-
-                setTimeout(() => {
-                    const interval = setInterval(() => {
-                        progress += Math.floor(Math.random() * 5) + 2; 
-                        
-                        if (progress >= 100) {
-                            progress = 100;
-                            clearInterval(interval);
-                            
-                            if (preloaderPerc) preloaderPerc.style.display = 'none';
-                            
-                            isOverloaded = true;
-                            preloader.classList.add('overload');
-                            
-                            setTimeout(() => {
-                                preloader.classList.add('fade-out');
-                                setTimeout(() => {
-                                    preloader.style.display = 'none';
-                                    document.querySelectorAll('.reveal').forEach((el, index) => {
-                                        setTimeout(() => { el.classList.add('active'); }, index * 100);
-                                    });
-                                }, 1500);
-                            }, 500);
-                        }
-                        if(preloaderPerc && progress < 100) {
-                            preloaderPerc.innerText = progress + '%';
-                            preloaderPerc.setAttribute('data-text', progress + '%');
-                            preloaderPerc.style.setProperty('--progress', progress + '%');
-                        }
-                    }, 40);
-                }, 500);
-            }
+            // Trigger reveal animations directly since preloader is removed
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach((el, index) => {
+                    setTimeout(() => { el.classList.add('active'); }, index * 100);
+                });
+            }, 100);
 
             // Global Mouse Tracker for Grid Background
             const gridBg = document.getElementById('gridBackground');
