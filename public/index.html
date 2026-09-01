@@ -359,10 +359,6 @@
             overflow: hidden;
             transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
         }
-        #matrixCanvas {
-            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-            display: block; z-index: 1; background: #000;
-        }
         .preloader.fade-out {
             opacity: 0; visibility: hidden;
         }
@@ -1778,7 +1774,6 @@
 <body>
     <!-- The Matrix Code Rain Preloader -->
     <div class="preloader" id="preloader">
-        <canvas id="matrixCanvas"></canvas>
         <div class="preloader-percentage-new" id="preloaderPerc" data-text="0%">0%</div>
     </div>
     
@@ -2736,9 +2731,9 @@
             // Matrix Preloader Logic
             const preloader = document.getElementById('preloader');
             const preloaderPerc = document.getElementById('preloaderPerc');
-            const canvas = document.getElementById('matrixCanvas');
             
-            if (preloader && canvas) {
+            
+            if (preloader) {
                 const ctx = canvas.getContext('2d');
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
