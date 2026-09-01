@@ -2734,47 +2734,7 @@
             
             
             if (preloader) {
-                const ctx = canvas.getContext('2d');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
                 
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
-                const fontSize = 14;
-                const columns = canvas.width / fontSize;
-                const drops = Array.from({length: columns}).fill(1);
-                
-                let isOverloaded = false;
-                
-                function drawMatrix() {
-                    if (isOverloaded) {
-                        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-                    } else {
-                        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                    }
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    ctx.fillStyle = isOverloaded ? '#fff' : '#10b981'; // Emerald Green
-                    ctx.font = fontSize + 'px monospace';
-                    
-                    for (let i = 0; i < drops.length; i++) {
-                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                        
-                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                            drops[i] = 0;
-                        }
-                        drops[i]++;
-                    }
-                    if (!preloader.classList.contains('fade-out') || isOverloaded) {
-                        requestAnimationFrame(drawMatrix);
-                    }
-                }
-                drawMatrix();
-                
-                window.addEventListener('resize', () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                });
 
                 let progress = 0;
                 
