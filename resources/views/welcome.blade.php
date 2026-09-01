@@ -2831,7 +2831,7 @@
                         } elseif (str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
                             $imageName = 'project-travel.png';
                         } elseif (str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
-                            $imageName = 'project-mutz.png';
+                            $imageName = 'project-emutz.png';
                         }
                     @endphp
                     <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">

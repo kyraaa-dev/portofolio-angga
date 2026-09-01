@@ -67,7 +67,7 @@ const anggaWiranata = {
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan"><img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-mutz.png" alt="E-MutZ KORPRI" width="100%"/></a>
+      <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan"><img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-emutz.png" alt="E-MutZ KORPRI" width="100%"/></a>
       <h3 align="center"><a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan">🎖️ E-MutZ KORPRI</a></h3>
       <p align="center"><i>Sistem Rekapitulasi Pemesanan Mutz ASN</i></p>
       <p align="center">

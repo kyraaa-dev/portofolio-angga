@@ -66,7 +66,7 @@ Repositori resmi **Personal Portfolio Website** milik **Angga Wiranata**. Dibang
   <tr>
     <td width="50%" valign="top">
       <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank">
-        <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-mutz.png" alt="E-MutZ KORPRI Preview" width="100%" style="border-radius: 8px;"/>
+        <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-emutz.png" alt="E-MutZ KORPRI Preview" width="100%" style="border-radius: 8px;"/>
       </a>
       <h3 align="center">🎖️ E-MutZ KORPRI</h3>
       <p align="center"><b>Sistem Rekapitulasi Pemesanan Mutz ASN</b></p>
