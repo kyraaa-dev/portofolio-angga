@@ -296,7 +296,7 @@
         .theme-toggle {
             background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);
             width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.3s ease;
+            cursor: pointer; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .theme-toggle:hover {
             background: var(--bg-surface-hover); border-color: var(--text-secondary);
@@ -408,7 +408,7 @@
             padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600;
             font-family: 'Inter', sans-serif; cursor: pointer; border: 1px solid var(--border-color);
             background: var(--bg-surface); color: var(--text-secondary);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .voice-lang-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
         .voice-lang-btn.active { background: var(--accent-color); border-color: var(--accent-color); color: #000; font-weight: 700; }
@@ -417,7 +417,7 @@
             background: rgba(16, 185, 129, 0.07); border: 1px solid rgba(16, 185, 129, 0.25);
             color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
             padding: 12px 22px 12px 12px; border-radius: 100px; cursor: pointer;
-            transition: all 0.3s ease; letter-spacing: 0.3px;
+            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; letter-spacing: 0.3px;
         }
         .voice-btn:hover { background: rgba(16, 185, 129, 0.15); border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.2); }
         .voice-btn.playing { background: rgba(16, 185, 129, 0.2); border-color: var(--accent-color); box-shadow: 0 0 20px rgba(16,185,129,0.3); }
@@ -900,7 +900,7 @@
             color: var(--accent-color); font-size: 13px; font-weight: 600;
             font-family: 'Inter', sans-serif; padding: 12px 20px; border-radius: 100px;
             cursor: pointer;            box-shadow: 0 0 20px rgba(16,185,129,0.2);
-            transition: all 0.3s ease; letter-spacing: 0.5px;
+            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; letter-spacing: 0.5px;
         }
         .replay-btn:hover {
             background: var(--accent-color); color: #000;
@@ -941,12 +941,15 @@
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: #fff; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
             padding: 8px 16px; border-radius: 100px; cursor: pointer;
- transition: all 0.3s ease;
+ transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .replay-skip:hover { background: rgba(255,255,255,0.2); }
 
         /* Replay animation classes */
-        .replay-hiding .reveal { opacity: 0 !important; transform: translateY(30px) !important; transition: all 0.5s ease !important; }
+        .replay-hiding .reveal {
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden; opacity: 0 !important; transform: translateY(30px) !important; transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease !important; }
         .replay-hiding .reveal.active { opacity: 0 !important; transform: translateY(30px) !important; }
         
         /* Orbit Ecosystem */
@@ -1068,7 +1071,7 @@
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
             border-radius: 50%; background: var(--bg-surface); z-index: 9999; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            opacity: 0; visibility: hidden; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(20px); border: 1px solid var(--border-color);
         }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -1128,7 +1131,7 @@
             transform: translateX(-50%);
             box-shadow: 0 0 10px rgba(0, 255, 249, 0.5);
             z-index: 2;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .timeline-item:hover .timeline-dot {
             background: var(--accent-color);
@@ -1212,7 +1215,8 @@
         .project-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
         }
-        .project-card { 
+        .project-card {
+            will-change: transform, box-shadow; 
             background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; 
             padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; 
@@ -1389,7 +1393,7 @@
         }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         .social-links { display: flex; gap: 16px; }
-        .social-links a { color: var(--text-secondary); transition: all 0.3s ease; display: flex; }
+        .social-links a { color: var(--text-secondary); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; display: flex; }
         .social-links a:hover { color: var(--text-primary); transform: translateY(-2px); }
         
         .status-badge {
@@ -1531,7 +1535,7 @@
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .cert-link:hover {
             color: var(--accent-color);
@@ -1589,7 +1593,10 @@
         [data-theme="light"] .cursor-glow { display: none; } /* Subtle glow only works well on dark themes */
 
         /* Smooth Reveal */
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.2, 0, 0, 1); }
+        .reveal {
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden; opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.2, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
@@ -1667,7 +1674,8 @@
                 padding-right: 24px;
             }
             .project-grid::-webkit-scrollbar { display: none; }
-            .project-card { flex: 0 0 85% !important; scroll-snap-align: center; }
+            .project-card {
+            will-change: transform, box-shadow; flex: 0 0 85% !important; scroll-snap-align: center; }
 
             .contact-card { padding: 32px; flex-direction: column; align-items: stretch; gap: 32px; }
             .contact-content { max-width: 100%; min-width: 100%; }
@@ -1758,7 +1766,7 @@
     <header class="navbar container reveal active">
         <div class="logo">
             <div class="logo-img-wrapper">
-                <img src="images/logo.png" alt="Logo" class="logo-img">
+                <img loading="lazy" src="images/logo.png" alt="Logo" class="logo-img">
             </div>
             <span class="logo-text">ANGGA WIRANATA</span>
         </div>
@@ -1781,7 +1789,7 @@
             </a>
 
             <!-- Language Toggle -->
-            <button class="lang-toggle" id="langToggle" aria-label="Toggle Language" style="background: none; border: 1px solid var(--border-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 4px 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; min-width: 40px; margin-right: 4px;">
+            <button class="lang-toggle" id="langToggle" aria-label="Toggle Language" style="background: none; border: 1px solid var(--border-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 4px 8px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; min-width: 40px; margin-right: 4px;">
                 ID
             </button>
 
@@ -1850,7 +1858,7 @@
                 </div>
                 
                 <div class="digital-id-image-wrapper">
-                    <img src="images/profile.jpg" alt="ANGGA WIRANATA" class="digital-id-image">
+                    <img loading="lazy" src="images/profile.jpg" alt="ANGGA WIRANATA" class="digital-id-image">
                 </div>
                 
                 <div class="digital-id-info">
@@ -2254,7 +2262,7 @@
                     }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img src="images/project-korpri.png" alt="SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img loading="lazy" src="images/project-korpri.png" alt="SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2272,7 +2280,7 @@
                                                             <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
                                                     </div>
                     </div>
-                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2319,9 +2327,9 @@
                     }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img src="images/duta-korpri.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img loading="lazy" src="images/duta-korpri.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
-                                            <img src="images/duta-korpri-2026.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                            <img loading="lazy" src="images/duta-korpri-2026.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
@@ -2338,7 +2346,7 @@
                                                             <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
                                                     </div>
                     </div>
-                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2385,7 +2393,7 @@
                     }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img src="images/kasflow-app.png" alt="KasFlow - Personal Cash Flow Manager Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img loading="lazy" src="images/kasflow-app.png" alt="KasFlow - Personal Cash Flow Manager Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2400,13 +2408,13 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
-                                                            <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                                                            <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                     Klik untuk Demo
                                 </a>
                                                     </div>
                     </div>
-                    <a href="https://kyraaa-dev.github.io/kasflow-app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="https://kyraaa-dev.github.io/kasflow-app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2453,7 +2461,7 @@
                     }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img src="images/project-travel.png" alt="Jelajahin - AI Travel Assistant &amp; Itinerary Planner Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img loading="lazy" src="images/project-travel.png" alt="Jelajahin - AI Travel Assistant &amp; Itinerary Planner Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2468,13 +2476,13 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
-                                                            <a href="https://project-travel-six.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                                                            <a href="https://project-travel-six.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                     Klik untuk Demo
                                 </a>
                                                     </div>
                     </div>
-                    <a href="https://project-travel-six.vercel.app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="https://project-travel-six.vercel.app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2521,7 +2529,7 @@
                     }
                 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                    <img src="images/project-emutz.png" alt="E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    <img loading="lazy" src="images/project-emutz.png" alt="E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
@@ -2535,13 +2543,13 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span data-i18n="proj_comp">Selesai</span>
                             </div>
-                            <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                            <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                 Lihat Proyek
                             </a>
                         </div>
                     </div>
-                    <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2562,7 +2570,7 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-image-wrapper">
-                    <img src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
+                    <img loading="lazy" src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">PT Revolusi Cita Edukasi</div>
