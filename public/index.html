@@ -1569,7 +1569,8 @@
             
             .cursor-dot, .cursor-outline {
                 position: fixed; top: 0; left: 0; transform: translate3d(-50%, -50%, 0);
-                border-radius: 50%; z-index: 999999; pointer-events: none;
+                border-radius: 50%; z-index: 999999;
+            transform: translateZ(9999px); pointer-events: none;
                 will-change: transform;
             }
             .cursor-dot { width: 8px; height: 8px; background-color: var(--text-primary); transition: background-color 0.5s ease; }
@@ -1752,6 +1753,7 @@
             top: 0; left: 0; width: 100vw; height: 100vh;
             background: var(--bg-base);
             z-index: 999999;
+            transform: translateZ(9999px);
             display: flex;
             flex-direction: column;
             justify-content: center;
