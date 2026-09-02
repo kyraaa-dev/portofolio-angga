@@ -348,8 +348,8 @@
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
             background-size: 50px 50px;
             opacity: 0.4;
-            -webkit-mask-image: radial-gradient(500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
-            mask-image: radial-gradient(500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
+            -webkit-mask-image: radial-gradient(800px circle at 50vw 50vh, black 0%, transparent 100%);
+            mask-image: radial-gradient(800px circle at 50vw 50vh, black 0%, transparent 100%);
         }
 
         /* Cinematic Preloader */
@@ -2708,12 +2708,7 @@
 
             // Global Mouse Tracker for Grid Background
             const gridBg = document.getElementById('gridBackground');
-            window.addEventListener('mousemove', (e) => {
-                if (gridBg) {
-                    gridBg.style.setProperty('--mouse-x', `${e.clientX}px`);
-                    gridBg.style.setProperty('--mouse-y', `${e.clientY}px`);
-                }
-            });
+// Mouse tracking for grid disabled for performance
 
             // Scroll Progress Bar Logic
             let isScrolling = false;
@@ -2741,13 +2736,6 @@
                 let outlineX = 0, outlineY = 0;
                 let glowX = 0, glowY = 0;
                 
-                window.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                    
-                    // Dot follows instantly using hardware acceleration
-                    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-                }, { passive: true });
                 
                 // Outline follows with spring physics lag
                 function animateCursor() {
@@ -2793,13 +2781,6 @@
             // Project Card Flashlight Effect (Vercel Style)
             const pCards = document.querySelectorAll('.project-card');
             pCards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
             });
 
             // Set initial toggle icons based on the theme already set in <head>
@@ -2835,26 +2816,6 @@
             const reflection = document.getElementById('cardReflection');
             
             if(card) {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; // x position within the element
-                    const y = e.clientY - rect.top;  // y position within the element
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
-                    const rotateY = ((x - centerX) / centerX) * 10;
-                    
-                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                    
-                    // Update reflection position based on theme
-                    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-                    const reflectColor = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.15)';
-                    
-                    reflection.style.opacity = '1';
-                    reflection.style.background = `radial-gradient(circle at ${x}px ${y}px, ${reflectColor}, transparent 60%)`;
-                });
                 
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = `rotateX(0deg) rotateY(0deg)`;
@@ -3047,12 +3008,6 @@
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mouseenter', () => {
                     btn.style.transition = 'none';
-                });
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
                 });
                 btn.addEventListener('mouseleave', () => {
                     btn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, color 0.3s ease';
