@@ -1779,7 +1779,12 @@
             width: 100%;
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px var(--accent-color));
+            /* Make it white in dark mode */
+            filter: brightness(0) invert(1);
+        }
+        [data-theme="light"] .preloader-logo-aw img {
+            /* Keep original color in light mode */
+            filter: none;
         }
         @keyframes pulseAwLogo {
             0% { 
