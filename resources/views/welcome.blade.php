@@ -486,13 +486,7 @@
             position: relative;
         }
         /* Static premium glow instead of animated pulse */
-        .digital-id-perspective::before {
-            content: ''; position: absolute; top: 50%; left: 50%; width: 100%; height: 100%;
-            background: transparent;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 100px 40px rgba(0, 255, 249, 0.15), 0 0 100px 40px rgba(255, 0, 193, 0.15);
-            z-index: -1; pointer-events: none; border-radius: 50%;
-        }
+        
         .digital-id-card {
             width: 320px;
             height: 480px;
@@ -2356,6 +2350,22 @@
             .hut-ri-badge { bottom: 80px; right: 16px; }
             .batik-corner { width: 80px; height: 80px; }
         }
+    
+        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            #particles-js { display: none !important; }
+            * { 
+                box-shadow: none !important; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+            }
+            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
+            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                background: rgba(15,15,20,1) !important;
+            }
+        }
+
     </style>
 
     <!-- Prevent Theme Flash -->
@@ -2415,7 +2425,23 @@
                 <style>
                     .availability-badge:hover { color: var(--text-primary) !important; }
                     @media (max-width: 640px) { .avail-text { display: none; } .availability-badge { margin-right: 8px; } }
-                </style>
+                
+        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            #particles-js { display: none !important; }
+            * { 
+                box-shadow: none !important; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+            }
+            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
+            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                background: rgba(15,15,20,1) !important;
+            }
+        }
+
+    </style>
             </a>
 
             <!-- Language Toggle -->
@@ -2496,6 +2522,22 @@
         [data-i18n], [data-i18n-btn] {
             transition: opacity 0.15s ease-in-out !important;
         }
+    
+        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            #particles-js { display: none !important; }
+            * { 
+                box-shadow: none !important; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+            }
+            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
+            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                background: rgba(15,15,20,1) !important;
+            }
+        }
+
     </style>
     <section class="hero container">
         <div id="particles-js"></div>
@@ -2593,7 +2635,23 @@
                         0% { transform: scale(1); box-shadow: 0 0 40px rgba(0, 255, 249, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3); }
                         100% { transform: scale(1.05); box-shadow: 0 0 70px rgba(0, 255, 249, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.5); }
                     }
-                </style>
+                
+        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            #particles-js { display: none !important; }
+            * { 
+                box-shadow: none !important; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+            }
+            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
+            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                background: rgba(15,15,20,1) !important;
+            }
+        }
+
+    </style>
                 <!-- Glowing Code Symbol SVG -->
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));">
                     <polyline points="16 18 22 12 16 6"></polyline>
@@ -2922,7 +2980,23 @@
                         .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
                         .project-card:hover .project-image-wrapper::after { opacity: 1; }
                     }
-                </style>
+                
+        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            #particles-js { display: none !important; }
+            * { 
+                box-shadow: none !important; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+            }
+            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
+            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                background: rgba(15,15,20,1) !important;
+            }
+        }
+
+    </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
                         $imageName = 'project-korpri.png';
@@ -3922,14 +3996,14 @@
         if (typeof particlesJS !== 'undefined') {
             particlesJS("particles-js", {
                 "particles": {
-                    "number": { "value": 35, "density": { "enable": true, "value_area": 800 } },
+                    "number": { "value": 12, "density": { "enable": true, "value_area": 800 } },
                     "color": { "value": "#10b981" },
                     "shape": { "type": "circle" },
                     "opacity": { "value": 0.5, "random": false },
                     "size": { "value": 2.5, "random": true },
                     "line_linked": {
                         "enable": false,
-                        "distance": 150,
+                        "distance": 0,
                         "color": "#10b981",
                         "opacity": 0.3,
                         "width": 1
