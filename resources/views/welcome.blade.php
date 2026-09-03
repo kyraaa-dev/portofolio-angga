@@ -263,6 +263,7 @@
             border-bottom: 1px solid var(--border-color); 
             transition: background-color 0.5s ease, border-color 0.5s ease;
         }
+        .mobile-menu-toggle { display: none; }
         .logo { display: flex; align-items: center; gap: 16px; cursor: pointer; flex: 1; }
         .logo-img-wrapper {
             height: 48px; 
@@ -1652,6 +1653,27 @@
             
             /* Navbar Mobile Fixes */
             .nav-actions { gap: 8px; flex: none; }
+            .mobile-menu-toggle { display: flex; background: none; border: none; color: var(--text-primary); cursor: pointer; padding: 4px; align-items: center; justify-content: center; z-index: 1001; }
+            .nav-links {
+                display: flex;
+                position: fixed;
+                top: 0; left: 0; width: 100vw; height: 100vh;
+                flex-direction: column; justify-content: center; align-items: center;
+                background: rgba(10, 15, 25, 0.95);
+                backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+                z-index: 999;
+                opacity: 0; pointer-events: none;
+                transition: opacity 0.4s ease;
+                gap: 40px; margin: 0; padding: 0;
+            }
+            [data-theme="light"] .nav-links { background: rgba(255, 255, 255, 0.95); }
+            .nav-links.active { opacity: 1; pointer-events: auto; }
+            .nav-links .nav-link { font-size: 28px; font-weight: 600; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; }
+            .nav-links.active .nav-link { opacity: 1; transform: translateY(0); }
+            .nav-links.active .nav-link:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active .nav-link:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active .nav-link:nth-child(3) { transition-delay: 0.3s; }
+
             .logo { flex: 1; min-width: 0; }
             .logo-text { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
             .theme-toggle, .merdeka-toggle, .audio-toggle-btn { width: 32px; height: 32px; min-width: 32px; padding: 0; display: flex; align-items: center; justify-content: center; }
@@ -1867,6 +1889,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
             box-shadow: 0 4px 20px rgba(220, 31, 38, 0.3) !important;
         }
+        .mobile-menu-toggle { display: none; }
         [data-merdeka="true"] .logo-text, 
         [data-merdeka="true"] .nav-link,
         [data-merdeka="true"] .theme-toggle,
@@ -2379,6 +2402,19 @@
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
             </button>
+
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">
+                <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
         </div>
     </header>
 
@@ -3302,7 +3338,38 @@
                 });
             }
 
-            // Theme Toggle Logic
+                    // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.querySelector('.nav-links');
+        const iconMenu = document.getElementById('icon-menu');
+        const iconClose = document.getElementById('icon-close');
+
+        if (mobileMenuToggle && navLinks) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isActive = navLinks.classList.toggle('active');
+                if (isActive) {
+                    iconMenu.style.display = 'none';
+                    iconClose.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+
+            const navItems = navLinks.querySelectorAll('.nav-link');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    iconMenu.style.display = 'block';
+                    iconClose.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Theme Toggle Logic
             const themeToggle = document.getElementById('themeToggle');
             const iconSun = document.getElementById('icon-sun');
             const iconMoon = document.getElementById('icon-moon');
