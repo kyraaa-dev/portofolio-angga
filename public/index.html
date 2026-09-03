@@ -1589,9 +1589,9 @@
 
         /* Smooth Reveal */
         .reveal {
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.2, 0, 0, 1); }
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
@@ -2861,14 +2861,16 @@
                     let distX = mouseX - outlineX;
                     let distY = mouseY - outlineY;
                     
-                    outlineX += distX * 0.2;
-                    outlineY += distY * 0.2;
-                    
-                    glowX += (mouseX - glowX) * 0.1;
-                    glowY += (mouseY - glowY) * 0.1;
-                    
-                    cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-                    if (cursorGlow) cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
+                    if (Math.abs(distX) > 0.05 || Math.abs(distY) > 0.05) {
+                        outlineX += distX * 0.2;
+                        outlineY += distY * 0.2;
+                        
+                        glowX += (mouseX - glowX) * 0.1;
+                        glowY += (mouseY - glowY) * 0.1;
+                        
+                        cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+                        if (cursorGlow) cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
+                    }
                     
                     requestAnimationFrame(animateCursor);
                 }
@@ -3103,19 +3105,26 @@
                 circle.style.strokeDasharray = `${circumference} ${circumference}`;
                 circle.style.strokeDashoffset = `${circumference}`;
 
+                let isBttScrolling = false;
                 window.addEventListener('scroll', () => {
-                    const scrollTotal = document.documentElement.scrollTop || document.body.scrollTop;
-                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scrollPercent = height > 0 ? scrollTotal / height : 0;
-                    const offset = circumference - scrollPercent * circumference;
-                    circle.style.strokeDashoffset = offset;
+                    if (!isBttScrolling) {
+                        window.requestAnimationFrame(() => {
+                            const scrollTotal = document.documentElement.scrollTop || document.body.scrollTop;
+                            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                            const scrollPercent = height > 0 ? scrollTotal / height : 0;
+                            const offset = circumference - scrollPercent * circumference;
+                            circle.style.strokeDashoffset = offset;
 
-                    if (scrollTotal > 300) {
-                        backToTop.classList.add('visible');
-                    } else {
-                        backToTop.classList.remove('visible');
+                            if (scrollTotal > 300) {
+                                backToTop.classList.add('visible');
+                            } else {
+                                backToTop.classList.remove('visible');
+                            }
+                            isBttScrolling = false;
+                        });
+                        isBttScrolling = true;
                     }
-                });
+                }, { passive: true });
 
                 backToTop.addEventListener('click', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
