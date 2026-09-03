@@ -1638,31 +1638,54 @@
             .mobile-menu-toggle.active .line2 { opacity: 0; }
             .mobile-menu-toggle.active .line3 { transform: translateY(-6.25px) rotate(-45deg); }
 
-            .nav-links {
-                display: flex; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                flex-direction: column; justify-content: center; align-items: flex-start;
-                background: rgba(10, 15, 25, 0.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-                z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
-                gap: 32px; margin: 0; padding: 0 10vw;
-            }
-            [data-theme="light"] .nav-links { background: rgba(255, 255, 255, 0.98); }
-            .nav-links.active { opacity: 1; pointer-events: auto; }
             
-            .nav-links .nav-link { 
-                font-size: 44px; font-weight: 300; letter-spacing: -0.04em; color: var(--text-primary); text-transform: lowercase; 
-                opacity: 0; transform: translateX(-40px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); 
-                display: flex; align-items: center;
-            }
-            .nav-links .nav-link::before {
-                content: ''; display: inline-block; width: 8px; height: 8px; background: var(--accent-color); border-radius: 50%; 
-                margin-right: 20px; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease;
-            }
-            .nav-links .nav-link:hover::before { opacity: 1; transform: translateX(0); }
+            /* Mobile Nav Desktop Fix */
+            .nav-links { display: none; }
             
-            .nav-links.active .nav-link { opacity: 1; transform: translateX(0); }
-            .nav-links.active .nav-link:nth-child(1) { transition-delay: 0.15s; }
-            .nav-links.active .nav-link:nth-child(2) { transition-delay: 0.25s; }
-            .nav-links.active .nav-link:nth-child(3) { transition-delay: 0.35s; }
+            /* Premium Mobile Overlay */
+            .mobile-overlay {
+                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                z-index: 999; pointer-events: none;
+                display: flex; flex-direction: column; justify-content: center;
+            }
+            .mobile-overlay-bg {
+                position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(5, 5, 7, 0.98); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+                opacity: 0; transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            [data-theme="light"] .mobile-overlay-bg { background: rgba(250, 250, 250, 0.98); }
+            
+            .mobile-overlay-content {
+                position: relative; z-index: 2; width: 100%; height: 100%;
+                display: flex; flex-direction: column; justify-content: space-between;
+                padding: 120px 8vw 60px 8vw; box-sizing: border-box;
+            }
+            .overlay-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+            
+            .mobile-nav-list { display: flex; flex-direction: column; gap: 8px; margin-top: auto; margin-bottom: auto; }
+            .mobile-nav-item { overflow: hidden; }
+            .mobile-link {
+                display: inline-block; font-size: 16vw; font-weight: 200; letter-spacing: -0.05em; line-height: 1.1;
+                color: var(--text-primary); text-decoration: none; text-transform: uppercase;
+                transform: translateY(100%) skewY(5deg); opacity: 0; transform-origin: left top;
+                transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.8s ease, color 0.3s ease;
+            }
+            .mobile-link:hover { color: var(--accent-color); }
+            
+            .mobile-overlay-footer { display: flex; gap: 24px; opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+            .mobile-social { font-size: 14px; font-weight: 500; color: var(--text-primary); text-decoration: none; }
+            
+            /* Active States */
+            .mobile-overlay.active { pointer-events: auto; }
+            .mobile-overlay.active .mobile-overlay-bg { opacity: 1; }
+            .mobile-overlay.active .overlay-label { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
+            .mobile-overlay.active .mobile-overlay-footer { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+            
+            .mobile-overlay.active .mobile-link { transform: translateY(0) skewY(0); opacity: 1; }
+            .mobile-overlay.active .mobile-nav-item:nth-child(1) .mobile-link { transition-delay: 0.1s; }
+            .mobile-overlay.active .mobile-nav-item:nth-child(2) .mobile-link { transition-delay: 0.2s; }
+            .mobile-overlay.active .mobile-nav-item:nth-child(3) .mobile-link { transition-delay: 0.3s; }
+
 
 
             .logo { flex: 1; min-width: 0; }
@@ -1935,6 +1958,27 @@
 
         </div>
     </header>
+
+    <!-- Super Premium Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="mobile-overlay-bg"></div>
+        <div class="mobile-overlay-content">
+            <div class="mobile-overlay-header">
+                <span class="overlay-label">Navigation</span>
+            </div>
+            <nav class="mobile-nav-list">
+                <div class="mobile-nav-item"><a href="#" class="mobile-link" data-i18n="nav_home">Home</a></div>
+                <div class="mobile-nav-item"><a href="#projects" class="mobile-link" data-i18n="nav_projects">Proyek</a></div>
+                <div class="mobile-nav-item"><a href="#contact" class="mobile-link" data-i18n="nav_contact">Kontak</a></div>
+            </nav>
+            <div class="mobile-overlay-footer">
+                <a href="#" class="mobile-social">LinkedIn</a>
+                <a href="#" class="mobile-social">GitHub</a>
+                <a href="#" class="mobile-social">Instagram</a>
+            </div>
+        </div>
+    </div>
+
 
     <style>
         #particles-js {
@@ -2951,19 +2995,19 @@
 
                     // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navLinks = document.querySelector('.nav-links');
+        const mobileOverlay = document.getElementById('mobileOverlay');
 
-        if (mobileMenuToggle && navLinks) {
+        if (mobileMenuToggle && mobileOverlay) {
             mobileMenuToggle.addEventListener('click', () => {
-                const isActive = navLinks.classList.toggle('active');
+                const isActive = mobileOverlay.classList.toggle('active');
                 mobileMenuToggle.classList.toggle('active');
                 document.body.style.overflow = isActive ? 'hidden' : '';
             });
 
-            const navItems = navLinks.querySelectorAll('.nav-link');
-            navItems.forEach(item => {
+            const mobileLinks = mobileOverlay.querySelectorAll('.mobile-link');
+            mobileLinks.forEach(item => {
                 item.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
                     mobileMenuToggle.classList.remove('active');
                     document.body.style.overflow = '';
                 });
