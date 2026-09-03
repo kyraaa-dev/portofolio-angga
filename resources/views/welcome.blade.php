@@ -132,6 +132,7 @@
             opacity: var(--mesh-opacity);
             pointer-events: none;
             transition: opacity 0.5s ease;
+            transform: translateZ(0);
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -370,6 +371,7 @@
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); z-index: 10;
             font-family: 'Inter', sans-serif; pointer-events: none;
             transition: opacity 0.5s ease;
+            transform: translateZ(0);
         }
         .preloader-percentage-new::before {
             content: attr(data-text); position: absolute; top: 0; left: 0; color: #fff;
@@ -3827,7 +3829,7 @@
         if (typeof particlesJS !== 'undefined') {
             particlesJS("particles-js", {
                 "particles": {
-                    "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
+                    "number": { "value": 35, "density": { "enable": true, "value_area": 800 } },
                     "color": { "value": "#10b981" },
                     "shape": { "type": "circle" },
                     "opacity": { "value": 0.5, "random": false },
@@ -3841,7 +3843,7 @@
                     },
                     "move": {
                         "enable": true,
-                        "speed": 1.5,
+                        "speed": 1.0,
                         "direction": "none",
                         "random": true,
                         "straight": false,
@@ -3852,8 +3854,8 @@
                 "interactivity": {
                     "detect_on": "window",
                     "events": {
-                        "onhover": { "enable": true, "mode": "grab" },
-                        "onclick": { "enable": true, "mode": "push" },
+                        "onhover": { "enable": false, "mode": "grab" },
+                        "onclick": { "enable": false, "mode": "push" },
                         "resize": true
                     },
                     "modes": {
