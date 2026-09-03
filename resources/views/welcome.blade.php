@@ -2350,21 +2350,6 @@
             .hut-ri-badge { bottom: 80px; right: 16px; }
             .batik-corner { width: 80px; height: 80px; }
         }
-    
-        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
-        @media (max-width: 768px) {
-            #particles-js { display: none !important; }
-            * { 
-                box-shadow: none !important; 
-                backdrop-filter: none !important; 
-                -webkit-backdrop-filter: none !important; 
-            }
-            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
-            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
-                border: 1px solid rgba(255,255,255,0.1) !important;
-                background: rgba(15,15,20,1) !important;
-            }
-        }
 
     </style>
 
@@ -2380,6 +2365,22 @@
             }
         })();
     </script>
+<style>
+        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
+        @media (max-width: 768px) {
+            #particles-js { display: none !important; }
+            * { 
+                box-shadow: none !important; 
+                backdrop-filter: none !important; 
+                -webkit-backdrop-filter: none !important; 
+            }
+            .mobile-overlay-bg { background: rgba(5,5,7,0.99) !important; }
+            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                background: rgba(15,15,20,1) !important;
+            }
+        }
+</style>
 </head>
 <body>
     <!-- The Matrix Code Rain Preloader -->
@@ -2425,21 +2426,6 @@
                 <style>
                     .availability-badge:hover { color: var(--text-primary) !important; }
                     @media (max-width: 640px) { .avail-text { display: none; } .availability-badge { margin-right: 8px; } }
-                
-        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
-        @media (max-width: 768px) {
-            #particles-js { display: none !important; }
-            * { 
-                box-shadow: none !important; 
-                backdrop-filter: none !important; 
-                -webkit-backdrop-filter: none !important; 
-            }
-            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
-            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
-                border: 1px solid rgba(255,255,255,0.1) !important;
-                background: rgba(15,15,20,1) !important;
-            }
-        }
 
     </style>
             </a>
@@ -2521,21 +2507,6 @@
         }
         [data-i18n], [data-i18n-btn] {
             transition: opacity 0.15s ease-in-out !important;
-        }
-    
-        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
-        @media (max-width: 768px) {
-            #particles-js { display: none !important; }
-            * { 
-                box-shadow: none !important; 
-                backdrop-filter: none !important; 
-                -webkit-backdrop-filter: none !important; 
-            }
-            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
-            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
-                border: 1px solid rgba(255,255,255,0.1) !important;
-                background: rgba(15,15,20,1) !important;
-            }
         }
 
     </style>
@@ -2635,21 +2606,6 @@
                         0% { transform: scale(1); box-shadow: 0 0 40px rgba(0, 255, 249, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3); }
                         100% { transform: scale(1.05); box-shadow: 0 0 70px rgba(0, 255, 249, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.5); }
                     }
-                
-        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
-        @media (max-width: 768px) {
-            #particles-js { display: none !important; }
-            * { 
-                box-shadow: none !important; 
-                backdrop-filter: none !important; 
-                -webkit-backdrop-filter: none !important; 
-            }
-            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
-            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
-                border: 1px solid rgba(255,255,255,0.1) !important;
-                background: rgba(15,15,20,1) !important;
-            }
-        }
 
     </style>
                 <!-- Glowing Code Symbol SVG -->
@@ -2980,21 +2936,6 @@
                         .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
                         .project-card:hover .project-image-wrapper::after { opacity: 1; }
                     }
-                
-        /* ULTRA PERFORMANCE MOBILE OVERRIDES */
-        @media (max-width: 768px) {
-            #particles-js { display: none !important; }
-            * { 
-                box-shadow: none !important; 
-                backdrop-filter: none !important; 
-                -webkit-backdrop-filter: none !important; 
-            }
-            .mobile-overlay { background: rgba(5,5,7,0.99) !important; }
-            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal {
-                border: 1px solid rgba(255,255,255,0.1) !important;
-                background: rgba(15,15,20,1) !important;
-            }
-        }
 
     </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
