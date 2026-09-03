@@ -2487,15 +2487,7 @@
 
 
     <style>
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; transform: translateZ(0); will-change: transform; }
         .hero { position: relative; }
         .hero-title, .hero-badge, .hero-description, .hero-buttons, .digital-id-perspective {
             position: relative;
@@ -3670,9 +3662,8 @@
                 window.addEventListener('scroll', () => {
                     if (!isBttScrolling) {
                         window.requestAnimationFrame(() => {
-                            const scrollTotal = document.documentElement.scrollTop || document.body.scrollTop;
-                            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                            const scrollPercent = height > 0 ? scrollTotal / height : 0;
+                            const scrollTotal = window.scrollY || document.documentElement.scrollTop;
+                            const scrollPercent = docHeight > 0 ? scrollTotal / docHeight : 0;
                             const offset = circumference - scrollPercent * circumference;
                             circle.style.strokeDashoffset = offset;
 
