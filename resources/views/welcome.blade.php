@@ -2315,9 +2315,9 @@
     </div>
 
     <!-- Custom Cursor Elements -->
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-outline" id="cursorOutline"></div>
+    <div class="cursor-glow" id="cursorGlow" style="opacity: 0;"></div>
+    <div class="cursor-dot" id="cursorDot" style="opacity: 0;"></div>
+    <div class="cursor-outline" id="cursorOutline" style="opacity: 0;"></div>
 
     <div class="bg-mesh"></div>
     
