@@ -1284,7 +1284,7 @@
         .project-link:hover { color: var(--text-primary); }
 
         /* Contact Section */
-        .contact { padding-bottom: 120px; }
+        .contact { padding-top: 120px; margin-top: 60px; padding-bottom: 120px; }
         .contact-card {
             background: var(--bg-surface); border: 1px solid var(--border-color);
             border-radius: 24px; padding: 64px; position: relative; overflow: hidden;
