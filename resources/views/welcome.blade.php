@@ -3455,7 +3455,6 @@
             });
 
             // Set initial toggle icons based on the theme already set in <head>
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
             if (htmlElement.getAttribute('data-theme') === 'light') {
                 iconMoon.style.display = 'block';
