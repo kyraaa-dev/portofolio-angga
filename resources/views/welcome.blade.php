@@ -3121,14 +3121,19 @@
             }
         }
 
-        /* ===== PREMIUM MEGA FOOTER ===== */
+        
+        /* ===== MINIMALIST AESTHETIC FOOTER ===== */
         .footer {
             position: relative;
-            margin-top: 100px;
-            padding: 0;
-            background: var(--bg-surface);
-            border-top: 1px solid rgba(16, 185, 129, 0.1);
-            overflow: hidden;
+            margin-top: 60px;
+            padding: 40px 0;
+            background: transparent;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 2;
+        }
+
+        [data-theme="light"] .footer {
+            border-top-color: rgba(0, 0, 0, 0.05);
         }
 
         .footer::before {
@@ -3137,129 +3142,12 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
+            width: 50%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            opacity: 0.5;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
         }
 
-        .footer-marquee-wrapper {
-            padding: 30px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            background: rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            display: flex;
-            white-space: nowrap;
-        }
-
-        [data-theme="light"] .footer-marquee-wrapper {
-            background: rgba(0, 0, 0, 0.02);
-            border-bottom-color: rgba(0, 0, 0, 0.05);
-        }
-
-        .footer-marquee {
-            display: flex;
-            animation: scrollText 30s linear infinite;
-        }
-
-        .footer-marquee span {
-            font-size: 80px;
-            font-weight: 800;
-            text-transform: uppercase;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-            color: transparent;
-            margin-right: 40px;
-            letter-spacing: 2px;
-            transition: color 0.3s ease;
-        }
-
-        [data-theme="light"] .footer-marquee span {
-            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer-marquee span:hover {
-            color: var(--text-primary);
-            -webkit-text-stroke: 0px;
-        }
-
-        .footer-marquee span.solid {
-            color: var(--accent-color);
-            -webkit-text-stroke: 0px;
-        }
-
-        .footer-main {
-            padding: 80px 0 40px;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .footer-brand h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-            color: var(--text-primary);
-        }
-
-        .footer-desc {
-            color: var(--text-secondary);
-            font-size: 15px;
-            line-height: 1.8;
-            max-width: 400px;
-            margin-bottom: 30px;
-        }
-
-        .footer-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-color);
-            margin-bottom: 24px;
-            font-weight: 600;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            width: fit-content;
-        }
-
-        .footer-links a::before {
-            content: '';
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            margin-right: 0;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-            transform: translateX(5px);
-        }
-
-        .footer-links a:hover::before {
-            width: 12px;
-            margin-right: 8px;
-        }
-
-        .footer-bottom {
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        .footer-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -3267,46 +3155,74 @@
             gap: 20px;
         }
 
-        [data-theme="light"] .footer-bottom {
-            border-top-color: rgba(0, 0, 0, 0.05);
-        }
-
-        .footer-copy {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .footer-badge {
-            display: inline-flex;
+        .footer-brand {
+            display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 700;
             color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            background: rgba(16, 185, 129, 0.05);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
         }
 
-        @keyframes scrollText {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
 
-        @media (max-width: 992px) {
-            .footer-main { grid-template-columns: 1fr 1fr; }
-            .footer-brand { grid-column: 1 / -1; }
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-tagline .accent-precision {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
         }
 
         @media (max-width: 768px) {
-            .footer-marquee span { font-size: 50px; margin-right: 20px; }
-            .footer-main { grid-template-columns: 1fr; padding: 60px 0 30px; gap: 40px; }
-            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; padding-bottom: 90px !important; }
-            .footer { margin-top: 40px; }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 90px !important;
+            }
+            .footer-brand { flex-direction: column; gap: 12px; }
+            .footer-socials { margin-top: 10px; }
+            .footer::before { width: 80%; }
         }
 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
@@ -3450,62 +3366,29 @@
     </section>
 
     
-    <!-- Premium Footer -->
-    <footer class="footer reveal">
-        <div class="footer-marquee-wrapper">
-            <div class="footer-marquee">
-                <span>LET'S TALK</span><span class="solid">&bull;</span>
-                <span>ANGGA WIRANATA</span><span class="solid">&bull;</span>
-                <span>WEB DEVELOPER</span><span class="solid">&bull;</span>
-                <span>LET'S TALK</span><span class="solid">&bull;</span>
-                <span>ANGGA WIRANATA</span><span class="solid">&bull;</span>
-                <span>WEB DEVELOPER</span><span class="solid">&bull;</span>
-                <span>LET'S TALK</span><span class="solid">&bull;</span>
-                <span>ANGGA WIRANATA</span><span class="solid">&bull;</span>
-                <span>WEB DEVELOPER</span><span class="solid">&bull;</span>
+    
+    <!-- Minimalist Aesthetic Footer -->
+    <footer class="footer container reveal">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">&gt;<span class="blinking-cursor" style="display: inline-block; width: 8px; height: 14px; background: var(--accent-color); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite;"></span></div>
+                <div class="footer-text">&copy; 2026 ANGGA WIRANATA</div>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <h3>ANGGA WIRANATA</h3>
-                    <p class="footer-desc">
-                        Berfokus pada pengembangan aplikasi web modern dengan antarmuka pengguna yang bersih, kinerja tinggi, dan arsitektur yang kuat.
-                    </p>
-                    <div class="footer-badge">
-                        <span class="pulse" style="width: 8px; height: 8px;"></span>
-                        Available for Work
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="footer-title">Navigation</h4>
-                    <div class="footer-links">
-                        <a href="#about">About</a>
-                        <a href="#services">Services</a>
-                        <a href="#experience">Journey</a>
-                        <a href="#projects">Projects</a>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 class="footer-title">Connect</h4>
-                    <div class="footer-links">
-                        <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                        <a href="mailto:anggawiranatafti@gmail.com">Email Me</a>
-                    </div>
-                </div>
+            
+            <div class="footer-socials">
+                <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="mailto:anggawiranatafti@gmail.com" aria-label="Email">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
             </div>
 
-            <div class="footer-bottom">
-                <div class="footer-copy">
-                    &copy; 2026 ANGGA WIRANATA, S.KOM. ALL RIGHTS RESERVED.
-                </div>
-                <div class="footer-tagline" style="font-family: 'Courier New', monospace; font-size: 13px; color: var(--text-secondary);">
-                    CRAFTED WITH <span style="color: var(--accent-color); font-weight: 600; text-shadow: 0 0 10px rgba(16,185,129,0.4);">PRECISION</span> <span class="blinking-cursor" style="display: inline-block; width: 8px; height: 13px; background: var(--accent-color); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite;"></span>
-                </div>
+            <div class="footer-tagline">
+                Crafted with <span class="accent-precision">precision</span>
             </div>
         </div>
     </footer>
