@@ -3119,7 +3119,7 @@
                 padding-top: 100px !important;
                 margin-top: 40px !important;
             }
-            .footer-bottom {
+            .footer {
                 padding-bottom: 90px !important;
             }
         }
