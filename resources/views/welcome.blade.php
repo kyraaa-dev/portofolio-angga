@@ -2346,6 +2346,65 @@
             .batik-corner { width: 80px; height: 80px; }
         }
 
+
+        /* ===== MOBILE POLISH FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix orbit overflowing on narrow screens */
+            .orbit-section { overflow: hidden; }
+            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            
+            /* Fix section header scroll-margin for sticky nav */
+            .section-header { scroll-margin-top: 100px; }
+            
+            /* Fix excessive gap between sections */
+            section { padding-top: 60px; padding-bottom: 60px; }
+            
+            /* Contact title too large on mobile */
+            .contact .section-title,
+            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
+            
+            /* Fix certificates card overflow */
+            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
+            
+            /* Hero buttons stack better */
+            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            
+            /* Stats grid tighter */
+            .stats { gap: 12px; }
+            .stat-card { padding: 20px 16px; }
+            
+            /* About section title */
+            .about h2 { font-size: 28px; }
+            
+            /* Project section gap reduction */
+            .project-grid { gap: 12px !important; }
+            
+            /* Footer links wrap better */
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            
+            /* Scroll progress thinner on mobile */
+            .scroll-progress { height: 2px; }
+        }
+        
+        @media (max-width: 480px) {
+            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            
+            /* Hero title smaller on very small screens */
+            .hero-title { font-size: 40px; }
+            h2 { font-size: 26px; }
+            
+            /* Contact title even smaller */
+            .contact .section-title,
+            .contact-content h2 { font-size: 24px !important; }
+            
+            /* Stats single column on very small screens */
+            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+            
+            /* Reduce container padding */
+            .container { padding: 0 16px; }
+        }
+
     </style>
 
     <!-- Prevent Theme Flash -->
@@ -2384,6 +2443,65 @@
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
         .lenis.lenis-smooth iframe { pointer-events: none; }
+
+        /* ===== MOBILE POLISH FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix orbit overflowing on narrow screens */
+            .orbit-section { overflow: hidden; }
+            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            
+            /* Fix section header scroll-margin for sticky nav */
+            .section-header { scroll-margin-top: 100px; }
+            
+            /* Fix excessive gap between sections */
+            section { padding-top: 60px; padding-bottom: 60px; }
+            
+            /* Contact title too large on mobile */
+            .contact .section-title,
+            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
+            
+            /* Fix certificates card overflow */
+            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
+            
+            /* Hero buttons stack better */
+            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            
+            /* Stats grid tighter */
+            .stats { gap: 12px; }
+            .stat-card { padding: 20px 16px; }
+            
+            /* About section title */
+            .about h2 { font-size: 28px; }
+            
+            /* Project section gap reduction */
+            .project-grid { gap: 12px !important; }
+            
+            /* Footer links wrap better */
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            
+            /* Scroll progress thinner on mobile */
+            .scroll-progress { height: 2px; }
+        }
+        
+        @media (max-width: 480px) {
+            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            
+            /* Hero title smaller on very small screens */
+            .hero-title { font-size: 40px; }
+            h2 { font-size: 26px; }
+            
+            /* Contact title even smaller */
+            .contact .section-title,
+            .contact-content h2 { font-size: 24px !important; }
+            
+            /* Stats single column on very small screens */
+            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+            
+            /* Reduce container padding */
+            .container { padding: 0 16px; }
+        }
+
     </style>
 </head>
 <body>
@@ -2431,6 +2549,65 @@
                 <style>
                     .availability-badge:hover { color: var(--text-primary) !important; }
                     @media (max-width: 640px) { .avail-text { display: none; } .availability-badge { margin-right: 8px; } }
+
+
+        /* ===== MOBILE POLISH FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix orbit overflowing on narrow screens */
+            .orbit-section { overflow: hidden; }
+            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            
+            /* Fix section header scroll-margin for sticky nav */
+            .section-header { scroll-margin-top: 100px; }
+            
+            /* Fix excessive gap between sections */
+            section { padding-top: 60px; padding-bottom: 60px; }
+            
+            /* Contact title too large on mobile */
+            .contact .section-title,
+            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
+            
+            /* Fix certificates card overflow */
+            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
+            
+            /* Hero buttons stack better */
+            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            
+            /* Stats grid tighter */
+            .stats { gap: 12px; }
+            .stat-card { padding: 20px 16px; }
+            
+            /* About section title */
+            .about h2 { font-size: 28px; }
+            
+            /* Project section gap reduction */
+            .project-grid { gap: 12px !important; }
+            
+            /* Footer links wrap better */
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            
+            /* Scroll progress thinner on mobile */
+            .scroll-progress { height: 2px; }
+        }
+        
+        @media (max-width: 480px) {
+            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            
+            /* Hero title smaller on very small screens */
+            .hero-title { font-size: 40px; }
+            h2 { font-size: 26px; }
+            
+            /* Contact title even smaller */
+            .contact .section-title,
+            .contact-content h2 { font-size: 24px !important; }
+            
+            /* Stats single column on very small screens */
+            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+            
+            /* Reduce container padding */
+            .container { padding: 0 16px; }
+        }
 
     </style>
             </a>
@@ -2512,6 +2689,65 @@
         }
         [data-i18n], [data-i18n-btn] {
             transition: opacity 0.15s ease-in-out !important;
+        }
+
+
+        /* ===== MOBILE POLISH FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix orbit overflowing on narrow screens */
+            .orbit-section { overflow: hidden; }
+            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            
+            /* Fix section header scroll-margin for sticky nav */
+            .section-header { scroll-margin-top: 100px; }
+            
+            /* Fix excessive gap between sections */
+            section { padding-top: 60px; padding-bottom: 60px; }
+            
+            /* Contact title too large on mobile */
+            .contact .section-title,
+            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
+            
+            /* Fix certificates card overflow */
+            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
+            
+            /* Hero buttons stack better */
+            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            
+            /* Stats grid tighter */
+            .stats { gap: 12px; }
+            .stat-card { padding: 20px 16px; }
+            
+            /* About section title */
+            .about h2 { font-size: 28px; }
+            
+            /* Project section gap reduction */
+            .project-grid { gap: 12px !important; }
+            
+            /* Footer links wrap better */
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            
+            /* Scroll progress thinner on mobile */
+            .scroll-progress { height: 2px; }
+        }
+        
+        @media (max-width: 480px) {
+            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            
+            /* Hero title smaller on very small screens */
+            .hero-title { font-size: 40px; }
+            h2 { font-size: 26px; }
+            
+            /* Contact title even smaller */
+            .contact .section-title,
+            .contact-content h2 { font-size: 24px !important; }
+            
+            /* Stats single column on very small screens */
+            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+            
+            /* Reduce container padding */
+            .container { padding: 0 16px; }
         }
 
     </style>
@@ -2611,6 +2847,65 @@
                         0% { transform: scale(1); box-shadow: 0 0 40px rgba(0, 255, 249, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3); }
                         100% { transform: scale(1.05); box-shadow: 0 0 70px rgba(0, 255, 249, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.5); }
                     }
+
+
+        /* ===== MOBILE POLISH FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix orbit overflowing on narrow screens */
+            .orbit-section { overflow: hidden; }
+            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            
+            /* Fix section header scroll-margin for sticky nav */
+            .section-header { scroll-margin-top: 100px; }
+            
+            /* Fix excessive gap between sections */
+            section { padding-top: 60px; padding-bottom: 60px; }
+            
+            /* Contact title too large on mobile */
+            .contact .section-title,
+            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
+            
+            /* Fix certificates card overflow */
+            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
+            
+            /* Hero buttons stack better */
+            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            
+            /* Stats grid tighter */
+            .stats { gap: 12px; }
+            .stat-card { padding: 20px 16px; }
+            
+            /* About section title */
+            .about h2 { font-size: 28px; }
+            
+            /* Project section gap reduction */
+            .project-grid { gap: 12px !important; }
+            
+            /* Footer links wrap better */
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            
+            /* Scroll progress thinner on mobile */
+            .scroll-progress { height: 2px; }
+        }
+        
+        @media (max-width: 480px) {
+            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            
+            /* Hero title smaller on very small screens */
+            .hero-title { font-size: 40px; }
+            h2 { font-size: 26px; }
+            
+            /* Contact title even smaller */
+            .contact .section-title,
+            .contact-content h2 { font-size: 24px !important; }
+            
+            /* Stats single column on very small screens */
+            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+            
+            /* Reduce container padding */
+            .container { padding: 0 16px; }
+        }
 
     </style>
                 <!-- Glowing Code Symbol SVG -->
@@ -2941,6 +3236,65 @@
                         .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
                         .project-card:hover .project-image-wrapper::after { opacity: 1; }
                     }
+
+
+        /* ===== MOBILE POLISH FIXES ===== */
+        @media (max-width: 768px) {
+            /* Fix orbit overflowing on narrow screens */
+            .orbit-section { overflow: hidden; }
+            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            
+            /* Fix section header scroll-margin for sticky nav */
+            .section-header { scroll-margin-top: 100px; }
+            
+            /* Fix excessive gap between sections */
+            section { padding-top: 60px; padding-bottom: 60px; }
+            
+            /* Contact title too large on mobile */
+            .contact .section-title,
+            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
+            
+            /* Fix certificates card overflow */
+            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
+            
+            /* Hero buttons stack better */
+            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            
+            /* Stats grid tighter */
+            .stats { gap: 12px; }
+            .stat-card { padding: 20px 16px; }
+            
+            /* About section title */
+            .about h2 { font-size: 28px; }
+            
+            /* Project section gap reduction */
+            .project-grid { gap: 12px !important; }
+            
+            /* Footer links wrap better */
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            
+            /* Scroll progress thinner on mobile */
+            .scroll-progress { height: 2px; }
+        }
+        
+        @media (max-width: 480px) {
+            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            
+            /* Hero title smaller on very small screens */
+            .hero-title { font-size: 40px; }
+            h2 { font-size: 26px; }
+            
+            /* Contact title even smaller */
+            .contact .section-title,
+            .contact-content h2 { font-size: 24px !important; }
+            
+            /* Stats single column on very small screens */
+            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+            
+            /* Reduce container padding */
+            .container { padding: 0 16px; }
+        }
 
     </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
