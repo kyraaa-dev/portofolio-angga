@@ -1897,6 +1897,15 @@
             }
         }
 </style>
+
+    <style>
+        /* Lenis Smooth Scroll Recommended CSS */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-smooth iframe { pointer-events: none; }
+    </style>
 </head>
 <body>
     <!-- Lightweight Modern Preloader -->
@@ -3506,7 +3515,30 @@
     <!-- Vanilla Tilt 3D Effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-    <!-- Lenis Smooth Scroll Removed for Native Performance -->
+    <!-- Lenis Smooth Scroll for Ultra Smooth Inertia -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script>
+        if (typeof Lenis !== 'undefined') {
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+                infinite: false,
+            })
+
+            function raf(time) {
+                lenis.raf(time)
+                requestAnimationFrame(raf)
+            }
+
+            requestAnimationFrame(raf)
+        }
+    </script>
     <!-- Native CSS Smooth Scroll is active instead -->
     
     <!-- Particles.js -->
