@@ -3112,6 +3112,17 @@
             .tech-pill { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
             [data-theme="light"] .tech-pill { background: #f8f9fa; }
         }
+
+        /* Fix mobile spacing for experience and footer */
+        @media (max-width: 768px) {
+            #experience {
+                padding-top: 100px !important;
+                margin-top: 40px !important;
+            }
+            .footer-bottom {
+                padding-bottom: 90px !important;
+            }
+        }
 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
