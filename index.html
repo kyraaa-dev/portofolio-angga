@@ -1982,101 +1982,7 @@
         }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
 <style>
         /* ULTRA PERFORMANCE MOBILE OVERRIDES */
         @media (max-width: 768px) {
@@ -2102,101 +2008,7 @@
         .lenis.lenis-stopped { overflow: hidden; }
         .lenis.lenis-smooth iframe { pointer-events: none; }
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -2247,101 +2059,7 @@
                     @media (max-width: 640px) { .avail-text { display: none; } .availability-badge { margin-right: 8px; } }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
             </a>
 
             <!-- Language Toggle -->
@@ -2415,101 +2133,7 @@
         }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
     <section class="hero container">
         <div id="particles-js"></div>
         <h1 class="hero-title reveal active delay-1">ANGGA<br>WIRANATA</h1>
@@ -2617,170 +2241,54 @@
         </div>
     </div>
 
-    <!-- Tech Stack Orbit Section -->
-    <section class="orbit-section container reveal delay-2">
+    
+    <!-- Tech Stack Glass Grid Section -->
+    <section class="tech-ecosystem container reveal delay-2" id="tech">
         <div class="section-header reveal">
             <h2 class="section-title text-reveal"><span data-i18n="tech_title_1">Tech</span> <span class="highlight" data-i18n="tech_title_2">Ecosystem</span></h2>
             <p class="section-description" data-i18n="tech_desc">Teknologi yang berputar dan mendukung setiap project saya.</p>
         </div>
         
-        <div class="orbit-container">
-            <!-- Central Core (Cooler) -->
-            <div class="orbit-center" style="box-shadow: 0 0 50px rgba(0, 255, 249, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.4); animation: core-pulse 2s infinite alternate; overflow: visible;">
-                <style>
-                    @keyframes core-pulse {
-                        0% { transform: scale(1); box-shadow: 0 0 40px rgba(0, 255, 249, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3); }
-                        100% { transform: scale(1.05); box-shadow: 0 0 70px rgba(0, 255, 249, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.5); }
-                    }
-
-
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
-                <!-- Glowing Code Symbol SVG -->
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));">
-                    <polyline points="16 18 22 12 16 6"></polyline>
-                    <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
+        <div class="tech-grid reveal">
+            <div class="tech-pill magnetic" style="--delay: 0.0s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                <span>Laravel</span>
             </div>
-            
-            <!-- Ring 1 (Inner) -->
-            <div class="orbit-ring orbit-ring-1">
-                <div class="orbit-item rev" style="top: -22px; left: calc(50% - 22px);">
-                    <!-- Laravel -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF2D20" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
-                </div>
-                <div class="orbit-item rev" style="top: auto; bottom: -22px; left: calc(50% - 22px);">
-                    <!-- React -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                </div>
+            <div class="tech-pill magnetic" style="--delay: -0.7s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+                <span>React.js</span>
             </div>
-            
-            <!-- Ring 2 (Middle) -->
-            <div class="orbit-ring orbit-ring-2">
-                <div class="orbit-item rev" style="top: calc(50% - 22px); left: -22px;">
-                    <!-- Database -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4479A1" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
-                </div>
-                <div class="orbit-item rev" style="top: calc(50% - 22px); right: -22px; left: auto;">
-                    <!-- Code -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3178C6" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                </div>
-                <div class="orbit-item rev" style="top: 15px; left: 50px;">
-                    <!-- Design/Figma -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F24E1E" stroke-width="2"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>
-                </div>
+            <div class="tech-pill magnetic" style="--delay: -1.4s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="M8 17l4 4 4-4"></path></svg>
+                <span>Tailwind CSS</span>
             </div>
-            
-            <!-- Ring 3 (Outer) -->
-            <div class="orbit-ring orbit-ring-3">
-                <div class="orbit-item rev" style="top: -22px; left: calc(50% - 22px);">
-                    <!-- Tailwind/CSS -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" stroke-width="2"><path d="M12 2.69l5.66 4.2c.2.15.34.38.34.64v8.94c0 .26-.14.49-.34.64L12 21.31l-5.66-4.2a.8.8 0 0 1-.34-.64V7.53c0-.26.14-.49.34-.64L12 2.69z"></path></svg>
-                </div>
-                <div class="orbit-item rev" style="top: auto; bottom: 35px; left: 45px;">
-                    <!-- PHP -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#777BB4" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon></svg>
-                </div>
-                <div class="orbit-item rev" style="top: auto; bottom: 35px; right: 45px; left: auto;">
-                    <!-- JS/Terminal -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7DF1E" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
-                </div>
+            <div class="tech-pill magnetic" style="--delay: -2.1s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                <span>JavaScript</span>
+            </div>
+            <div class="tech-pill magnetic" style="--delay: -2.8s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="6.5"></line></svg>
+                <span>Figma</span>
+            </div>
+            <div class="tech-pill magnetic" style="--delay: -3.5s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <span>Node.js</span>
+            </div>
+            <div class="tech-pill magnetic" style="--delay: -4.2s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <span>MySQL</span>
+            </div>
+            <div class="tech-pill magnetic" style="--delay: -4.9s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <span>Livewire</span>
+            </div>
+            <div class="tech-pill magnetic" style="--delay: -5.6s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
+                <span>Git</span>
             </div>
         </div>
     </section>
+
 
     <!-- About Section -->
     <section id="about" class="about container reveal">
@@ -3041,101 +2549,7 @@
                     }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img loading="lazy" src="images/project-korpri.png" alt="SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3202,101 +2616,7 @@
                     }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img loading="lazy" src="images/duta-korpri.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3364,101 +2684,7 @@
                     }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img loading="lazy" src="images/kasflow-app.png" alt="KasFlow - Personal Cash Flow Manager Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3528,101 +2754,7 @@
                     }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
-        
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
-        }
-
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
-            transform: translateZ(0);
-            backface-visibility: hidden;
-        }
-        
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
-        }
-    </style>
+        </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img loading="lazy" src="images/project-travel.png" alt="Jelajahin - AI Travel Assistant &amp; Itinerary Planner Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3692,101 +2824,86 @@
                     }
 
 
-        /* ===== MOBILE POLISH FIXES ===== */
-        @media (max-width: 768px) {
-            
-            /* Fix Hero Title Position */
-            .hero {
-                justify-content: flex-start !important;
-                padding-top: 130px !important;
-                min-height: auto !important;
-            }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
-
-            /* Fix orbit overflowing on narrow screens */
-            .orbit-section { overflow: hidden; }
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-ring { animation-duration: 60s !important; }
-            .orbit-item { animation-duration: 60s !important; }
-            
-            /* Fix section header scroll-margin for sticky nav */
-            .section-header { scroll-margin-top: 100px; }
-            
-            /* Fix excessive gap between sections */
-            section { padding-top: 60px; padding-bottom: 60px; }
-            
-            /* Contact title too large on mobile */
-            .contact .section-title,
-            .contact-content h2 { font-size: 28px !important; line-height: 1.3; }
-            
-            /* Fix certificates card overflow */
-            .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
-            
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
-            
-            /* Stats grid tighter */
-            .stats { gap: 12px; }
-            .stat-card { padding: 20px 16px; }
-            
-            /* About section title */
-            .about h2 { font-size: 28px; }
-            
-            /* Project section gap reduction */
-            .project-grid { gap: 12px !important; }
-            
-            /* Footer links wrap better */
-            .footer-links { flex-wrap: wrap; justify-content: center; }
-            
-            /* Scroll progress thinner on mobile */
-            .scroll-progress { height: 2px; }
-        }
         
-        @media (max-width: 480px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            
-            /* Hero title smaller on very small screens */
-            .hero-title { font-size: 40px; }
-            h2 { font-size: 26px; }
-            
-            /* Contact title even smaller */
-            .contact .section-title,
-            .contact-content h2 { font-size: 24px !important; }
-            
-            /* Stats single column on very small screens */
-            .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
-            
-            /* Reduce container padding */
-            .container { padding: 0 16px; }
+        /* ===== MINIMALIST TECH ECOSYSTEM ===== */
+        .tech-ecosystem { padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 2; }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
         }
 
-
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: organicFloat 6s ease-in-out infinite;
+            animation-delay: var(--delay);
+            will-change: transform;
             transform: translateZ(0);
-            backface-visibility: hidden;
+        }
+
+        [data-theme="light"] .tech-pill {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+            color: var(--text-primary);
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-5px) scale(1.05);
+            color: var(--text-primary);
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.2);
+            animation-play-state: paused;
+        }
+
+        .tech-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5));
+            transition: transform 0.3s ease;
         }
         
-        /* Reduce paint complexity during scroll */
-        @media (max-width: 768px) {
-            /* Simplify shadows on mobile for scroll performance */
-            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
-            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            
-            /* Disable glow effects on mobile */
-            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
-            
-            /* Reduce paint area for marquee */
-            .marquee-section { box-shadow: none !important; }
+        .tech-pill:hover .tech-icon {
+            transform: scale(1.1) rotate(5deg);
         }
-    </style>
+
+        @keyframes organicFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid { gap: 12px; padding: 0 10px; }
+            .tech-pill { padding: 12px 20px; font-size: 14px; }
+            .tech-pill:hover { transform: none; animation-play-state: running; }
+            
+            /* Disable blur on mobile for performance */
+            .tech-pill { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
+            [data-theme="light"] .tech-pill { background: #f8f9fa; }
+        }
+</style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     <img loading="lazy" src="images/project-emutz.png" alt="E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
