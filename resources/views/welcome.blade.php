@@ -3221,6 +3221,16 @@
             .footer-socials { margin-top: 10px; }
             .footer::before { width: 80%; }
         }
+
+        @media (max-width: 768px) {
+
+            /* Fix horizontal overflow on entire mobile page */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+        }
 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
