@@ -56,7 +56,7 @@
     <meta property="twitter:image" content="https://anggawiranata.my.id/images/og-image.png">
 
     <!-- Favicon & Search Icons (Google SEO Optimized) -->
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
