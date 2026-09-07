@@ -1612,6 +1612,25 @@
 
         [data-theme="light"] .cursor-glow { display: none; } /* Subtle glow only works well on dark themes */
 
+        
+        /* Text Reveal Animation (Per Word) */
+        .text-reveal { display: inline; }
+        .word-reveal { 
+            overflow: hidden; 
+            display: inline-block; 
+            vertical-align: bottom; 
+        }
+        .word-reveal-inner { 
+            display: inline-block; 
+            transform: translateY(110%); 
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.6s ease; 
+        }
+        .reveal.active .word-reveal-inner { 
+            transform: translateY(0); 
+            opacity: 1;
+        }
+
         /* Smooth Reveal */
         .reveal {
             opacity: 0; transform: translateY(40px);
@@ -4469,7 +4488,7 @@
                         const revealParent = el.closest('.text-reveal') || (el.classList.contains('text-reveal') ? el : null);
                         if (revealParent) {
                             const words = text.split(' ');
-                            el.innerHTML = words.map(w => `<span class="word-reveal"><span class="word-reveal-inner">${w}</span></span>`).join('');
+                            el.innerHTML = words.map(w => `<span class="word-reveal"><span class="word-reveal-inner">${w}</span></span>`).join(' ');
                             // We use join('') because margin-right handles spacing
                         } else {
                             el.innerHTML = text;
