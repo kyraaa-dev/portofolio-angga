@@ -3120,6 +3120,194 @@
                 padding-bottom: 90px !important;
             }
         }
+
+        /* ===== PREMIUM MEGA FOOTER ===== */
+        .footer {
+            position: relative;
+            margin-top: 100px;
+            padding: 0;
+            background: var(--bg-surface);
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            opacity: 0.5;
+        }
+
+        .footer-marquee-wrapper {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            background: rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        [data-theme="light"] .footer-marquee-wrapper {
+            background: rgba(0, 0, 0, 0.02);
+            border-bottom-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-marquee {
+            display: flex;
+            animation: scrollText 30s linear infinite;
+        }
+
+        .footer-marquee span {
+            font-size: 80px;
+            font-weight: 800;
+            text-transform: uppercase;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+            color: transparent;
+            margin-right: 40px;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        [data-theme="light"] .footer-marquee span {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-marquee span:hover {
+            color: var(--text-primary);
+            -webkit-text-stroke: 0px;
+        }
+
+        .footer-marquee span.solid {
+            color: var(--accent-color);
+            -webkit-text-stroke: 0px;
+        }
+
+        .footer-main {
+            padding: 80px 0 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .footer-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .footer-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+        }
+
+        .footer-links a::before {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            margin-right: 0;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover::before {
+            width: 12px;
+            margin-right: 8px;
+        }
+
+        .footer-bottom {
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        [data-theme="light"] .footer-bottom {
+            border-top-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-copy {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 992px) {
+            .footer-main { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: 1 / -1; }
+        }
+
+        @media (max-width: 768px) {
+            .footer-marquee span { font-size: 50px; margin-right: 20px; }
+            .footer-main { grid-template-columns: 1fr; padding: 60px 0 30px; gap: 40px; }
+            .footer-bottom { flex-direction: column; text-align: center; justify-content: center; padding-bottom: 90px !important; }
+            .footer { margin-top: 40px; }
+        }
 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
@@ -3261,18 +3449,67 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer container reveal">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <span class="footer-logo">&gt;<span class="blinking-cursor-logo">_</span></span>
-                <span class="footer-text">&copy; 2026 ANGGA WIRANATA, S.KOM.</span>
+    
+    <!-- Premium Footer -->
+    <footer class="footer reveal">
+        <div class="footer-marquee-wrapper">
+            <div class="footer-marquee">
+                <span>LET'S TALK</span><span class="solid">&bull;</span>
+                <span>ANGGA WIRANATA</span><span class="solid">&bull;</span>
+                <span>WEB DEVELOPER</span><span class="solid">&bull;</span>
+                <span>LET'S TALK</span><span class="solid">&bull;</span>
+                <span>ANGGA WIRANATA</span><span class="solid">&bull;</span>
+                <span>WEB DEVELOPER</span><span class="solid">&bull;</span>
+                <span>LET'S TALK</span><span class="solid">&bull;</span>
+                <span>ANGGA WIRANATA</span><span class="solid">&bull;</span>
+                <span>WEB DEVELOPER</span><span class="solid">&bull;</span>
             </div>
-            <div class="footer-tagline">
-                Crafted with <span class="accent-precision">precision</span> <span class="blinking-cursor">_</span>
+        </div>
+
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <h3>ANGGA WIRANATA</h3>
+                    <p class="footer-desc">
+                        Berfokus pada pengembangan aplikasi web modern dengan antarmuka pengguna yang bersih, kinerja tinggi, dan arsitektur yang kuat.
+                    </p>
+                    <div class="footer-badge">
+                        <span class="pulse" style="width: 8px; height: 8px;"></span>
+                        Available for Work
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <div class="footer-links">
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#experience">Journey</a>
+                        <a href="#projects">Projects</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-title">Connect</h4>
+                    <div class="footer-links">
+                        <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="mailto:anggawiranatafti@gmail.com">Email Me</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    &copy; 2026 ANGGA WIRANATA, S.KOM. ALL RIGHTS RESERVED.
+                </div>
+                <div class="footer-tagline" style="font-family: 'Courier New', monospace; font-size: 13px; color: var(--text-secondary);">
+                    CRAFTED WITH <span style="color: var(--accent-color); font-weight: 600; text-shadow: 0 0 10px rgba(16,185,129,0.4);">PRECISION</span> <span class="blinking-cursor" style="display: inline-block; width: 8px; height: 13px; background: var(--accent-color); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite;"></span>
+                </div>
             </div>
         </div>
     </footer>
+
 
     <!-- Terminal Panel for Replay -->
     <div class="replay-terminal" id="replayTerminal">
