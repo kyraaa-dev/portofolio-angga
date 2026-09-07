@@ -2371,6 +2371,8 @@
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-ring { animation-duration: 60s !important; }
+            .orbit-item { animation-duration: 60s !important; }
             
             /* Fix section header scroll-margin for sticky nav */
             .section-header { scroll-margin-top: 100px; }
@@ -2424,6 +2426,29 @@
             .container { padding: 0 16px; }
         }
 
+
+        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
+        .reveal, .section-header, .hero, .navbar, .footer,
+        .service-card, .timeline-item, .project-card, .cert-card,
+        .contact-card, .stat-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce paint complexity during scroll */
+        @media (max-width: 768px) {
+            /* Simplify shadows on mobile for scroll performance */
+            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            
+            /* Disable glow effects on mobile */
+            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
+            
+            /* Reduce paint area for marquee */
+            .marquee-section { box-shadow: none !important; }
+        }
     </style>
 
     <!-- Prevent Theme Flash -->
@@ -2468,6 +2493,8 @@
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-ring { animation-duration: 60s !important; }
+            .orbit-item { animation-duration: 60s !important; }
             
             /* Fix section header scroll-margin for sticky nav */
             .section-header { scroll-margin-top: 100px; }
@@ -2521,6 +2548,29 @@
             .container { padding: 0 16px; }
         }
 
+
+        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
+        .reveal, .section-header, .hero, .navbar, .footer,
+        .service-card, .timeline-item, .project-card, .cert-card,
+        .contact-card, .stat-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce paint complexity during scroll */
+        @media (max-width: 768px) {
+            /* Simplify shadows on mobile for scroll performance */
+            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            
+            /* Disable glow effects on mobile */
+            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
+            
+            /* Reduce paint area for marquee */
+            .marquee-section { box-shadow: none !important; }
+        }
     </style>
 </head>
 <body>
@@ -2575,6 +2625,8 @@
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-ring { animation-duration: 60s !important; }
+            .orbit-item { animation-duration: 60s !important; }
             
             /* Fix section header scroll-margin for sticky nav */
             .section-header { scroll-margin-top: 100px; }
@@ -2628,6 +2680,29 @@
             .container { padding: 0 16px; }
         }
 
+
+        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
+        .reveal, .section-header, .hero, .navbar, .footer,
+        .service-card, .timeline-item, .project-card, .cert-card,
+        .contact-card, .stat-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce paint complexity during scroll */
+        @media (max-width: 768px) {
+            /* Simplify shadows on mobile for scroll performance */
+            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            
+            /* Disable glow effects on mobile */
+            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
+            
+            /* Reduce paint area for marquee */
+            .marquee-section { box-shadow: none !important; }
+        }
     </style>
             </a>
 
@@ -2716,6 +2791,8 @@
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-ring { animation-duration: 60s !important; }
+            .orbit-item { animation-duration: 60s !important; }
             
             /* Fix section header scroll-margin for sticky nav */
             .section-header { scroll-margin-top: 100px; }
@@ -2769,6 +2846,29 @@
             .container { padding: 0 16px; }
         }
 
+
+        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
+        .reveal, .section-header, .hero, .navbar, .footer,
+        .service-card, .timeline-item, .project-card, .cert-card,
+        .contact-card, .stat-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce paint complexity during scroll */
+        @media (max-width: 768px) {
+            /* Simplify shadows on mobile for scroll performance */
+            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            
+            /* Disable glow effects on mobile */
+            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
+            
+            /* Reduce paint area for marquee */
+            .marquee-section { box-shadow: none !important; }
+        }
     </style>
     <section class="hero container">
         <div id="particles-js"></div>
@@ -2873,6 +2973,8 @@
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-ring { animation-duration: 60s !important; }
+            .orbit-item { animation-duration: 60s !important; }
             
             /* Fix section header scroll-margin for sticky nav */
             .section-header { scroll-margin-top: 100px; }
@@ -2926,6 +3028,29 @@
             .container { padding: 0 16px; }
         }
 
+
+        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
+        .reveal, .section-header, .hero, .navbar, .footer,
+        .service-card, .timeline-item, .project-card, .cert-card,
+        .contact-card, .stat-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce paint complexity during scroll */
+        @media (max-width: 768px) {
+            /* Simplify shadows on mobile for scroll performance */
+            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            
+            /* Disable glow effects on mobile */
+            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
+            
+            /* Reduce paint area for marquee */
+            .marquee-section { box-shadow: none !important; }
+        }
     </style>
                 <!-- Glowing Code Symbol SVG -->
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));">
@@ -3262,6 +3387,8 @@
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-ring { animation-duration: 60s !important; }
+            .orbit-item { animation-duration: 60s !important; }
             
             /* Fix section header scroll-margin for sticky nav */
             .section-header { scroll-margin-top: 100px; }
@@ -3315,6 +3442,29 @@
             .container { padding: 0 16px; }
         }
 
+
+        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
+        .reveal, .section-header, .hero, .navbar, .footer,
+        .service-card, .timeline-item, .project-card, .cert-card,
+        .contact-card, .stat-card {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Reduce paint complexity during scroll */
+        @media (max-width: 768px) {
+            /* Simplify shadows on mobile for scroll performance */
+            .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
+            .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            
+            /* Disable glow effects on mobile */
+            .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
+            
+            /* Reduce paint area for marquee */
+            .marquee-section { box-shadow: none !important; }
+        }
     </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
@@ -4312,15 +4462,16 @@
     <script>
         if (typeof Lenis !== 'undefined') {
             const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+                duration: 1.4,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                 direction: 'vertical',
                 gestureDirection: 'vertical',
                 smooth: true,
-                mouseMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
+                mouseMultiplier: 0.8,
+                smoothTouch: true,
+                touchMultiplier: 1.5,
                 infinite: false,
+                lerp: 0.08,
             })
 
             function raf(time) {
@@ -4336,7 +4487,7 @@
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        if (typeof particlesJS !== 'undefined') {
+        if (typeof particlesJS !== 'undefined' && window.innerWidth > 768) {
             particlesJS("particles-js", {
                 "particles": {
                     "number": { "value": 12, "density": { "enable": true, "value_area": 800 } },
