@@ -3697,7 +3697,7 @@
                 document.querySelectorAll('.text-reveal').forEach(parent => {
                     const words = parent.querySelectorAll('.word-reveal-inner');
                     words.forEach((w, i) => {
-                        w.style.transitionDelay = `${i * 0.05}s`;
+                        w.style.transitionDelay = `${0.3 + (i * 0.15)}s`;
                     });
                     
                     const sectionReveal = parent.closest('.reveal');
