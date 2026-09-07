@@ -1049,10 +1049,7 @@
 
         /* Responsive Orbit */
         @media (max-width: 768px) {
-            .orbit-container {
-                transform: scale(0.8);
-                margin: 0 auto;
-            }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-section {
                 padding: 40px 0;
             }
@@ -1807,10 +1804,7 @@
             .cert-card { flex: 0 0 85% !important; scroll-snap-align: center; }
         }
         @media (max-width: 480px) {
-            .orbit-container {
-                transform: scale(0.65);
-                margin: -40px auto;
-            }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .digital-id-card {
                 width: 260px;
                 min-height: 360px;
@@ -2368,9 +2362,20 @@
 
         /* ===== MOBILE POLISH FIXES ===== */
         @media (max-width: 768px) {
+            
+            /* Fix Hero Title Position */
+            .hero {
+                justify-content: flex-start !important;
+                padding-top: 130px !important;
+                min-height: auto !important;
+            }
+            .hero-buttons {
+                margin-bottom: 60px !important;
+            }
+
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
-            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-ring { animation-duration: 60s !important; }
             .orbit-item { animation-duration: 60s !important; }
             
@@ -2409,7 +2414,7 @@
         }
         
         @media (max-width: 480px) {
-            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             
             /* Hero title smaller on very small screens */
             .hero-title { font-size: 40px; }
@@ -2490,9 +2495,20 @@
 
         /* ===== MOBILE POLISH FIXES ===== */
         @media (max-width: 768px) {
+            
+            /* Fix Hero Title Position */
+            .hero {
+                justify-content: flex-start !important;
+                padding-top: 130px !important;
+                min-height: auto !important;
+            }
+            .hero-buttons {
+                margin-bottom: 60px !important;
+            }
+
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
-            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-ring { animation-duration: 60s !important; }
             .orbit-item { animation-duration: 60s !important; }
             
@@ -2531,7 +2547,7 @@
         }
         
         @media (max-width: 480px) {
-            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             
             /* Hero title smaller on very small screens */
             .hero-title { font-size: 40px; }
@@ -2622,9 +2638,20 @@
 
         /* ===== MOBILE POLISH FIXES ===== */
         @media (max-width: 768px) {
+            
+            /* Fix Hero Title Position */
+            .hero {
+                justify-content: flex-start !important;
+                padding-top: 130px !important;
+                min-height: auto !important;
+            }
+            .hero-buttons {
+                margin-bottom: 60px !important;
+            }
+
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
-            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-ring { animation-duration: 60s !important; }
             .orbit-item { animation-duration: 60s !important; }
             
@@ -2663,7 +2690,7 @@
         }
         
         @media (max-width: 480px) {
-            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             
             /* Hero title smaller on very small screens */
             .hero-title { font-size: 40px; }
@@ -2788,9 +2815,20 @@
 
         /* ===== MOBILE POLISH FIXES ===== */
         @media (max-width: 768px) {
+            
+            /* Fix Hero Title Position */
+            .hero {
+                justify-content: flex-start !important;
+                padding-top: 130px !important;
+                min-height: auto !important;
+            }
+            .hero-buttons {
+                margin-bottom: 60px !important;
+            }
+
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
-            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-ring { animation-duration: 60s !important; }
             .orbit-item { animation-duration: 60s !important; }
             
@@ -2829,7 +2867,7 @@
         }
         
         @media (max-width: 480px) {
-            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             
             /* Hero title smaller on very small screens */
             .hero-title { font-size: 40px; }
@@ -2970,9 +3008,20 @@
 
         /* ===== MOBILE POLISH FIXES ===== */
         @media (max-width: 768px) {
+            
+            /* Fix Hero Title Position */
+            .hero {
+                justify-content: flex-start !important;
+                padding-top: 130px !important;
+                min-height: auto !important;
+            }
+            .hero-buttons {
+                margin-bottom: 60px !important;
+            }
+
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
-            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-ring { animation-duration: 60s !important; }
             .orbit-item { animation-duration: 60s !important; }
             
@@ -3011,7 +3060,7 @@
         }
         
         @media (max-width: 480px) {
-            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             
             /* Hero title smaller on very small screens */
             .hero-title { font-size: 40px; }
@@ -3384,9 +3433,20 @@
 
         /* ===== MOBILE POLISH FIXES ===== */
         @media (max-width: 768px) {
+            
+            /* Fix Hero Title Position */
+            .hero {
+                justify-content: flex-start !important;
+                padding-top: 130px !important;
+                min-height: auto !important;
+            }
+            .hero-buttons {
+                margin-bottom: 60px !important;
+            }
+
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
-            .orbit-container { transform: scale(0.6); margin: -60px auto -40px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             .orbit-ring { animation-duration: 60s !important; }
             .orbit-item { animation-duration: 60s !important; }
             
@@ -3425,7 +3485,7 @@
         }
         
         @media (max-width: 480px) {
-            .orbit-container { transform: scale(0.5); margin: -80px auto -60px; }
+            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
             
             /* Hero title smaller on very small screens */
             .hero-title { font-size: 40px; }
