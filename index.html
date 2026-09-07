@@ -1901,6 +1901,7 @@
     </style>
 </head>
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Lightweight Modern Preloader -->
     <div id="preloaderNew" class="preloader-new">
         <div class="preloader-logo-aw"><img src="images/logo.png" alt="Logo AW"></div>
@@ -1933,9 +1934,9 @@
         </div>
         
         <nav class="nav-links">
-            <a href="#" class="nav-link" data-i18n="nav_home">Beranda</a>
-            <a href="#projects" class="nav-link" data-i18n="nav_projects">Proyek</a>
-            <a href="#contact" class="nav-link" data-i18n="nav_contact">Kontak</a>
+            <a href="#" class="nav-link magnetic" data-i18n="nav_home">Beranda</a>
+            <a href="#projects" class="nav-link magnetic" data-i18n="nav_projects">Proyek</a>
+            <a href="#contact" class="nav-link magnetic" data-i18n="nav_contact">Kontak</a>
         </nav>
 
         <div class="nav-actions">
@@ -1987,9 +1988,9 @@
                 <span class="overlay-label">Navigation</span>
             </div>
             <nav class="mobile-nav-list">
-                <div class="mobile-nav-item"><a href="#" class="mobile-link" data-i18n="nav_home">Home</a></div>
-                <div class="mobile-nav-item"><a href="#projects" class="mobile-link" data-i18n="nav_projects">Proyek</a></div>
-                <div class="mobile-nav-item"><a href="#contact" class="mobile-link" data-i18n="nav_contact">Kontak</a></div>
+                <div class="mobile-nav-item"><a href="#" class="mobile-link magnetic" data-i18n="nav_home">Home</a></div>
+                <div class="mobile-nav-item"><a href="#projects" class="mobile-link magnetic" data-i18n="nav_projects">Proyek</a></div>
+                <div class="mobile-nav-item"><a href="#contact" class="mobile-link magnetic" data-i18n="nav_contact">Kontak</a></div>
             </nav>
             <div class="mobile-overlay-footer">
                 <a href="https://www.linkedin.com/in/angga-wiranata-320837420?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer" class="mobile-social">
@@ -2030,11 +2031,11 @@
         </p>
         
         <div class="hero-buttons reveal active delay-2" style="display: flex; gap: 16px; margin-bottom: 100px;">
-            <a href="#projects" class="btn btn-primary btn-radar" data-i18n="hero_btn_work">
+            <a href="#projects" class="btn btn-primary btn-radar magnetic" data-i18n="hero_btn_work">
                 Lihat Karya
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
             </a>
-            <a href="#contact" class="btn btn-outline" data-i18n="hero_btn_contact">
+            <a href="#contact" class="btn btn-outline magnetic" data-i18n="hero_btn_contact">
                 Hubungi Saya
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </a>
@@ -2131,7 +2132,7 @@
     <!-- Tech Stack Orbit Section -->
     <section class="orbit-section container reveal delay-2">
         <div class="section-header reveal">
-            <h2 class="section-title" data-i18n="tech_title">Tech <span class="highlight">Ecosystem</span></h2>
+            <h2 class="section-title text-reveal" data-i18n="tech_title">Tech <span class="highlight">Ecosystem</span></h2>
             <p class="section-description" data-i18n="tech_desc">Teknologi yang berputar dan mendukung setiap project saya.</p>
         </div>
         
@@ -2202,10 +2203,10 @@
     <section id="about" class="about container reveal">
         <div class="about-grid">
             <div class="about-text">
-                <h2 data-i18n="about_title">Lebih Dekat Dengan Saya</h2>
+                <h2 class="text-reveal" data-i18n="about_title">Lebih Dekat Dengan Saya</h2>
                 <p data-i18n="about_p1">Saya adalah seorang Web Developer yang bersemangat dalam membangun antarmuka web yang modern, cepat, dan mudah diakses. Fokus saya tidak hanya pada fungsionalitas, namun juga pada estetika visual yang mampu memberikan pengalaman terbaik bagi pengguna.</p>
                 <p data-i18n="about_p2">Dengan latar belakang yang kuat di bidang teknik informatika, saya selalu berusaha untuk terus mengikuti perkembangan teknologi terbaru dan mengimplementasikannya dalam setiap proyek yang saya kerjakan.</p>
-                <a href="#contact" class="btn-collab" data-i18n="about_btn">
+                <a href="#contact" class="btn-collab magnetic" data-i18n="about_btn">
                                         <span class="collab-dot"></span>
                                         <span>Mari Berkolaborasi</span>
                                         <svg class="collab-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -2302,7 +2303,7 @@
     <!-- Services Section -->
     <section id="services" class="services container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title" data-i18n="services_title">What I <span class="highlight">Do</span></h2>
+            <h2 class="section-title text-reveal" data-i18n="services_title">What I <span class="highlight">Do</span></h2>
             <p class="section-description" data-i18n="services_desc">Layanan & Spesialisasi</p>
         </div>
         
@@ -2360,7 +2361,7 @@
     <!-- Experience Timeline Section -->
     <section id="experience" class="experience container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title" data-i18n="exp_title">My <span class="highlight">Journey</span></h2>
+            <h2 class="section-title text-reveal" data-i18n="exp_title">My <span class="highlight">Journey</span></h2>
             <p class="section-description" data-i18n="exp_desc">Pengalaman Karir & Pendidikan</p>
         </div>
         
@@ -2404,7 +2405,7 @@
 
     <section id="projects" class="projects container">
         <div class="section-header reveal">
-            <h2 class="section-title" data-i18n="proj_title">Selected Projects</h2>
+            <h2 class="section-title text-reveal" data-i18n="proj_title">Selected Projects</h2>
             <p class="section-description" data-i18n="proj_desc">Engineered solutions for enterprise clients and institutions.</p>
         </div>
         
@@ -2760,7 +2761,7 @@
     <!-- Certificates Section -->
     <section id="certificates" class="certificates container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title" data-i18n="cert_title">Certifications & Awards</h2>
+            <h2 class="section-title text-reveal" data-i18n="cert_title">Certifications & Awards</h2>
             <p class="section-description" data-i18n="cert_desc">Professional certifications and recognitions that validate my expertise.</p>
         </div>
         
@@ -2803,7 +2804,7 @@
     <section id="contact" class="contact container reveal">
         <div class="contact-card">
             <div class="contact-content">
-                <h2 class="section-title" data-i18n="contact_title">Let's build something great.</h2>
+                <h2 class="section-title text-reveal" data-i18n="contact_title">Let's build something great.</h2>
                 <p class="section-description" data-i18n="contact_desc">Available for freelance work and full-time opportunities. If you have a project that needs some creative engineering, let's talk.</p>
                 <div class="contact-layout">
                     <form id="telegramForm" class="telegram-form" onsubmit="sendToTelegram(event)">
@@ -3681,8 +3682,20 @@
                 if (translations[key] && translations[key][lang]) {
                     el.style.opacity = '0';
                     setTimeout(() => {
-                        el.innerHTML = translations[key][lang];
+                        let text = translations[key][lang];
+                        if (el.classList.contains('text-reveal')) {
+                            el.innerHTML = `<span class="line-reveal-wrapper"><span class="line-reveal-inner">${text}</span></span>`;
+                        } else {
+                            el.innerHTML = text;
+                        }
                         el.style.opacity = '1';
+                        // Re-trigger reveal animation if already active
+                        if (el.classList.contains('active')) {
+                            el.classList.remove('active');
+                            // force reflow
+                            void el.offsetWidth;
+                            el.classList.add('active');
+                        }
                     }, 150);
                 }
             });
