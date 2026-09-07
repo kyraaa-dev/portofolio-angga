@@ -2124,7 +2124,7 @@
     <!-- Tech Stack Orbit Section -->
     <section class="orbit-section container reveal delay-2">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal" data-i18n="tech_title">Tech <span class="highlight">Ecosystem</span></h2>
+            <h2 class="section-title text-reveal"><span data-i18n="tech_title_1">Tech</span> <span class="highlight" data-i18n="tech_title_2">Ecosystem</span></h2>
             <p class="section-description" data-i18n="tech_desc">Teknologi yang berputar dan mendukung setiap project saya.</p>
         </div>
         
@@ -2295,7 +2295,7 @@
     <!-- Services Section -->
     <section id="services" class="services container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal" data-i18n="services_title">What I <span class="highlight">Do</span></h2>
+            <h2 class="section-title text-reveal"><span data-i18n="services_title_1">What I</span> <span class="highlight" data-i18n="services_title_2">Do</span></h2>
             <p class="section-description" data-i18n="services_desc">Layanan & Spesialisasi</p>
         </div>
         
@@ -2353,7 +2353,7 @@
     <!-- Experience Timeline Section -->
     <section id="experience" class="experience container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal" data-i18n="exp_title">My <span class="highlight">Journey</span></h2>
+            <h2 class="section-title text-reveal"><span data-i18n="exp_title_1">My</span> <span class="highlight" data-i18n="exp_title_2">Journey</span></h2>
             <p class="section-description" data-i18n="exp_desc">Pengalaman Karir & Pendidikan</p>
         </div>
         
@@ -3675,22 +3675,36 @@
                     el.style.opacity = '0';
                     setTimeout(() => {
                         let text = translations[key][lang];
-                        if (el.classList.contains('text-reveal')) {
-                            el.innerHTML = `<span class="line-reveal-wrapper"><span class="line-reveal-inner">${text}</span></span>`;
+                        // Check if parent is text-reveal
+                        const revealParent = el.closest('.text-reveal') || (el.classList.contains('text-reveal') ? el : null);
+                        if (revealParent) {
+                            const words = text.split(' ');
+                            el.innerHTML = words.map(w => `<span class="word-reveal"><span class="word-reveal-inner">${w}</span></span>`).join('');
+                            // We use join('') because margin-right handles spacing
                         } else {
                             el.innerHTML = text;
                         }
                         el.style.opacity = '1';
-                        // Re-trigger reveal animation if already active
-                        if (el.classList.contains('active')) {
-                            el.classList.remove('active');
-                            // force reflow
-                            void el.offsetWidth;
-                            el.classList.add('active');
-                        }
+
                     }, 150);
                 }
             });
+
+            setTimeout(() => {
+                document.querySelectorAll('.text-reveal').forEach(parent => {
+                    const words = parent.querySelectorAll('.word-reveal-inner');
+                    words.forEach((w, i) => {
+                        w.style.transitionDelay = `${i * 0.05}s`;
+                    });
+                    
+                    const sectionReveal = parent.closest('.reveal');
+                    if (sectionReveal && sectionReveal.classList.contains('active')) {
+                        sectionReveal.classList.remove('active');
+                        void sectionReveal.offsetWidth;
+                        sectionReveal.classList.add('active');
+                    }
+                });
+            }, 200);
 
             // Update placeholders
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
