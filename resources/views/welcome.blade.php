@@ -3231,6 +3231,26 @@
                 max-width: 100vw !important;
             }
         }
+
+        @media (max-width: 768px) {
+
+            /* Fix navbar disappearing on scroll due to overflow-x: hidden */
+            .navbar {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1002;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            }
+            body {
+                padding-top: 80px; /* Offset for fixed navbar */
+            }
+        }
 </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
