@@ -3117,7 +3117,7 @@
         @media (max-width: 768px) {
             
             .footer {
-                padding-bottom: 90px !important;
+                padding-bottom: 20px !important;
             }
         }
 
@@ -3215,9 +3215,9 @@
             .footer-content {
                 flex-direction: column;
                 text-align: center;
-                padding-bottom: 90px !important;
+                padding-bottom: 20px !important;
             }
-            .footer-brand { flex-direction: column; gap: 12px; }
+            .footer-brand { flex-direction: column; gap: 8px; }
             .footer-socials { margin-top: 10px; }
             .footer::before { width: 80%; }
         }
