@@ -2001,7 +2001,58 @@
         .lenis.lenis-smooth iframe { pointer-events: none; }
 
         </style>
-</head>
+
+        <style>
+            /* Universal Header Styling matching the screenshot */
+            .navbar {
+                display: flex; align-items: center; justify-content: space-between;
+                padding: 16px 24px;
+                position: fixed !important; top: 0; left: 0; right: 0; width: 100%;
+                z-index: 1002;
+                background: var(--nav-bg) !important;
+                border-bottom: 1px solid var(--border-color);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+            .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+            .logo-img-wrapper { height: 32px; display: flex; align-items: center; }
+            .logo-img { height: 100%; width: auto; object-fit: contain; }
+            .logo-text { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; color: var(--text-primary); }
+            
+            .nav-actions { display: flex; align-items: center; gap: 12px; }
+            
+            .availability-badge { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+            .avail-dot { width: 8px; height: 8px; background-color: #10B981; border-radius: 50%; display: inline-block; }
+            .avail-text { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+            
+            .lang-toggle {
+                background: transparent; color: var(--text-primary);
+                border: 1px solid var(--border-color);
+                border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 700;
+                cursor: pointer; transition: all 0.2s ease;
+            }
+            
+            .theme-toggle {
+                background: transparent; color: var(--text-primary);
+                border: 1px solid var(--border-color);
+                border-radius: 50%; width: 36px; height: 36px;
+                display: flex; align-items: center; justify-content: center;
+                cursor: pointer; transition: all 0.2s ease;
+            }
+            
+            @media (max-width: 768px) {
+                .navbar { padding: 12px 16px; }
+                .logo { gap: 8px; }
+                .logo-img-wrapper { height: 28px; }
+                .logo-text { font-size: 15px; }
+                .avail-text { display: none; }
+                .nav-actions { gap: 8px; }
+                .lang-toggle { padding: 4px 8px; font-size: 12px; min-width: 36px; }
+                .theme-toggle { width: 32px; height: 32px; }
+                .mobile-menu-toggle { margin-left: 4px; }
+            }
+        </style>
+        </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
     <!-- Lightweight Modern Preloader -->
@@ -3143,9 +3194,7 @@
 
             <!-- Certificate 2 -->
             <div class="cert-card reveal delay-2">
-                <div class="cert-icon-wrapper">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                </div>
+                <div class="cert-img-wrapper" style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--border-color);"><img src="images/hacktiv8-ai.jpg" alt="Hacktiv8 AI Certificate" style="width: 100%; height: 100%; object-fit: cover;"></div>
                 <h3 class="cert-title" data-i18n="cert_2_title">AI Productivity for Developers</h3>
                 <div class="cert-issuer" data-i18n="cert_2_issuer">Hacktiv8 Indonesia</div>
                 <p class="cert-desc" data-i18n="cert_2_desc">Has completed the Maju Bareng AI program, and successfully developed a final project as part of the program requirements.</p>
