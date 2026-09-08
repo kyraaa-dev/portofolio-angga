@@ -214,11 +214,11 @@
         }
         /* Glow on hover */
         .btn-collab:hover {
-            background: linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(52,211,153,0.1) 100%);
-            border-color: rgba(16, 185, 129, 0.8);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 0 0 40px rgba(16, 185, 129, 0.1);
+            background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 100%);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
             transform: translateY(-2px);
-            color: #34d399;
+            color: var(--accent-color);
         }
         /* Pulse ring */
         .btn-collab::after {
@@ -226,7 +226,7 @@
             position: absolute;
             inset: 0;
             border-radius: 100px;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            border: 1px solid var(--accent-glow);
             animation: collabRing 2s ease-out infinite;
             pointer-events: none;
         }
@@ -246,9 +246,9 @@
         .btn-collab .collab-dot {
             width: 7px;
             height: 7px;
-            background: #10b981;
+            background: var(--accent-color);
             border-radius: 50%;
-            box-shadow: 0 0 6px #10b981;
+            box-shadow: 0 0 6px var(--accent-color);
             animation: dotPulse 1.5s ease-in-out infinite;
             flex-shrink: 0;
         }
@@ -2992,7 +2992,7 @@
             transform: translateX(-50%);
             width: 50%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
         }
 
         .footer-content {
