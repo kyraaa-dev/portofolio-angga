@@ -1616,7 +1616,7 @@
             }
         }
 
-        [data-theme="light"] .cursor-glow { display: none; } /* Subtle glow only works well on dark themes */
+        .cursor-glow { display: none !important; }
 
         
         /* Text Reveal Animation (Per Word) */
