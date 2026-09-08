@@ -2532,6 +2532,11 @@
             }
             
             @media (max-width: 768px) {
+            /* Reduce Hero Space */
+            .hero {
+                padding-top: 20px !important;
+            }
+        
                 .navbar { padding: 12px 16px; }
                 .logo { gap: 8px; }
                 .logo-img-wrapper { height: 28px; }
@@ -2544,7 +2549,7 @@
             }
         </style>
         
-    <meta id="theme-color-meta" name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#000000">
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
