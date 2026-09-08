@@ -305,6 +305,19 @@
             animation: shimmerBar 2s linear infinite;
             position: relative;
         }
+        .scroll-progress-bar-reverse {
+            position: absolute;
+            bottom: -1px;
+            right: 0;
+            height: 3px;
+            width: 0%;
+            background: #10B981 !important;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+            border-radius: 2px 0 0 2px;
+            z-index: 10;
+            will-change: width;
+            transition: width 0.08s linear;
+        }
         .scroll-progress-bar::after {
             content: '';
             position: absolute;
@@ -2637,6 +2650,7 @@
             </button>
 
         </div>
+        <div class="scroll-progress-bar-reverse" id="scrollBarReverse"></div>
     </header>
 
     <!-- Super Premium Mobile Menu -->
