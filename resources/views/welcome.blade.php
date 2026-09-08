@@ -1492,7 +1492,9 @@
         .cert-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.05); /* neutral letterbox background */
+            padding: 4px;
             display: block;
             transition: transform 0.5s ease;
         }
@@ -3432,7 +3434,7 @@
 
             <!-- Certificate 2 -->
             <div class="cert-card reveal delay-2">
-                <div class="cert-img-wrapper" style="width: 100%; height: 160px; overflow: hidden; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--border-color);"><img src="images/hacktiv8-ai.jpg" alt="Hacktiv8 AI Certificate" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                <div class="cert-image-wrapper"><img src="images/hacktiv8-ai.jpg" alt="Hacktiv8 AI Certificate" class="cert-img"></div>
                 <h3 class="cert-title" data-i18n="cert_2_title">AI Productivity for Developers</h3>
                 <div class="cert-issuer" data-i18n="cert_2_issuer">Hacktiv8 Indonesia</div>
                 <p class="cert-desc" data-i18n="cert_2_desc">Has completed the Maju Bareng AI program, and successfully developed a final project as part of the program requirements.</p>
