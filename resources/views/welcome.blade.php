@@ -179,9 +179,9 @@
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(52,211,153,0.04) 100%);
-            color: #10b981;
+            border: 1px solid var(--accent-glow);
+            background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 100%);
+            color: var(--accent-color);
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -326,7 +326,7 @@
             height: 6px;
             background: #a7f3d0;
             border-radius: 50%;
-            box-shadow: 0 0 6px #10b981, 0 0 12px #10b981;
+            box-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--accent-color);
         }
         @keyframes shimmerBar {
             0% { background-position: 200% 0; }
@@ -445,13 +445,13 @@
         .voice-lang-btn.active { background: var(--accent-color); border-color: var(--accent-color); color: #000; font-weight: 700; }
         .voice-btn {
             display: flex; align-items: center; gap: 14px;
-            background: rgba(16, 185, 129, 0.07); border: 1px solid rgba(16, 185, 129, 0.25);
+            background: var(--accent-glow); border: 1px solid var(--accent-glow);
             color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
             padding: 12px 22px 12px 12px; border-radius: 100px; cursor: pointer;
             transition: all 0.3s ease; backdrop-filter: blur(8px); letter-spacing: 0.3px;
         }
-        .voice-btn:hover { background: rgba(16, 185, 129, 0.15); border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(16,185,129,0.2); }
-        .voice-btn.playing { background: rgba(16, 185, 129, 0.2); border-color: var(--accent-color); box-shadow: 0 0 20px rgba(16,185,129,0.3); }
+        .voice-btn:hover { background: var(--accent-glow); border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+        .voice-btn.playing { background: var(--accent-glow); border-color: var(--accent-color); box-shadow: 0 0 20px var(--accent-glow); }
         .voice-icon-wrap {
             width: 38px; height: 38px; border-radius: 50%;
             background: var(--accent-color); display: flex; align-items: center; justify-content: center;
@@ -910,7 +910,7 @@
         }
         .service-card:hover::before { opacity: 0.15; }
         .service-icon {
-            width: 60px; height: 60px; border-radius: 12px; background: rgba(16, 185, 129, 0.1);
+            width: 60px; height: 60px; border-radius: 12px; background: var(--accent-glow);
             display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
             color: var(--accent-color); position: relative; z-index: 1;
             transition: transform 0.4s ease, background 0.4s ease;
@@ -929,23 +929,23 @@
             color: var(--accent-color); font-size: 13px; font-weight: 600;
             font-family: 'Inter', sans-serif; padding: 12px 20px; border-radius: 100px;
             cursor: pointer; backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(16,185,129,0.2);
+            box-shadow: 0 0 20px var(--accent-glow);
             transition: all 0.3s ease; letter-spacing: 0.5px;
         }
         .replay-btn:hover {
             background: var(--accent-color); color: #000;
-            box-shadow: 0 0 40px rgba(16,185,129,0.5); transform: translateY(-3px);
+            box-shadow: 0 0 40px var(--accent-glow); transform: translateY(-3px);
         }
         .replay-btn svg { transition: transform 0.3s ease; }
         .replay-btn:hover svg { transform: scale(1.2); }
 
         .replay-terminal {
             position: fixed; bottom: 90px; left: 32px; width: 380px;
-            background: #0d0d0d; border: 1px solid rgba(16,185,129,0.3);
+            background: #0d0d0d; border: 1px solid var(--accent-glow);
             border-radius: 12px; z-index: 9001; overflow: hidden;
             opacity: 0; pointer-events: none; transform: translateY(20px) scale(0.95);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(16,185,129,0.1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow);
         }
         .replay-terminal.visible { opacity: 1; pointer-events: all; transform: translateY(0) scale(1); }
         .replay-terminal-header {
@@ -958,7 +958,7 @@
         .t-title { font-size: 12px; color: rgba(255,255,255,0.4); font-family: monospace; margin-left: 4px; }
         .replay-terminal-body {
             padding: 20px; font-family: 'Courier New', monospace; font-size: 13px;
-            color: #10b981; line-height: 2; min-height: 160px; max-height: 220px; overflow-y: auto;
+            color: var(--accent-color); line-height: 2; min-height: 160px; max-height: 220px; overflow-y: auto;
         }
         .t-line { display: flex; align-items: center; gap: 8px; opacity: 0; animation: tLineIn 0.3s forwards; }
         .t-prompt { color: rgba(255,255,255,0.3); }
@@ -1250,7 +1250,7 @@
         }
         .project-card:hover { 
             border-color: var(--accent-color); background: var(--bg-surface-hover);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3), inset 0 0 20px rgba(16, 185, 129, 0.1);
+            box-shadow: 0 15px 40px var(--accent-glow), inset 0 0 20px var(--accent-glow);
         }
         /* Flashlight Effect */
         .project-card::after {
@@ -1319,7 +1319,7 @@
             border-left: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(16, 185, 129, 0.1), inset 0 0 20px rgba(255,255,255,0.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.02);
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
             height: 100%;
@@ -1354,7 +1354,7 @@
         .contact-terminal:hover {
             animation-play-state: paused;
             transform: rotateY(0) rotateX(0) translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 50px rgba(16, 185, 129, 0.2), inset 0 0 20px rgba(255,255,255,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 50px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.05);
         }
         [data-theme="light"] .contact-terminal { background: rgba(250, 250, 250, 0.8); border-color: rgba(0,0,0,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .c-term-header {
@@ -1375,7 +1375,7 @@
             padding: 20px;
             font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 13px;
-            color: #10b981;
+            color: var(--accent-color);
             flex: 1;
             overflow-y: auto;
             line-height: 1.6;
@@ -1384,7 +1384,7 @@
         .c-term-prompt { color: #34d399; font-weight: bold; }
         .c-term-text { color: var(--text-primary); }
         .c-term-cursor {
-            display: inline-block; width: 8px; height: 15px; background: #10b981;
+            display: inline-block; width: 8px; height: 15px; background: var(--accent-color);
             animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px;
         }
         @keyframes cTypeLine { to { opacity: 1; } }
@@ -1403,7 +1403,7 @@
             outline: none; 
             border-color: var(--accent-color); 
             background: rgba(0, 0, 0, 0.5); 
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15), inset 0 0 20px rgba(16, 185, 129, 0.05);
+            box-shadow: 0 0 0 4px var(--accent-glow), inset 0 0 20px var(--accent-glow);
             transform: translateY(-2px);
         }
         [data-theme="light"] .form-input:focus { background: #ffffff; }
@@ -1429,13 +1429,13 @@
         }
         [data-theme="light"] .status-badge { background: rgba(255, 255, 255, 0.5); }
         .pulse { 
-            width: 8px; height: 8px; background-color: #10b981; border-radius: 50%; 
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); animation: pulse 2s infinite; 
+            width: 8px; height: 8px; background-color: var(--accent-color); border-radius: 50%; 
+            box-shadow: 0 0 0 0 var(--accent-glow); animation: pulse 2s infinite; 
         }
         @keyframes pulse { 
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); } 
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } 
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); } 
+            70% { transform: scale(1); box-shadow: 0 0 0 10px var(--accent-glow); } 
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); } 
         }
 
         /* Footer */
@@ -1503,20 +1503,20 @@
             width: 56px;
             height: 56px;
             border-radius: 12px;
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
+            background: var(--accent-glow);
+            color: var(--accent-color);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 24px;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--accent-glow);
             transition: all 0.4s ease;
         }
         .cert-card:hover .cert-icon-wrapper {
-            background: #10b981;
+            background: var(--accent-color);
             color: #000;
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
         .cert-title {
             font-size: 20px;
@@ -1576,11 +1576,11 @@
         [data-theme="light"] .footer { background: #ffffff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-top-color: rgba(0,0,0,0.05); }
         .footer-content { display: flex; justify-content: space-between; align-items: center; }
         .footer-brand { display: flex; align-items: center; gap: 12px; }
-        .footer-logo { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; font-size: 14px; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; box-shadow: 0 0 10px rgba(16,185,129,0.2); letter-spacing: 2px; }
+        .footer-logo { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; font-size: 14px; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; box-shadow: 0 0 10px var(--accent-glow); letter-spacing: 2px; }
         .blinking-cursor-logo { display: inline-block; animation: blink 1s step-end infinite; }
         .footer-text { color: var(--text-secondary); font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
         .footer-tagline { color: var(--text-secondary); font-size: 14px; font-family: 'Courier New', monospace; }
-        .accent-precision { color: var(--accent-color); font-weight: 600; text-shadow: 0 0 10px rgba(16,185,129,0.4); }
+        .accent-precision { color: var(--accent-color); font-weight: 600; text-shadow: 0 0 10px var(--accent-glow); }
         .blinking-cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent-color); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
@@ -1605,7 +1605,7 @@
             .cursor-glow {
                 position: fixed; top: 0; left: 0;
                 width: 800px; height: 800px;
-                background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 40%, transparent 70%);
+                background: radial-gradient(circle, var(--accent-glow) 0%, var(--accent-glow) 40%, transparent 70%);
                 border-radius: 50%;
                 transform: translate(-50%, -50%);
                 pointer-events: none;
@@ -2524,7 +2524,7 @@
             .nav-actions { display: flex; align-items: center; gap: 12px; }
             
             .availability-badge { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-            .avail-dot { width: 8px; height: 8px; background-color: #10B981; border-radius: 50%; display: inline-block; }
+            .avail-dot { width: 8px; height: 8px; background-color: var(--accent-color); border-radius: 50%; display: inline-block; }
             .avail-text { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
             
             .lang-toggle {
@@ -2602,7 +2602,7 @@
         <div class="nav-actions">
             <!-- Available for Hire Badge -->
             <a href="#contact" class="availability-badge" style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; margin-right: 12px;">
-                <span style="width: 6px; height: 6px; background-color: #10B981; border-radius: 50%; display: inline-block;"></span>
+                <span style="width: 6px; height: 6px; background-color: var(--accent-color); border-radius: 50%; display: inline-block;"></span>
                 <span class="avail-text" data-i18n="nav_avail">Tersedia untuk proyek</span>
                 <style>
                     .availability-badge:hover { color: var(--text-primary) !important; }
@@ -3148,9 +3148,9 @@
         .tech-pill:hover {
             transform: translateY(-5px) scale(1.05);
             color: var(--text-primary);
-            background: rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.2);
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
             animation-play-state: paused;
         }
 
@@ -3158,7 +3158,7 @@
             width: 20px;
             height: 20px;
             color: var(--accent-color);
-            filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5));
+            filter: drop-shadow(0 0 5px var(--accent-glow));
             transition: transform 0.3s ease;
         }
         
@@ -3231,11 +3231,11 @@
             font-size: 16px;
             font-weight: 700;
             color: var(--accent-color);
-            background: rgba(16, 185, 129, 0.05);
+            background: var(--accent-glow);
             padding: 6px 10px;
             border-radius: 6px;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
 
         .footer-text {
@@ -3257,7 +3257,7 @@
         .footer-tagline .accent-precision {
             color: var(--accent-color);
             font-weight: 600;
-            text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+            text-shadow: 0 0 8px var(--accent-glow);
         }
 
         .footer-socials {
@@ -3276,7 +3276,7 @@
         .footer-socials a:hover {
             color: var(--accent-color);
             transform: translateY(-3px);
-            filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+            filter: drop-shadow(0 0 8px var(--accent-glow));
         }
 
         @media (max-width: 768px) {
@@ -3408,7 +3408,7 @@
                     <div>
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">{{ $project->title }}</h3>
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
-                            <div class="project-tag" style="background: rgba(16,185,129,0.1); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
+                            <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
                             </div>
@@ -3714,7 +3714,7 @@
                     }
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
                     
-                    ctx.fillStyle = isOverloaded ? '#fff' : '#10b981'; // Emerald Green
+                    ctx.fillStyle = isOverloaded ? '#fff' : 'var(--accent-color)'; // Emerald Green
                     ctx.font = fontSize + 'px monospace';
                     
                     for (let i = 0; i < drops.length; i++) {
@@ -4069,8 +4069,8 @@
                                 ? (currentLang === 'en' ? 'View Project on GitHub' : 'Lihat Proyek di GitHub')
                                 : (currentLang === 'en' ? 'Open Live Demo' : 'Buka Live Demo');
                             modalLinkContainer.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg> ${linkLabel}</a>`;
-                            modalLinkContainer.style.background = 'rgba(16, 185, 129, 0.1)';
-                            modalLinkContainer.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                            modalLinkContainer.style.background = 'var(--accent-glow)';
+                            modalLinkContainer.style.borderColor = 'var(--accent-glow)';
                         } else {
                             const devText = translations['proj_dev_status'] ? translations['proj_dev_status'][currentLang] : 'Tahap Pengembangan (Coming Soon)';
                             modalLinkContainer.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; margin-top: -2px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span data-i18n="proj_dev_status">${devText}</span>`;
@@ -4649,8 +4649,8 @@
                         fontSize: '14px',
                         fontWeight: '600',
                         fontFamily: "'Inter', sans-serif",
-                        boxShadow: '0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(16, 185, 129, 0.2)',
-                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        boxShadow: '0 10px 25px rgba(0,0,0,0.5), 0 0 15px var(--accent-glow)',
+                        border: '1px solid var(--accent-glow)',
                         backdropFilter: 'blur(12px)',
                         opacity: '0',
                         transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -4731,14 +4731,14 @@
                         toast.id = 'langToast';
                         Object.assign(toast.style, {
                             position: 'fixed', bottom: '30px', left: '50%', transform: 'translateX(-50%) translateY(20px)',
-                            background: 'rgba(16, 185, 129, 0.9)', color: '#fff', padding: '12px 24px', borderRadius: '30px',
+                            background: 'var(--accent-glow)', color: '#fff', padding: '12px 24px', borderRadius: '30px',
                             fontSize: '14px', fontWeight: '600', fontFamily: "'Inter', sans-serif",
                             boxShadow: '0 10px 25px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.3)',
                             backdropFilter: 'blur(12px)', opacity: '0', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)', zIndex: '9999', pointerEvents: 'none'
                         });
                         document.body.appendChild(toast);
                     }
-                    toast.style.background = 'rgba(16, 185, 129, 0.9)'; // Green for success
+                    toast.style.background = 'var(--accent-glow)'; // Green for success
                     toast.innerHTML = '<span style="margin-right: 8px;">✅</span> Pesan berhasil dikirim!';
                     requestAnimationFrame(() => { toast.style.opacity = '1'; toast.style.transform = 'translateX(-50%) translateY(0)'; });
                     
