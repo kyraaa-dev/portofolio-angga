@@ -13,8 +13,6 @@
     <meta name="author" content="{{ $settings['name'] ?? 'Angga Wiranata' }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://anggawiranata.my.id/">
-    <meta name="theme-color" content="#000000">
-
     <!-- Schema.org JSON-LD for Google -->
     <script type="application/ld+json">
     {
@@ -2545,7 +2543,9 @@
                 .mobile-menu-toggle { margin-left: 4px; }
             }
         </style>
-        </head>
+        
+    <meta id="theme-color-meta" name="theme-color" content="#ffffff">
+</head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
     <!-- The Matrix Code Rain Preloader -->
@@ -3876,7 +3876,13 @@
 
             // Set initial toggle icons based on the theme already set in <head>
 
-            if (htmlElement.getAttribute('data-theme') === 'light') {
+            
+            const initialTheme = htmlElement.getAttribute('data-theme');
+            const metaThemeColorInit = document.getElementById('theme-color-meta');
+            if (metaThemeColorInit) {
+                metaThemeColorInit.content = initialTheme === 'dark' ? '#000000' : '#ffffff';
+            }
+            if (initialTheme === 'light') {
                 iconMoon.style.display = 'block';
                 iconSun.style.display = 'none';
             }
@@ -3891,7 +3897,13 @@
             });
 
             function setTheme(theme) {
+                
                 htmlElement.setAttribute('data-theme', theme);
+                const metaThemeColor = document.getElementById('theme-color-meta');
+                if (metaThemeColor) {
+                    metaThemeColor.content = theme === 'dark' ? '#000000' : '#ffffff';
+                }
+
                 localStorage.setItem('theme', theme);
                 
                 if (theme === 'light') {
