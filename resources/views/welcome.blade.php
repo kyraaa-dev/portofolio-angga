@@ -491,7 +491,7 @@
         }
         /* Static premium glow instead of animated pulse */
         
-        .digital-id-card {
+        .digital-id-card { will-change: transform;
             width: 320px;
             height: 480px;
             background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%);
@@ -647,7 +647,7 @@
         }
         
         /* Light Mode Overrides for Digital ID Card */
-        [data-theme="light"] .digital-id-card {
+        [data-theme="light"] .digital-id-card { will-change: transform;
             background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(245,245,245,0.95) 100%);
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-top-color: rgba(255, 255, 255, 1);
@@ -897,7 +897,7 @@
             background: var(--bg-surface); border: 1px solid var(--border-color);
             border-radius: 16px; padding: 40px; position: relative; overflow: hidden;
             transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); transform: translateZ(0);
         }
         .service-card::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -928,7 +928,7 @@
             background: rgba(0, 0, 0, 0.8); border: 1px solid var(--accent-color);
             color: var(--accent-color); font-size: 13px; font-weight: 600;
             font-family: 'Inter', sans-serif; padding: 12px 20px; border-radius: 100px;
-            cursor: pointer; backdrop-filter: blur(10px);
+            cursor: pointer; backdrop-filter: blur(10px); transform: translateZ(0);
             box-shadow: 0 0 20px var(--accent-glow);
             transition: all 0.3s ease; letter-spacing: 0.5px;
         }
@@ -971,7 +971,7 @@
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: #fff; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
             padding: 8px 16px; border-radius: 100px; cursor: pointer;
-            backdrop-filter: blur(10px); transition: all 0.3s ease;
+            backdrop-filter: blur(10px); transform: translateZ(0); transition: all 0.3s ease;
         }
         .replay-skip:hover { background: rgba(255,255,255,0.2); }
 
@@ -1312,7 +1312,7 @@
             align-items: stretch;
             margin-top: 40px; /* Align with form */
         }
-        .contact-terminal {
+        .contact-terminal { will-change: transform;
             background: rgba(10, 15, 25, 0.65); /* More transparent for glassmorphism */
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-top: 1px solid rgba(255, 255, 255, 0.3);
@@ -1356,7 +1356,7 @@
             transform: rotateY(0) rotateX(0) translateY(-10px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 50px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.05);
         }
-        [data-theme="light"] .contact-terminal { background: rgba(250, 250, 250, 0.8); border-color: rgba(0,0,0,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        [data-theme="light"] .contact-terminal { will-change: transform; background: rgba(250, 250, 250, 0.8); border-color: rgba(0,0,0,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .c-term-header {
             background: rgba(255, 255, 255, 0.05);
             padding: 12px 16px;
@@ -1572,7 +1572,7 @@
             transform: translateX(4px) translateY(-4px);
         }
 
-        .footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 60px; background: var(--glass-bg); backdrop-filter: blur(10px); }
+        .footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 60px; background: var(--glass-bg); backdrop-filter: blur(10px); transform: translateZ(0); }
         [data-theme="light"] .footer { background: #ffffff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-top-color: rgba(0,0,0,0.05); }
         .footer-content { display: flex; justify-content: space-between; align-items: center; }
         .footer-brand { display: flex; align-items: center; gap: 12px; }
@@ -1640,7 +1640,7 @@
         /* Smooth Reveal */
         .reveal {
             opacity: 0; transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); will-change: opacity, transform;
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
@@ -1653,7 +1653,7 @@
             .contact-card { flex-direction: column; }
             .contact-content { max-width: 100%; }
             .contact-terminal-wrapper { max-width: 100%; margin-top: 0; }
-            .contact-terminal { animation: none; transform: none; min-height: 350px; }
+            .contact-terminal { will-change: transform; animation: none; transform: none; min-height: 350px; }
             .contact-terminal:hover { transform: translateY(-5px); }
             .contact-card::before { right: -10%; top: -20%; width: 120%; height: 120%; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%); }
         }
@@ -1736,7 +1736,7 @@
             .lang-toggle { font-size: 11px; padding: 2px 6px; min-width: 30px; height: 32px; }
 
             /* Digital ID Card - Mobile Fix */
-            .digital-id-card {
+            .digital-id-card { will-change: transform;
                 width: 280px;
                 height: auto;
                 min-height: 400px;
@@ -1787,7 +1787,7 @@
             .contact-layout { gap: 24px; margin-top: 24px; }
             .contact-sidebar { flex-direction: column; justify-content: center; text-align: center; gap: 20px; }
             .contact-terminal-wrapper { max-width: 100%; min-width: 100%; margin-top: 0; }
-            .contact-terminal { 
+            .contact-terminal { will-change: transform; 
                 transform: none; 
                 min-height: 300px;
             }
@@ -1814,7 +1814,7 @@
         }
         @media (max-width: 480px) {
             .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .digital-id-card {
+            .digital-id-card { will-change: transform;
                 width: 260px;
                 min-height: 360px;
                 padding: 20px;
@@ -1887,7 +1887,7 @@
         }
 
         /* Merdeka Digital ID Card */
-        [data-merdeka="true"] .digital-id-card {
+        [data-merdeka="true"] .digital-id-card { will-change: transform;
             background: rgba(255, 255, 255, 0.95) !important;
             border: 2px solid #DC1F26 !important;
             box-shadow: 0 10px 30px rgba(220, 31, 38, 0.25), inset 0 0 20px rgba(220, 31, 38, 0.05) !important;
@@ -2255,8 +2255,8 @@
             left: 24px;
             z-index: 998;
             background: rgba(220, 31, 38, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); transform: translateZ(0);
+            -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
             border: 1px solid rgba(220, 31, 38, 0.3);
             border-radius: 12px;
             padding: 12px 20px;
@@ -2454,8 +2454,8 @@
             /* Simplify shadows on mobile for scroll performance */
             .project-card { box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important; }
             .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important; }
-            .contact-terminal { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
-            .digital-id-card { box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .contact-terminal { will-change: transform; box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+            .digital-id-card { will-change: transform; box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
             
             /* Disable glow effects on mobile */
             .cursor-glow, .cursor-dot, .cursor-outline { display: none !important; }
@@ -2480,7 +2480,7 @@
 <style>
         /* ULTRA PERFORMANCE MOBILE OVERRIDES */
         @media (max-width: 768px) {
-            #particles-js { display: none !important; }
+            #particles-js { pointer-events: none; display: none !important; }
             * { 
                 box-shadow: none !important; 
                 backdrop-filter: none !important; 
@@ -2513,8 +2513,8 @@
                 z-index: 1002;
                 background: var(--nav-bg) !important;
                 border-bottom: 1px solid var(--border-color);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px); transform: translateZ(0);
+                -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
             }
             .logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
             .logo-img-wrapper { height: 32px; display: flex; align-items: center; }
@@ -2682,7 +2682,7 @@
 
 
     <style>
-        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; transform: translateZ(0); will-change: transform; }
+        #particles-js { pointer-events: none; position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; transform: translateZ(0); will-change: transform; }
         .hero { position: relative; }
         .hero-title, .hero-badge, .hero-description, .hero-buttons, .digital-id-perspective {
             position: relative;
@@ -3311,8 +3311,8 @@
                 width: 100%;
                 z-index: 1002;
                 background: var(--nav-bg);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px); transform: translateZ(0);
+                -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
                 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
             }
             body {
