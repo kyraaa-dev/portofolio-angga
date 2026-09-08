@@ -1967,7 +1967,7 @@
             background: var(--accent-color);
             box-shadow: 0 0 10px var(--accent-color);
             transform-origin: left;
-            transform: scaleX(0);
+            
             will-change: transform;
         }
 
@@ -3379,7 +3379,7 @@
                     window.requestAnimationFrame(() => {
                         const winScroll = window.scrollY || document.documentElement.scrollTop;
                         const scrolled = docHeight > 0 ? (winScroll / docHeight) * 100 : 0;
-                        if (bar) bar.style.transform = `scaleX(${scrolled / 100})`;
+                        if (bar) bar.style.width = `${scrolled}%`;
                         isScrolling = false;
                     });
                     isScrolling = true;
