@@ -3251,7 +3251,60 @@
                 padding-top: 80px; /* Offset for fixed navbar */
             }
         }
-</style>
+
+        /* Header Layout Polish */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px !important;
+                background: var(--nav-bg) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+            }
+            .logo {
+                gap: 8px !important;
+                flex: none !important;
+            }
+            .logo-img-wrapper {
+                height: 32px !important;
+            }
+            .logo-text {
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                letter-spacing: -0.5px !important;
+            }
+            .nav-actions {
+                flex: 1 !important;
+                justify-content: flex-end !important;
+                gap: 8px !important;
+            }
+            .lang-toggle {
+                padding: 6px 12px !important;
+                border-radius: 8px !important;
+                font-size: 13px !important;
+                border: 1px solid var(--border-color) !important;
+            }
+            .theme-toggle {
+                padding: 8px !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .theme-toggle svg {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            .mobile-menu-toggle {
+                margin-left: 4px !important;
+            }
+            .hamburger-lines {
+                width: 24px !important;
+            }
+            .availability-badge {
+                margin-right: 4px !important;
+            }
+        }
+        </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
                         $imageName = 'project-korpri.png';
@@ -3339,12 +3392,12 @@
                 <div class="cert-icon-wrapper">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </div>
-                <h3 class="cert-title" data-i18n="cert_2_title">Laravel Advanced Architect</h3>
-                <div class="cert-issuer" data-i18n="cert_2_issuer">Laravel Certifications</div>
-                <p class="cert-desc" data-i18n="cert_2_desc">Official certification demonstrating advanced knowledge of the Laravel framework, including architecture, testing, and deployment best practices.</p>
+                <h3 class="cert-title" data-i18n="cert_2_title">AI Productivity for Developers</h3>
+                <div class="cert-issuer" data-i18n="cert_2_issuer">Hacktiv8 Indonesia</div>
+                <p class="cert-desc" data-i18n="cert_2_desc">Has completed the Maju Bareng AI program, and successfully developed a final project as part of the program requirements.</p>
                 <div class="cert-footer">
                     <span class="cert-date" data-i18n="cert_2_date">Issued: 2024</span>
-                    <a href="#" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                    <a href="images/hacktiv8-ai.jpg" target="_blank" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
                 </div>
             </div>
 
@@ -4392,10 +4445,10 @@
             "cert_1_issuer": { id: "PT Revolusi Cita Edukasi", en: "PT Revolusi Cita Edukasi" },
             "cert_1_desc": { id: "Telah dianugerahkan sertifikat kehadiran untuk kursus online bersertifikat 1 minggu yang diselenggarakan oleh RevoU.", en: "Has been awarded a certificate of attendance for a 1-week certified online course offered by RevoU." },
             "cert_1_date": { id: "Diterbitkan: 24 Juli 2026", en: "Issued: 24 July 2026" },
-            "cert_2_title": { id: "Laravel Advanced Architect", en: "Laravel Advanced Architect" },
-            "cert_2_issuer": { id: "Sertifikasi Laravel", en: "Laravel Certifications" },
-            "cert_2_desc": { id: "Sertifikasi resmi yang menunjukkan pengetahuan tingkat lanjut tentang framework Laravel, termasuk arsitektur, pengujian, dan praktik terbaik penerapan.", en: "Official certification demonstrating advanced knowledge of the Laravel framework, including architecture, testing, and deployment best practices." },
-            "cert_2_date": { id: "Diterbitkan: 2024", en: "Issued: 2024" },
+            "cert_2_title": { id: "AI Productivity for Developers", en: "AI Productivity for Developers" },
+            "cert_2_issuer": { id: "Hacktiv8 Indonesia", en: "Hacktiv8 Indonesia" },
+            "cert_2_desc": { id: "Telah menyelesaikan program Maju Bareng AI, dan berhasil mengembangkan proyek akhir sebagai bagian dari persyaratan program.", en: "Has completed the Maju Bareng AI program, and successfully developed a final project as part of the program requirements." },
+            "cert_2_date": { id: "Diterbitkan: 06 Sept 2026", en: "Issued: 06 Sept 2026" },
             "cert_3_title": { id: "React Native Specialist", en: "React Native Specialist" },
             "cert_3_issuer": { id: "Meta (Facebook)", en: "Meta (Facebook)" },
             "cert_3_desc": { id: "Kemampuan yang terbukti dalam membangun aplikasi seluler lintas platform dengan performa native menggunakan React Native dan ekosistem JavaScript modern.", en: "Proven ability to build cross-platform mobile applications with native performance using React Native and modern JavaScript ecosystem." },
