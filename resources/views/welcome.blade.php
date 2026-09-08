@@ -1602,30 +1602,10 @@
                 width: 40px; height: 40px; border: 1px solid var(--text-secondary); 
                 transition: width 0.2s, height 0.2s, border-color 0.5s ease, background-color 0.2s; 
             }
-            .cursor-glow {
-                position: fixed; top: 0; left: 0;
-                width: 800px; height: 800px;
-                background: radial-gradient(circle, var(--accent-glow) 0%, var(--accent-glow) 40%, transparent 70%);
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
-                pointer-events: none;
-                z-index: 999998;
-                will-change: transform;
-                mix-blend-mode: screen;
-                opacity: 0; transition: opacity 0.5s ease;
-            }
+            
         }
-
-        .cursor-glow { display: none !important; }
 
         
-        /* Text Reveal Animation (Per Word) */
-        .text-reveal { display: inline; }
-        .word-reveal { 
-            overflow: hidden; 
-            display: inline-block; 
-            vertical-align: bottom; 
-        }
         .word-reveal-inner { 
             display: inline-block; 
             transform: translateY(110%); 
@@ -2495,12 +2475,7 @@
 </style>
 
     <style>
-        /* Lenis Smooth Scroll Recommended CSS */
-        html.lenis, html.lenis body { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
-        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-        .lenis.lenis-stopped { overflow: hidden; }
-        .lenis.lenis-smooth iframe { pointer-events: none; }
+        
 
         </style>
 
@@ -2579,7 +2554,7 @@
     </div>
 
     <!-- Custom Cursor Elements -->
-    <div class="cursor-glow" id="cursorGlow" style="opacity: 0;"></div>
+    
     <div class="cursor-dot" id="cursorDot" style="opacity: 0;"></div>
     <div class="cursor-outline" id="cursorOutline" style="opacity: 0;"></div>
 
@@ -3796,7 +3771,7 @@
             // Custom Cursor Logic
             const cursorDot = document.getElementById('cursorDot');
             const cursorOutline = document.getElementById('cursorOutline');
-            const cursorGlow = document.getElementById('cursorGlow');
+            const cursorGlow = null;
             
             if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
                 let mouseX = 0, mouseY = 0;
@@ -3811,7 +3786,7 @@
                     if (cursorDot.style.opacity !== '1') {
                         cursorDot.style.opacity = '1';
                         cursorOutline.style.opacity = '1';
-                        if (cursorGlow) cursorGlow.style.opacity = '1';
+                        
                     }
                 }, { passive: true });
                 
@@ -3828,7 +3803,7 @@
                         glowY += (mouseY - glowY) * 0.1;
                         
                         cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-                        if (cursorGlow) cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
+                        
                     }
                     
                     requestAnimationFrame(animateCursor);
@@ -4380,31 +4355,6 @@
     <!-- Vanilla Tilt 3D Effect -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-    <!-- Lenis Smooth Scroll for Ultra Smooth Inertia -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-    <script>
-        if (typeof Lenis !== 'undefined') {
-            const lenis = new Lenis({
-                duration: 1.4,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                direction: 'vertical',
-                gestureDirection: 'vertical',
-                smooth: true,
-                mouseMultiplier: 0.8,
-                smoothTouch: true,
-                touchMultiplier: 1.5,
-                infinite: false,
-                lerp: 0.08,
-            })
-
-            function raf(time) {
-                lenis.raf(time)
-                requestAnimationFrame(raf)
-            }
-
-            requestAnimationFrame(raf)
-        }
-    </script>
     <!-- Native CSS Smooth Scroll is active instead -->
     
     <!-- Particles.js -->
