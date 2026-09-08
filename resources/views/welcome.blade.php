@@ -297,12 +297,10 @@
         }
         .scroll-progress-bar { 
             height: 100%; width: 0%; 
-            background: linear-gradient(90deg, #10b981 0%, #34d399 40%, #6ee7b7 70%, #10b981 100%);
-            background-size: 200% 100%;
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.8), 0 0 20px rgba(16, 185, 129, 0.4), 0 0 40px rgba(16, 185, 129, 0.2);
+            background: var(--accent-color);
+            box-shadow: 0 0 8px var(--accent-glow), 0 0 20px var(--accent-glow);
             transition: width 0.08s linear;
             border-radius: 0 2px 2px 0;
-            animation: shimmerBar 2s linear infinite;
             position: relative;
         }
         .scroll-progress-bar-reverse {
