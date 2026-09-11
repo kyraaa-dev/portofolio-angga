@@ -337,10 +337,10 @@
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-base); }
-        ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.5); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 10px; border: 2px solid var(--bg-base); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
         /* Glowing Interactive Grid Background */
         .grid-background {
@@ -414,7 +414,7 @@
             content: ''; width: 8px; height: 8px; background: var(--accent-color); 
             border-radius: 50%; box-shadow: 0 0 10px var(--accent-color);
         }
-        .hero-title { 
+        .hero-title { filter: drop-shadow(0 0 20px var(--accent-glow)); 
             font-size: 80px; font-weight: 800; line-height: 1.05; margin-bottom: 24px; 
             letter-spacing: -0.06em; 
             background: var(--hero-gradient);
@@ -1242,8 +1242,10 @@
         .project-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
         }
-        .project-card { 
-            background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; 
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 16px; 
             padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; 
             transform-style: preserve-3d;
@@ -4358,7 +4360,32 @@
     </script>
     
     <!-- Vanilla Tilt 3D Effect -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script>
+        if (typeof VanillaTilt !== 'undefined') {
+            VanillaTilt.init(document.querySelectorAll(".project-card"), {
+                max: 5,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.2,
+                scale: 1.02
+            });
+            VanillaTilt.init(document.querySelectorAll(".cert-card"), {
+                max: 8,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.15,
+                scale: 1.02
+            });
+            VanillaTilt.init(document.querySelectorAll(".digital-id-card"), {
+                max: 10,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.3,
+                scale: 1.03
+            });
+        }
+    </script>
 
     <!-- Native CSS Smooth Scroll is active instead -->
     
