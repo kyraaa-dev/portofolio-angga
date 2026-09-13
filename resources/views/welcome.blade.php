@@ -4370,6 +4370,7 @@
     <!-- Native CSS Smooth Scroll is active instead -->
     
     <!-- Native Pure CSS Aurora Background -->
+    <script>
         // 🌐 Bilingual Translation Logic (EN/ID)
         const translations = {
             "nav_home": { id: "Beranda", en: "Home" },
