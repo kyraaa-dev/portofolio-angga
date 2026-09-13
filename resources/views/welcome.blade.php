@@ -2442,50 +2442,27 @@
 <style>
         /* ULTRA PERFORMANCE MOBILE OVERRIDES */
         @media (max-width: 768px) {
-                    /* Pure CSS Aurora Background */
+                            /* Pure CSS Static Aurora Background */
         .aurora-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; overflow: hidden; pointer-events: none;
-        }
-        .aurora-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px);
-            opacity: 0.6; animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
-        .aurora-1 {
-            width: 60vw; height: 60vw; min-width: 400px; min-height: 400px;
-            background: var(--accent-glow); top: -20vh; left: -10vw;
-        }
-        .aurora-2 {
-            width: 50vw; height: 50vw; min-width: 300px; min-height: 300px;
-            background: rgba(0, 112, 243, 0.15); bottom: -20vh; right: -10vw;
-            animation-delay: -10s; animation-direction: alternate-reverse;
+            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.1), transparent 40%);
         }
         .grid-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-size: 50px 50px;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
             z-index: 1;
+        }
+        [data-theme="light"] .aurora-bg {
+            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.08), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.05), transparent 40%);
         }
         [data-theme="light"] .grid-overlay {
             background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
         }
-        @keyframes floatBlob {
-            0% { transform: translate3d(0, 0, 0) scale(1); }
-            100% { transform: translate3d(8vw, 6vh, 0) scale(1.1); }
-        }
-            * { 
-                box-shadow: none !important; 
-                backdrop-filter: none !important; 
-                -webkit-backdrop-filter: none !important; 
-            }
-            .mobile-overlay-bg { background: var(--bg-base) !important; }
-            .glass-card, .project-card, .cert-card, .digital-id-card, .contact-terminal, .heatmap-container, .terminal-header {
-                border: 1px solid var(--border-color) !important;
-                background: var(--bg-surface) !important;
-            }
-        }
-</style>
+    </style>
 
     <style>
         
@@ -2668,54 +2645,31 @@
 
 
     <style>
-                /* Pure CSS Aurora Background */
+                        /* Pure CSS Static Aurora Background */
         .aurora-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; overflow: hidden; pointer-events: none;
-        }
-        .aurora-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px);
-            opacity: 0.6; animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-        }
-        .aurora-1 {
-            width: 60vw; height: 60vw; min-width: 400px; min-height: 400px;
-            background: var(--accent-glow); top: -20vh; left: -10vw;
-        }
-        .aurora-2 {
-            width: 50vw; height: 50vw; min-width: 300px; min-height: 300px;
-            background: rgba(0, 112, 243, 0.15); bottom: -20vh; right: -10vw;
-            animation-delay: -10s; animation-direction: alternate-reverse;
+            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.1), transparent 40%);
         }
         .grid-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-size: 50px 50px;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
             z-index: 1;
+        }
+        [data-theme="light"] .aurora-bg {
+            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.08), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.05), transparent 40%);
         }
         [data-theme="light"] .grid-overlay {
             background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
         }
-        @keyframes floatBlob {
-            0% { transform: translate3d(0, 0, 0) scale(1); }
-            100% { transform: translate3d(8vw, 6vh, 0) scale(1.1); }
-        }
-        .hero { position: relative; }
-        .hero-title, .hero-badge, .hero-description, .hero-buttons, .digital-id-perspective {
-            position: relative;
-            z-index: 1;
-        }
-        [data-i18n], [data-i18n-btn] {
-            transition: opacity 0.15s ease-in-out !important;
-        }
-
-
-        </style>
+    </style>
     <section class="hero container">
             <!-- Pure CSS Aurora & Grid Background (Zero JS, 60fps) -->
     <div class="aurora-bg">
-        <div class="aurora-blob aurora-1"></div>
-        <div class="aurora-blob aurora-2"></div>
+        
         <div class="grid-overlay"></div>
     </div>
         <h1 class="hero-title reveal active delay-1">{!! str_replace(' ', '<br>', $settings['name'] ?? 'ANGGA WIRANATA') !!}</h1>
