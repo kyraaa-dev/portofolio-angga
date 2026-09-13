@@ -1958,7 +1958,38 @@
 <style>
         /* ULTRA PERFORMANCE MOBILE OVERRIDES */
         @media (max-width: 768px) {
-            #particles-js { pointer-events: none; display: none !important; }
+                    /* Pure CSS Aurora Background */
+        .aurora-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0; overflow: hidden; pointer-events: none;
+        }
+        .aurora-blob {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            opacity: 0.6; animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .aurora-1 {
+            width: 60vw; height: 60vw; min-width: 400px; min-height: 400px;
+            background: var(--accent-glow); top: -20vh; left: -10vw;
+        }
+        .aurora-2 {
+            width: 50vw; height: 50vw; min-width: 300px; min-height: 300px;
+            background: rgba(0, 112, 243, 0.15); bottom: -20vh; right: -10vw;
+            animation-delay: -10s; animation-direction: alternate-reverse;
+        }
+        .grid-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-size: 50px 50px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            z-index: 1;
+        }
+        [data-theme="light"] .grid-overlay {
+            background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
+        }
+        @keyframes floatBlob {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(8vw, 6vh, 0) scale(1.1); }
+        }
             * { 
                 box-shadow: none !important; 
                 backdrop-filter: none !important; 
@@ -2146,7 +2177,38 @@
 
 
     <style>
-        #particles-js { pointer-events: none; position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; pointer-events: none; transform: translateZ(0); will-change: transform; }
+                /* Pure CSS Aurora Background */
+        .aurora-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 0; overflow: hidden; pointer-events: none;
+        }
+        .aurora-blob {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            opacity: 0.6; animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .aurora-1 {
+            width: 60vw; height: 60vw; min-width: 400px; min-height: 400px;
+            background: var(--accent-glow); top: -20vh; left: -10vw;
+        }
+        .aurora-2 {
+            width: 50vw; height: 50vw; min-width: 300px; min-height: 300px;
+            background: rgba(0, 112, 243, 0.15); bottom: -20vh; right: -10vw;
+            animation-delay: -10s; animation-direction: alternate-reverse;
+        }
+        .grid-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-size: 50px 50px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            z-index: 1;
+        }
+        [data-theme="light"] .grid-overlay {
+            background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
+        }
+        @keyframes floatBlob {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(8vw, 6vh, 0) scale(1.1); }
+        }
         .hero { position: relative; }
         .hero-title, .hero-badge, .hero-description, .hero-buttons, .digital-id-perspective {
             position: relative;
@@ -2159,7 +2221,12 @@
 
         </style>
     <section class="hero container">
-        <div id="particles-js"></div>
+            <!-- Pure CSS Aurora & Grid Background (Zero JS, 60fps) -->
+    <div class="aurora-bg">
+        <div class="aurora-blob aurora-1"></div>
+        <div class="aurora-blob aurora-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
         <h1 class="hero-title reveal active delay-1">ANGGA<br>WIRANATA</h1>
         <div class="hero-badge reveal active delay-1"><span class="glitch-text" data-text="PENGEMBANG WEB" data-i18n="hero_badge" id="heroBadgeText">PENGEMBANG WEB</span></div>
         <p class="hero-description reveal active delay-2" data-i18n="hero_desc">
@@ -3950,50 +4017,7 @@
 
     <!-- Native CSS Smooth Scroll is active instead -->
     
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        if (typeof particlesJS !== 'undefined' && window.innerWidth > 768) {
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": { "value": 12, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#0070f3" },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.5, "random": false },
-                    "size": { "value": 2.5, "random": true },
-                    "line_linked": {
-                        "enable": false,
-                        "distance": 0,
-                        "color": "#0070f3",
-                        "opacity": 0.3,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1.0,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "window",
-                    "events": {
-                        "onhover": { "enable": false, "mode": "grab" },
-                        "onclick": { "enable": false, "mode": "push" },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": { "distance": 200, "line_linked": { "opacity": 0.8 } },
-                        "push": { "particles_nb": 3 }
-                    }
-                },
-                "retina_detect": true
-            });
-        }
-
+    <!-- Native Pure CSS Aurora Background -->
         // 🌐 Bilingual Translation Logic (EN/ID)
         const translations = {
             "nav_home": { id: "Beranda", en: "Home" },
