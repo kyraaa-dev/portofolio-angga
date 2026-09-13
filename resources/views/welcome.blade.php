@@ -120,9 +120,6 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(136, 136, 136, 0.05), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(0, 112, 243, 0.05), transparent 25%);
             opacity: var(--mesh-opacity);
             pointer-events: none;
             transition: opacity 0.5s ease;
@@ -501,7 +498,6 @@
         .id-reflection {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             border-radius: 24px;
-            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 60%);
             opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5; mix-blend-mode: overlay;
         }
         .digital-id-header {
@@ -883,7 +879,6 @@
         }
         .service-card::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%);
             opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 0;
         }
         .service-card:hover {
@@ -1085,7 +1080,7 @@
         .progress-ring { position: absolute; top: -1px; left: -1px; transform: rotate(-90deg); }
         .progress-ring__circle { stroke-dasharray: 138.2; stroke-dashoffset: 138.2; transition: stroke-dashoffset 0.1s linear; }
 
-        .about-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, var(--accent-glow), transparent 70%); pointer-events: none; }
+        .about-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
         .code-snippet { font-family: monospace; font-size: 15px; color: var(--text-primary); line-height: 1.7; transition: color 0.5s ease;}
         .code-snippet span.keyword { color: #c678dd; font-weight: 600; }
         .code-snippet span.string { color: #98c379; }
@@ -1239,12 +1234,10 @@
         /* Flashlight Effect */
         .project-card::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
             opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0;
         }
         [data-theme="light"] .project-card::after {
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,0,0,0.04), transparent 40%);
-        }
+            }
         .project-card:hover::after { opacity: 1; }
         
         .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; position: relative; z-index: 1; }
@@ -1278,7 +1271,6 @@
         }
         .contact-card::before {
             content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 100%; height: 200%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
             opacity: 0.5; pointer-events: none; transition: background 0.5s ease;
         }
         .contact-content { flex: 1; min-width: 320px; max-width: 800px; position: relative; z-index: 1; text-align: center; margin: 0 auto; }
@@ -1446,7 +1438,6 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255,255,255,0.06), transparent 40%);
             opacity: 0;
             transition: opacity 0.3s;
             z-index: -1;
@@ -1621,7 +1612,7 @@
             .contact-terminal-wrapper { max-width: 100%; margin-top: 0; }
             .contact-terminal { will-change: transform; animation: none; transform: none; min-height: 350px; }
             .contact-terminal:hover { transform: translateY(-5px); }
-            .contact-card::before { right: -10%; top: -20%; width: 120%; height: 120%; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%); }
+            .contact-card::before { right: -10%; top: -20%; width: 120%; height: 120%; }
         }
         @media (max-width: 768px) {
             h1 { font-size: 56px; line-height: 1.1; }
@@ -2446,19 +2437,14 @@
         .aurora-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; overflow: hidden; pointer-events: none;
-            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.15), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.1), transparent 40%);
-        }
+            }
         .grid-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-size: 50px 50px;
             background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
             z-index: 1;
         }
-        [data-theme="light"] .aurora-bg {
-            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.08), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.05), transparent 40%);
-        }
+        
         [data-theme="light"] .grid-overlay {
             background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
         }
@@ -2649,19 +2635,14 @@
         .aurora-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; overflow: hidden; pointer-events: none;
-            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.15), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.1), transparent 40%);
-        }
+            }
         .grid-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-size: 50px 50px;
             background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
             z-index: 1;
         }
-        [data-theme="light"] .aurora-bg {
-            background: radial-gradient(circle at top right, rgba(0, 112, 243, 0.08), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(0, 112, 243, 0.05), transparent 40%);
-        }
+        
         [data-theme="light"] .grid-overlay {
             background-image: radial-gradient(circle, rgba(0,0,0,0.08) 1px, transparent 1px);
         }
