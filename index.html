@@ -63,9 +63,10 @@
     <meta property="twitter:image" content="https://anggawiranata.my.id/images/og-image.png">
 
     <!-- Favicon & Search Icons (Google SEO Optimized) -->
-    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-192x192.png">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png?v=2">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-192x192.png?v=2">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,19 +122,8 @@
             transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        /* Subtle Background Mesh / Glow */
-        .bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            opacity: var(--mesh-opacity);
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-            transform: translateZ(0);
-        }
+        /* Subtle Background Mesh / Glow Removed */
+
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -299,33 +289,16 @@
             background: var(--bg-surface-hover); border-color: var(--text-secondary);
         }
 
-        /* Scroll Progress Bar - Premium Neon */
-        .scroll-progress-container { 
-            position: fixed; top: 0; left: 0; width: 100vw; height: 3px; 
-            z-index: 9999; background: transparent; 
-        }
-                        .scroll-progress-bar::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
-            background: #a7f3d0;
-            border-radius: 50%;
-            box-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--accent-color);
-        }
-        @keyframes shimmerBar {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-base); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 10px; border: 2px solid var(--bg-base); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; border: 2px solid var(--bg-base); }
+        ::-webkit-scrollbar-thumb:hover { background: #3291ff; }
+        
+        body.no-scroll { overflow: hidden !important; }
+        body.no-scroll::-webkit-scrollbar { display: none !important; }
+        body.no-scroll .back-to-top { display: none !important; }
 
         /* Glowing Interactive Grid Background */
         .grid-background {
@@ -2042,16 +2015,14 @@
     <!-- Interactive Grid Background -->
     <div class="grid-background" id="gridBackground"></div>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress-container">
-            </div>
+    <!-- Scroll Progress Bar Removed -->
 
     <!-- Custom Cursor Elements -->
     
     <div class="cursor-dot" id="cursorDot" style="opacity: 0;"></div>
     <div class="cursor-outline" id="cursorOutline" style="opacity: 0;"></div>
 
-    <div class="bg-mesh"></div>
+    <div class="bg-mesh" style="display: none;"></div>
     
     <header class="navbar container reveal active">
         <div class="logo">
@@ -3436,7 +3407,13 @@
                 mobileMenuToggle.classList.toggle('active');
                 document.documentElement.style.overflow = isActive ? 'hidden' : '';
                 document.body.style.overflow = isActive ? 'hidden' : '';
-                if (backToTopBtn) backToTopBtn.style.display = isActive ? 'none' : '';
+                if (isActive) {
+                    document.body.classList.add('no-scroll');
+                    if (backToTopBtn) backToTopBtn.style.display = 'none';
+                } else {
+                    document.body.classList.remove('no-scroll');
+                    if (backToTopBtn) backToTopBtn.style.display = '';
+                }
             });
 
             const mobileLinks = mobileOverlay.querySelectorAll('.mobile-link');
@@ -3446,6 +3423,7 @@
                     mobileMenuToggle.classList.remove('active');
                     document.documentElement.style.overflow = '';
                     document.body.style.overflow = '';
+                    document.body.classList.remove('no-scroll');
                     if (backToTopBtn) backToTopBtn.style.display = '';
                 });
             });
