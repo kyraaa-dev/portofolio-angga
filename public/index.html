@@ -332,36 +332,46 @@
 
         /* Cinematic Preloader */
         .preloader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; height: 100dvh;
             background: #050505; z-index: 999999; display: flex; justify-content: center; align-items: center;
             overflow: hidden;
             transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
         }
         #matrixCanvas {
-            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: block; z-index: 1; background: #000;
         }
         .preloader.fade-out {
             opacity: 0; visibility: hidden;
         }
         .preloader::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 100; opacity: 0; pointer-events: none;
             transition: opacity 0.2s ease-out;
         }
         .preloader.overload::after { opacity: 1; }
 
         .preloader-percentage-new {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 8vw; font-weight: 900; color: transparent;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); z-index: 10;
-            font-family: 'Inter', sans-serif; pointer-events: none;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            font-size: clamp(56px, 9vw, 130px); font-weight: 900; color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25); z-index: 10;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            pointer-events: none;
             transition: opacity 0.5s ease;
-            transform: translateZ(0);
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            user-select: none;
+            will-change: transform;
         }
         .preloader-percentage-new::before {
             content: attr(data-text); position: absolute; top: 0; left: 0; color: #fff;
             width: var(--progress, 0%); overflow: hidden; white-space: nowrap;
+            line-height: 1; text-align: left;
+            -webkit-text-stroke: 0;
+            filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.35));
         }
         .preloader.slide-up .preloader-percentage-new { opacity: 0; }
         
