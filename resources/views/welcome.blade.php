@@ -462,31 +462,238 @@
         }
         .voice-label { color: var(--text-primary); transition: color 0.3s ease; }
 
+        /* 🪢 Interactive Hanging 3D Lanyard ID Card System */
+        .lanyard-system {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            height: 640px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            perspective: 1200px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+
+        /* Top Mounting Bracket */
+        .lanyard-mount {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .lanyard-mount-bracket {
+            width: 100px;
+            height: 8px;
+            background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .lanyard-mount-ring {
+            width: 32px;
+            height: 12px;
+            border: 3px solid #6b7280;
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            margin-top: -1px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* SVG Dynamic Strap */
+        .lanyard-strap-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: visible;
+        }
+        .lanyard-path-band {
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+            transition: stroke 0.3s ease;
+        }
+        .lanyard-path-stitch {
+            opacity: 0.85;
+        }
+
+        /* Draggable Assembly (Card + Hardware) */
+        .lanyard-card-assembly {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 320px;
+            margin-left: -160px;
+            transform-origin: 160px 24px;
+            will-change: transform;
+            cursor: grab;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lanyard-card-assembly:active,
+        .lanyard-card-assembly.is-dragging {
+            cursor: grabbing;
+        }
+
+        /* Metallic Hardware Clasp */
+        .lanyard-hardware {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 25;
+            margin-bottom: -18px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+            pointer-events: none;
+        }
+        .lanyard-swivel {
+            width: 22px;
+            height: 10px;
+            background: linear-gradient(135deg, #f3f4f6 0%, #9ca3af 50%, #4b5563 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .lanyard-clip {
+            width: 16px;
+            height: 24px;
+            background: linear-gradient(90deg, #9ca3af 0%, #f9fafb 40%, #6b7280 80%, #374151 100%);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            margin-top: -2px;
+        }
+        .lanyard-clip::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 3px;
+            width: 10px;
+            height: 14px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 2px;
+        }
+        .lanyard-ring {
+            width: 20px;
+            height: 20px;
+            border: 3.5px solid #d1d5db;
+            border-radius: 50%;
+            margin-top: -6px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4);
+            background: transparent;
+        }
+
+        /* Punched Hole in ID Card */
+        .badge-slot-punch {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.1);
+            z-index: 10;
+        }
+
+        /* Drag Hint Indicator */
+        .lanyard-drag-hint {
+            position: absolute;
+            top: -46px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 112, 243, 0.25);
+            border: 1px solid rgba(0, 112, 243, 0.5);
+            color: #60a5fa;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0, 112, 243, 0.35);
+            animation: hintBounce 2s ease-in-out infinite;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 30;
+        }
+        .lanyard-drag-hint.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-10px) scale(0.9);
+            pointer-events: none;
+        }
+        @keyframes hintBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+
+        /* Holographic Sheen / Rainbow Foil Overlay */
+        .id-holo-foil {
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            background: linear-gradient(135deg, 
+                transparent 15%, 
+                rgba(255, 0, 128, 0.18) 30%, 
+                rgba(0, 255, 255, 0.22) 48%, 
+                rgba(255, 230, 0, 0.18) 65%, 
+                transparent 85%
+            );
+            background-size: 200% 200%;
+            mix-blend-mode: color-dodge;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 6;
+            transition: opacity 0.2s ease;
+        }
+
         /* 3D Glass Access Card (Optimized & Premium) */
         .digital-id-perspective {
             perspective: 1000px;
             margin-bottom: 80px;
             position: relative;
         }
-        /* Static premium glow instead of animated pulse */
         
         .digital-id-card { will-change: transform;
             width: 320px;
             height: 480px;
-            background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%);
+            background: linear-gradient(135deg, rgba(20,20,20,0.85) 0%, rgba(5,5,5,0.92) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top-color: rgba(255, 255, 255, 0.2);
-            border-left-color: rgba(255, 255, 255, 0.15);
+            border-top-color: rgba(255, 255, 255, 0.25);
+            border-left-color: rgba(255, 255, 255, 0.18);
             border-radius: 24px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
             padding: 30px;
+            padding-top: 36px;
             display: flex;
             flex-direction: column;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.1s; /* Only for JS mouse move */
+            overflow: hidden;
         }
         /* Subtle inner noise/texture */
         .digital-id-card::before {
@@ -2673,26 +2880,76 @@
 
 
 
-        <div class="digital-id-perspective reveal active delay-2">
-            <div class="digital-id-card" id="digitalCard">
-                <div class="id-reflection" id="cardReflection"></div>
-                <div class="digital-id-header">
-                    <div class="id-chip"></div>
-                    <div class="id-logo">DEV_ACCESS</div>
-                </div>
-                
-                <div class="digital-id-image-wrapper">
-                    <img src="images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image">
-                </div>
-                
-                <div class="digital-id-info">
-                    <h4 class="digital-id-name">{{ $settings['name'] ?? 'ANGGA WIRANATA' }}</h4>
-                    <p class="digital-id-role glitch-role" data-text="{{ $settings['title'] ?? 'WEB DEVELOPER' }}">{{ $settings['title'] ?? 'WEB DEVELOPER' }}</p>
+        <!-- 🪢 Interactive Hanging Lanyard 3D ID Card -->
+        <div class="lanyard-system reveal active delay-2" id="lanyardSystem">
+            <!-- Top Ceiling Mount Bracket -->
+            <div class="lanyard-mount">
+                <div class="lanyard-mount-bracket"></div>
+                <div class="lanyard-mount-ring"></div>
+            </div>
+
+            <!-- Dynamic SVG Hanging Lanyard Ribbon Strap -->
+            <svg class="lanyard-strap-svg" id="lanyardSvg" viewBox="0 0 400 300" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="lanyardRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#18181b" />
+                        <stop offset="50%" stop-color="#27272a" />
+                        <stop offset="100%" stop-color="#09090b" />
+                    </linearGradient>
+                    <linearGradient id="lanyardStitchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0070f3" />
+                        <stop offset="50%" stop-color="#00dfd8" />
+                        <stop offset="100%" stop-color="#0070f3" />
+                    </linearGradient>
+                </defs>
+                <path id="lanyardPathLeft" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="22" stroke-linecap="round" />
+                <path id="lanyardPathLeftStitch" class="lanyard-path-stitch" d="" fill="none" stroke="url(#lanyardStitchGrad)" stroke-width="2" stroke-dasharray="5,4" />
+                <path id="lanyardPathRight" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="22" stroke-linecap="round" />
+                <path id="lanyardPathRightStitch" class="lanyard-path-stitch" d="" fill="none" stroke="url(#lanyardStitchGrad)" stroke-width="2" stroke-dasharray="5,4" />
+            </svg>
+
+            <!-- Draggable Hanging Card Assembly -->
+            <div class="lanyard-card-assembly" id="lanyardAssembly">
+                <!-- Hardware Metallic Clasp, Swivel & Ring -->
+                <div class="lanyard-hardware">
+                    <div class="lanyard-swivel"></div>
+                    <div class="lanyard-clip"></div>
+                    <div class="lanyard-ring"></div>
                 </div>
 
-                <div class="digital-id-footer">
-                    <div class="id-barcode"></div>
-                    <div class="id-access">LEVEL 05</div>
+                <!-- Drag hint indicator -->
+                <div class="lanyard-drag-hint" id="lanyardHint">
+                    <span class="hint-hand">✨</span>
+                    <span data-i18n="lanyard_hint">Tarik & Ayunkan Kartu / Drag me!</span>
+                </div>
+
+                <!-- Digital ID Card -->
+                <div class="digital-id-card" id="digitalCard">
+                    <!-- Badge punched slot hole for clip ring -->
+                    <div class="badge-slot-punch"></div>
+
+                    <!-- Holographic shimmer foil layer -->
+                    <div class="id-holo-foil" id="cardHoloFoil"></div>
+                    <div class="id-reflection" id="cardReflection"></div>
+                    
+                    <div class="digital-id-header">
+                        <div class="id-chip"></div>
+                        <div class="id-logo">DEV_ACCESS</div>
+                    </div>
+                    
+                    <div class="digital-id-image-wrapper">
+                        <img src="images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image" draggable="false">
+                    </div>
+                    
+                    <div class="digital-id-info">
+                        <h4 class="digital-id-name">{{ $settings['name'] ?? 'ANGGA WIRANATA' }}</h4>
+                        <p class="digital-id-role glitch-role" data-text="{{ $settings['title'] ?? 'WEB DEVELOPER' }}">{{ $settings['title'] ?? 'WEB DEVELOPER' }}</p>
+                    </div>
+
+                    <div class="digital-id-footer">
+                        <div class="id-barcode"></div>
+                        <div class="id-access">LEVEL 05</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3894,42 +4151,257 @@
                 }
             }
 
-            // 3D Card Hover Effect (Vercel/Stripe style)
-            const card = document.getElementById('digitalCard');
-            const reflection = document.getElementById('cardReflection');
-            
-            if(card) {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; // x position within the element
-                    const y = e.clientY - rect.top;  // y position within the element
+            // 🪢 Interactive Hanging 3D Lanyard ID Card with Real Physics
+            (function initLanyardPhysics() {
+                const system = document.getElementById('lanyardSystem');
+                const assembly = document.getElementById('lanyardAssembly');
+                const card = document.getElementById('digitalCard');
+                const hint = document.getElementById('lanyardHint');
+                const holoFoil = document.getElementById('cardHoloFoil');
+                const reflection = document.getElementById('cardReflection');
+                const svg = document.getElementById('lanyardSvg');
+                const pathLeft = document.getElementById('lanyardPathLeft');
+                const pathLeftStitch = document.getElementById('lanyardPathLeftStitch');
+                const pathRight = document.getElementById('lanyardPathRight');
+                const pathRightStitch = document.getElementById('lanyardPathRightStitch');
+
+                if (!system || !assembly || !card) return;
+
+                let sysRect = system.getBoundingClientRect();
+                let anchorX = sysRect.width / 2;
+                let anchorY = 10;
+                const restLength = 145; // Resting length of lanyard ribbon
+
+                let posX = anchorX;
+                let posY = anchorY + restLength;
+                let velX = 0;
+                let velY = 0;
+
+                let angleZ = 0;
+                let vAngleZ = 0;
+                let tiltX = 0;
+                let tiltY = 0;
+
+                let isDragging = false;
+                let dragStartClientX = 0;
+                let dragStartClientY = 0;
+                let cardStartPosX = 0;
+                let cardStartPosY = 0;
+                let lastPointerX = 0;
+                let lastPointerY = 0;
+                let pointerVelX = 0;
+                let pointerVelY = 0;
+                let lastTime = performance.now();
+                let hasInteracted = false;
+                let idleTimer = 0;
+
+                function updateDimensions() {
+                    sysRect = system.getBoundingClientRect();
+                    anchorX = sysRect.width / 2;
+                    anchorY = 10;
+                    if (svg) {
+                        svg.setAttribute('viewBox', `0 0 ${sysRect.width} ${sysRect.height}`);
+                    }
+                }
+                updateDimensions();
+                window.addEventListener('resize', updateDimensions);
+
+                function onPointerDown(e) {
+                    isDragging = true;
+                    assembly.classList.add('is-dragging');
                     
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -10; // Max rotation 10deg
-                    const rotateY = ((x - centerX) / centerX) * 10;
-                    
-                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                    
-                    // Update reflection position based on theme
-                    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-                    const reflectColor = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.15)';
-                    
-                    reflection.style.opacity = '1';
-                    reflection.style.background = `radial-gradient(circle at ${x}px ${y}px, ${reflectColor}, transparent 60%)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                    reflection.style.opacity = '0';
-                    card.style.transition = 'transform 0.5s ease-out';
-                });
-                
-                card.addEventListener('mouseenter', () => {
-                    card.style.transition = 'none'; // Remove transition when actively hovering for instant response
-                });
-            }
+                    if (!hasInteracted) {
+                        hasInteracted = true;
+                        if (hint) hint.classList.add('hidden');
+                    }
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+
+                    dragStartClientX = clientX;
+                    dragStartClientY = clientY;
+                    cardStartPosX = posX;
+                    cardStartPosY = posY;
+                    lastPointerX = clientX;
+                    lastPointerY = clientY;
+                    pointerVelX = 0;
+                    pointerVelY = 0;
+                    lastTime = performance.now();
+
+                    velX = 0;
+                    velY = 0;
+                    vAngleZ = 0;
+
+                    window.addEventListener('pointermove', onPointerMove, { passive: false });
+                    window.addEventListener('pointerup', onPointerUp);
+                    window.addEventListener('pointercancel', onPointerUp);
+                    window.addEventListener('touchmove', onTouchMove, { passive: false });
+                    window.addEventListener('touchend', onPointerUp);
+                }
+
+                function onPointerMove(e) {
+                    if (!isDragging) return;
+                    if (e.cancelable) e.preventDefault();
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+
+                    const dx = clientX - dragStartClientX;
+                    const dy = clientY - dragStartClientY;
+
+                    const now = performance.now();
+                    const dt = Math.max(1, now - lastTime);
+                    pointerVelX = ((clientX - lastPointerX) / dt) * 16;
+                    pointerVelY = ((clientY - lastPointerY) / dt) * 16;
+                    lastPointerX = clientX;
+                    lastPointerY = clientY;
+                    lastTime = now;
+
+                    let targetX = cardStartPosX + dx;
+                    let targetY = cardStartPosY + dy;
+
+                    // Elastic resistance if pushed above ceiling
+                    if (targetY < anchorY + 35) {
+                        targetY = anchorY + 35 + (targetY - (anchorY + 35)) * 0.2;
+                    }
+
+                    // Maximum distance constraint
+                    const distFromAnchor = Math.hypot(targetX - anchorX, targetY - anchorY);
+                    const maxDist = 340;
+                    if (distFromAnchor > maxDist) {
+                        const rad = Math.atan2(targetY - anchorY, targetX - anchorX);
+                        targetX = anchorX + Math.cos(rad) * maxDist;
+                        targetY = anchorY + Math.sin(rad) * maxDist;
+                    }
+
+                    posX = targetX;
+                    posY = targetY;
+
+                    // Dynamic tilt angles while actively dragging
+                    const deltaX = posX - anchorX;
+                    angleZ = (deltaX / 160) * 32;
+                    tiltY = Math.max(-28, Math.min(28, -pointerVelX * 2.2));
+                    tiltX = Math.max(-22, Math.min(22, pointerVelY * 2.2));
+                }
+
+                function onTouchMove(e) {
+                    if (!isDragging) return;
+                    if (e.cancelable) e.preventDefault();
+                    onPointerMove(e);
+                }
+
+                function onPointerUp() {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    assembly.classList.remove('is-dragging');
+
+                    // Impart throw momentum with damping limits
+                    velX = Math.max(-30, Math.min(30, pointerVelX * 1.3));
+                    velY = Math.max(-25, Math.min(25, pointerVelY * 1.3));
+                    vAngleZ = Math.max(-18, Math.min(18, pointerVelX * 0.8));
+
+                    window.removeEventListener('pointermove', onPointerMove);
+                    window.removeEventListener('pointerup', onPointerUp);
+                    window.removeEventListener('pointercancel', onPointerUp);
+                    window.removeEventListener('touchmove', onTouchMove);
+                    window.removeEventListener('touchend', onPointerUp);
+                }
+
+                assembly.addEventListener('pointerdown', onPointerDown);
+                assembly.addEventListener('touchstart', onPointerDown, { passive: false });
+
+                // 60fps Physics & Bezier Curve Animation Loop
+                function physicsLoop() {
+                    idleTimer += 0.02;
+
+                    if (!isDragging) {
+                        // Natural idle sway when undisturbed
+                        const isStationary = Math.hypot(posX - anchorX, posY - (anchorY + restLength)) < 4 && Math.abs(velX) < 0.15;
+                        const idleSwayX = isStationary ? Math.sin(idleTimer * 1.4) * 6 : 0;
+                        const idleSwayAngle = isStationary ? Math.sin(idleTimer * 1.4) * 2 : 0;
+
+                        const springK = 0.048; // Spring stiffness
+                        const damping = 0.935; // Air friction damping
+
+                        const restX = anchorX + idleSwayX;
+                        const restY = anchorY + restLength;
+
+                        const forceX = (restX - posX) * springK;
+                        const forceY = (restY - posY) * springK;
+
+                        velX = (velX + forceX) * damping;
+                        velY = (velY + forceY) * damping;
+
+                        posX += velX;
+                        posY += velY;
+
+                        // Pendulum angular spring
+                        const targetAngle = ((posX - anchorX) / 130) * 26 + idleSwayAngle;
+                        const angularForce = (targetAngle - angleZ) * 0.085;
+                        vAngleZ = (vAngleZ + angularForce) * 0.915;
+                        angleZ += vAngleZ;
+
+                        // Return 3D tilt to equilibrium
+                        tiltX += (-velY * 1.2 - tiltX) * 0.12;
+                        tiltY += (velX * 1.6 - tiltY) * 0.12;
+                    }
+
+                    // Render dynamic lanyard ribbon straps
+                    const clipX = posX;
+                    const clipY = posY + 16;
+
+                    const strapSpread = 38;
+                    const leftStartX = anchorX - strapSpread;
+                    const leftStartY = anchorY;
+                    const rightStartX = anchorX + strapSpread;
+                    const rightStartY = anchorY;
+
+                    // Elastic sag calculation for realistic cloth feel
+                    const currentDist = Math.hypot(clipX - anchorX, clipY - anchorY);
+                    const slack = Math.max(0, (restLength + 16 - currentDist) * 0.45);
+
+                    const ctrlXLeft = (leftStartX + clipX) / 2 - 12 - (velX * 0.25) - (slack * 0.3);
+                    const ctrlYLeft = (leftStartY + clipY) / 2 + 10 + slack;
+                    const dLeft = `M ${leftStartX.toFixed(1)} ${leftStartY.toFixed(1)} Q ${ctrlXLeft.toFixed(1)} ${ctrlYLeft.toFixed(1)} ${(clipX - 2).toFixed(1)} ${clipY.toFixed(1)}`;
+
+                    const ctrlXRight = (rightStartX + clipX) / 2 + 12 - (velX * 0.25) + (slack * 0.3);
+                    const ctrlYRight = (rightStartY + clipY) / 2 + 10 + slack;
+                    const dRight = `M ${rightStartX.toFixed(1)} ${rightStartY.toFixed(1)} Q ${ctrlXRight.toFixed(1)} ${ctrlYRight.toFixed(1)} ${(clipX + 2).toFixed(1)} ${clipY.toFixed(1)}`;
+
+                    if (pathLeft) pathLeft.setAttribute('d', dLeft);
+                    if (pathLeftStitch) pathLeftStitch.setAttribute('d', dLeft);
+                    if (pathRight) pathRight.setAttribute('d', dRight);
+                    if (pathRightStitch) pathRightStitch.setAttribute('d', dRight);
+
+                    // Apply 3D transform to assembly
+                    const transX = posX - anchorX;
+                    const transY = posY;
+
+                    assembly.style.transform = `translate3d(${transX.toFixed(2)}px, ${transY.toFixed(2)}px, 0) rotateZ(${angleZ.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) rotateX(${tiltX.toFixed(2)}deg)`;
+
+                    // Holographic foil sheen update
+                    if (holoFoil) {
+                        const totalTilt = Math.abs(tiltY) + Math.abs(tiltX) + Math.abs(angleZ * 0.5);
+                        const foilOpacity = Math.min(0.55, 0.15 + (totalTilt / 45));
+                        holoFoil.style.opacity = foilOpacity.toFixed(2);
+                        holoFoil.style.backgroundPosition = `${50 + tiltY * 2.2}% ${50 + tiltX * 2.2}%`;
+                    }
+
+                    // Reflection glare update
+                    if (reflection) {
+                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                        const reflectColor = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.18)';
+                        const glareX = 160 + tiltY * 4;
+                        const glareY = 240 - tiltX * 4;
+                        reflection.style.opacity = Math.min(1, (Math.abs(tiltY) + Math.abs(tiltX)) / 35).toFixed(2);
+                        reflection.style.background = `radial-gradient(circle at ${glareX}px ${glareY}px, ${reflectColor}, transparent 65%)`;
+                    }
+
+                    requestAnimationFrame(physicsLoop);
+                }
+
+                requestAnimationFrame(physicsLoop);
+            })();
 
             // Filters
             const filterBtns = document.querySelectorAll('.filter-btn');
@@ -4357,13 +4829,6 @@
                 "max-glare": 0.15,
                 scale: 1.02
             });
-            VanillaTilt.init(document.querySelectorAll(".digital-id-card"), {
-                max: 10,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.3,
-                scale: 1.03
-            });
         }
     </script>
 
@@ -4382,6 +4847,7 @@
             "hero_desc": { id: "Membangun aplikasi web yang efisien dan tangguh dengan estetika modern.", en: "Building efficient and robust web applications with modern aesthetics." },
             "hero_btn_work": { id: `Lihat Karya <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`, en: `View Work <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>` },
             "hero_btn_contact": { id: `Hubungi Saya <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`, en: `Contact Me <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>` },
+            "lanyard_hint": { id: "Tarik & Ayunkan Kartu / Drag me!", en: "Pull & Swing Card / Drag me!" },
 
             "tech_title_1": { id: "Ekosistem ", en: "Tech " },
             "tech_title_2": { id: "Teknologi", en: "Ecosystem" },

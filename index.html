@@ -15,37 +15,28 @@
     <link rel="canonical" href="https://anggawiranata.my.id/">
     <!-- Schema.org JSON-LD for Google -->
     <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "anggawiranata.my.id",
-        "alternateName": "Angga Wiranata Portfolio",
-        "url": "https://anggawiranata.my.id/"
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "ANGGA WIRANATA",
-          "jobTitle": "Web Developer",
-          "url": "https://anggawiranata.my.id/",
-          "image": "https://anggawiranata.my.id/images/profile.jpg",
-          "sameAs": [
-            "https://github.com/kyraaa-dev",
-            "https://www.linkedin.com/in/angga-wiranata-320837420"
-          ],
-          "description": "Professional Web Developer based in Indonesia, specializing in building modern web applications with Laravel, React, and modern CSS."
-        }
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "ANGGA WIRANATA",
+        "jobTitle": "Web Developer",
+        "url": "https://anggawiranata.my.id/",
+        "image": "https://anggawiranata.my.id/images/profile.jpg",
+        "sameAs": [
+          "https://github.com/kyraaa-dev",
+          "https://www.linkedin.com/in/angga-wiranata-320837420"
+        ],
+        "description": "Professional Web Developer based in Indonesia, specializing in building modern web applications with Laravel, React, and modern CSS."
       }
-    ]
+    }
     </script>
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://anggawiranata.my.id/">
-    <meta property="og:site_name" content="anggawiranata.my.id">
+    <meta property="og:site_name" content="Angga Wiranata Portfolio">
     <meta property="og:title" content="ANGGA WIRANATA | Web Developer">
     <meta property="og:description" content="Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React.">
     <meta property="og:image" content="https://anggawiranata.my.id/images/og-image.png">
@@ -57,16 +48,15 @@
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://anggawiranata.my.id/">
+    <meta property="twitter:url" content="http://localhost">
     <meta property="twitter:title" content="ANGGA WIRANATA | Web Developer">
     <meta property="twitter:description" content="Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React.">
     <meta property="twitter:image" content="https://anggawiranata.my.id/images/og-image.png">
 
     <!-- Favicon & Search Icons (Google SEO Optimized) -->
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg?v=2">
-    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png?v=2">
-    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png?v=2">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-192x192.png?v=2">
+    <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-192x192.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,8 +112,19 @@
             transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        /* Subtle Background Mesh / Glow Removed */
-
+        /* Subtle Background Mesh / Glow */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: var(--mesh-opacity);
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            transform: translateZ(0);
+        }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -251,7 +252,7 @@
         .navbar { 
             display: flex; align-items: center; justify-content: space-between; 
             padding: 20px 0; position: sticky; top: 0; z-index: 1002; 
-            background: var(--nav-bg); 
+            background: var(--nav-bg); backdrop-filter: saturate(180%) blur(12px); 
             border-bottom: 1px solid var(--border-color); 
             transition: background-color 0.5s ease, border-color 0.5s ease;
         }
@@ -283,22 +284,39 @@
         .theme-toggle {
             background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);
             width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer; transition: all 0.3s ease;
         }
         .theme-toggle:hover {
             background: var(--bg-surface-hover); border-color: var(--text-secondary);
         }
 
+        /* Scroll Progress Bar - Premium Neon */
+        .scroll-progress-container { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 3px; 
+            z-index: 9999; background: transparent; 
+        }
+                        .scroll-progress-bar::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background: #a7f3d0;
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--accent-color);
+        }
+        @keyframes shimmerBar {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-base); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; border: 2px solid var(--bg-base); }
-        ::-webkit-scrollbar-thumb:hover { background: #3291ff; }
-        
-        body.no-scroll { overflow: hidden !important; }
-        body.no-scroll::-webkit-scrollbar { display: none !important; }
-        body.no-scroll .back-to-top { display: none !important; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 10px; border: 2px solid var(--bg-base); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
         /* Glowing Interactive Grid Background */
         .grid-background {
@@ -308,13 +326,45 @@
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
             background-size: 50px 50px;
             opacity: 0.4;
-            -webkit-mask-image: radial-gradient(800px circle at 50vw 50vh, black 0%, transparent 100%);
-            mask-image: radial-gradient(800px circle at 50vw 50vh, black 0%, transparent 100%);
+            -webkit-mask-image: radial-gradient(500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
+            mask-image: radial-gradient(500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
         }
 
         /* Cinematic Preloader */
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #050505; z-index: 999999; display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+            transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
+        }
+        #matrixCanvas {
+            position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            display: block; z-index: 1; background: #000;
+        }
+        .preloader.fade-out {
+            opacity: 0; visibility: hidden;
+        }
+        .preloader::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #fff; z-index: 100; opacity: 0; pointer-events: none;
+            transition: opacity 0.2s ease-out;
+        }
+        .preloader.overload::after { opacity: 1; }
 
-        .preloader.slide-up { transform: translateY(-100%); }
+        .preloader-percentage-new {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 8vw; font-weight: 900; color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2); z-index: 10;
+            font-family: 'Inter', sans-serif; pointer-events: none;
+            transition: opacity 0.5s ease;
+            transform: translateZ(0);
+        }
+        .preloader-percentage-new::before {
+            content: attr(data-text); position: absolute; top: 0; left: 0; color: #fff;
+            width: var(--progress, 0%); overflow: hidden; white-space: nowrap;
+        }
+        .preloader.slide-up .preloader-percentage-new { opacity: 0; }
+        
         @keyframes fadeIn {
             to { opacity: 1; }
         }
@@ -368,7 +418,7 @@
             padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600;
             font-family: 'Inter', sans-serif; cursor: pointer; border: 1px solid var(--border-color);
             background: var(--bg-surface); color: var(--text-secondary);
-            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .voice-lang-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
         .voice-lang-btn.active { background: var(--accent-color); border-color: var(--accent-color); color: #000; font-weight: 700; }
@@ -377,7 +427,7 @@
             background: var(--accent-glow); border: 1px solid var(--accent-glow);
             color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
             padding: 12px 22px 12px 12px; border-radius: 100px; cursor: pointer;
-            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; letter-spacing: 0.3px;
+            transition: all 0.3s ease; backdrop-filter: blur(8px); letter-spacing: 0.3px;
         }
         .voice-btn:hover { background: var(--accent-glow); border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
         .voice-btn.playing { background: var(--accent-glow); border-color: var(--accent-color); box-shadow: 0 0 20px var(--accent-glow); }
@@ -412,29 +462,238 @@
         }
         .voice-label { color: var(--text-primary); transition: color 0.3s ease; }
 
+        /* 🪢 Interactive Hanging 3D Lanyard ID Card System */
+        .lanyard-system {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            height: 640px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            perspective: 1200px;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+
+        /* Top Mounting Bracket */
+        .lanyard-mount {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .lanyard-mount-bracket {
+            width: 100px;
+            height: 8px;
+            background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .lanyard-mount-ring {
+            width: 32px;
+            height: 12px;
+            border: 3px solid #6b7280;
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            margin-top: -1px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
+        }
+
+        /* SVG Dynamic Strap */
+        .lanyard-strap-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            overflow: visible;
+        }
+        .lanyard-path-band {
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+            transition: stroke 0.3s ease;
+        }
+        .lanyard-path-stitch {
+            opacity: 0.85;
+        }
+
+        /* Draggable Assembly (Card + Hardware) */
+        .lanyard-card-assembly {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 320px;
+            margin-left: -160px;
+            transform-origin: 160px 24px;
+            will-change: transform;
+            cursor: grab;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lanyard-card-assembly:active,
+        .lanyard-card-assembly.is-dragging {
+            cursor: grabbing;
+        }
+
+        /* Metallic Hardware Clasp */
+        .lanyard-hardware {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 25;
+            margin-bottom: -18px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+            pointer-events: none;
+        }
+        .lanyard-swivel {
+            width: 22px;
+            height: 10px;
+            background: linear-gradient(135deg, #f3f4f6 0%, #9ca3af 50%, #4b5563 100%);
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .lanyard-clip {
+            width: 16px;
+            height: 24px;
+            background: linear-gradient(90deg, #9ca3af 0%, #f9fafb 40%, #6b7280 80%, #374151 100%);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            margin-top: -2px;
+        }
+        .lanyard-clip::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 3px;
+            width: 10px;
+            height: 14px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 2px;
+        }
+        .lanyard-ring {
+            width: 20px;
+            height: 20px;
+            border: 3.5px solid #d1d5db;
+            border-radius: 50%;
+            margin-top: -6px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.4);
+            background: transparent;
+        }
+
+        /* Punched Hole in ID Card */
+        .badge-slot-punch {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.1);
+            z-index: 10;
+        }
+
+        /* Drag Hint Indicator */
+        .lanyard-drag-hint {
+            position: absolute;
+            top: -46px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 112, 243, 0.25);
+            border: 1px solid rgba(0, 112, 243, 0.5);
+            color: #60a5fa;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0, 112, 243, 0.35);
+            animation: hintBounce 2s ease-in-out infinite;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 30;
+        }
+        .lanyard-drag-hint.hidden {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-10px) scale(0.9);
+            pointer-events: none;
+        }
+        @keyframes hintBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+
+        /* Holographic Sheen / Rainbow Foil Overlay */
+        .id-holo-foil {
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            background: linear-gradient(135deg, 
+                transparent 15%, 
+                rgba(255, 0, 128, 0.18) 30%, 
+                rgba(0, 255, 255, 0.22) 48%, 
+                rgba(255, 230, 0, 0.18) 65%, 
+                transparent 85%
+            );
+            background-size: 200% 200%;
+            mix-blend-mode: color-dodge;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 6;
+            transition: opacity 0.2s ease;
+        }
+
         /* 3D Glass Access Card (Optimized & Premium) */
         .digital-id-perspective {
             perspective: 1000px;
             margin-bottom: 80px;
             position: relative;
         }
-        /* Static premium glow instead of animated pulse */
         
         .digital-id-card { will-change: transform;
             width: 320px;
             height: 480px;
-            background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(5,5,5,0.9) 100%);
+            background: linear-gradient(135deg, rgba(20,20,20,0.85) 0%, rgba(5,5,5,0.92) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top-color: rgba(255, 255, 255, 0.2);
-            border-left-color: rgba(255, 255, 255, 0.15);
+            border-top-color: rgba(255, 255, 255, 0.25);
+            border-left-color: rgba(255, 255, 255, 0.18);
             border-radius: 24px;
-            -webkit-box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.15);
             padding: 30px;
+            padding-top: 36px;
             display: flex;
             flex-direction: column;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.1s; /* Only for JS mouse move */
+            overflow: hidden;
         }
         /* Subtle inner noise/texture */
         .digital-id-card::before {
@@ -823,6 +1082,7 @@
             background: var(--bg-surface); border: 1px solid var(--border-color);
             border-radius: 16px; padding: 40px; position: relative; overflow: hidden;
             transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            backdrop-filter: blur(10px); transform: translateZ(0);
         }
         .service-card::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -852,8 +1112,9 @@
             background: rgba(0, 0, 0, 0.8); border: 1px solid var(--accent-color);
             color: var(--accent-color); font-size: 13px; font-weight: 600;
             font-family: 'Inter', sans-serif; padding: 12px 20px; border-radius: 100px;
-            cursor: pointer;            box-shadow: 0 0 20px var(--accent-glow);
-            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; letter-spacing: 0.5px;
+            cursor: pointer; backdrop-filter: blur(10px); transform: translateZ(0);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: all 0.3s ease; letter-spacing: 0.5px;
         }
         .replay-btn:hover {
             background: var(--accent-color); color: #000;
@@ -894,15 +1155,12 @@
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: #fff; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
             padding: 8px 16px; border-radius: 100px; cursor: pointer;
- transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(10px); transform: translateZ(0); transition: all 0.3s ease;
         }
         .replay-skip:hover { background: rgba(255,255,255,0.2); }
 
         /* Replay animation classes */
-        .replay-hiding .reveal {
-            will-change: transform, opacity;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; opacity: 0 !important; transform: translateY(30px) !important; transition: transform 0.5s ease, opacity 0.5s ease, background-color 0.5s ease !important; }
+        .replay-hiding .reveal { opacity: 0 !important; transform: translateY(30px) !important; transition: all 0.5s ease !important; }
         .replay-hiding .reveal.active { opacity: 0 !important; transform: translateY(30px) !important; }
         
         /* Orbit Ecosystem */
@@ -993,7 +1251,7 @@
         /* Project Modal */
         .project-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.6); z-index: 10000;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); z-index: 10000;
             display: flex; justify-content: center; align-items: center;
             opacity: 0; visibility: hidden; transition: all 0.4s ease; padding: 20px;
         }
@@ -1021,7 +1279,7 @@
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
             border-radius: 50%; background: var(--bg-surface); z-index: 9999; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(20px); border: 1px solid var(--border-color);
         }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -1081,7 +1339,7 @@
             transform: translateX(-50%);
             box-shadow: 0 0 10px rgba(0, 255, 249, 0.5);
             z-index: 2;
-            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .timeline-item:hover .timeline-dot {
             background: var(--accent-color);
@@ -1166,8 +1424,9 @@
             display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
         }
         .project-card {
-            will-change: transform, box-shadow; 
-            background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; 
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 16px; 
             padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; 
             transform-style: preserve-3d;
@@ -1244,7 +1503,8 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.02);
- -webkit-transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
             height: 100%;
             width: 100%;
             min-height: 380px;
@@ -1318,7 +1578,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px;
             color: var(--text-primary); font-family: var(--font-family); font-size: 16px;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); resize: vertical; box-sizing: border-box;
- }
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        }
         [data-theme="light"] .form-input { background: rgba(255, 255, 255, 0.7); border-color: rgba(0,0,0,0.1); }
         
         .form-input:focus { 
@@ -1340,7 +1601,7 @@
         }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         .social-links { display: flex; gap: 16px; }
-        .social-links a { color: var(--text-secondary); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; display: flex; }
+        .social-links a { color: var(--text-secondary); transition: all 0.3s ease; display: flex; }
         .social-links a:hover { color: var(--text-primary); transform: translateY(-2px); }
         
         .status-badge {
@@ -1483,7 +1744,7 @@
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
-            transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         .cert-link:hover {
             color: var(--accent-color);
@@ -1495,8 +1756,8 @@
             transform: translateX(4px) translateY(-4px);
         }
 
-        .footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 60px; background: var(--glass-bg); }
-        [data-theme="light"] .footer { background: #ffffff !important; border-top-color: rgba(0,0,0,0.05); }
+        .footer { padding: 40px 0; border-top: 1px solid var(--border-color); margin-top: 60px; background: var(--glass-bg); backdrop-filter: blur(10px); transform: translateZ(0); }
+        [data-theme="light"] .footer { background: #ffffff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-top-color: rgba(0,0,0,0.05); }
         .footer-content { display: flex; justify-content: space-between; align-items: center; }
         .footer-brand { display: flex; align-items: center; gap: 12px; }
         .footer-logo { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; font-size: 14px; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; box-shadow: 0 0 10px var(--accent-glow); letter-spacing: 2px; }
@@ -1512,13 +1773,12 @@
 
         /* Custom Cursor */
         @media (pointer: fine) {
-            
-            
+            body { cursor: none; }
+            a, button, .filter-btn, .logo { cursor: none !important; }
             
             .cursor-dot, .cursor-outline {
                 position: fixed; top: 0; left: 0; transform: translate3d(-50%, -50%, 0);
-                border-radius: 50%; z-index: 999999;
-            transform: translateZ(9999px); pointer-events: none;
+                border-radius: 50%; z-index: 999999; pointer-events: none;
                 will-change: transform; opacity: 0; transition: opacity 0.3s ease;
             }
             .cursor-dot { width: 8px; height: 8px; background-color: var(--text-primary); transition: background-color 0.5s ease; }
@@ -1635,7 +1895,7 @@
 
             .logo { flex: 1; min-width: 0; }
             .logo-text { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
-            .theme-toggle { width: 32px; height: 32px; min-width: 32px; padding: 0; display: flex; align-items: center; justify-content: center; }
+            .theme-toggle, .merdeka-toggle, .audio-toggle-btn { width: 32px; height: 32px; min-width: 32px; padding: 0; display: flex; align-items: center; justify-content: center; }
             .theme-toggle svg { width: 16px; height: 16px; }
             .lang-toggle { font-size: 11px; padding: 2px 6px; min-width: 30px; height: 32px; }
 
@@ -1684,8 +1944,7 @@
                 padding-right: 24px;
             }
             .project-grid::-webkit-scrollbar { display: none; }
-            .project-card {
-            will-change: transform, box-shadow; flex: 0 0 85% !important; scroll-snap-align: center; }
+            .project-card { flex: 0 0 85% !important; scroll-snap-align: center; }
 
             .contact-card { padding: 32px; flex-direction: column; align-items: stretch; gap: 32px; }
             .contact-content { max-width: 100%; min-width: 100%; }
@@ -1736,6 +1995,537 @@
             .digital-id-name {
                 font-size: 18px;
             }
+        }
+
+        /* ===== MERDEKA MODE ===== */
+        
+        /* Merdeka Color Overrides - Dark Mode */
+        [data-merdeka="true"] {
+            --accent-color: #DC1F26;
+            --accent-glow: rgba(220, 31, 38, 0.3);
+            --border-color: rgba(220, 31, 38, 0.15);
+            --border-hover: rgba(220, 31, 38, 0.3);
+        }
+        /* Merdeka Color Overrides - Light Mode */
+        [data-merdeka="true"][data-theme="light"] {
+            --accent-color: #DC1F26;
+            --accent-glow: rgba(220, 31, 38, 0.15);
+            --border-color: rgba(220, 31, 38, 0.12);
+            --border-hover: rgba(220, 31, 38, 0.25);
+        }
+
+        /* Merdeka Button Overrides */
+        [data-merdeka="true"] .btn-radar {
+            background: #DC1F26 !important;
+            border-color: #DC1F26 !important;
+            color: #ffffff !important;
+        }
+        [data-merdeka="true"] .btn-radar:hover {
+            background: rgba(220, 31, 38, 0.1) !important;
+            color: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-radar::after {
+            background: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-outline {
+            background: #ffffff !important;
+            color: #DC1F26 !important;
+            border-color: #DC1F26 !important;
+            font-weight: 700 !important;
+        }
+        [data-merdeka="true"] .btn-outline:hover {
+            background: #DC1F26 !important;
+            color: #ffffff !important;
+            border-color: #DC1F26 !important;
+            box-shadow: 0 4px 15px rgba(220, 31, 38, 0.4) !important;
+        }
+
+        /* Merdeka scroll progress bar override */
+        [data-merdeka="true"]         [data-merdeka="true"] .scroll-progress-bar::after {
+            background: #fff !important;
+            box-shadow: 0 0 6px #DC1F26, 0 0 12px #DC1F26 !important;
+        }
+
+        /* Merdeka Digital ID Card */
+        [data-merdeka="true"] .digital-id-card { will-change: transform;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 2px solid #DC1F26 !important;
+            box-shadow: 0 10px 30px rgba(220, 31, 38, 0.25), inset 0 0 20px rgba(220, 31, 38, 0.05) !important;
+        }
+        [data-merdeka="true"] .digital-id-name {
+            color: #DC1F26 !important;
+            text-shadow: none !important;
+        }
+        [data-merdeka="true"] .digital-id-role {
+            color: #333333 !important;
+            text-shadow: none !important;
+            animation: none !important;
+            font-weight: 800 !important;
+        }
+        [data-merdeka="true"] .id-logo {
+            color: #DC1F26 !important; 
+        }
+        [data-merdeka="true"] .id-barcode {
+            background: repeating-linear-gradient(90deg, #DC1F26, #DC1F26 2px, transparent 2px, transparent 4px, #DC1F26 4px, #DC1F26 5px, transparent 5px, transparent 8px) !important;
+            opacity: 0.9 !important;
+        }
+        [data-merdeka="true"] .id-access {
+            color: #ffffff !important;
+            background: #DC1F26 !important;
+            border-color: #DC1F26 !important;
+        }
+
+        /* Merdeka hero gradient */
+        [data-merdeka="true"] .hero-title {
+            background: linear-gradient(135deg, #DC1F26 0%, #ff6b6b 25%, #ffffff 50%, #ff6b6b 75%, #DC1F26 100%) !important;
+            background-size: 200% auto !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            animation: merdekaGradient 4s linear infinite !important;
+        }
+        @keyframes merdekaGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Merdeka badge glow on hero badge */
+        [data-merdeka="true"] .hero-badge::before {
+            background: #DC1F26 !important;
+            box-shadow: 0 0 10px #DC1F26 !important;
+        }
+
+        /* Merdeka Navbar */
+        [data-merdeka="true"] .navbar {
+            background: rgba(220, 31, 38, 0.95) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 4px 20px rgba(220, 31, 38, 0.3) !important;
+        }
+        .mobile-menu-toggle { display: none; }
+        .mobile-overlay { display: none; }
+        [data-merdeka="true"] .logo-text, 
+        [data-merdeka="true"] .nav-link,
+        [data-merdeka="true"] .theme-toggle,
+        [data-merdeka="true"] .audio-toggle-btn,
+        [data-merdeka="true"] .lang-toggle {
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+        }
+        [data-merdeka="true"] .theme-toggle:hover,
+        [data-merdeka="true"] .audio-toggle-btn:hover,
+        [data-merdeka="true"] .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: #ffffff !important;
+        }
+        [data-merdeka="true"] .nav-link:hover {
+            color: #ffcccc !important;
+        }
+
+        /* Merdeka collab button override */
+        [data-merdeka="true"] .btn-collab {
+            border-color: rgba(255, 255, 255, 0.8) !important;
+            background: #DC1F26 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(220, 31, 38, 0.4) !important;
+        }
+        [data-merdeka="true"] .btn-collab * {
+            color: #ffffff !important;
+        }
+        [data-merdeka="true"] .btn-collab:hover {
+            background: #ffffff !important;
+            border-color: #DC1F26 !important;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(220, 31, 38, 0.4) !important;
+            color: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-collab:hover * {
+            color: #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-collab .collab-dot {
+            background: #ffffff !important;
+            box-shadow: 0 0 6px #ffffff !important;
+        }
+        [data-merdeka="true"] .btn-collab:hover .collab-dot {
+            background: #DC1F26 !important;
+            box-shadow: 0 0 6px #DC1F26 !important;
+        }
+        [data-merdeka="true"] .btn-collab::after {
+            border-color: rgba(220, 31, 38, 0.6) !important;
+        }
+
+        /* ===== MERDEKA GARUDA WATERMARK ===== */
+        [data-merdeka="true"] body::after {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/90/National_emblem_of_Indonesia_Garuda_Pancasila.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: -1;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            opacity: 0.15;
+            filter: none;
+        }
+
+
+
+        /* ===== MERDEKA TOGGLE BUTTON ===== */
+        .merdeka-toggle {
+            position: relative;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 4px;
+            overflow: hidden;
+        }
+        .merdeka-toggle:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--text-secondary);
+            transform: scale(1.1);
+        }
+        .merdeka-toggle .merdeka-flag {
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .merdeka-toggle:hover .merdeka-flag {
+            animation: flagWave 0.6s ease-in-out;
+        }
+        .merdeka-flag-red {
+            width: 100%;
+            height: 50%;
+            background: #DC1F26;
+        }
+        .merdeka-flag-white {
+            width: 100%;
+            height: 50%;
+            background: #ffffff;
+        }
+        [data-theme="light"] .merdeka-flag-white {
+            background: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        [data-merdeka="true"] .merdeka-toggle .merdeka-flag {
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+        /* Active state glow */
+        [data-merdeka="true"] .merdeka-toggle {
+            border-color: #DC1F26;
+            box-shadow: 0 0 12px rgba(220, 31, 38, 0.4), 0 0 24px rgba(220, 31, 38, 0.15);
+            background: rgba(220, 31, 38, 0.08);
+        }
+        [data-merdeka="true"] .merdeka-toggle::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            border: 1px solid rgba(220, 31, 38, 0.4);
+            animation: merdekaRing 2s ease-out infinite;
+            pointer-events: none;
+        }
+        @keyframes merdekaRing {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes flagWave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* ===== CONFETTI CANVAS ===== */
+        #merdekaConfettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1002;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        [data-merdeka="true"] #merdekaConfettiCanvas {
+            opacity: 1;
+        }
+
+        /* ===== HUT RI BADGE ===== */
+        .hut-ri-badge {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 998;
+            opacity: 0;
+            transform: scale(0.5) rotate(-15deg);
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        [data-merdeka="true"] .hut-ri-badge {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            pointer-events: auto;
+        }
+        .hut-ri-badge-img {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.25));
+            animation: badgeFloat 3s ease-in-out infinite;
+            background-color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 31, 38, 0.3);
+        }
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes badgeRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== BATIK ORNAMENT ===== */
+        .batik-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        [data-merdeka="true"] .batik-overlay {
+            opacity: 1;
+        }
+
+        /* Batik corner ornaments */
+        .batik-corner {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            pointer-events: none;
+            z-index: 997;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        [data-merdeka="true"] .batik-corner {
+            opacity: 0.15;
+        }
+        .batik-corner-tl {
+            top: 0;
+            left: 0;
+        }
+        .batik-corner-tr {
+            top: 0;
+            right: 0;
+            transform: scaleX(-1);
+        }
+        .batik-corner-bl {
+            bottom: 0;
+            left: 0;
+            transform: scaleY(-1);
+        }
+        .batik-corner-br {
+            bottom: 0;
+            right: 0;
+            transform: scale(-1, -1);
+        }
+
+        /* Merdeka toast notification */
+        .merdeka-toast {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            z-index: 10000;
+            padding: 14px 28px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .merdeka-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .merdeka-toast-on {
+            background: linear-gradient(135deg, rgba(220, 31, 38, 0.9), rgba(180, 20, 25, 0.95));
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(220, 31, 38, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+            backdrop-filter: blur(12px);
+        }
+        .merdeka-toast-off {
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        [data-theme="light"] .merdeka-toast-off {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* Batik section divider */
+        .batik-divider {
+            width: 100%;
+            height: 30px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            background-repeat: repeat-x;
+            background-size: 60px 30px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30' viewBox='0 0 60 30'%3E%3Cpath d='M30 0 Q35 15 30 30 Q25 15 30 0Z' fill='%23DC1F26' opacity='0.15'/%3E%3Cpath d='M15 0 Q20 15 15 30 Q10 15 15 0Z' fill='%23DC1F26' opacity='0.1'/%3E%3Cpath d='M45 0 Q50 15 45 30 Q40 15 45 0Z' fill='%23DC1F26' opacity='0.1'/%3E%3Ccircle cx='30' cy='15' r='3' fill='%23DC1F26' opacity='0.12'/%3E%3Ccircle cx='0' cy='15' r='2' fill='%23DC1F26' opacity='0.08'/%3E%3Ccircle cx='60' cy='15' r='2' fill='%23DC1F26' opacity='0.08'/%3E%3C/svg%3E");
+        }
+        [data-merdeka="true"] .batik-divider {
+            opacity: 1;
+        }
+
+        /* Merdeka Countdown */
+        .merdeka-countdown {
+            position: fixed;
+            bottom: 30px;
+            left: 24px;
+            z-index: 998;
+            background: rgba(220, 31, 38, 0.1);
+            backdrop-filter: blur(10px); transform: translateZ(0);
+            -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
+            border: 1px solid rgba(220, 31, 38, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px -10px rgba(220, 31, 38, 0.3);
+            color: var(--text-primary);
+        }
+        .audio-toggle-btn {
+            background: none; border: 1px solid var(--border-color); color: var(--text-primary);
+            font-size: 14px; cursor: pointer; border-radius: 8px; padding: 4px 8px;
+            align-items: center; justify-content: center;
+            transition: all 0.3s ease; min-width: 40px; margin-right: 4px;
+            display: none;
+        }
+        [data-merdeka="true"] .audio-toggle-btn {
+            display: flex;
+        }
+        .audio-toggle-btn:hover {
+            background: var(--bg-surface-hover);
+        }
+        .countdown-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #DC1F26;
+        }
+        [data-theme="dark"] .countdown-title {
+            color: #ff6b6b;
+        }
+        .countdown-timer {
+            display: flex;
+            gap: 12px;
+        }
+        .cd-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .cd-val {
+            font-size: 24px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+        .cd-lbl {
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .merdeka-celebrate {
+            font-size: 18px;
+            font-weight: 800;
+            color: #DC1F26;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            animation: pulseText 2s infinite;
+        }
+        [data-theme="dark"] .merdeka-celebrate {
+            color: #ff6b6b;
+        }
+        @keyframes pulseText {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* Merdeka banner ribbon */
+        .merdeka-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 10001;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background: linear-gradient(90deg, #DC1F26 50%, #ffffff 50%);
+            background-size: 40px 4px;
+        }
+        [data-merdeka="true"] .merdeka-banner {
+            opacity: 1;
+        }
+
+        @media (max-width: 640px) {
+            .merdeka-countdown {
+                bottom: 80px;
+                left: 16px;
+                padding: 10px 16px;
+            }
+            .cd-val { font-size: 20px; }
+            .cd-lbl { font-size: 8px; }
+
+            .hut-ri-badge-img {
+                height: 80px;
+                padding: 6px 10px;
+                border-radius: 10px;
+            }
+            .hut-ri-badge { bottom: 80px; right: 16px; }
+            .batik-corner { width: 80px; height: 80px; }
         }
 
 
@@ -1847,78 +2637,6 @@
             }
         })();
     </script>
-
-    <style>
-        .preloader-new {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg-base);
-            z-index: 999999;
-            transform: translateZ(9999px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, visibility;
-        }
-        .preloader-new.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .preloader-logo-aw {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: pulseAwLogo 1.5s ease-in-out infinite alternate;
-            will-change: opacity, transform, filter;
-        }
-        .preloader-logo-aw img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            /* Make it white in dark mode */
-            filter: brightness(0) invert(1);
-        }
-        [data-theme="light"] .preloader-logo-aw img {
-            /* Keep original color in light mode */
-            filter: none;
-        }
-        @keyframes pulseAwLogo {
-            0% { 
-                transform: scale(0.9);
-                opacity: 0.6; 
-                filter: drop-shadow(0 0 5px transparent);
-            }
-            100% { 
-                transform: scale(1.1);
-                opacity: 1; 
-                filter: drop-shadow(0 0 20px var(--accent-color));
-            }
-        }
-        .preloader-bar-bg {
-            width: 150px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-        .preloader-bar-fill {
-            position: absolute;
-            top: 0; left: 0; height: 100%; width: 100%;
-            background: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-color);
-            transform-origin: left;
-            
-            will-change: transform;
-        }
-
-
-        </style>
 <style>
         /* ULTRA PERFORMANCE MOBILE OVERRIDES */
         @media (max-width: 768px) {
@@ -2004,30 +2722,30 @@
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
-    <!-- Lightweight Modern Preloader -->
-    <div id="preloaderNew" class="preloader-new">
-        <div class="preloader-logo-aw"><img src="images/logo.png" alt="Logo AW"></div>
-        <div class="preloader-bar-bg">
-            <div id="preloaderFill" class="preloader-bar-fill"></div>
-        </div>
+    <!-- The Matrix Code Rain Preloader -->
+    <div class="preloader" id="preloader">
+        <canvas id="matrixCanvas"></canvas>
+        <div class="preloader-percentage-new" id="preloaderPerc" data-text="0%">0%</div>
     </div>
     
     <!-- Interactive Grid Background -->
     <div class="grid-background" id="gridBackground"></div>
 
-    <!-- Scroll Progress Bar Removed -->
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+            </div>
 
     <!-- Custom Cursor Elements -->
     
     <div class="cursor-dot" id="cursorDot" style="opacity: 0;"></div>
     <div class="cursor-outline" id="cursorOutline" style="opacity: 0;"></div>
 
-    <div class="bg-mesh" style="display: none;"></div>
+    <div class="bg-mesh"></div>
     
     <header class="navbar container reveal active">
         <div class="logo">
             <div class="logo-img-wrapper">
-                <img loading="lazy" src="images/logo.png" alt="Logo" class="logo-img">
+                <img src="images/logo.png" alt="Logo" class="logo-img">
             </div>
             <span class="logo-text">ANGGA WIRANATA</span>
         </div>
@@ -2052,11 +2770,20 @@
             </a>
 
             <!-- Language Toggle -->
-            <button class="lang-toggle" id="langToggle" aria-label="Toggle Language" style="background: none; border: 1px solid var(--border-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 4px 8px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; min-width: 40px; margin-right: 4px;">
+            <button class="lang-toggle" id="langToggle" aria-label="Toggle Language" style="background: none; border: 1px solid var(--border-color); color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; border-radius: 8px; padding: 4px 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; min-width: 40px; margin-right: 4px;">
                 ID
             </button>
 
+            <!-- Merdeka Audio Toggle -->
+            <button class="audio-toggle-btn" id="merdekaAudioToggle" aria-label="Toggle Audio" title="Mute/Unmute Music">🔊</button>
 
+            <!-- Merdeka Mode Toggle 🇮🇩 -->
+            <button class="merdeka-toggle" id="merdekaToggle" aria-label="Toggle Merdeka Mode" title="🇮🇩 Merdeka Mode">
+                <div class="merdeka-flag">
+                    <div class="merdeka-flag-red"></div>
+                    <div class="merdeka-flag-white"></div>
+                </div>
+            </button>
 
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
                 <!-- Sun Icon (shows in dark mode) -->
@@ -2153,26 +2880,76 @@
 
 
 
-        <div class="digital-id-perspective reveal active delay-2">
-            <div class="digital-id-card" id="digitalCard">
-                <div class="id-reflection" id="cardReflection"></div>
-                <div class="digital-id-header">
-                    <div class="id-chip"></div>
-                    <div class="id-logo">DEV_ACCESS</div>
-                </div>
-                
-                <div class="digital-id-image-wrapper">
-                    <img loading="lazy" src="images/profile.jpg" alt="ANGGA WIRANATA" class="digital-id-image">
-                </div>
-                
-                <div class="digital-id-info">
-                    <h4 class="digital-id-name">ANGGA WIRANATA</h4>
-                    <p class="digital-id-role glitch-role" data-text="Web Developer">Web Developer</p>
+        <!-- 🪢 Interactive Hanging Lanyard 3D ID Card -->
+        <div class="lanyard-system reveal active delay-2" id="lanyardSystem">
+            <!-- Top Ceiling Mount Bracket -->
+            <div class="lanyard-mount">
+                <div class="lanyard-mount-bracket"></div>
+                <div class="lanyard-mount-ring"></div>
+            </div>
+
+            <!-- Dynamic SVG Hanging Lanyard Ribbon Strap -->
+            <svg class="lanyard-strap-svg" id="lanyardSvg" viewBox="0 0 400 300" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="lanyardRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#18181b" />
+                        <stop offset="50%" stop-color="#27272a" />
+                        <stop offset="100%" stop-color="#09090b" />
+                    </linearGradient>
+                    <linearGradient id="lanyardStitchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0070f3" />
+                        <stop offset="50%" stop-color="#00dfd8" />
+                        <stop offset="100%" stop-color="#0070f3" />
+                    </linearGradient>
+                </defs>
+                <path id="lanyardPathLeft" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="22" stroke-linecap="round" />
+                <path id="lanyardPathLeftStitch" class="lanyard-path-stitch" d="" fill="none" stroke="url(#lanyardStitchGrad)" stroke-width="2" stroke-dasharray="5,4" />
+                <path id="lanyardPathRight" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="22" stroke-linecap="round" />
+                <path id="lanyardPathRightStitch" class="lanyard-path-stitch" d="" fill="none" stroke="url(#lanyardStitchGrad)" stroke-width="2" stroke-dasharray="5,4" />
+            </svg>
+
+            <!-- Draggable Hanging Card Assembly -->
+            <div class="lanyard-card-assembly" id="lanyardAssembly">
+                <!-- Hardware Metallic Clasp, Swivel & Ring -->
+                <div class="lanyard-hardware">
+                    <div class="lanyard-swivel"></div>
+                    <div class="lanyard-clip"></div>
+                    <div class="lanyard-ring"></div>
                 </div>
 
-                <div class="digital-id-footer">
-                    <div class="id-barcode"></div>
-                    <div class="id-access">LEVEL 05</div>
+                <!-- Drag hint indicator -->
+                <div class="lanyard-drag-hint" id="lanyardHint">
+                    <span class="hint-hand">✨</span>
+                    <span data-i18n="lanyard_hint">Tarik & Ayunkan Kartu / Drag me!</span>
+                </div>
+
+                <!-- Digital ID Card -->
+                <div class="digital-id-card" id="digitalCard">
+                    <!-- Badge punched slot hole for clip ring -->
+                    <div class="badge-slot-punch"></div>
+
+                    <!-- Holographic shimmer foil layer -->
+                    <div class="id-holo-foil" id="cardHoloFoil"></div>
+                    <div class="id-reflection" id="cardReflection"></div>
+                    
+                    <div class="digital-id-header">
+                        <div class="id-chip"></div>
+                        <div class="id-logo">DEV_ACCESS</div>
+                    </div>
+                    
+                    <div class="digital-id-image-wrapper">
+                        <img src="images/profile.jpg" alt="ANGGA WIRANATA" class="digital-id-image" draggable="false">
+                    </div>
+                    
+                    <div class="digital-id-info">
+                        <h4 class="digital-id-name">ANGGA WIRANATA</h4>
+                        <p class="digital-id-role glitch-role" data-text="Web Developer">Web Developer</p>
+                    </div>
+
+                    <div class="digital-id-footer">
+                        <div class="id-barcode"></div>
+                        <div class="id-access">LEVEL 05</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2546,9 +3323,280 @@
                     }
 
 
+        
+        /* ===== MINIMALIST TECH ECOSYSTEM ===== */
+        .tech-ecosystem { padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 2; }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: organicFloat 6s ease-in-out infinite;
+            animation-delay: var(--delay);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        [data-theme="light"] .tech-pill {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+            color: var(--text-primary);
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-5px) scale(1.05);
+            color: var(--text-primary);
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
+            animation-play-state: paused;
+        }
+
+        .tech-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 5px var(--accent-glow));
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-pill:hover .tech-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes organicFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid { gap: 12px; padding: 0 10px; }
+            .tech-pill { padding: 12px 20px; font-size: 14px; }
+            .tech-pill:hover { transform: none; animation-play-state: running; }
+            
+            /* Disable blur on mobile for performance */
+            .tech-pill { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
+            [data-theme="light"] .tech-pill { background: #f8f9fa; }
+        }
+
+        /* Fix mobile spacing for experience and footer */
+        @media (max-width: 768px) {
+            
+            .footer {
+                padding-bottom: 20px !important;
+            }
+        }
+
+        
+        /* ===== MINIMALIST AESTHETIC FOOTER ===== */
+        .footer { position: relative; margin-top: 20px; padding: 20px 0;
+            background: transparent;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 2;
+        }
+
+        [data-theme="light"] .footer {
+            border-top-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-color);
+            background: var(--accent-glow);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-tagline .accent-precision {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 20px !important;
+            }
+            .footer-brand { flex-direction: column; gap: 8px; }
+            .footer-socials { margin-top: 10px; }
+            .footer::before { width: 80%; }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix horizontal overflow on entire mobile page */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix navbar disappearing on scroll due to overflow-x: hidden */
+            .navbar {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1002;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px); transform: translateZ(0);
+                -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            }
+            body {
+                padding-top: 80px; /* Offset for fixed navbar */
+            }
+        }
+
+        /* Header Layout Polish */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px !important;
+                background: var(--nav-bg) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+            }
+            .logo {
+                gap: 8px !important;
+                flex: none !important;
+            }
+            .logo-img-wrapper {
+                height: 32px !important;
+            }
+            .logo-text {
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                letter-spacing: -0.5px !important;
+            }
+            .nav-actions {
+                flex: 1 !important;
+                justify-content: flex-end !important;
+                gap: 8px !important;
+            }
+            .lang-toggle {
+                padding: 6px 12px !important;
+                border-radius: 8px !important;
+                font-size: 13px !important;
+                border: 1px solid var(--border-color) !important;
+            }
+            .theme-toggle {
+                padding: 8px !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .theme-toggle svg {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            .mobile-menu-toggle {
+                margin-left: 4px !important;
+            }
+            .hamburger-lines {
+                width: 24px !important;
+            }
+            .availability-badge {
+                margin-right: 4px !important;
+            }
+        }
         </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img loading="lazy" src="images/project-korpri.png" alt="SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img src="images/project-korpri.png" alt="SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2566,7 +3614,7 @@
                                                             <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
                                                     </div>
                     </div>
-                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2613,11 +3661,282 @@
                     }
 
 
+        
+        /* ===== MINIMALIST TECH ECOSYSTEM ===== */
+        .tech-ecosystem { padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 2; }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: organicFloat 6s ease-in-out infinite;
+            animation-delay: var(--delay);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        [data-theme="light"] .tech-pill {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+            color: var(--text-primary);
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-5px) scale(1.05);
+            color: var(--text-primary);
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
+            animation-play-state: paused;
+        }
+
+        .tech-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 5px var(--accent-glow));
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-pill:hover .tech-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes organicFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid { gap: 12px; padding: 0 10px; }
+            .tech-pill { padding: 12px 20px; font-size: 14px; }
+            .tech-pill:hover { transform: none; animation-play-state: running; }
+            
+            /* Disable blur on mobile for performance */
+            .tech-pill { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
+            [data-theme="light"] .tech-pill { background: #f8f9fa; }
+        }
+
+        /* Fix mobile spacing for experience and footer */
+        @media (max-width: 768px) {
+            
+            .footer {
+                padding-bottom: 20px !important;
+            }
+        }
+
+        
+        /* ===== MINIMALIST AESTHETIC FOOTER ===== */
+        .footer { position: relative; margin-top: 20px; padding: 20px 0;
+            background: transparent;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 2;
+        }
+
+        [data-theme="light"] .footer {
+            border-top-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-color);
+            background: var(--accent-glow);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-tagline .accent-precision {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 20px !important;
+            }
+            .footer-brand { flex-direction: column; gap: 8px; }
+            .footer-socials { margin-top: 10px; }
+            .footer::before { width: 80%; }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix horizontal overflow on entire mobile page */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix navbar disappearing on scroll due to overflow-x: hidden */
+            .navbar {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1002;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px); transform: translateZ(0);
+                -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            }
+            body {
+                padding-top: 80px; /* Offset for fixed navbar */
+            }
+        }
+
+        /* Header Layout Polish */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px !important;
+                background: var(--nav-bg) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+            }
+            .logo {
+                gap: 8px !important;
+                flex: none !important;
+            }
+            .logo-img-wrapper {
+                height: 32px !important;
+            }
+            .logo-text {
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                letter-spacing: -0.5px !important;
+            }
+            .nav-actions {
+                flex: 1 !important;
+                justify-content: flex-end !important;
+                gap: 8px !important;
+            }
+            .lang-toggle {
+                padding: 6px 12px !important;
+                border-radius: 8px !important;
+                font-size: 13px !important;
+                border: 1px solid var(--border-color) !important;
+            }
+            .theme-toggle {
+                padding: 8px !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .theme-toggle svg {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            .mobile-menu-toggle {
+                margin-left: 4px !important;
+            }
+            .hamburger-lines {
+                width: 24px !important;
+            }
+            .availability-badge {
+                margin-right: 4px !important;
+            }
+        }
         </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img loading="lazy" src="images/duta-korpri.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img src="images/duta-korpri.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
-                                            <img loading="lazy" src="images/duta-korpri-2026.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                            <img src="images/duta-korpri-2026.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
@@ -2634,7 +3953,7 @@
                                                             <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
                                                     </div>
                     </div>
-                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                    <a href="#"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2681,9 +4000,280 @@
                     }
 
 
+        
+        /* ===== MINIMALIST TECH ECOSYSTEM ===== */
+        .tech-ecosystem { padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 2; }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: organicFloat 6s ease-in-out infinite;
+            animation-delay: var(--delay);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        [data-theme="light"] .tech-pill {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+            color: var(--text-primary);
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-5px) scale(1.05);
+            color: var(--text-primary);
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
+            animation-play-state: paused;
+        }
+
+        .tech-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 5px var(--accent-glow));
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-pill:hover .tech-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes organicFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid { gap: 12px; padding: 0 10px; }
+            .tech-pill { padding: 12px 20px; font-size: 14px; }
+            .tech-pill:hover { transform: none; animation-play-state: running; }
+            
+            /* Disable blur on mobile for performance */
+            .tech-pill { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
+            [data-theme="light"] .tech-pill { background: #f8f9fa; }
+        }
+
+        /* Fix mobile spacing for experience and footer */
+        @media (max-width: 768px) {
+            
+            .footer {
+                padding-bottom: 20px !important;
+            }
+        }
+
+        
+        /* ===== MINIMALIST AESTHETIC FOOTER ===== */
+        .footer { position: relative; margin-top: 20px; padding: 20px 0;
+            background: transparent;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 2;
+        }
+
+        [data-theme="light"] .footer {
+            border-top-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-color);
+            background: var(--accent-glow);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-tagline .accent-precision {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 20px !important;
+            }
+            .footer-brand { flex-direction: column; gap: 8px; }
+            .footer-socials { margin-top: 10px; }
+            .footer::before { width: 80%; }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix horizontal overflow on entire mobile page */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix navbar disappearing on scroll due to overflow-x: hidden */
+            .navbar {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1002;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px); transform: translateZ(0);
+                -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            }
+            body {
+                padding-top: 80px; /* Offset for fixed navbar */
+            }
+        }
+
+        /* Header Layout Polish */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px !important;
+                background: var(--nav-bg) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+            }
+            .logo {
+                gap: 8px !important;
+                flex: none !important;
+            }
+            .logo-img-wrapper {
+                height: 32px !important;
+            }
+            .logo-text {
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                letter-spacing: -0.5px !important;
+            }
+            .nav-actions {
+                flex: 1 !important;
+                justify-content: flex-end !important;
+                gap: 8px !important;
+            }
+            .lang-toggle {
+                padding: 6px 12px !important;
+                border-radius: 8px !important;
+                font-size: 13px !important;
+                border: 1px solid var(--border-color) !important;
+            }
+            .theme-toggle {
+                padding: 8px !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .theme-toggle svg {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            .mobile-menu-toggle {
+                margin-left: 4px !important;
+            }
+            .hamburger-lines {
+                width: 24px !important;
+            }
+            .availability-badge {
+                margin-right: 4px !important;
+            }
+        }
         </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img loading="lazy" src="images/kasflow-app.png" alt="KasFlow - Personal Cash Flow Manager Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img src="images/kasflow-app.png" alt="KasFlow - Personal Cash Flow Manager Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2698,13 +4288,13 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
-                                                            <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                                                            <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                     Klik untuk Demo
                                 </a>
                                                     </div>
                     </div>
-                    <a href="https://kyraaa-dev.github.io/kasflow-app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                    <a href="https://kyraaa-dev.github.io/kasflow-app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -2751,9 +4341,280 @@
                     }
 
 
+        
+        /* ===== MINIMALIST TECH ECOSYSTEM ===== */
+        .tech-ecosystem { padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 2; }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .tech-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: default;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: organicFloat 6s ease-in-out infinite;
+            animation-delay: var(--delay);
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        [data-theme="light"] .tech-pill {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+            color: var(--text-primary);
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-5px) scale(1.05);
+            color: var(--text-primary);
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
+            animation-play-state: paused;
+        }
+
+        .tech-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 5px var(--accent-glow));
+            transition: transform 0.3s ease;
+        }
+        
+        .tech-pill:hover .tech-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes organicFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid { gap: 12px; padding: 0 10px; }
+            .tech-pill { padding: 12px 20px; font-size: 14px; }
+            .tech-pill:hover { transform: none; animation-play-state: running; }
+            
+            /* Disable blur on mobile for performance */
+            .tech-pill { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
+            [data-theme="light"] .tech-pill { background: #f8f9fa; }
+        }
+
+        /* Fix mobile spacing for experience and footer */
+        @media (max-width: 768px) {
+            
+            .footer {
+                padding-bottom: 20px !important;
+            }
+        }
+
+        
+        /* ===== MINIMALIST AESTHETIC FOOTER ===== */
+        .footer { position: relative; margin-top: 20px; padding: 20px 0;
+            background: transparent;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 2;
+        }
+
+        [data-theme="light"] .footer {
+            border-top-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-color);
+            background: var(--accent-glow);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-tagline .accent-precision {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-socials a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 20px !important;
+            }
+            .footer-brand { flex-direction: column; gap: 8px; }
+            .footer-socials { margin-top: 10px; }
+            .footer::before { width: 80%; }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix horizontal overflow on entire mobile page */
+            html, body {
+                overflow-x: hidden !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Fix navbar disappearing on scroll due to overflow-x: hidden */
+            .navbar {
+                position: fixed !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                z-index: 1002;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px); transform: translateZ(0);
+                -webkit-backdrop-filter: blur(10px); transform: translateZ(0);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            }
+            body {
+                padding-top: 80px; /* Offset for fixed navbar */
+            }
+        }
+
+        /* Header Layout Polish */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px !important;
+                background: var(--nav-bg) !important;
+                border-bottom: 1px solid var(--border-color) !important;
+            }
+            .logo {
+                gap: 8px !important;
+                flex: none !important;
+            }
+            .logo-img-wrapper {
+                height: 32px !important;
+            }
+            .logo-text {
+                font-size: 16px !important;
+                font-weight: 800 !important;
+                letter-spacing: -0.5px !important;
+            }
+            .nav-actions {
+                flex: 1 !important;
+                justify-content: flex-end !important;
+                gap: 8px !important;
+            }
+            .lang-toggle {
+                padding: 6px 12px !important;
+                border-radius: 8px !important;
+                font-size: 13px !important;
+                border: 1px solid var(--border-color) !important;
+            }
+            .theme-toggle {
+                padding: 8px !important;
+                border: 1px solid var(--border-color) !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .theme-toggle svg {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            .mobile-menu-toggle {
+                margin-left: 4px !important;
+            }
+            .hamburger-lines {
+                width: 24px !important;
+            }
+            .availability-badge {
+                margin-right: 4px !important;
+            }
+        }
         </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                                        <img loading="lazy" src="images/project-travel.png" alt="Jelajahin - AI Travel Assistant &amp; Itinerary Planner Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img src="images/project-travel.png" alt="Jelajahin - AI Travel Assistant &amp; Itinerary Planner Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -2768,13 +4629,13 @@
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
-                                                            <a href="https://project-travel-six.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                                                            <a href="https://project-travel-six.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                     Klik untuk Demo
                                 </a>
                                                     </div>
                     </div>
-                    <a href="https://project-travel-six.vercel.app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                    <a href="https://project-travel-six.vercel.app/"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -3094,11 +4955,12 @@
         }
         </style>
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                    <img loading="lazy" src="images/project-emutz.png" alt="E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                        <img src="images/project-emutz.png" alt="E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
-                </div>
+                                    </div>
                 
                 <div class="project-footer" style="padding-top: 0; border-top: none;">
                     <div>
@@ -3106,20 +4968,20 @@
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
                             <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
                                 <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
-                                <span data-i18n="proj_comp">Selesai</span>
+                                <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
-                            <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
-                                Lihat Proyek
-                            </a>
-                        </div>
+                                                            <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                                    Lihat Project
+                                </a>
+                                                    </div>
                     </div>
-                    <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;">
+                    <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan"  target="_blank" rel="noopener noreferrer"  class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
             </div>
-        </div>
+                    </div>
     </section>
 
     <!-- Certificates Section -->
@@ -3135,7 +4997,7 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-image-wrapper">
-                    <img loading="lazy" src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
+                    <img src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">PT Revolusi Cita Edukasi</div>
@@ -3253,6 +5115,118 @@
         </div>
     </div>
 
+    <!-- ===== MERDEKA MODE ELEMENTS ===== -->
+    
+    <!-- Merdeka Confetti Canvas -->
+    <canvas id="merdekaConfettiCanvas"></canvas>
+
+    <!-- Merdeka Countdown -->
+    <div class="merdeka-countdown" id="merdekaCountdown">
+        <div class="countdown-title" id="cdTitle">Menuju HUT RI ke-81</div>
+        <div class="countdown-timer" id="cdTimer">
+            <div class="cd-item"><span class="cd-val" id="cdDays">00</span><span class="cd-lbl">Hari</span></div>
+            <div class="cd-item"><span class="cd-val" id="cdHours">00</span><span class="cd-lbl">Jam</span></div>
+            <div class="cd-item"><span class="cd-val" id="cdMins">00</span><span class="cd-lbl">Mnt</span></div>
+            <div class="cd-item"><span class="cd-val" id="cdSecs">00</span><span class="cd-lbl">Dtk</span></div>
+        </div>
+        <div class="merdeka-celebrate" id="cdCelebrate">
+            MERDEKA! 🇮🇩
+        </div>
+    </div>
+
+    <!-- Merdeka Banner Ribbon (top bar) -->
+    <div class="merdeka-banner" id="merdekaBanner"></div>
+
+    <!-- Batik Corner Ornaments -->
+    <svg class="batik-corner batik-corner-tl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="batikGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#DC1F26;stop-opacity:0.6"/>
+                <stop offset="100%" style="stop-color:#DC1F26;stop-opacity:0.1"/>
+            </linearGradient>
+        </defs>
+        <!-- Kawung-inspired pattern -->
+        <circle cx="20" cy="20" r="18" fill="none" stroke="url(#batikGrad)" stroke-width="1"/>
+        <circle cx="20" cy="20" r="8" fill="url(#batikGrad)" opacity="0.3"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="url(#batikGrad)" stroke-width="0.8"/>
+        <circle cx="50" cy="15" r="5" fill="url(#batikGrad)" opacity="0.2"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="url(#batikGrad)" stroke-width="0.8"/>
+        <circle cx="15" cy="50" r="5" fill="url(#batikGrad)" opacity="0.2"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="url(#batikGrad)" stroke-width="0.6"/>
+        <circle cx="42" cy="42" r="4" fill="url(#batikGrad)" opacity="0.15"/>
+        <!-- Connecting lines (parang-style) -->
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="url(#batikGrad)" stroke-width="0.8" opacity="0.5"/>
+        <path d="M 5 35 Q 30 60 55 40 Q 80 20 105 45" fill="none" stroke="url(#batikGrad)" stroke-width="0.6" opacity="0.3"/>
+        <path d="M 35 5 Q 60 30 85 10" fill="none" stroke="url(#batikGrad)" stroke-width="0.6" opacity="0.3"/>
+        <!-- Diamond accents -->
+        <rect x="70" cy="30" width="6" height="6" transform="rotate(45, 73, 33)" fill="url(#batikGrad)" opacity="0.2"/>
+        <rect x="30" cy="70" width="6" height="6" transform="rotate(45, 33, 73)" fill="url(#batikGrad)" opacity="0.2"/>
+        <!-- Mega mendung inspired curves -->
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80 Q 100 65 120 80" fill="none" stroke="url(#batikGrad)" stroke-width="0.5" opacity="0.25"/>
+        <path d="M 80 0 Q 65 20 80 40 Q 95 60 80 80" fill="none" stroke="url(#batikGrad)" stroke-width="0.5" opacity="0.25"/>
+    </svg>
+    <svg class="batik-corner batik-corner-tr" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#DC1F26" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="#DC1F26" opacity="0.15"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="50" cy="15" r="5" fill="#DC1F26" opacity="0.1"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="15" cy="50" r="5" fill="#DC1F26" opacity="0.1"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="#DC1F26" stroke-width="0.6" opacity="0.2"/>
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80 Q 100 65 120 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+        <path d="M 80 0 Q 65 20 80 40 Q 95 60 80 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+    </svg>
+    <svg class="batik-corner batik-corner-bl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#DC1F26" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="#DC1F26" opacity="0.15"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="#DC1F26" stroke-width="0.6" opacity="0.2"/>
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+    </svg>
+    <svg class="batik-corner batik-corner-br" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#DC1F26" stroke-width="1" opacity="0.3"/>
+        <circle cx="20" cy="20" r="8" fill="#DC1F26" opacity="0.15"/>
+        <circle cx="50" cy="15" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="15" cy="50" r="12" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="42" cy="42" r="10" fill="none" stroke="#DC1F26" stroke-width="0.6" opacity="0.2"/>
+        <path d="M 5 5 Q 30 30 55 10 Q 80 -10 105 15" fill="none" stroke="#DC1F26" stroke-width="0.8" opacity="0.25"/>
+        <path d="M 0 80 Q 20 65 40 80 Q 60 95 80 80" fill="none" stroke="#DC1F26" stroke-width="0.5" opacity="0.15"/>
+    </svg>
+
+    <!-- Batik background overlay -->
+    <div class="batik-overlay" id="batikOverlay">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="batikPattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+                    <!-- Kawung motif -->
+                    <ellipse cx="40" cy="40" rx="15" ry="15" fill="none" stroke="#DC1F26" stroke-width="0.4" opacity="0.06"/>
+                    <ellipse cx="40" cy="40" rx="6" ry="6" fill="#DC1F26" opacity="0.03"/>
+                    <ellipse cx="40" cy="20" rx="8" ry="12" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <ellipse cx="40" cy="60" rx="8" ry="12" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <ellipse cx="20" cy="40" rx="12" ry="8" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <ellipse cx="60" cy="40" rx="12" ry="8" fill="none" stroke="#DC1F26" stroke-width="0.3" opacity="0.04"/>
+                    <!-- Connecting dots -->
+                    <circle cx="0" cy="0" r="2" fill="#DC1F26" opacity="0.04"/>
+                    <circle cx="80" cy="0" r="2" fill="#DC1F26" opacity="0.04"/>
+                    <circle cx="0" cy="80" r="2" fill="#DC1F26" opacity="0.04"/>
+                    <circle cx="80" cy="80" r="2" fill="#DC1F26" opacity="0.04"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#batikPattern)"/>
+        </svg>
+    </div>
+
+    <!-- HUT RI ke-81 Badge -->
+    <div class="hut-ri-badge" id="hutRiBadge">
+        <img src="images/81.png" alt="HUT RI 81" class="hut-ri-badge-img">
+    </div>
+
+    <!-- Merdeka Toast Notification -->
+    <div class="merdeka-toast" id="merdekaToast"></div>
+
     <!-- Back to Top Progress Ring -->
     <div class="back-to-top" id="backToTop">
         <svg class="progress-ring" width="50" height="50">
@@ -3268,74 +5242,109 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Lightweight Preloader Logic
-            const preloaderNew = document.getElementById('preloaderNew');
-            const preloaderFill = document.getElementById('preloaderFill');
+            // Matrix Preloader Logic
+            const preloader = document.getElementById('preloader');
+            const preloaderPerc = document.getElementById('preloaderPerc');
+            const canvas = document.getElementById('matrixCanvas');
             
-            if (preloaderNew && preloaderFill) {
-                let progress = 0;
-                let lastTime = 0;
+            if (preloader && canvas) {
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
                 
-                function simulateLoading(timestamp) {
-                    if (!lastTime) lastTime = timestamp;
-                    const deltaTime = timestamp - lastTime;
-                    
-                    // Progress faster for smoother UX (takes ~0.8 seconds to load)
-                    if (deltaTime > 16) {
-                        progress += Math.random() * 4 + 2; 
-                        lastTime = timestamp;
-                    }
-                    
-                    if (progress > 100) progress = 100;
-                    
-                    preloaderFill.style.transform = `scaleX(${progress / 100})`;
-                    
-                    if (progress < 100) {
-                        window.requestAnimationFrame(simulateLoading);
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
+                const fontSize = 14;
+                const columns = canvas.width / fontSize;
+                const drops = Array.from({length: columns}).fill(1);
+                
+                let isOverloaded = false;
+                
+                function drawMatrix() {
+                    if (isOverloaded) {
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
                     } else {
-                        setTimeout(() => {
-                            preloaderNew.classList.add('fade-out');
-                            setTimeout(() => {
-                                preloaderNew.style.display = 'none';
-                                document.querySelectorAll('.reveal').forEach((el, index) => {
-                                    setTimeout(() => { el.classList.add('active'); }, index * 80);
-                                });
-                            }, 600); 
-                        }, 200); 
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    }
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    ctx.fillStyle = isOverloaded ? '#fff' : 'var(--accent-color)'; // Emerald Green
+                    ctx.font = fontSize + 'px monospace';
+                    
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                        
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        drops[i]++;
+                    }
+                    if (!preloader.classList.contains('fade-out') || isOverloaded) {
+                        requestAnimationFrame(drawMatrix);
                     }
                 }
-                window.requestAnimationFrame(simulateLoading);
-            } else {
-                document.querySelectorAll('.reveal').forEach((el, index) => {
-                    setTimeout(() => { el.classList.add('active'); }, index * 80);
+                drawMatrix();
+                
+                window.addEventListener('resize', () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
                 });
+
+                let progress = 0;
+                
+                // Cinematic Cyberpunk Startup Sound (Web Audio API Synthesizer)
+                function playStartupSound() {
+                    // Sound removed per user request
+                }
+
+                setTimeout(() => {
+                    const interval = setInterval(() => {
+                        progress += Math.floor(Math.random() * 5) + 2; 
+                        
+                        if (progress >= 100) {
+                            progress = 100;
+                            clearInterval(interval);
+                            
+                            if (preloaderPerc) preloaderPerc.style.display = 'none';
+                            
+                            isOverloaded = true;
+                            preloader.classList.add('overload');
+                            
+                            setTimeout(() => {
+                                preloader.classList.add('fade-out');
+                                setTimeout(() => {
+                                    preloader.style.display = 'none';
+                                    document.querySelectorAll('.reveal').forEach((el, index) => {
+                                        setTimeout(() => { el.classList.add('active'); }, index * 100);
+                                    });
+                                }, 1500);
+                            }, 500);
+                        }
+                        if(preloaderPerc && progress < 100) {
+                            preloaderPerc.innerText = progress + '%';
+                            preloaderPerc.setAttribute('data-text', progress + '%');
+                            preloaderPerc.style.setProperty('--progress', progress + '%');
+                        }
+                    }, 40);
+                }, 500);
             }
 
             // Global Mouse Tracker for Grid Background
             const gridBg = document.getElementById('gridBackground');
-// Mouse tracking for grid disabled for performance
+            window.addEventListener('mousemove', (e) => {
+                if (gridBg) {
+                    gridBg.style.setProperty('--mouse-x', `${e.clientX}px`);
+                    gridBg.style.setProperty('--mouse-y', `${e.clientY}px`);
+                }
+            });
 
             // Scroll Progress Bar Logic
-            let isScrolling = false;
-            let docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            window.addEventListener('resize', () => {
-                docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            }, { passive: true });
-
-            const bar = document.getElementById('scrollBar');
-            const barReverse = document.getElementById('scrollBarReverse');
             window.addEventListener('scroll', () => {
-                if (!isScrolling) {
-                    window.requestAnimationFrame(() => {
-                        const winScroll = window.scrollY || document.documentElement.scrollTop;
-                        const scrolled = docHeight > 0 ? (winScroll / docHeight) * 100 : 0;
-                        if (bar) bar.style.width = `${scrolled}%`;
-                        if (barReverse) barReverse.style.width = `${scrolled}%`;
-                        isScrolling = false;
-                    });
-                    isScrolling = true;
-                }
-            }, { passive: true });
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('scrollBar').style.width = scrolled + "%";
+            });
 
             // Custom Cursor Logic
             const cursorDot = document.getElementById('cursorDot');
@@ -3407,13 +5416,7 @@
                 mobileMenuToggle.classList.toggle('active');
                 document.documentElement.style.overflow = isActive ? 'hidden' : '';
                 document.body.style.overflow = isActive ? 'hidden' : '';
-                if (isActive) {
-                    document.body.classList.add('no-scroll');
-                    if (backToTopBtn) backToTopBtn.style.display = 'none';
-                } else {
-                    document.body.classList.remove('no-scroll');
-                    if (backToTopBtn) backToTopBtn.style.display = '';
-                }
+                if (backToTopBtn) backToTopBtn.style.display = isActive ? 'none' : '';
             });
 
             const mobileLinks = mobileOverlay.querySelectorAll('.mobile-link');
@@ -3423,7 +5426,6 @@
                     mobileMenuToggle.classList.remove('active');
                     document.documentElement.style.overflow = '';
                     document.body.style.overflow = '';
-                    document.body.classList.remove('no-scroll');
                     if (backToTopBtn) backToTopBtn.style.display = '';
                 });
             });
@@ -3438,6 +5440,13 @@
             // Project Card Flashlight Effect (Vercel Style)
             const pCards = document.querySelectorAll('.project-card');
             pCards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
             });
 
             // Set initial toggle icons based on the theme already set in <head>
@@ -3481,22 +5490,257 @@
                 }
             }
 
-            // 3D Card Hover Effect (Vercel/Stripe style)
-            const card = document.getElementById('digitalCard');
-            const reflection = document.getElementById('cardReflection');
-            
-            if(card) {
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                    reflection.style.opacity = '0';
-                    card.style.transition = 'transform 0.5s ease-out';
-                });
-                
-                card.addEventListener('mouseenter', () => {
-                    card.style.transition = 'none'; // Remove transition when actively hovering for instant response
-                });
-            }
+            // 🪢 Interactive Hanging 3D Lanyard ID Card with Real Physics
+            (function initLanyardPhysics() {
+                const system = document.getElementById('lanyardSystem');
+                const assembly = document.getElementById('lanyardAssembly');
+                const card = document.getElementById('digitalCard');
+                const hint = document.getElementById('lanyardHint');
+                const holoFoil = document.getElementById('cardHoloFoil');
+                const reflection = document.getElementById('cardReflection');
+                const svg = document.getElementById('lanyardSvg');
+                const pathLeft = document.getElementById('lanyardPathLeft');
+                const pathLeftStitch = document.getElementById('lanyardPathLeftStitch');
+                const pathRight = document.getElementById('lanyardPathRight');
+                const pathRightStitch = document.getElementById('lanyardPathRightStitch');
+
+                if (!system || !assembly || !card) return;
+
+                let sysRect = system.getBoundingClientRect();
+                let anchorX = sysRect.width / 2;
+                let anchorY = 10;
+                const restLength = 145; // Resting length of lanyard ribbon
+
+                let posX = anchorX;
+                let posY = anchorY + restLength;
+                let velX = 0;
+                let velY = 0;
+
+                let angleZ = 0;
+                let vAngleZ = 0;
+                let tiltX = 0;
+                let tiltY = 0;
+
+                let isDragging = false;
+                let dragStartClientX = 0;
+                let dragStartClientY = 0;
+                let cardStartPosX = 0;
+                let cardStartPosY = 0;
+                let lastPointerX = 0;
+                let lastPointerY = 0;
+                let pointerVelX = 0;
+                let pointerVelY = 0;
+                let lastTime = performance.now();
+                let hasInteracted = false;
+                let idleTimer = 0;
+
+                function updateDimensions() {
+                    sysRect = system.getBoundingClientRect();
+                    anchorX = sysRect.width / 2;
+                    anchorY = 10;
+                    if (svg) {
+                        svg.setAttribute('viewBox', `0 0 ${sysRect.width} ${sysRect.height}`);
+                    }
+                }
+                updateDimensions();
+                window.addEventListener('resize', updateDimensions);
+
+                function onPointerDown(e) {
+                    isDragging = true;
+                    assembly.classList.add('is-dragging');
+                    
+                    if (!hasInteracted) {
+                        hasInteracted = true;
+                        if (hint) hint.classList.add('hidden');
+                    }
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+
+                    dragStartClientX = clientX;
+                    dragStartClientY = clientY;
+                    cardStartPosX = posX;
+                    cardStartPosY = posY;
+                    lastPointerX = clientX;
+                    lastPointerY = clientY;
+                    pointerVelX = 0;
+                    pointerVelY = 0;
+                    lastTime = performance.now();
+
+                    velX = 0;
+                    velY = 0;
+                    vAngleZ = 0;
+
+                    window.addEventListener('pointermove', onPointerMove, { passive: false });
+                    window.addEventListener('pointerup', onPointerUp);
+                    window.addEventListener('pointercancel', onPointerUp);
+                    window.addEventListener('touchmove', onTouchMove, { passive: false });
+                    window.addEventListener('touchend', onPointerUp);
+                }
+
+                function onPointerMove(e) {
+                    if (!isDragging) return;
+                    if (e.cancelable) e.preventDefault();
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+
+                    const dx = clientX - dragStartClientX;
+                    const dy = clientY - dragStartClientY;
+
+                    const now = performance.now();
+                    const dt = Math.max(1, now - lastTime);
+                    pointerVelX = ((clientX - lastPointerX) / dt) * 16;
+                    pointerVelY = ((clientY - lastPointerY) / dt) * 16;
+                    lastPointerX = clientX;
+                    lastPointerY = clientY;
+                    lastTime = now;
+
+                    let targetX = cardStartPosX + dx;
+                    let targetY = cardStartPosY + dy;
+
+                    // Elastic resistance if pushed above ceiling
+                    if (targetY < anchorY + 35) {
+                        targetY = anchorY + 35 + (targetY - (anchorY + 35)) * 0.2;
+                    }
+
+                    // Maximum distance constraint
+                    const distFromAnchor = Math.hypot(targetX - anchorX, targetY - anchorY);
+                    const maxDist = 340;
+                    if (distFromAnchor > maxDist) {
+                        const rad = Math.atan2(targetY - anchorY, targetX - anchorX);
+                        targetX = anchorX + Math.cos(rad) * maxDist;
+                        targetY = anchorY + Math.sin(rad) * maxDist;
+                    }
+
+                    posX = targetX;
+                    posY = targetY;
+
+                    // Dynamic tilt angles while actively dragging
+                    const deltaX = posX - anchorX;
+                    angleZ = (deltaX / 160) * 32;
+                    tiltY = Math.max(-28, Math.min(28, -pointerVelX * 2.2));
+                    tiltX = Math.max(-22, Math.min(22, pointerVelY * 2.2));
+                }
+
+                function onTouchMove(e) {
+                    if (!isDragging) return;
+                    if (e.cancelable) e.preventDefault();
+                    onPointerMove(e);
+                }
+
+                function onPointerUp() {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    assembly.classList.remove('is-dragging');
+
+                    // Impart throw momentum with damping limits
+                    velX = Math.max(-30, Math.min(30, pointerVelX * 1.3));
+                    velY = Math.max(-25, Math.min(25, pointerVelY * 1.3));
+                    vAngleZ = Math.max(-18, Math.min(18, pointerVelX * 0.8));
+
+                    window.removeEventListener('pointermove', onPointerMove);
+                    window.removeEventListener('pointerup', onPointerUp);
+                    window.removeEventListener('pointercancel', onPointerUp);
+                    window.removeEventListener('touchmove', onTouchMove);
+                    window.removeEventListener('touchend', onPointerUp);
+                }
+
+                assembly.addEventListener('pointerdown', onPointerDown);
+                assembly.addEventListener('touchstart', onPointerDown, { passive: false });
+
+                // 60fps Physics & Bezier Curve Animation Loop
+                function physicsLoop() {
+                    idleTimer += 0.02;
+
+                    if (!isDragging) {
+                        // Natural idle sway when undisturbed
+                        const isStationary = Math.hypot(posX - anchorX, posY - (anchorY + restLength)) < 4 && Math.abs(velX) < 0.15;
+                        const idleSwayX = isStationary ? Math.sin(idleTimer * 1.4) * 6 : 0;
+                        const idleSwayAngle = isStationary ? Math.sin(idleTimer * 1.4) * 2 : 0;
+
+                        const springK = 0.048; // Spring stiffness
+                        const damping = 0.935; // Air friction damping
+
+                        const restX = anchorX + idleSwayX;
+                        const restY = anchorY + restLength;
+
+                        const forceX = (restX - posX) * springK;
+                        const forceY = (restY - posY) * springK;
+
+                        velX = (velX + forceX) * damping;
+                        velY = (velY + forceY) * damping;
+
+                        posX += velX;
+                        posY += velY;
+
+                        // Pendulum angular spring
+                        const targetAngle = ((posX - anchorX) / 130) * 26 + idleSwayAngle;
+                        const angularForce = (targetAngle - angleZ) * 0.085;
+                        vAngleZ = (vAngleZ + angularForce) * 0.915;
+                        angleZ += vAngleZ;
+
+                        // Return 3D tilt to equilibrium
+                        tiltX += (-velY * 1.2 - tiltX) * 0.12;
+                        tiltY += (velX * 1.6 - tiltY) * 0.12;
+                    }
+
+                    // Render dynamic lanyard ribbon straps
+                    const clipX = posX;
+                    const clipY = posY + 16;
+
+                    const strapSpread = 38;
+                    const leftStartX = anchorX - strapSpread;
+                    const leftStartY = anchorY;
+                    const rightStartX = anchorX + strapSpread;
+                    const rightStartY = anchorY;
+
+                    // Elastic sag calculation for realistic cloth feel
+                    const currentDist = Math.hypot(clipX - anchorX, clipY - anchorY);
+                    const slack = Math.max(0, (restLength + 16 - currentDist) * 0.45);
+
+                    const ctrlXLeft = (leftStartX + clipX) / 2 - 12 - (velX * 0.25) - (slack * 0.3);
+                    const ctrlYLeft = (leftStartY + clipY) / 2 + 10 + slack;
+                    const dLeft = `M ${leftStartX.toFixed(1)} ${leftStartY.toFixed(1)} Q ${ctrlXLeft.toFixed(1)} ${ctrlYLeft.toFixed(1)} ${(clipX - 2).toFixed(1)} ${clipY.toFixed(1)}`;
+
+                    const ctrlXRight = (rightStartX + clipX) / 2 + 12 - (velX * 0.25) + (slack * 0.3);
+                    const ctrlYRight = (rightStartY + clipY) / 2 + 10 + slack;
+                    const dRight = `M ${rightStartX.toFixed(1)} ${rightStartY.toFixed(1)} Q ${ctrlXRight.toFixed(1)} ${ctrlYRight.toFixed(1)} ${(clipX + 2).toFixed(1)} ${clipY.toFixed(1)}`;
+
+                    if (pathLeft) pathLeft.setAttribute('d', dLeft);
+                    if (pathLeftStitch) pathLeftStitch.setAttribute('d', dLeft);
+                    if (pathRight) pathRight.setAttribute('d', dRight);
+                    if (pathRightStitch) pathRightStitch.setAttribute('d', dRight);
+
+                    // Apply 3D transform to assembly
+                    const transX = posX - anchorX;
+                    const transY = posY;
+
+                    assembly.style.transform = `translate3d(${transX.toFixed(2)}px, ${transY.toFixed(2)}px, 0) rotateZ(${angleZ.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) rotateX(${tiltX.toFixed(2)}deg)`;
+
+                    // Holographic foil sheen update
+                    if (holoFoil) {
+                        const totalTilt = Math.abs(tiltY) + Math.abs(tiltX) + Math.abs(angleZ * 0.5);
+                        const foilOpacity = Math.min(0.55, 0.15 + (totalTilt / 45));
+                        holoFoil.style.opacity = foilOpacity.toFixed(2);
+                        holoFoil.style.backgroundPosition = `${50 + tiltY * 2.2}% ${50 + tiltX * 2.2}%`;
+                    }
+
+                    // Reflection glare update
+                    if (reflection) {
+                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                        const reflectColor = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.18)';
+                        const glareX = 160 + tiltY * 4;
+                        const glareY = 240 - tiltX * 4;
+                        reflection.style.opacity = Math.min(1, (Math.abs(tiltY) + Math.abs(tiltX)) / 35).toFixed(2);
+                        reflection.style.background = `radial-gradient(circle at ${glareX}px ${glareY}px, ${reflectColor}, transparent 65%)`;
+                    }
+
+                    requestAnimationFrame(physicsLoop);
+                }
+
+                requestAnimationFrame(physicsLoop);
+            })();
 
             // Filters
             const filterBtns = document.querySelectorAll('.filter-btn');
@@ -3684,6 +5928,12 @@
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mouseenter', () => {
                     btn.style.transition = 'none';
+                });
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
                 });
                 btn.addEventListener('mouseleave', () => {
                     btn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, color 0.3s ease';
@@ -3918,13 +6168,6 @@
                 "max-glare": 0.15,
                 scale: 1.02
             });
-            VanillaTilt.init(document.querySelectorAll(".digital-id-card"), {
-                max: 10,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.3,
-                scale: 1.03
-            });
         }
     </script>
 
@@ -3943,6 +6186,7 @@
             "hero_desc": { id: "Membangun aplikasi web yang efisien dan tangguh dengan estetika modern.", en: "Building efficient and robust web applications with modern aesthetics." },
             "hero_btn_work": { id: `Lihat Karya <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>`, en: `View Work <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>` },
             "hero_btn_contact": { id: `Hubungi Saya <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`, en: `Contact Me <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>` },
+            "lanyard_hint": { id: "Tarik & Ayunkan Kartu / Drag me!", en: "Pull & Swing Card / Drag me!" },
 
             "tech_title_1": { id: "Ekosistem ", en: "Tech " },
             "tech_title_2": { id: "Teknologi", en: "Ecosystem" },
@@ -4251,6 +6495,377 @@
             }
         }
 
+    </script>
+
+    <!-- ===== MERDEKA MODE JAVASCRIPT ===== -->
+    <script>
+    (function() {
+        'use strict';
+
+        const html = document.documentElement;
+        const merdekaToggle = document.getElementById('merdekaToggle');
+        const confettiCanvas = document.getElementById('merdekaConfettiCanvas');
+        const merdekaToast = document.getElementById('merdekaToast');
+        
+        if (!merdekaToggle || !confettiCanvas) return;
+
+        // ===== AUDIO LOGIC =====
+        const merdekaAudio = new Audio('/audio/indonesia-raya.mp3');
+        merdekaAudio.loop = true;
+        merdekaAudio.volume = 0.4;
+        let isAudioPlaying = false;
+        const audioToggleBtn = document.getElementById('merdekaAudioToggle');
+        
+        if (audioToggleBtn) {
+            audioToggleBtn.addEventListener('click', () => {
+                if (isAudioPlaying) {
+                    merdekaAudio.pause();
+                    audioToggleBtn.innerText = '🔇';
+                    isAudioPlaying = false;
+                } else {
+                    merdekaAudio.play().catch(e => console.log('Audio play failed', e));
+                    audioToggleBtn.innerText = '🔊';
+                    isAudioPlaying = true;
+                }
+            });
+        }
+
+        const ctx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let confettiAnimId = null;
+        let isMerdekaActive = false;
+
+        // Countdown Logic
+        const cdDays = document.getElementById('cdDays');
+        const cdHours = document.getElementById('cdHours');
+        const cdMins = document.getElementById('cdMins');
+        const cdSecs = document.getElementById('cdSecs');
+        const cdTimer = document.getElementById('cdTimer');
+        const cdTitle = document.getElementById('cdTitle');
+        const cdCelebrate = document.getElementById('cdCelebrate');
+
+        const targetDate = new Date('August 17, 2026 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance <= 0) {
+                if(cdTimer) cdTimer.style.display = 'none';
+                if(cdTitle) cdTitle.style.display = 'none';
+                if(cdCelebrate) cdCelebrate.style.display = 'flex';
+                
+                // Automatically activate Merdeka Mode when countdown hits zero
+                if (html.getAttribute('data-merdeka') !== 'true') {
+                    // Only auto-activate if the user hasn't explicitly turned it off
+                    if (localStorage.getItem('merdekaMode') !== 'false' && typeof setMerdekaMode === 'function') {
+                        setMerdekaMode(true);
+                    }
+                }
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (cdDays) cdDays.innerText = days.toString().padStart(2, '0');
+            if (cdHours) cdHours.innerText = hours.toString().padStart(2, '0');
+            if (cdMins) cdMins.innerText = minutes.toString().padStart(2, '0');
+            if (cdSecs) cdSecs.innerText = seconds.toString().padStart(2, '0');
+        }
+
+        // ===== CONFETTI SYSTEM =====
+        function resizeConfettiCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        resizeConfettiCanvas();
+        window.addEventListener('resize', resizeConfettiCanvas);
+
+        class ConfettiPiece {
+            constructor(x, y, isBurst = false) {
+                this.x = x || Math.random() * confettiCanvas.width;
+                this.y = y || (isBurst ? confettiCanvas.height * 0.4 : -10);
+                this.size = Math.random() * 6 + 3;
+                this.speedY = isBurst ? (Math.random() * -12 - 4) : (Math.random() * 1.5 + 0.5);
+                this.speedX = isBurst ? (Math.random() * 10 - 5) : (Math.random() * 2 - 1);
+                this.gravity = isBurst ? 0.15 : 0;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 8;
+                this.opacity = isBurst ? 1 : (Math.random() * 0.5 + 0.3);
+                this.color = Math.random() > 0.5 ? '#DC1F26' : '#ffffff';
+                this.shape = Math.floor(Math.random() * 3); // 0: rect, 1: circle, 2: diamond
+                this.width = this.size * (Math.random() * 1.5 + 0.5);
+                this.height = this.size * (Math.random() * 0.5 + 0.5);
+                this.wobble = Math.random() * Math.PI * 2;
+                this.wobbleSpeed = Math.random() * 0.05 + 0.02;
+                this.life = isBurst ? 180 : 500;
+                this.maxLife = this.life;
+            }
+
+            update() {
+                this.speedY += this.gravity;
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.wobble) * 0.5;
+                this.wobble += this.wobbleSpeed;
+                this.rotation += this.rotationSpeed;
+                this.life--;
+
+                if (this.life < 30) {
+                    this.opacity *= 0.95;
+                }
+
+                return this.y < confettiCanvas.height + 20 && this.life > 0 && this.opacity > 0.01;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                if (this.color === '#ffffff') {
+                    ctx.shadowColor = 'rgba(0,0,0,0.15)';
+                    ctx.shadowBlur = 2;
+                }
+
+                switch (this.shape) {
+                    case 0: // Rectangle
+                        ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+                        break;
+                    case 1: // Circle
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                    case 2: // Diamond
+                        ctx.beginPath();
+                        ctx.moveTo(0, -this.size / 2);
+                        ctx.lineTo(this.size / 3, 0);
+                        ctx.lineTo(0, this.size / 2);
+                        ctx.lineTo(-this.size / 3, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                }
+                ctx.restore();
+            }
+        }
+
+        class FireworkRocket {
+            constructor() {
+                this.x = Math.random() * confettiCanvas.width;
+                this.y = confettiCanvas.height;
+                this.targetY = Math.random() * (confettiCanvas.height * 0.4) + confettiCanvas.height * 0.1;
+                this.speed = Math.random() * 4 + 5;
+                this.color = Math.random() > 0.5 ? '#DC1F26' : '#ffffff';
+                this.exploded = false;
+                this.opacity = 1;
+            }
+            update() {
+                if (!this.exploded) {
+                    this.y -= this.speed;
+                    this.speed *= 0.98;
+                    if (this.speed < 1 || this.y <= this.targetY) {
+                        this.explode();
+                    }
+                }
+                return this.opacity > 0;
+            }
+            explode() {
+                this.exploded = true;
+                this.opacity = 0;
+                const numParticles = 40 + Math.random() * 20;
+                for(let i=0; i<numParticles; i++) {
+                    confettiParticles.push(new FireworkParticle(this.x, this.y, this.color));
+                }
+            }
+            draw(ctx) {
+                if(!this.exploded) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 2, 0, Math.PI*2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+        }
+        
+        class FireworkParticle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 1;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.gravity = 0.05;
+                this.opacity = 1;
+                this.decay = Math.random() * 0.015 + 0.015;
+            }
+            update() {
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.opacity -= this.decay;
+                return this.opacity > 0;
+            }
+            draw(ctx) {
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 1.5, 0, Math.PI*2);
+                ctx.fillStyle = this.color;
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = 6;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        function burstConfetti() {
+            const centerX = confettiCanvas.width / 2;
+            const centerY = confettiCanvas.height * 0.35;
+            for (let i = 0; i < 120; i++) {
+                confettiParticles.push(new ConfettiPiece(
+                    centerX + (Math.random() - 0.5) * 200,
+                    centerY + (Math.random() - 0.5) * 100,
+                    true
+                ));
+            }
+        }
+
+        function addContinuousConfetti() {
+            if (isMerdekaActive) {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    if (Math.random() > 0.96) {
+                        confettiParticles.push(new FireworkRocket());
+                    }
+                } else {
+                    if (Math.random() > 0.85) {
+                        confettiParticles.push(new ConfettiPiece());
+                    }
+                }
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+
+            confettiParticles = confettiParticles.filter(p => {
+                p.draw(ctx);
+                return p.update();
+            });
+
+            addContinuousConfetti();
+
+            if (isMerdekaActive || confettiParticles.length > 0) {
+                confettiAnimId = requestAnimationFrame(animateConfetti);
+            } else {
+                confettiAnimId = null;
+            }
+        }
+
+        function startConfettiLoop() {
+            if (!confettiAnimId) {
+                animateConfetti();
+            }
+        }
+
+        function stopConfetti() {
+            // Let existing particles finish naturally, stop adding new ones
+            // The animation loop will auto-stop when all particles are gone
+        }
+
+        // ===== TOAST NOTIFICATION =====
+        let toastTimeout = null;
+        function showMerdekaToast(isOn) {
+            if (toastTimeout) clearTimeout(toastTimeout);
+            
+            merdekaToast.className = 'merdeka-toast ' + (isOn ? 'merdeka-toast-on' : 'merdeka-toast-off');
+            merdekaToast.innerHTML = isOn 
+                ? '🇮🇩 <span>Merdeka Mode Aktif! Dirgahayu RI ke-81</span> 🎉'
+                : '🌙 <span>Merdeka Mode Dinonaktifkan</span>';
+            
+            requestAnimationFrame(() => {
+                merdekaToast.classList.add('show');
+            });
+
+            toastTimeout = setTimeout(() => {
+                merdekaToast.classList.remove('show');
+            }, 3500);
+        }
+
+        // ===== TOGGLE MERDEKA MODE =====
+        function setMerdekaMode(active, showToastNotif = true) {
+            isMerdekaActive = active;
+            html.setAttribute('data-merdeka', active ? 'true' : 'false');
+            localStorage.setItem('merdekaMode', active ? 'true' : 'false');
+
+            if (active) {
+                burstConfetti();
+                startConfettiLoop();
+                if (showToastNotif) showMerdekaToast(true);
+                
+                // Play Audio
+                merdekaAudio.play().catch(e => console.log('Audio autoplay prevented'));
+                isAudioPlaying = true;
+                if(audioToggleBtn) audioToggleBtn.innerText = '🔊';
+
+                // Update Marquee Texts
+                const marqueeTexts = ["DIRGAHAYU REPUBLIK INDONESIA 🇮🇩", "MERDEKA!", "79 TAHUN INDONESIA MAJU", "PULIH LEBIH CEPAT", "BANGKIT LEBIH KUAT", "17 AGUSTUS 1945"];
+                document.querySelectorAll('.marquee-item').forEach((item, index) => {
+                    if(!item.dataset.originalText) item.dataset.originalText = item.innerText;
+                    item.innerText = marqueeTexts[index % marqueeTexts.length];
+                });
+            } else {
+                stopConfetti();
+                if (showToastNotif) showMerdekaToast(false);
+                
+                // Pause Audio
+                merdekaAudio.pause();
+                isAudioPlaying = false;
+                if(audioToggleBtn) audioToggleBtn.innerText = '🔇';
+
+                // Restore Marquee Texts
+                document.querySelectorAll('.marquee-item').forEach((item) => {
+                    if(item.dataset.originalText) {
+                        item.innerText = item.dataset.originalText;
+                    }
+                });
+            }
+        }
+
+        merdekaToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-merdeka') === 'true';
+            setMerdekaMode(!current);
+        });
+
+        // Start countdown
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ===== AUTO-DETECT & RESTORE STATE =====
+        function initMerdekaMode() {
+            const saved = localStorage.getItem('merdekaMode');
+            const now = new Date();
+            const isAugust = now.getMonth() === 7; // August is month 7 (0-indexed)
+
+            if (saved === 'true') {
+                setMerdekaMode(true, false);
+            } else if (saved === null && isAugust) {
+                // Auto-activate during August if user hasn't explicitly toggled
+                setMerdekaMode(true, true);
+            }
+        }
+
+        // Initialize after a short delay to avoid interfering with preloader
+        setTimeout(initMerdekaMode, 2500);
+    })();
     </script>
 </body>
 </html>
