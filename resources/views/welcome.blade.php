@@ -490,7 +490,7 @@
             perspective: 1200px;
             user-select: none;
             -webkit-user-select: none;
-            touch-action: none;
+            touch-action: pan-y; /* Allows vertical page scrolling on mobile */
         }
 
         /* Top Mounting Bracket */
@@ -555,6 +555,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            touch-action: none; /* Only the card itself captures horizontal/custom dragging */
         }
         .lanyard-card-assembly:active,
         .lanyard-card-assembly.is-dragging {
@@ -3709,7 +3710,11 @@
                 updateDimensions();
                 window.addEventListener('resize', updateDimensions);
 
+                let activePointerId = null;
+
                 function onPointerDown(e) {
+                    if (e.button !== undefined && e.button !== 0) return;
+
                     isDragging = true;
                     assembly.classList.add('is-dragging');
                     
@@ -3718,8 +3723,17 @@
                         if (hint) hint.classList.add('hidden');
                     }
 
-                    const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
-                    const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+                    if (e.pointerId !== undefined) {
+                        activePointerId = e.pointerId;
+                        if (assembly.setPointerCapture) {
+                            try {
+                                assembly.setPointerCapture(e.pointerId);
+                            } catch (err) {}
+                        }
+                    }
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : posX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : posY);
 
                     dragStartClientX = clientX;
                     dragStartClientY = clientY;
@@ -3738,16 +3752,25 @@
                     window.addEventListener('pointermove', onPointerMove, { passive: false });
                     window.addEventListener('pointerup', onPointerUp);
                     window.addEventListener('pointercancel', onPointerUp);
+                    window.addEventListener('lostpointercapture', onPointerUp);
                     window.addEventListener('touchmove', onTouchMove, { passive: false });
                     window.addEventListener('touchend', onPointerUp);
+                    window.addEventListener('touchcancel', onPointerUp);
                 }
 
                 function onPointerMove(e) {
-                    if (!isDragging) return;
-                    if (e.cancelable) e.preventDefault();
+                    if (!isDragging) {
+                        onPointerUp();
+                        return;
+                    }
 
-                    const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
-                    const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+                    // Only prevent default on cancelable events while actually dragging
+                    if (e.cancelable) {
+                        e.preventDefault();
+                    }
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : lastPointerX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : lastPointerY);
 
                     const dx = clientX - dragStartClientX;
                     const dy = clientY - dragStartClientY;
@@ -3788,30 +3811,59 @@
                 }
 
                 function onTouchMove(e) {
-                    if (!isDragging) return;
+                    if (!isDragging) {
+                        onPointerUp();
+                        return;
+                    }
                     if (e.cancelable) e.preventDefault();
                     onPointerMove(e);
                 }
 
-                function onPointerUp() {
-                    if (!isDragging) return;
+                function onPointerUp(e) {
+                    if (!isDragging) {
+                        cleanListeners();
+                        return;
+                    }
                     isDragging = false;
                     assembly.classList.remove('is-dragging');
+
+                    if (activePointerId !== null && assembly.releasePointerCapture) {
+                        try {
+                            assembly.releasePointerCapture(activePointerId);
+                        } catch (err) {}
+                        activePointerId = null;
+                    }
 
                     // Impart throw momentum with damping limits
                     velX = Math.max(-30, Math.min(30, pointerVelX * 1.3));
                     velY = Math.max(-25, Math.min(25, pointerVelY * 1.3));
                     vAngleZ = Math.max(-18, Math.min(18, pointerVelX * 0.8));
 
+                    cleanListeners();
+                }
+
+                function cleanListeners() {
                     window.removeEventListener('pointermove', onPointerMove);
                     window.removeEventListener('pointerup', onPointerUp);
                     window.removeEventListener('pointercancel', onPointerUp);
+                    window.removeEventListener('lostpointercapture', onPointerUp);
                     window.removeEventListener('touchmove', onTouchMove);
                     window.removeEventListener('touchend', onPointerUp);
+                    window.removeEventListener('touchcancel', onPointerUp);
                 }
 
-                assembly.addEventListener('pointerdown', onPointerDown);
-                assembly.addEventListener('touchstart', onPointerDown, { passive: false });
+                if (window.PointerEvent) {
+                    assembly.addEventListener('pointerdown', onPointerDown);
+                } else {
+                    assembly.addEventListener('touchstart', onPointerDown, { passive: false });
+                    assembly.addEventListener('mousedown', onPointerDown);
+                }
+
+                // Global safety guards so touch / pointer dragging NEVER gets stuck or locks scroll
+                window.addEventListener('blur', onPointerUp);
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) onPointerUp();
+                });
 
                 // 60fps Physics & Bezier Curve Animation Loop
                 function physicsLoop() {
