@@ -280,7 +280,7 @@
             gap: 12px;
             cursor: pointer;
             text-decoration: none;
-            flex-shrink: 0;
+            flex: 1;
         }
         .logo-img-wrapper {
             height: 38px;
@@ -317,6 +317,7 @@
             font-weight: 800;
         }
         .logo-last {
+            margin-left: 6px;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -407,49 +408,6 @@
             letter-spacing: -0.2px;
             color: var(--text-primary);
             white-space: nowrap;
-        }
-        .status-pill-divider {
-            width: 1px;
-            height: 11px;
-            background: var(--border-color);
-            margin: 0 2px;
-            flex-shrink: 0;
-        }
-        .status-pill-clock {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
-            white-space: nowrap;
-        }
-        .clock-colon {
-            animation: blinkColon 1s infinite;
-            display: inline-block;
-            line-height: 1;
-        }
-        @keyframes blinkColon {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.25; }
-        }
-        .clock-zone {
-            font-size: 9px;
-            opacity: 0.75;
-            font-weight: 600;
-        }
-        .status-pill-clock-icon {
-            opacity: 0.75;
-            color: var(--accent-color);
-            flex-shrink: 0;
-        }
-        .status-pill:hover .status-pill-clock {
-            color: var(--text-primary);
-        }
-        .status-pill:hover .status-pill-clock-icon {
-            opacity: 1;
         }
 
         /* Language Toggle Button (Desktop & Base) */
@@ -567,8 +525,11 @@
 
         /* Responsive rules: Tablets & Mobile */
         @media (max-width: 900px) {
-            .status-pill-text, .status-pill-divider {
+            .status-pill-text {
                 display: none !important;
+            }
+            .status-pill {
+                padding: 0 10px;
             }
         }
 
@@ -613,7 +574,7 @@
                 letter-spacing: -0.3px;
             }
             .logo-last {
-                display: none; /* Shows 'Angga' on mobile: clean, never truncated */
+                display: none; /* Shows 'Angga' on mobile: clean & never wraps */
             }
 
             .nav-actions {
@@ -622,18 +583,17 @@
 
             /* Height standardization on mobile: exact 32px */
             .status-pill {
+                width: 32px;
                 height: 32px;
-                padding: 0 9px;
-                gap: 5px;
-                border-radius: 16px;
+                padding: 0 !important;
+                border-radius: 8px;
+                justify-content: center;
                 margin: 0 !important;
             }
-            .status-pill-clock {
-                font-size: 11px;
+            .status-pill-text {
+                display: none !important;
             }
-            .clock-zone {
-                font-size: 8px;
-            }
+
             .lang-toggle {
                 height: 32px;
                 min-width: 34px;
@@ -672,15 +632,8 @@
                 gap: 4px;
             }
             .status-pill {
+                width: 30px;
                 height: 30px;
-                padding: 0 6px;
-                gap: 4px;
-            }
-            .status-pill-clock-icon {
-                display: none;
-            }
-            .clock-zone {
-                display: none;
             }
             .lang-toggle {
                 height: 30px;
@@ -726,13 +679,6 @@
         .mobile-drawer-status-text {
             color: var(--text-primary);
             font-weight: 600;
-        }
-        .mobile-drawer-divider {
-            opacity: 0.3;
-        }
-        .mobile-drawer-clock {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-secondary);
         }
 
         /* Scroll Progress Bar - Premium Neon */
@@ -2612,7 +2558,7 @@
             <div class="logo-img-wrapper">
                 <img src="images/logo.png" alt="Logo" class="logo-img">
             </div>
-            <span class="logo-text"><span class="logo-first">Angga</span><span class="logo-last"> Wiranata</span></span>
+            <span class="logo-text"><span class="logo-first">Angga</span> <span class="logo-last">Wiranata</span></span>
         </div>
         
         <nav class="nav-links">
@@ -2622,21 +2568,13 @@
         </nav>
 
         <div class="nav-actions">
-            <!-- 🟢 Live Status Pill & Real-Time Local Clock (Bali, WITA) -->
-            <a href="#contact" class="status-pill availability-badge magnetic" title="Waktu Lokal Angga (Bali, WITA) • Klik untuk Kolaborasi">
+            <!-- 🟢 Live Status Pill -->
+            <a href="#contact" class="status-pill availability-badge magnetic" title="Tersedia untuk proyek baru">
                 <span class="status-dot-wrap">
                     <span class="status-dot-ping"></span>
                     <span class="status-dot-core"></span>
                 </span>
                 <span class="status-pill-text avail-text" data-i18n="nav_avail">Tersedia untuk proyek</span>
-                <span class="status-pill-divider"></span>
-                <span class="status-pill-clock">
-                    <svg class="status-pill-clock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                    <span class="live-clock-target">--:-- WITA</span>
-                </span>
             </a>
 
             <!-- Language Toggle -->
@@ -2678,10 +2616,6 @@
                         <span class="status-dot-core"></span>
                     </span>
                     <span class="mobile-drawer-status-text" data-i18n="nav_avail">Tersedia untuk proyek</span>
-                    <span class="mobile-drawer-divider">•</span>
-                    <span class="mobile-drawer-clock">
-                        <span class="live-clock-target">--:-- WITA</span>
-                    </span>
                 </div>
             </div>
             <nav class="mobile-nav-list">
@@ -4899,39 +4833,6 @@
                 }
             }
 
-            // 🕒 Real-Time Local Clock (Bali, Indonesia - WITA / UTC+8)
-            (function initLiveBaliClock() {
-                const clockTargets = document.querySelectorAll('.live-clock-target');
-                if (!clockTargets.length) return;
-
-                function updateClock() {
-                    try {
-                        const now = new Date();
-                        const formatter = new Intl.DateTimeFormat('en-GB', {
-                            timeZone: 'Asia/Makassar',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            hour12: false
-                        });
-                        const parts = formatter.formatToParts(now);
-                        const hh = parts.find(p => p.type === 'hour')?.value || '00';
-                        const mm = parts.find(p => p.type === 'minute')?.value || '00';
-                        const html = `${hh}<span class="clock-colon">:</span>${mm} <span class="clock-zone">WITA</span>`;
-                        clockTargets.forEach(el => el.innerHTML = html);
-                    } catch (e) {
-                        const d = new Date();
-                        const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-                        const bali = new Date(utc + (3600000 * 8));
-                        const hh = String(bali.getHours()).padStart(2, '0');
-                        const mm = String(bali.getMinutes()).padStart(2, '0');
-                        const html = `${hh}<span class="clock-colon">:</span>${mm} <span class="clock-zone">WITA</span>`;
-                        clockTargets.forEach(el => el.innerHTML = html);
-                    }
-                }
-
-                updateClock();
-                setInterval(updateClock, 1000);
-            })();
 
             // 🪢 Interactive Hanging 3D Lanyard ID Card with Real Physics
             (function initLanyardPhysics() {
