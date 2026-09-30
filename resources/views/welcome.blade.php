@@ -293,6 +293,142 @@
             background: var(--bg-surface-hover); border-color: var(--text-secondary);
         }
 
+        /* 🟢 Live Status Pill & Real-Time Local Clock (Bali, WITA) */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 5px 12px;
+            border-radius: 9999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-right: 8px;
+        }
+        [data-theme="light"] .status-pill {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+        .status-pill:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(16, 185, 129, 0.45);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+        [data-theme="light"] .status-pill:hover {
+            background: rgba(0, 0, 0, 0.07);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+        }
+        .status-dot-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 8px;
+            height: 8px;
+            flex-shrink: 0;
+        }
+        .status-dot-core {
+            width: 7px;
+            height: 7px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            position: relative;
+            z-index: 2;
+        }
+        .status-dot-ping {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(16, 185, 129, 0.7);
+            animation: statusRadarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes statusRadarPing {
+            0% { transform: scale(1); opacity: 0.9; }
+            75%, 100% { transform: scale(2.8); opacity: 0; }
+        }
+        .status-pill-text {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+        .status-pill-divider {
+            width: 1px;
+            height: 11px;
+            background: rgba(255, 255, 255, 0.18);
+            margin: 0 2px;
+            flex-shrink: 0;
+        }
+        [data-theme="light"] .status-pill-divider {
+            background: rgba(0, 0, 0, 0.15);
+        }
+        .status-pill-clock {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+        .status-pill-clock-icon {
+            opacity: 0.75;
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+        .status-pill:hover .status-pill-clock {
+            color: var(--text-primary);
+        }
+        .status-pill:hover .status-pill-clock-icon {
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .status-pill {
+                padding: 4px 8px;
+                gap: 5px;
+                margin-right: 2px;
+            }
+            .status-pill-text {
+                display: none;
+            }
+            .status-pill-divider {
+                display: none;
+            }
+        }
+        @media (max-width: 440px) {
+            .status-pill {
+                padding: 3px 6px;
+                gap: 4px;
+            }
+            .status-pill-clock span span {
+                display: none; /* Hides "WITA" on compact mobile screens */
+            }
+            .logo-text {
+                font-size: 15px;
+            }
+            .logo {
+                gap: 8px;
+            }
+            .nav-actions {
+                gap: 6px;
+            }
+        }
+
         /* Scroll Progress Bar - Premium Neon */
         .scroll-progress-container { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 3px; 
@@ -2259,16 +2395,21 @@
         </nav>
 
         <div class="nav-actions">
-            <!-- Available for Hire Badge -->
-            <a href="#contact" class="availability-badge" style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease; margin-right: 12px;">
-                <span style="width: 6px; height: 6px; background-color: var(--accent-color); border-radius: 50%; display: inline-block;"></span>
-                <span class="avail-text" data-i18n="nav_avail">Tersedia untuk proyek</span>
-                <style>
-                    .availability-badge:hover { color: var(--text-primary) !important; }
-                    @media (max-width: 640px) { .avail-text { display: none; } .availability-badge { margin-right: 8px; } }
-
-
-        </style>
+            <!-- 🟢 Live Status Pill & Real-Time Local Clock (Bali, WITA) -->
+            <a href="#contact" class="status-pill availability-badge magnetic" title="Waktu Lokal Angga (Bali, WITA) • Klik untuk Kolaborasi">
+                <span class="status-dot-wrap">
+                    <span class="status-dot-ping"></span>
+                    <span class="status-dot-core"></span>
+                </span>
+                <span class="status-pill-text avail-text" data-i18n="nav_avail">Tersedia untuk proyek</span>
+                <span class="status-pill-divider"></span>
+                <span class="status-pill-clock">
+                    <svg class="status-pill-clock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span id="liveClockText">--:-- WITA</span>
+                </span>
             </a>
 
             <!-- Language Toggle -->
@@ -3545,6 +3686,39 @@
                     iconMoon.style.display = 'none';
                 }
             }
+
+            // 🕒 Real-Time Local Clock (Bali, Indonesia - WITA / UTC+8)
+            (function initLiveBaliClock() {
+                const clockEl = document.getElementById('liveClockText');
+                if (!clockEl) return;
+
+                function updateClock() {
+                    try {
+                        const now = new Date();
+                        const formatter = new Intl.DateTimeFormat('en-GB', {
+                            timeZone: 'Asia/Makassar',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        });
+                        const parts = formatter.formatToParts(now);
+                        const hh = parts.find(p => p.type === 'hour')?.value || '00';
+                        const mm = parts.find(p => p.type === 'minute')?.value || '00';
+                        const colon = now.getSeconds() % 2 === 0 ? ':' : '<span style="opacity:0.35;">:</span>';
+                        clockEl.innerHTML = `${hh}${colon}${mm} <span style="font-size:9px;opacity:0.75;font-weight:600;">WITA</span>`;
+                    } catch (e) {
+                        const d = new Date();
+                        const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+                        const bali = new Date(utc + (3600000 * 8));
+                        const hh = String(bali.getHours()).padStart(2, '0');
+                        const mm = String(bali.getMinutes()).padStart(2, '0');
+                        clockEl.innerHTML = `${hh}:${mm} <span style="font-size:9px;opacity:0.75;">WITA</span>`;
+                    }
+                }
+
+                updateClock();
+                setInterval(updateClock, 1000);
+            })();
 
             // 🪢 Interactive Hanging 3D Lanyard ID Card with Real Physics
             (function initLanyardPhysics() {
