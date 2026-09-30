@@ -63,7 +63,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-base: #000000;
@@ -537,12 +537,60 @@
             z-index: 10;
             overflow: visible;
         }
+        .lanyard-path-edge {
+            filter: drop-shadow(0 6px 14px rgba(0,0,0,0.6));
+            opacity: 0.95;
+        }
         .lanyard-path-band {
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
             transition: stroke 0.3s ease;
         }
-        .lanyard-path-stitch {
-            opacity: 0.85;
+        .lanyard-strap-text {
+            font-family: 'JetBrains Mono', 'SF Mono', monospace;
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            fill: #ffffff;
+            text-transform: uppercase;
+            dominant-baseline: central;
+            pointer-events: none;
+            user-select: none;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.9));
+        }
+
+        /* Woven Techwear Label Tag */
+        .lanyard-woven-tag {
+            background: linear-gradient(135deg, #0284c7 0%, #0070f3 100%);
+            border-radius: 4px;
+            padding: 3px 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 5px;
+            box-shadow: 0 4px 14px rgba(0, 112, 243, 0.45), inset 0 1px 0 rgba(255,255,255,0.4);
+            border: 1px dashed rgba(255,255,255,0.45);
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            position: relative;
+            z-index: 26;
+        }
+        .woven-tag-brand {
+            font-size: 8px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .woven-tag-code {
+            font-size: 7px;
+            background: rgba(0,0,0,0.35);
+            padding: 1px 5px;
+            border-radius: 2px;
+            color: #67e8f9;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         /* Draggable Assembly (Card + Hardware) */
@@ -2368,26 +2416,46 @@
             <svg class="lanyard-strap-svg" id="lanyardSvg" viewBox="0 0 400 300" preserveAspectRatio="none">
                 <defs>
                     <linearGradient id="lanyardRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#18181b" />
-                        <stop offset="50%" stop-color="#27272a" />
-                        <stop offset="100%" stop-color="#09090b" />
+                        <stop offset="0%" stop-color="#121217" />
+                        <stop offset="50%" stop-color="#22222a" />
+                        <stop offset="100%" stop-color="#0c0c10" />
                     </linearGradient>
-                    <linearGradient id="lanyardStitchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <linearGradient id="lanyardEdgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#0070f3" />
                         <stop offset="50%" stop-color="#00dfd8" />
                         <stop offset="100%" stop-color="#0070f3" />
                     </linearGradient>
                 </defs>
-                <path id="lanyardPathLeft" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="22" stroke-linecap="round" />
-                <path id="lanyardPathLeftStitch" class="lanyard-path-stitch" d="" fill="none" stroke="url(#lanyardStitchGrad)" stroke-width="2" stroke-dasharray="5,4" />
-                <path id="lanyardPathRight" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="22" stroke-linecap="round" />
-                <path id="lanyardPathRightStitch" class="lanyard-path-stitch" d="" fill="none" stroke="url(#lanyardStitchGrad)" stroke-width="2" stroke-dasharray="5,4" />
+                <!-- Left Strap (Cyan Glowing Edge + Dark Woven Band) -->
+                <path id="lanyardPathLeftEdge" class="lanyard-path-edge" d="" fill="none" stroke="url(#lanyardEdgeGrad)" stroke-width="27" stroke-linecap="round" />
+                <path id="lanyardPathLeft" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="23" stroke-linecap="round" />
+
+                <!-- Right Strap (Cyan Glowing Edge + Dark Woven Band) -->
+                <path id="lanyardPathRightEdge" class="lanyard-path-edge" d="" fill="none" stroke="url(#lanyardEdgeGrad)" stroke-width="27" stroke-linecap="round" />
+                <path id="lanyardPathRight" class="lanyard-path-band" d="" fill="none" stroke="url(#lanyardRibbonGrad)" stroke-width="23" stroke-linecap="round" />
+
+                <!-- Contoured Developer Typography (Follows Dynamic Straps) -->
+                <text class="lanyard-strap-text">
+                    <textPath href="#lanyardPathLeft" startOffset="50%" text-anchor="middle">
+                        KYRAAA // DEV_ACCESS
+                    </textPath>
+                </text>
+                <text class="lanyard-strap-text">
+                    <textPath href="#lanyardPathRight" startOffset="50%" text-anchor="middle">
+                        ANGGA WIRANATA • 2026
+                    </textPath>
+                </text>
             </svg>
 
             <!-- Draggable Hanging Card Assembly -->
             <div class="lanyard-card-assembly" id="lanyardAssembly">
                 <!-- Hardware Metallic Clasp, Swivel & Ring -->
                 <div class="lanyard-hardware">
+                    <!-- Woven Fabric Techwear Label Tag -->
+                    <div class="lanyard-woven-tag">
+                        <span class="woven-tag-brand">KYRAAA DEV</span>
+                        <span class="woven-tag-code">#AW-2026</span>
+                    </div>
                     <div class="lanyard-swivel"></div>
                     <div class="lanyard-clip"></div>
                     <div class="lanyard-ring"></div>
@@ -3518,10 +3586,10 @@
                 const holoFoil = document.getElementById('cardHoloFoil');
                 const reflection = document.getElementById('cardReflection');
                 const svg = document.getElementById('lanyardSvg');
+                const pathLeftEdge = document.getElementById('lanyardPathLeftEdge');
                 const pathLeft = document.getElementById('lanyardPathLeft');
-                const pathLeftStitch = document.getElementById('lanyardPathLeftStitch');
+                const pathRightEdge = document.getElementById('lanyardPathRightEdge');
                 const pathRight = document.getElementById('lanyardPathRight');
-                const pathRightStitch = document.getElementById('lanyardPathRightStitch');
 
                 if (!system || !assembly || !card) return;
 
@@ -3727,9 +3795,9 @@
                     const dRight = `M ${rightStartX.toFixed(1)} ${rightStartY.toFixed(1)} Q ${ctrlXRight.toFixed(1)} ${ctrlYRight.toFixed(1)} ${(clipX + 2).toFixed(1)} ${clipY.toFixed(1)}`;
 
                     if (pathLeft) pathLeft.setAttribute('d', dLeft);
-                    if (pathLeftStitch) pathLeftStitch.setAttribute('d', dLeft);
+                    if (pathLeftEdge) pathLeftEdge.setAttribute('d', dLeft);
                     if (pathRight) pathRight.setAttribute('d', dRight);
-                    if (pathRightStitch) pathRightStitch.setAttribute('d', dRight);
+                    if (pathRightEdge) pathRightEdge.setAttribute('d', dRight);
 
                     // Apply 3D transform to assembly
                     const transX = posX - anchorX;
