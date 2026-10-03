@@ -1631,14 +1631,17 @@
             transform: translate(-50%, -50%);
         }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-        .social-links { display: flex; gap: 16px; }
-        .social-links a { color: var(--text-secondary); transition: all 0.3s ease; display: flex; }
-        .social-links a:hover { color: var(--text-primary); transform: translateY(-2px); }
+        .social-links { display: flex; align-items: center; gap: 16px; }
+        .social-links a, .social-links button { 
+            color: var(--text-secondary); background: none; border: none; padding: 0; cursor: pointer;
+            transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+        }
+        .social-links a:hover, .social-links button:hover { color: var(--text-primary); transform: translateY(-2px); }
         
         .status-badge {
-            display: inline-flex; align-items: center; gap: 12px; padding: 12px 24px;
+            display: inline-flex; align-items: center; gap: 12px; padding: 10px 20px;
             background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color); border-radius: 100px;
-            font-size: 14px; font-weight: 500; color: var(--text-primary); position: relative; z-index: 1;
+            font-size: 13.5px; font-weight: 500; color: var(--text-primary); position: relative; z-index: 1;
             transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         [data-theme="light"] .status-badge { background: rgba(255, 255, 255, 0.5); }
@@ -1650,6 +1653,152 @@
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); } 
             70% { transform: scale(1); box-shadow: 0 0 0 10px var(--accent-glow); } 
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); } 
+        }
+
+        /* Interactive Email Copy Pill */
+        .email-copy-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 8px 6px 14px;
+            border-radius: 9999px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            user-select: none;
+            position: relative;
+            z-index: 1;
+        }
+        .email-copy-pill:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 0 16px var(--accent-glow);
+        }
+        .email-copy-pill:active {
+            transform: translateY(0);
+        }
+        .email-pill-icon {
+            display: flex;
+            align-items: center;
+            color: var(--accent-color);
+        }
+        .email-pill-address {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.2px;
+        }
+        .email-pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            background: var(--accent-glow);
+            color: var(--accent-color);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+        }
+        .email-copy-pill:hover .email-pill-badge {
+            background: var(--accent-color);
+            color: #ffffff;
+        }
+        .email-copy-pill.copied {
+            border-color: #10b981;
+        }
+        .email-copy-pill.copied .email-pill-badge {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        /* Floating Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translate(-50%, 30px);
+            z-index: 999999;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+            user-select: none;
+            max-width: 90vw;
+        }
+        .toast-notification.active {
+            opacity: 1;
+            transform: translate(-50%, 0);
+            pointer-events: auto;
+        }
+        .toast-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 18px 10px 12px;
+            background: rgba(13, 16, 23, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(0, 112, 243, 0.35);
+            border-radius: 9999px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 112, 243, 0.2);
+        }
+        [data-theme="light"] .toast-inner {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 112, 243, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 112, 243, 0.12);
+        }
+        .toast-icon-box {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            border-radius: 50%;
+            background: var(--accent-glow);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: toastPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes toastPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .toast-text-box {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .toast-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.2px;
+            line-height: 1.2;
+        }
+        .toast-message {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+
+        @media (max-width: 640px) {
+            .contact-sidebar {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .email-copy-pill {
+                width: 100%;
+                max-width: 320px;
+                justify-content: space-between;
+            }
+            .email-pill-address {
+                font-size: 11.5px;
+            }
         }
 
         /* Footer */
@@ -2690,6 +2839,10 @@
                 <div class="mobile-nav-item"><a href="#contact" class="mobile-link magnetic" data-i18n="nav_contact">Kontak</a></div>
             </nav>
             <div class="mobile-overlay-footer">
+                <div class="mobile-social" onclick="copyEmailToClipboard('anggawiranatafti@gmail.com'); const mo = document.getElementById('mobileOverlay'); if(mo) mo.classList.remove('active'); const tb = document.getElementById('mobileMenuToggle'); if(tb) tb.classList.remove('active');" style="cursor: pointer;" title="Salin Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>anggawiranatafti@gmail.com</span>
+                </div>
                 <a href="https://www.linkedin.com/in/angga-wiranata-320837420?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer" class="mobile-social">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                     <span>LinkedIn</span>
@@ -3325,10 +3478,20 @@
                             <span class="pulse"></span>
                             <span data-i18n="contact_avail">Tersedia untuk proyek</span>
                         </div>
+                        <div class="email-copy-pill" id="emailCopyBtn" title="Klik untuk menyalin email" role="button" tabindex="0" onclick="copyEmailToClipboard('anggawiranatafti@gmail.com')">
+                            <span class="email-pill-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </span>
+                            <span class="email-pill-address">anggawiranatafti@gmail.com</span>
+                            <span class="email-pill-badge">
+                                <svg class="copy-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span class="copy-badge-text" data-i18n="copy_email_btn">Salin</span>
+                            </span>
+                        </div>
                         <div class="social-links">
                             <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
                             <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                            <a href="mailto:anggawiranatafti@gmail.com" aria-label="Email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                            <a href="mailto:anggawiranatafti@gmail.com" onclick="event.preventDefault(); copyEmailToClipboard('anggawiranatafti@gmail.com');" title="Salin Email" aria-label="Email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
                         </div>
                     </div>
                 </div>
@@ -4483,7 +4646,11 @@
             "contact_avail": { id: "Tersedia untuk proyek", en: "Available for work" },
             "contact_name": { id: "Nama Lengkap", en: "Full Name" },
             "contact_email": { id: "Alamat Email", en: "Email Address" },
-            "contact_msg": { id: "Tulis pesan Anda di sini...", en: "Write your message here..." }
+            "contact_msg": { id: "Tulis pesan Anda di sini...", en: "Write your message here..." },
+            "copy_email_btn": { id: "Salin", en: "Copy" },
+            "copied_email_btn": { id: "Tersalin!", en: "Copied!" },
+            "toast_copied_title": { id: "Email Berhasil Disalin!", en: "Email Copied to Clipboard!" },
+            "toast_copied_msg": { id: "Alamat email siap ditempel", en: "Email address ready to paste" }
         };
 
         let currentLang = localStorage.getItem('site_lang') || 'id';
@@ -4714,7 +4881,107 @@
             }
         }
 
+        // Global Modern Toast Notification System
+        let toastTimeout = null;
+        function showToast(title, message, iconType = 'success') {
+            const toast = document.getElementById('toastNotification');
+            if (!toast) return;
+
+            const titleEl = document.getElementById('toastTitle');
+            const msgEl = document.getElementById('toastMessage');
+            const iconBox = document.getElementById('toastIconBox');
+
+            if (titleEl) titleEl.textContent = title;
+            if (msgEl) msgEl.textContent = message;
+
+            if (iconBox) {
+                if (iconType === 'success') {
+                    iconBox.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                    iconBox.style.background = 'var(--accent-glow)';
+                    iconBox.style.color = 'var(--accent-color)';
+                } else if (iconType === 'info') {
+                    iconBox.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+                    iconBox.style.background = 'var(--accent-glow)';
+                    iconBox.style.color = 'var(--accent-color)';
+                }
+            }
+
+            toast.classList.add('active');
+
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3200);
+        }
+
+        // Seamless Copy Email with Fallback
+        function copyEmailToClipboard(email = 'anggawiranatafti@gmail.com') {
+            const isEn = (localStorage.getItem('site_lang') || 'id') === 'en';
+            const successTitle = isEn ? (translations['toast_copied_title']?.en || 'Email Copied to Clipboard!') : (translations['toast_copied_title']?.id || 'Email Berhasil Disalin!');
+            const successMsg = email;
+
+            function onCopySuccess() {
+                showToast(successTitle, successMsg, 'success');
+                
+                // Visual feedback on pill button
+                const btn = document.getElementById('emailCopyBtn');
+                if (btn) {
+                    btn.classList.add('copied');
+                    const badgeText = btn.querySelector('.copy-badge-text');
+                    if (badgeText) {
+                        badgeText.textContent = isEn ? 'Copied!' : 'Tersalin!';
+                    }
+                    setTimeout(() => {
+                        btn.classList.remove('copied');
+                        if (badgeText) {
+                            badgeText.textContent = isEn ? 'Copy' : 'Salin';
+                        }
+                    }, 2500);
+                }
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).then(onCopySuccess).catch(() => {
+                    fallbackCopyEmail(email, onCopySuccess);
+                });
+            } else {
+                fallbackCopyEmail(email, onCopySuccess);
+            }
+        }
+
+        function fallbackCopyEmail(text, callback) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.top = '-9999px';
+            textArea.style.left = '-9999px';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback copy error:', err);
+            }
+            if (callback) callback();
+            document.body.removeChild(textArea);
+        }
+
     </script>
+
+    <!-- Hardware-accelerated Modern Toast Notification -->
+    <div class="toast-notification" id="toastNotification" role="alert" aria-live="polite">
+        <div class="toast-inner">
+            <div class="toast-icon-box" id="toastIconBox">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="toast-text-box">
+                <div class="toast-title" id="toastTitle">Email Berhasil Disalin!</div>
+                <div class="toast-message" id="toastMessage">anggawiranatafti@gmail.com</div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
