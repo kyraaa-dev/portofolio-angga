@@ -2889,7 +2889,7 @@
             {{ $settings['description'] ?? 'Membangun aplikasi web yang efisien dan tangguh dengan estetika modern.' }}
         </p>
         
-        <div class="hero-buttons reveal active delay-2" style="display: flex; gap: 16px; margin-bottom: 100px;">
+        <div class="hero-buttons reveal active delay-2" style="display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center; align-items: center;">
             <a href="#projects" class="btn btn-primary btn-radar magnetic" data-i18n="hero_btn_work">
                 Lihat Karya
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
@@ -2898,6 +2898,19 @@
                 Hubungi Saya
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </a>
+        </div>
+
+        <div class="hero-email-wrap reveal active delay-2" style="display: flex; justify-content: center; margin-bottom: 90px;">
+            <div class="email-copy-pill" id="heroEmailCopyBtn" title="Klik untuk menyalin email" role="button" tabindex="0">
+                <span class="email-pill-icon">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </span>
+                <span class="email-pill-address">anggawiranatafti@gmail.com</span>
+                <span class="email-pill-badge">
+                    <svg class="copy-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span class="copy-badge-text" data-i18n="copy_email_btn">Salin</span>
+                </span>
+            </div>
         </div>
 
 
@@ -4914,59 +4927,92 @@
             }, 3200);
         }
 
-        // Seamless Copy Email with Fallback
+        // Seamless Copy Email with Bulletproof Multi-Tier Fallback (Safari, iOS, Chrome, HTTP, HTTPS)
         function copyEmailToClipboard(email = 'anggawiranatafti@gmail.com') {
             const isEn = (localStorage.getItem('site_lang') || 'id') === 'en';
             const successTitle = isEn ? (translations['toast_copied_title']?.en || 'Email Copied to Clipboard!') : (translations['toast_copied_title']?.id || 'Email Berhasil Disalin!');
             const successMsg = email;
 
-            function onCopySuccess() {
-                showToast(successTitle, successMsg, 'success');
-                
-                // Visual feedback on pill button
-                const btn = document.getElementById('emailCopyBtn');
-                if (btn) {
-                    btn.classList.add('copied');
-                    const badgeText = btn.querySelector('.copy-badge-text');
-                    if (badgeText) {
-                        badgeText.textContent = isEn ? 'Copied!' : 'Tersalin!';
-                    }
-                    setTimeout(() => {
-                        btn.classList.remove('copied');
-                        if (badgeText) {
-                            badgeText.textContent = isEn ? 'Copy' : 'Salin';
-                        }
-                    }, 2500);
+            // Trigger immediate visual feedback
+            showToast(successTitle, successMsg, 'success');
+            
+            // Visual feedback on all email copy pills
+            const pills = document.querySelectorAll('.email-copy-pill');
+            pills.forEach(pill => {
+                pill.classList.add('copied');
+                const badgeText = pill.querySelector('.copy-badge-text');
+                if (badgeText) {
+                    badgeText.textContent = isEn ? 'Copied!' : 'Tersalin!';
                 }
+                setTimeout(() => {
+                    pill.classList.remove('copied');
+                    if (badgeText) {
+                        badgeText.textContent = isEn ? 'Copy' : 'Salin';
+                    }
+                }, 2500);
+            });
+
+            // Perform Copy
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(email).catch(function() {
+                    fallbackCopy(email);
+                });
+                return;
             }
 
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(email).then(onCopySuccess).catch(() => {
-                    fallbackCopyEmail(email, onCopySuccess);
-                });
-            } else {
-                fallbackCopyEmail(email, onCopySuccess);
-            }
+            fallbackCopy(email);
         }
 
-        function fallbackCopyEmail(text, callback) {
+        function fallbackCopy(text) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
+            
+            // Critical styles for Safari & iOS
             textArea.style.position = 'fixed';
-            textArea.style.top = '-9999px';
-            textArea.style.left = '-9999px';
-            textArea.style.opacity = '0';
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            textArea.style.padding = '0';
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            textArea.style.background = 'transparent';
+            textArea.style.fontSize = '16px';
+            textArea.setAttribute('readonly', '');
+            
             document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
+            
+            if (navigator.userAgent.match(/ipad|iphone/i)) {
+                const range = document.createRange();
+                range.selectNodeContents(textArea);
+                const selection = window.getSelection();
+                if (selection) {
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+                textArea.setSelectionRange(0, 999999);
+            } else {
+                textArea.focus();
+                textArea.select();
+            }
+
             try {
                 document.execCommand('copy');
             } catch (err) {
-                console.error('Fallback copy error:', err);
+                console.warn('execCommand failed:', err);
             }
-            if (callback) callback();
             document.body.removeChild(textArea);
         }
+
+        // Global Event Delegation for all Email Copy Elements
+        document.addEventListener('click', function(e) {
+            const pill = e.target.closest('.email-copy-pill');
+            if (pill) {
+                e.preventDefault();
+                copyEmailToClipboard('anggawiranatafti@gmail.com');
+            }
+        });
 
     </script>
 
