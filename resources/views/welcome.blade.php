@@ -171,6 +171,16 @@
             background: var(--bg-surface-hover); color: var(--text-primary); border-color: var(--text-secondary); 
         }
 
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 5;
+        }
+
         /* ===== COLLAB BUTTON ===== */
         .btn-collab {
             display: inline-flex;
@@ -2037,9 +2047,7 @@
                 padding-top: 130px !important;
                 min-height: auto !important;
             }
-            .hero-buttons {
-                margin-bottom: 60px !important;
-            }
+
 
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
@@ -2060,9 +2068,45 @@
             /* Fix certificates card overflow */
             .cert-card { min-width: 0; overflow: hidden; word-break: break-word; }
             
-            /* Hero buttons stack better */
-            .hero-buttons { flex-direction: column; gap: 12px !important; align-items: stretch; }
-            .hero-buttons .btn { width: 100%; justify-content: center; }
+            /* Hero buttons mobile layout - rock-solid, equal width & perfectly aligned */
+            .hero-buttons {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
+                width: 100% !important;
+                max-width: 280px !important;
+                margin: 0 auto 50px auto !important;
+                align-items: stretch !important;
+                box-sizing: border-box !important;
+            }
+            .hero-buttons .btn {
+                width: 100% !important;
+                min-width: 0 !important;
+                height: 48px !important;
+                padding: 12px 20px !important;
+                font-size: 14.5px !important;
+                font-weight: 600 !important;
+                justify-content: center !important;
+                text-align: center !important;
+                box-sizing: border-box !important;
+                transform: none !important;
+                -webkit-tap-highlight-color: transparent !important;
+                user-select: none !important;
+                -webkit-user-select: none !important;
+                touch-action: manipulation !important;
+                transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+            }
+            .hero-buttons .btn:active {
+                transform: scale(0.98) !important;
+            }
+            .hero-buttons .btn svg {
+                flex-shrink: 0 !important;
+            }
+
+            /* Radar pulse tuned for mobile to avoid bleeding into adjacent button */
+            .btn-radar::after {
+                animation: radar-pulse-mobile 2.5s infinite cubic-bezier(0.19, 1, 0.22, 1) !important;
+            }
             
             /* Stats grid tighter */
             .stats { gap: 12px; }
@@ -2079,6 +2123,11 @@
             
             /* Scroll progress thinner on mobile */
             .scroll-progress { height: 2px; }
+        }
+        
+        @keyframes radar-pulse-mobile {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.35; }
+            100% { transform: translate(-50%, -50%) scale(1.08, 1.2); opacity: 0; }
         }
         
         @media (max-width: 480px) {
@@ -2736,7 +2785,7 @@
             {{ $settings['description'] ?? 'Membangun aplikasi web yang efisien dan tangguh dengan estetika modern.' }}
         </p>
         
-        <div class="hero-buttons reveal active delay-2" style="display: flex; gap: 16px; margin-bottom: 100px;">
+        <div class="hero-buttons reveal active delay-2">
             <a href="#projects" class="btn btn-primary btn-radar magnetic" data-i18n="hero_btn_work">
                 Lihat Karya
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
@@ -4142,22 +4191,41 @@
                 });
             }
 
-            // Magnetic Buttons
-            const magneticBtns = document.querySelectorAll('.hero-actions .btn, .hero-buttons .btn');
-            magneticBtns.forEach(btn => {
-                btn.addEventListener('mouseenter', () => {
-                    btn.style.transition = 'none';
+            // Magnetic Buttons (Desktop only with fine pointer & hover support)
+            const isTouchOrMobile = () => window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches || !window.matchMedia('(hover: hover)').matches;
+
+            if (!isTouchOrMobile()) {
+                const magneticBtns = document.querySelectorAll('.hero-actions .btn, .hero-buttons .btn');
+                magneticBtns.forEach(btn => {
+                    btn.addEventListener('mouseenter', () => {
+                        if (isTouchOrMobile()) return;
+                        btn.style.transition = 'none';
+                    });
+                    btn.addEventListener('mousemove', (e) => {
+                        if (isTouchOrMobile()) return;
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        btn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, color 0.3s ease';
+                        btn.style.transform = `translate(0, 0)`;
+                    });
                 });
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-                });
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, color 0.3s ease';
-                    btn.style.transform = `translate(0, 0)`;
-                });
+            }
+
+            // Mobile Safeguard: Ensure buttons on touch/mobile never retain transform offsets
+            document.querySelectorAll('.hero-buttons .btn').forEach(btn => {
+                const resetBtn = () => {
+                    if (isTouchOrMobile()) {
+                        btn.style.transform = '';
+                        btn.style.transition = '';
+                    }
+                };
+                btn.addEventListener('touchend', resetBtn, { passive: true });
+                btn.addEventListener('touchcancel', resetBtn, { passive: true });
+                btn.addEventListener('click', resetBtn);
             });
             // Stats Counter Animation
             const statsSection = document.getElementById('stats-section');
