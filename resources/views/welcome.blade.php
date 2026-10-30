@@ -3709,8 +3709,8 @@
             if(circle) {
                 const radius = circle.r.baseVal.value;
                 const circumference = radius * 2 * Math.PI;
-                circle.style.strokeDasharray = ;
-                circle.style.strokeDashoffset = ;
+                circle.style.strokeDasharray = circumference + " " + circumference;
+                circle.style.strokeDashoffset = circumference;
 
                 let cachedDocHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
                 window.addEventListener('resize', () => {
