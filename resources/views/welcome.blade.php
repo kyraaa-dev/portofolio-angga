@@ -141,8 +141,12 @@
         .btn { 
             display: inline-flex; align-items: center; justify-content: center; gap: 8px; 
             padding: 12px 28px; border-radius: 8px; font-weight: 500; font-size: 15px; 
-            text-decoration: none; transition: all 0.2s ease; cursor: pointer; 
+            text-decoration: none; 
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease; 
+            cursor: pointer; 
         }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:active { transform: translateY(0); }
         .btn-primary { 
             background: var(--text-primary); color: var(--bg-base); border: 1px solid var(--text-primary); 
             box-shadow: 0 4px 14px rgba(0,0,0,0.1);
@@ -1128,7 +1132,7 @@
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 15px 35px var(--accent-glow); }
         .progress-ring { position: absolute; top: -1px; left: -1px; transform: rotate(-90deg); }
-        .progress-ring__circle { stroke-dasharray: 138.2; stroke-dashoffset: 138.2; transition: stroke-dashoffset 0.1s linear; }
+        .progress-ring__circle { stroke-dasharray: 138.2; stroke-dashoffset: 138.2; transition: none; }
 
         .about-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
         .code-snippet { font-family: monospace; font-size: 15px; color: var(--text-primary); line-height: 1.7; }
@@ -1610,14 +1614,14 @@
             opacity: 1;
         }
 
-        /* Smooth Reveal */
+        /* Super Smooth Apple-Grade Reveal */
         .reveal {
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
+        .delay-1 { transition-delay: 0.08s; }
+        .delay-2 { transition-delay: 0.16s; }
 
         @media (min-width: 768px) {
             .nav-links { display: flex; }
@@ -1977,6 +1981,7 @@
             .aurora-bg {
                 position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
                 z-index: 0; overflow: hidden; pointer-events: none;
+                contain: strict; transform: translateZ(0); will-change: transform;
             }
             .grid-overlay {
                 position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -2457,7 +2462,7 @@
     <header class="navbar reveal active">
         <a href="#" class="logo">
             <div class="logo-img-wrapper">
-                <img src="images/logo.png" alt="Logo" class="logo-img">
+                <img src="images/logo.png" alt="Logo" class="logo-img" decoding="async">
             </div>
             <span class="logo-text">{{ $settings['name'] ?? 'Angga Wiranata' }}</span>
         </a>
@@ -2531,6 +2536,7 @@
         .aurora-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; overflow: hidden; pointer-events: none;
+            contain: strict; transform: translateZ(0); will-change: transform;
             }
         .grid-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -2640,7 +2646,7 @@
                     </div>
                     
                     <div class="digital-id-image-wrapper">
-                        <img src="images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image" draggable="false">
+                        <img src="images/profile.jpg" alt="{{ $settings['name'] ?? 'Profile' }}" class="digital-id-image" draggable="false" decoding="async">
                     </div>
                     
                     <div class="digital-id-info">
@@ -2835,7 +2841,7 @@
         <div class="github-heatmap reveal delay-2">
             <h3>GitHub Activity</h3>
             <div class="heatmap-container">
-                <img src="https://ghchart.rshah.org/kyraaa-dev" alt="Angga Wiranata Github Chart" loading="lazy">
+                <img src="https://ghchart.rshah.org/kyraaa-dev" alt="Angga Wiranata Github Chart" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -2988,7 +2994,7 @@
                             $imageName = 'project-emutz.png';
                         }
                     @endphp
-                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); ">
+                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); " loading="lazy" decoding="async">
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
@@ -3040,7 +3046,7 @@
             <!-- Certificate 1 -->
             <div class="cert-card reveal delay-1">
                 <div class="cert-image-wrapper">
-                    <img src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img">
+                    <img src="images/cert-revou.png" alt="Sertifikat RevoU" class="cert-img" loading="lazy" decoding="async">
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">PT Revolusi Cita Edukasi</div>
@@ -3053,7 +3059,7 @@
 
             <!-- Certificate 2 -->
             <div class="cert-card reveal delay-2">
-                <div class="cert-image-wrapper"><img src="images/hacktiv8-ai.jpg" alt="Hacktiv8 AI Certificate" class="cert-img"></div>
+                <div class="cert-image-wrapper"><img src="images/hacktiv8-ai.jpg" alt="Hacktiv8 AI Certificate" class="cert-img" loading="lazy" decoding="async"></div>
                 <h3 class="cert-title" data-i18n="cert_2_title">AI Productivity for Developers</h3>
                 <div class="cert-issuer" data-i18n="cert_2_issuer">Hacktiv8 Indonesia</div>
                 <p class="cert-desc" data-i18n="cert_2_desc">Has completed the Maju Bareng AI program, and successfully developed a final project as part of the program requirements.</p>
@@ -3590,7 +3596,7 @@
 
             // Reveal Animations
             const revealElements = document.querySelectorAll('.reveal');
-            const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -20px 0px" };
+            const revealOptions = { threshold: 0.05, rootMargin: "0px 0px -30px 0px" };
             const revealOnScroll = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -3603,6 +3609,120 @@
             revealElements.forEach(el => {
                 revealOnScroll.observe(el);
             });
+
+            // 🚀 Super Smooth Anchor & Inertia Glide Engine (120fps Synchronized)
+            (function initSuperSmoothEngine() {
+                function smoothScrollTo(targetY, duration = 800) {
+                    const startY = window.scrollY || window.pageYOffset;
+                    const diff = targetY - startY;
+                    if (Math.abs(diff) < 2) return;
+
+                    const startTime = performance.now();
+                    let isCancelled = false;
+
+                    const cancelEvents = ['wheel', 'touchmove', 'keydown', 'mousedown'];
+                    function onInterrupt(e) {
+                        if (e.type === 'keydown' && !['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Space'].includes(e.code)) return;
+                        isCancelled = true;
+                        cleanup();
+                    }
+                    function cleanup() {
+                        cancelEvents.forEach(evt => window.removeEventListener(evt, onInterrupt, { passive: true }));
+                    }
+                    cancelEvents.forEach(evt => window.addEventListener(evt, onInterrupt, { passive: true }));
+
+                    function easeOutQuint(t) {
+                        return 1 - Math.pow(1 - t, 5);
+                    }
+
+                    function step(now) {
+                        if (isCancelled) return;
+                        const elapsed = now - startTime;
+                        const progress = Math.min(1, elapsed / duration);
+                        const ease = easeOutQuint(progress);
+
+                        window.scrollTo(0, startY + diff * ease);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(step);
+                        } else {
+                            cleanup();
+                        }
+                    }
+                    requestAnimationFrame(step);
+                }
+                window.smoothScrollTo = smoothScrollTo;
+
+                // Intercept Internal Anchors for Buttery Glide
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        const href = this.getAttribute('href');
+                        if (!href || href.startsWith('#lanyardPath')) return;
+                        if (href === '#' || href === '#top') {
+                            e.preventDefault();
+                            smoothScrollTo(0, 750);
+                            return;
+                        }
+                        try {
+                            const targetEl = document.querySelector(href);
+                            if (targetEl) {
+                                e.preventDefault();
+                                const navOffset = 72;
+                                const rect = targetEl.getBoundingClientRect();
+                                const targetY = Math.max(0, rect.top + window.scrollY - navOffset);
+                                smoothScrollTo(targetY, 850);
+                            }
+                        } catch (err) {}
+                    });
+                });
+
+                // Desktop Mouse Wheel Damped Glide (Only for physical notched mouse wheels; 100% native on trackpads & touch)
+                if (window.matchMedia('(pointer: fine) and (hover: hover)').matches) {
+                    let targetScrollY = window.scrollY;
+                    let currentScrollY = window.scrollY;
+                    let isWheeling = false;
+
+                    window.addEventListener('wheel', (e) => {
+                        const isDiscreteWheel = e.deltaMode !== 0 || (Math.abs(e.deltaY) >= 30 && Math.abs(e.deltaY) % 1 === 0);
+                        if (!isDiscreteWheel) {
+                            targetScrollY = window.scrollY;
+                            currentScrollY = window.scrollY;
+                            return;
+                        }
+
+                        e.preventDefault();
+                        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+                        targetScrollY = Math.max(0, Math.min(maxScroll, targetScrollY + e.deltaY * 0.92));
+
+                        if (!isWheeling) {
+                            isWheeling = true;
+                            currentScrollY = window.scrollY;
+
+                            function wheelStep() {
+                                const diff = targetScrollY - currentScrollY;
+                                if (Math.abs(diff) < 0.6) {
+                                    window.scrollTo(0, targetScrollY);
+                                    currentScrollY = targetScrollY;
+                                    isWheeling = false;
+                                    return;
+                                }
+                                currentScrollY += diff * 0.12;
+                                window.scrollTo(0, currentScrollY);
+                                requestAnimationFrame(wheelStep);
+                            }
+                            requestAnimationFrame(wheelStep);
+                        }
+                    }, { passive: false });
+
+                    window.addEventListener('scroll', () => {
+                        if (!isWheeling) {
+                            targetScrollY = window.scrollY;
+                            currentScrollY = window.scrollY;
+                        }
+                    }, { passive: true });
+                }
+            })();
+
 
             // Text Decrypt Animation Function
             const decryptChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
@@ -3741,8 +3861,13 @@
                     }
                 }, { passive: true });
 
-                backToTop.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                backToTop.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (window.smoothScrollTo) {
+                        window.smoothScrollTo(0, 800);
+                    } else {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
                 });
             }
 
