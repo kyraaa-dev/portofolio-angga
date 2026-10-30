@@ -3676,51 +3676,7 @@
                     });
                 });
 
-                // Desktop Mouse Wheel Damped Glide (Only for physical notched mouse wheels; 100% native on trackpads & touch)
-                if (window.matchMedia('(pointer: fine) and (hover: hover)').matches) {
-                    let targetScrollY = window.scrollY;
-                    let currentScrollY = window.scrollY;
-                    let isWheeling = false;
 
-                    window.addEventListener('wheel', (e) => {
-                        const isDiscreteWheel = e.deltaMode !== 0 || (Math.abs(e.deltaY) >= 30 && Math.abs(e.deltaY) % 1 === 0);
-                        if (!isDiscreteWheel) {
-                            targetScrollY = window.scrollY;
-                            currentScrollY = window.scrollY;
-                            return;
-                        }
-
-                        e.preventDefault();
-                        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-                        targetScrollY = Math.max(0, Math.min(maxScroll, targetScrollY + e.deltaY * 0.92));
-
-                        if (!isWheeling) {
-                            isWheeling = true;
-                            currentScrollY = window.scrollY;
-
-                            function wheelStep() {
-                                const diff = targetScrollY - currentScrollY;
-                                if (Math.abs(diff) < 0.6) {
-                                    window.scrollTo(0, targetScrollY);
-                                    currentScrollY = targetScrollY;
-                                    isWheeling = false;
-                                    return;
-                                }
-                                currentScrollY += diff * 0.12;
-                                window.scrollTo(0, currentScrollY);
-                                requestAnimationFrame(wheelStep);
-                            }
-                            requestAnimationFrame(wheelStep);
-                        }
-                    }, { passive: false });
-
-                    window.addEventListener('scroll', () => {
-                        if (!isWheeling) {
-                            targetScrollY = window.scrollY;
-                            currentScrollY = window.scrollY;
-                        }
-                    }, { passive: true });
-                }
             })();
 
 
@@ -3843,11 +3799,6 @@
                         window.requestAnimationFrame(() => {
                             const scrollTotal = window.scrollY || document.documentElement.scrollTop;
                             const scrollPercent = Math.min(1, Math.max(0, scrollTotal / cachedDocHeight));
-                            
-                            if (scrollBar) {
-                                scrollBar.style.width = (scrollPercent * 100) + "%";
-                            }
-                            
                             circle.style.strokeDashoffset = circumference - scrollPercent * circumference;
 
                             if (scrollTotal > 300) {
