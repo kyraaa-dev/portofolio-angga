@@ -1097,10 +1097,10 @@
         .project-modal-content {
             background: var(--bg-surface); border: 1px solid var(--border-color);
             padding: 40px; border-radius: 20px; max-width: 600px; width: 100%;
-            transform: scale(0.9) translateY(30px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: none; transition: opacity 0.2s ease;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative;
         }
-        .project-modal-overlay.active .project-modal-content { transform: scale(1) translateY(0); }
+        .project-modal-overlay.active .project-modal-content { transform: none; }
         .project-modal-close {
             position: absolute; top: 24px; right: 24px; background: none; border: none;
             color: var(--text-secondary); cursor: pointer; transition: color 0.2s ease;
@@ -1264,15 +1264,16 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 16px; 
             padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; 
-            transform-style: preserve-3d;
+            position: relative; overflow: hidden;
+            transform: none !important;
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
         .project-card > * {
-            transform: translateZ(30px);
+            transform: none;
         }
         .project-card:hover { 
             border-color: var(--accent-color); background: var(--bg-surface-hover);
-            box-shadow: 0 15px 40px var(--accent-glow), inset 0 0 20px var(--accent-glow);
+            transform: none !important;
         }
         /* Flashlight Effect */
         .project-card::after {
@@ -1930,14 +1931,12 @@
             .marquee-section { box-shadow: none !important; }
         }
     
-        /* Optimized Project Card Hover */
-        .project-card { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease; }
-        .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-color: var(--accent-glow); }
-        .project-card:hover .project-img { transform: scale(1.05); }
+        /* Static Project Card - No Animation */
+        .project-card { transform: none !important; }
+        .project-card:hover { transform: none !important; }
+        .project-card:hover .project-img { transform: none !important; }
         .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-        .project-img-hover { transition: opacity 0.4s ease, transform 0.5s ease; }
         .project-card:hover .project-img-hover { opacity: 1; }
-        /* project-card-clean-hover */
         
     </style>
 
@@ -2930,12 +2929,12 @@
     </section>
 
     <section id="projects" class="projects container">
-        <div class="section-header reveal">
-            <h2 class="section-title text-reveal" data-i18n="proj_title">Selected Projects</h2>
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="proj_title">Selected Projects</h2>
             <p class="section-description" data-i18n="proj_desc">Engineered solutions for enterprise clients and institutions.</p>
         </div>
         
-        <div class="filters reveal delay-1">
+        <div class="filters">
             <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">5</span></button>
             <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">5</span></button>
             <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">3</span></button>
@@ -2960,7 +2959,7 @@
                     $cardDesc = 'E-MutZ KORPRI adalah sistem informasi manajemen dan rekapitulasi pemesanan seragam/atribut Mutz KORPRI untuk seluruh SKPD / ASN, mencakup pencatatan pesanan per SKPD, manajemen stok & retur, statistik pemesanan real-time, cetak kwitansi, hingga export laporan data.';
                 }
             @endphp
-            <div class="project-card reveal delay-{{ $index % 3 }}" data-category="{{ $filterCategories }}" data-desc="{{ $cardDesc }}">
+            <div class="project-card" data-category="{{ $filterCategories }}" data-desc="{{ $cardDesc }}">
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
                         $imageName = 'project-korpri.png';
@@ -2976,10 +2975,10 @@
                             $imageName = 'project-emutz.png';
                         }
                     @endphp
-                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); ">
                     
                     @if($hoverImageName)
-                        <img src="images/{{ $hoverImageName }}" alt="{{ $project->title }} Alternate" class="project-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                        <img src="images/{{ $hoverImageName }}" alt="{{ $project->title }} Alternate" class="project-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; ">
                     @endif
 
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
@@ -3264,12 +3263,10 @@
                         const categories = card.getAttribute('data-category');
                         if (filter === 'all' || categories.includes(filter)) {
                             card.style.display = 'flex';
-                            card.classList.add('active');
-                            setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 50);
+                            card.style.opacity = '1';
+                            card.style.transform = 'none';
                         } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(10px)';
-                            setTimeout(() => { card.style.display = 'none'; }, 300);
+                            card.style.display = 'none';
                         }
                     });
                 });
@@ -3360,24 +3357,18 @@
                     projectModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                     
-                    // Trigger Decrypt Effect
-                    if (modalTitleEl) decryptText(modalTitleEl, title, 40);
+                    // Set modal text instantly without scramble animations
+                    if (modalTitleEl) modalTitleEl.textContent = title;
                     if (modalDescEl) {
                         const customDesc = card.getAttribute('data-desc');
-                        
-                        // Use custom desc if available, else fallback to generic text
                         let localizedText = customDesc ? customDesc : modalDescText;
-                        
-                        // If it matches the default English generic text, try getting translation
                         if (!customDesc) {
                             const descKey = modalDescEl.getAttribute('data-i18n');
                             if (descKey && translations[descKey] && translations[descKey][currentLang]) {
                                 localizedText = translations[descKey][currentLang];
                             }
                         }
-                            
-                        modalDescEl.textContent = "";
-                        setTimeout(() => decryptText(modalDescEl, localizedText, 15), 300);
+                        modalDescEl.textContent = localizedText;
                     }
                 });
             });
