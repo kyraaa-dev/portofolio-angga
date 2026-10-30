@@ -151,18 +151,8 @@
             background: transparent; color: var(--text-primary);
         }
         
-        /* Radar Pulse Effect */
+        /* Radar Effect */
         .btn-radar { position: relative; z-index: 1; }
-        .btn-radar::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100%; height: 100%; background: var(--text-primary); border-radius: 8px;
-            z-index: -1; pointer-events: none;
-            animation: radar-pulse 2.5s infinite cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        @keyframes radar-pulse {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-            100% { transform: translate(-50%, -50%) scale(1.4, 1.7); opacity: 0; }
-        }
 
         .btn-outline { 
             background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); 
@@ -224,20 +214,15 @@
             transform: translateY(-2px);
             color: var(--accent-color);
         }
-        /* Pulse ring */
         .btn-collab::after {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 100px;
             border: 1px solid var(--accent-glow);
-            animation: collabRing 2s ease-out infinite;
             pointer-events: none;
         }
-        @keyframes collabRing {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.15); opacity: 0; }
-        }
+
         /* Arrow icon animation */
         .btn-collab .collab-arrow {
             transition: transform 0.3s ease;
@@ -253,12 +238,7 @@
             background: var(--accent-color);
             border-radius: 50%;
             box-shadow: 0 0 6px var(--accent-color);
-            animation: dotPulse 1.5s ease-in-out infinite;
             flex-shrink: 0;
-        }
-        @keyframes dotPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
         }
 
         /* Navbar */
@@ -320,10 +300,7 @@
             border-radius: 50%;
             box-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--accent-color);
         }
-        @keyframes shimmerBar {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+        
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 10px; }
@@ -331,67 +308,16 @@
         ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 10px; border: 2px solid var(--bg-base); }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
-        /* Glowing Interactive Grid Background */
+        /* Subtle Grid Background */
         .grid-background {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;
             background-image: 
                 linear-gradient(var(--border-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
             background-size: 50px 50px;
-            opacity: 0.4;
-            -webkit-mask-image: radial-gradient(500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
-            mask-image: radial-gradient(500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
-        }
-
-        /* Cinematic Preloader */
-        .preloader {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; height: 100dvh;
-            background: #050505; z-index: 999999; display: flex; justify-content: center; align-items: center;
-            overflow: hidden;
-            transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
-        }
-        #matrixCanvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: block; z-index: 1; background: #000;
-        }
-        .preloader.fade-out {
-            opacity: 0; visibility: hidden;
-        }
-        .preloader::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff; z-index: 100; opacity: 0; pointer-events: none;
-            transition: opacity 0.2s ease-out;
-        }
-        .preloader.overload::after { opacity: 1; }
-
-        .preloader-percentage-new {
-            position: absolute; top: 50% !important; left: 50% !important;
-            transform: translate3d(-50%, -50%, 0) !important;
-            -webkit-transform: translate3d(-50%, -50%, 0) !important;
-            margin: 0 !important;
-            font-size: clamp(56px, 9vw, 130px); font-weight: 900; color: transparent;
-            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25); z-index: 10;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            text-align: center;
-            font-variant-numeric: tabular-nums;
-            user-select: none;
-            will-change: transform;
-        }
-        .preloader-percentage-new::before {
-            content: attr(data-text); position: absolute; top: 0; left: 0; color: #fff;
-            width: var(--progress, 0%); overflow: hidden; white-space: nowrap;
-            line-height: 1; text-align: left;
-            -webkit-text-stroke: 0;
-            filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.35));
-        }
-        .preloader.slide-up .preloader-percentage-new { opacity: 0; }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
+            opacity: 0.25;
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
         }
 
         .nav-links { display: none; gap: 32px; align-items: center; }
@@ -422,10 +348,6 @@
             background-size: 200% auto;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
             transition: background 0.5s ease;
-            animation: textShimmer 6s linear infinite;
-        }
-        @keyframes textShimmer {
-            to { background-position: 200% center; }
         }
         .hero-subtitle { 
             font-size: 24px; font-weight: 400; color: var(--text-secondary); margin-bottom: 32px; 
@@ -461,30 +383,9 @@
             background: var(--accent-color); display: flex; align-items: center; justify-content: center;
             position: relative; flex-shrink: 0; color: #000;
         }
-        .voice-pulse {
-            position: absolute; inset: -4px; border-radius: 50%;
-            border: 2px solid var(--accent-color); opacity: 0.5;
-            animation: voicePulse 2s ease-out infinite;
-        }
-        @keyframes voicePulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.6); opacity: 0; }
-        }
-        .voice-btn.playing .voice-pulse { animation-duration: 0.8s; }
         .equalizer { display: flex; align-items: flex-end; gap: 3px; height: 18px; }
-        .eq-bar {
-            width: 3px; border-radius: 2px; background: #000;
-            animation: eqDance 0.6s ease-in-out infinite alternate;
-        }
-        .eq-bar:nth-child(1) { animation-delay: 0s; height: 8px; }
-        .eq-bar:nth-child(2) { animation-delay: 0.1s; height: 14px; }
-        .eq-bar:nth-child(3) { animation-delay: 0.2s; height: 10px; }
-        .eq-bar:nth-child(4) { animation-delay: 0.15s; height: 16px; }
-        .eq-bar:nth-child(5) { animation-delay: 0.05s; height: 7px; }
-        @keyframes eqDance {
-            0% { transform: scaleY(0.3); }
-            100% { transform: scaleY(1.2); }
-        }
+        .eq-bar { width: 3px; border-radius: 2px; background: #000; height: 10px; }
+
         .voice-label { color: var(--text-primary); transition: color 0.3s ease; }
 
         /* 🪢 Interactive Hanging 3D Lanyard ID Card System */
@@ -551,25 +452,22 @@
             filter: drop-shadow(0 6px 16px rgba(0,0,0,0.65));
         }
 
-        /* Draggable Assembly (Card + Hardware) */
+        /* Card Assembly (Card + Hardware) */
         .lanyard-card-assembly {
             position: absolute;
             top: 0;
             left: 50%;
             width: 320px;
             margin-left: -160px;
-            transform-origin: 160px 24px;
-            will-change: transform;
-            cursor: grab;
+            transform: translateY(145px);
             z-index: 20;
             display: flex;
             flex-direction: column;
             align-items: center;
-            touch-action: none; /* Only the card itself captures horizontal/custom dragging */
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .lanyard-card-assembly:active,
-        .lanyard-card-assembly.is-dragging {
-            cursor: grabbing;
+        .lanyard-card-assembly:hover {
+            transform: translateY(140px);
         }
 
         /* Monolithic Minimalist Titanium Clamp & Wire Loop */
@@ -654,41 +552,7 @@
             z-index: 10;
         }
 
-        /* Drag Hint Indicator */
-        .lanyard-drag-hint {
-            position: absolute;
-            top: -46px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 112, 243, 0.25);
-            border: 1px solid rgba(0, 112, 243, 0.5);
-            color: #60a5fa;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-            pointer-events: none;
-            box-shadow: 0 4px 15px rgba(0, 112, 243, 0.35);
-            animation: hintBounce 2s ease-in-out infinite;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            z-index: 30;
-        }
-        .lanyard-drag-hint.hidden {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-10px) scale(0.9);
-            pointer-events: none;
-        }
-        @keyframes hintBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-6px); }
-        }
+        .lanyard-drag-hint { display: none; }
 
         /* Holographic Sheen / Rainbow Foil Overlay */
         .id-holo-foil {
@@ -702,13 +566,14 @@
                 rgba(255, 230, 0, 0.18) 65%, 
                 transparent 85%
             );
-            background-size: 200% 200%;
+            background-size: 100% 100%;
             mix-blend-mode: color-dodge;
             opacity: 0.25;
             pointer-events: none;
             z-index: 6;
             transition: opacity 0.2s ease;
         }
+        .digital-id-card:hover .id-holo-foil { opacity: 0.35; }
 
         /* 3D Glass Access Card (Optimized & Premium) */
         .digital-id-perspective {
@@ -795,66 +660,12 @@
         .glitch-role {
             position: relative;
             display: inline-block;
-            text-shadow: 0 0 10px rgba(0, 255, 249, 0.8);
-            animation: textFlicker 3s infinite alternate;
+            color: #00fff9;
+            text-shadow: 0 0 10px rgba(0, 255, 249, 0.6);
         }
-        .glitch-role::before, .glitch-role::after {
-            content: attr(data-text);
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        }
-        .glitch-role::before {
-            left: 2px; text-shadow: -1px 0 rgba(255,0,0,0.7);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        .glitch-role::after {
-            left: -2px; text-shadow: -1px 0 rgba(0,0,255,0.7);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 8px, 0); }
-            20% { clip: rect(32px, 9999px, 86px, 0); }
-            40% { clip: rect(65px, 9999px, 12px, 0); }
-            60% { clip: rect(12px, 9999px, 90px, 0); }
-            80% { clip: rect(78px, 9999px, 43px, 0); }
-            100% { clip: rect(3px, 9999px, 25px, 0); }
-        }
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(65px, 9999px, 100px, 0); }
-            20% { clip: rect(10px, 9999px, 32px, 0); }
-            40% { clip: rect(45px, 9999px, 73px, 0); }
-            60% { clip: rect(87px, 9999px, 12px, 0); }
-            80% { clip: rect(34px, 9999px, 56px, 0); }
-            100% { clip: rect(12px, 9999px, 89px, 0); }
-        }
-        @keyframes textFlicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(0, 255, 249, 0.8), 0 0 20px rgba(0, 255, 249, 0.4); }
-            20%, 24%, 55% { opacity: 0.8; text-shadow: none; }
-        }
-        
         .glitch-text {
             position: relative;
             display: inline-block;
-            animation: glitchTextFlicker 3s infinite alternate;
-        }
-        .glitch-text::before, .glitch-text::after {
-            content: attr(data-text);
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        }
-        .glitch-text::before {
-            left: 2px; text-shadow: -1px 0 rgba(255,0,0,0.7);
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-        .glitch-text::after {
-            left: -2px; text-shadow: -1px 0 rgba(0,0,255,0.7);
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-anim 2.5s infinite linear alternate-reverse;
-        }
-        @keyframes glitchTextFlicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-            20%, 24%, 55% { opacity: 0.8; }
         }
 
         .digital-id-footer {
@@ -910,7 +721,6 @@
         }
         
         /* Light Mode Overrides for Preloader */
-
 
         /* Stats */
         .stats { 
@@ -989,15 +799,9 @@
         }
         .radar-wrapper { padding: 0 24px 24px 24px; }
         /* Profile Photo Neon Ring */
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-        @keyframes floatCode {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
+        
+        
+
         .mac-header {
             background: rgba(0,0,0,0.2); padding: 16px 20px; display: flex; gap: 8px;
             border-bottom: 1px solid var(--border-color); transition: background 0.5s ease;
@@ -1240,8 +1044,7 @@
             position: absolute;
             border-radius: 50%;
             border: 1px dashed rgba(255, 255, 255, 0.15);
-            animation: orbit-spin linear infinite;
-        }
+            }
         [data-theme="light"] .orbit-ring {
             border-color: rgba(0, 0, 0, 0.15);
         }
@@ -1268,18 +1071,11 @@
         }
         .orbit-item.rev {
             /* Reverse the rotation so text/logo stays upright */
-            animation: orbit-spin-rev linear infinite;
-        }
-        .orbit-ring-1 .orbit-item.rev { animation-duration: 15s; }
-        .orbit-ring-2 .orbit-item.rev { animation-duration: 25s; animation-direction: reverse; }
-        .orbit-ring-3 .orbit-item.rev { animation-duration: 35s; }
+            }
+        
 
-        @keyframes orbit-spin {
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes orbit-spin-rev {
-            100% { transform: rotate(-360deg); }
-        }
+        
+        
 
         /* Responsive Orbit */
         @media (max-width: 768px) {
@@ -1313,7 +1109,6 @@
         .project-modal-logo { margin-bottom: 24px; text-align: left; }
         .project-modal-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.4; }
         .project-modal-desc { color: var(--text-secondary); line-height: 1.8; font-size: 16px; margin-bottom: 24px; }
-
 
         /* Back to Top Progress Ring */
         .back-to-top {
@@ -1569,11 +1364,7 @@
             opacity: 0.6;
         }
 
-        @keyframes float-terminal {
-            0% { transform: rotateY(-8deg) rotateX(4deg) translateY(0px); }
-            50% { transform: rotateY(-8deg) rotateX(4deg) translateY(-15px); }
-            100% { transform: rotateY(-8deg) rotateX(4deg) translateY(0px); }
-        }
+        
 
         .contact-terminal:hover {
             animation-play-state: paused;
@@ -1654,13 +1445,8 @@
         [data-theme="light"] .status-badge { background: rgba(255, 255, 255, 0.5); }
         .pulse { 
             width: 8px; height: 8px; background-color: var(--accent-color); border-radius: 50%; 
-            box-shadow: 0 0 0 0 var(--accent-glow); animation: pulse 2s infinite; 
-        }
-        @keyframes pulse { 
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); } 
-            70% { transform: scale(1); box-shadow: 0 0 0 10px var(--accent-glow); } 
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--accent-glow); } 
-        }
+            box-shadow: 0 0 0 0 var(--accent-glow); }
+        
 
         /* Footer */
         /* Certificates */
@@ -1809,26 +1595,7 @@
         .blinking-cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent-color); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-
-
-
-        /* Custom Cursor */
-        @media (pointer: fine) {
-            body { cursor: none; }
-            a, button, .filter-btn, .logo { cursor: none !important; }
-            
-            .cursor-dot, .cursor-outline {
-                position: fixed; top: 0; left: 0; transform: translate3d(-50%, -50%, 0);
-                border-radius: 50%; z-index: 999999; pointer-events: none;
-                will-change: transform; opacity: 0; transition: opacity 0.3s ease;
-            }
-            .cursor-dot { width: 8px; height: 8px; background-color: var(--text-primary); transition: background-color 0.5s ease; }
-            .cursor-outline { 
-                width: 40px; height: 40px; border: 1px solid var(--text-secondary); 
-                transition: width 0.2s, height 0.2s, border-color 0.5s ease, background-color 0.2s; 
-            }
-            
-        }
+        
 
         
         .word-reveal-inner { 
@@ -1931,8 +1698,6 @@
             .mobile-overlay.active .mobile-nav-item:nth-child(1) .mobile-link { transition-delay: 0.1s; }
             .mobile-overlay.active .mobile-nav-item:nth-child(2) .mobile-link { transition-delay: 0.2s; }
             .mobile-overlay.active .mobile-nav-item:nth-child(3) .mobile-link { transition-delay: 0.3s; }
-
-
 
             .logo { flex: 1; min-width: 0; }
             .logo-text { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
@@ -2048,7 +1813,6 @@
                 min-height: auto !important;
             }
 
-
             /* Fix orbit overflowing on narrow screens */
             .orbit-section { overflow: hidden; }
             .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
@@ -2103,10 +1867,7 @@
                 flex-shrink: 0 !important;
             }
 
-            /* Radar pulse tuned for mobile to avoid bleeding into adjacent button */
-            .btn-radar::after {
-                animation: radar-pulse-mobile 2.5s infinite cubic-bezier(0.19, 1, 0.22, 1) !important;
-            }
+            
             
             /* Stats grid tighter */
             .stats { gap: 12px; }
@@ -2125,10 +1886,8 @@
             .scroll-progress { height: 2px; }
         }
         
-        @keyframes radar-pulse-mobile {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.35; }
-            100% { transform: translate(-50%, -50%) scale(1.08, 1.2); opacity: 0; }
-        }
+        
+
         
         @media (max-width: 480px) {
             .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
@@ -2147,7 +1906,6 @@
             /* Reduce container padding */
             .container { padding: 0 16px; }
         }
-
 
         /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
         .reveal, .section-header, .hero, .navbar, .footer,
@@ -2171,6 +1929,16 @@
             /* Reduce paint area for marquee */
             .marquee-section { box-shadow: none !important; }
         }
+    
+        /* Optimized Project Card Hover */
+        .project-card { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease; }
+        .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-color: var(--accent-glow); }
+        .project-card:hover .project-img { transform: scale(1.05); }
+        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
+        .project-img-hover { transition: opacity 0.4s ease, transform 0.5s ease; }
+        .project-card:hover .project-img-hover { opacity: 1; }
+        /* project-card-clean-hover */
+        
     </style>
 
     <!-- Prevent Theme Flash & Reset Merdeka Mode -->
@@ -2240,9 +2008,7 @@
             letter-spacing: 0.5px;
             cursor: default;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: organicFloat 6s ease-in-out infinite;
-            animation-delay: var(--delay);
-            will-change: transform;
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
             transform: translateZ(0);
         }
         [data-theme="light"] .tech-pill {
@@ -2269,10 +2035,8 @@
         .tech-pill:hover .tech-icon {
             transform: scale(1.1) rotate(5deg);
         }
-        @keyframes organicFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
+        
+
         @media (max-width: 768px) {
             .tech-grid { gap: 12px; padding: 0 10px; }
             .tech-pill { padding: 12px 20px; font-size: 14px; backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
@@ -2663,11 +2427,7 @@
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
-    <!-- The Matrix Code Rain Preloader -->
-    <div class="preloader" id="preloader">
-        <canvas id="matrixCanvas"></canvas>
-        <div class="preloader-percentage-new" id="preloaderPerc" data-text="0%" style="position: absolute; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); -webkit-transform: translate3d(-50%, -50%, 0); margin: 0; line-height: 1; text-align: center;">0%</div>
-    </div>
+    
     
     <!-- Interactive Grid Background -->
     <div class="grid-background" id="gridBackground"></div>
@@ -2676,10 +2436,7 @@
     <div class="scroll-progress-container">
             </div>
 
-    <!-- Custom Cursor Elements -->
     
-    <div class="cursor-dot" id="cursorDot" style="opacity: 0;"></div>
-    <div class="cursor-outline" id="cursorOutline" style="opacity: 0;"></div>
 
     <div class="bg-mesh"></div>
     
@@ -2755,7 +2512,6 @@
         </div>
     </div>
 
-
     <style>
                         /* Pure CSS Static Aurora Background */
         .aurora-bg {
@@ -2796,9 +2552,6 @@
             </a>
         </div>
 
-
-
-
         <!-- 🪢 Interactive Hanging Lanyard 3D ID Card -->
         <div class="lanyard-system reveal active delay-2" id="lanyardSystem">
             <!-- Top Ceiling Mount Bracket -->
@@ -2832,17 +2585,17 @@
                 </defs>
 
                 <!-- Left Strap (Minimalist Satin + Luminous Filament + Micro-Text) -->
-                <path id="lanyardPathLeft" class="lanyard-path-band" d="" fill="none" stroke="url(#minimalSatinGrad)" stroke-width="16" stroke-linecap="round" />
-                <path id="lanyardPathLeftFilament" d="" fill="none" stroke="url(#luminousFilamentGrad)" stroke-width="1.6" filter="url(#filamentGlow)" opacity="0.9" />
-                <path id="lanyardPathLeftHighlight" d="" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="15" stroke-linecap="round" />
+                <path id="lanyardPathLeft" class="lanyard-path-band" d="M 162 10 Q 188 85 198 160" fill="none" stroke="url(#minimalSatinGrad)" stroke-width="16" stroke-linecap="round" />
+                <path id="lanyardPathLeftFilament" d="M 162 10 Q 188 85 198 160" fill="none" stroke="url(#luminousFilamentGrad)" stroke-width="1.6" filter="url(#filamentGlow)" opacity="0.9" />
+                <path id="lanyardPathLeftHighlight" d="M 162 10 Q 188 85 198 160" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="15" stroke-linecap="round" />
                 <text class="minimal-strap-text">
                     <textPath href="#lanyardPathLeft" startOffset="50%" text-anchor="middle">ANGGA WIRANATA</textPath>
                 </text>
 
                 <!-- Right Strap (Minimalist Satin + Luminous Filament + Micro-Text) -->
-                <path id="lanyardPathRight" class="lanyard-path-band" d="" fill="none" stroke="url(#minimalSatinGrad)" stroke-width="16" stroke-linecap="round" />
-                <path id="lanyardPathRightFilament" d="" fill="none" stroke="url(#luminousFilamentGrad)" stroke-width="1.6" filter="url(#filamentGlow)" opacity="0.9" />
-                <path id="lanyardPathRightHighlight" d="" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="15" stroke-linecap="round" />
+                <path id="lanyardPathRight" class="lanyard-path-band" d="M 238 10 Q 212 85 202 160" fill="none" stroke="url(#minimalSatinGrad)" stroke-width="16" stroke-linecap="round" />
+                <path id="lanyardPathRightFilament" d="M 238 10 Q 212 85 202 160" fill="none" stroke="url(#luminousFilamentGrad)" stroke-width="1.6" filter="url(#filamentGlow)" opacity="0.9" />
+                <path id="lanyardPathRightHighlight" d="M 238 10 Q 212 85 202 160" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="15" stroke-linecap="round" />
                 <text class="minimal-strap-text">
                     <textPath href="#lanyardPathRight" startOffset="50%" text-anchor="middle">SOFTWARE ENGINEER</textPath>
                 </text>
@@ -2998,7 +2751,6 @@
         </div>
     </section>
 
-
     <!-- About Section -->
     <section id="about" class="about container reveal">
         <div class="about-grid">
@@ -3012,7 +2764,7 @@
                                         <svg class="collab-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                                     </a>
             </div>
-            <div class="about-visual" style="padding: 32px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; animation: floatCode 6s ease-in-out infinite;">
+            <div class="about-visual" style="padding: 32px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; ">
                 <div class="radar-wrapper" id="radarWrapper">
                     <!-- SVG Radar Chart -->
                     <div class="radar-chart-container">
@@ -3216,47 +2968,7 @@
         </div>
 
         <div class="project-grid">
-                                    <div class="project-card reveal delay-0" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="Unggulan" data-desc="Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).">
-                <style>
-                    @keyframes autoCrossfade {
-                        0%, 45% { opacity: 0; transform: scale(1); }
-                        50%, 95% { opacity: 1; transform: scale(1.05); }
-                        100% { opacity: 0; transform: scale(1); }
-                    }
-                    @keyframes scanline {
-                        0% { top: -10%; }
-                        50% { top: 110%; }
-                        100% { top: -10%; }
-                    }
-                    @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-                    
-                    .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
-                    
-                    /* Holographic Scanline Overlay */
-                    .project-image-wrapper::before {
-                        content: ''; position: absolute; left: 0; right: 0; top: -10%; height: 2px;
-                        background: var(--accent-color);
-                        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-                        z-index: 10; pointer-events: none; opacity: 0;
-                        transition: opacity 0.3s;
-                    }
-                    
-                    /* Cyberpunk Tech Grid Overlay */
-                    .project-image-wrapper::after {
-                        content: ''; position: absolute; inset: 0;
-                        background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
-                        background-size: 100% 4px, 3px 100%;
-                        z-index: 5; pointer-events: none; opacity: 0;
-                        transition: opacity 0.5s;
-                    }
-
-                    @media (hover: hover) and (pointer: fine) {
-                        .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
-                        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-                        .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
-                        .project-card:hover .project-image-wrapper::after { opacity: 1; }
-                    }
-                </style>
+                                    <div class="project-card reveal delay-0">
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img src="images/project-korpri.png" alt="SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3270,7 +2982,7 @@
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">SILUKOR SISTEM INFORMASI LAYANAN USULAN KEANGGOTAAN KORPRI</h3>
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
                             <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); "></span>
                                 <span  data-i18n="proj_feat" >Unggulan</span>
                             </div>
                                                             <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
@@ -3281,51 +2993,11 @@
                     </a>
                 </div>
             </div>
-                                    <div class="project-card reveal delay-1" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="Unggulan" data-desc="Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.">
-                <style>
-                    @keyframes autoCrossfade {
-                        0%, 45% { opacity: 0; transform: scale(1); }
-                        50%, 95% { opacity: 1; transform: scale(1.05); }
-                        100% { opacity: 0; transform: scale(1); }
-                    }
-                    @keyframes scanline {
-                        0% { top: -10%; }
-                        50% { top: 110%; }
-                        100% { top: -10%; }
-                    }
-                    @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-                    
-                    .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
-                    
-                    /* Holographic Scanline Overlay */
-                    .project-image-wrapper::before {
-                        content: ''; position: absolute; left: 0; right: 0; top: -10%; height: 2px;
-                        background: var(--accent-color);
-                        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-                        z-index: 10; pointer-events: none; opacity: 0;
-                        transition: opacity 0.3s;
-                    }
-                    
-                    /* Cyberpunk Tech Grid Overlay */
-                    .project-image-wrapper::after {
-                        content: ''; position: absolute; inset: 0;
-                        background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
-                        background-size: 100% 4px, 3px 100%;
-                        z-index: 5; pointer-events: none; opacity: 0;
-                        transition: opacity 0.5s;
-                    }
-
-                    @media (hover: hover) and (pointer: fine) {
-                        .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
-                        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-                        .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
-                        .project-card:hover .project-image-wrapper::after { opacity: 1; }
-                    }
-                </style>
+                                    <div class="project-card reveal delay-1">
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img src="images/duta-korpri.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
-                                            <img src="images/duta-korpri-2026.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Alternate" class="project-img-hover auto-slideshow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
+                                            <img src="images/duta-korpri-2026.png" alt="SISDUKOR SISTEM INFORMASI DUTA KORPRI Alternate" class="project-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
@@ -3336,7 +3008,7 @@
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">SISDUKOR SISTEM INFORMASI DUTA KORPRI</h3>
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
                             <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); "></span>
                                 <span  data-i18n="proj_feat" >Unggulan</span>
                             </div>
                                                             <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
@@ -3347,47 +3019,7 @@
                     </a>
                 </div>
             </div>
-                                    <div class="project-card reveal delay-2" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="Unggulan, Selesai" data-desc="KasFlow adalah aplikasi manajemen arus kas pribadi yang intuitif dan modern untuk mencatat pemasukan, pengeluaran, serta melacak kesehatan finansial secara real-time.">
-                <style>
-                    @keyframes autoCrossfade {
-                        0%, 45% { opacity: 0; transform: scale(1); }
-                        50%, 95% { opacity: 1; transform: scale(1.05); }
-                        100% { opacity: 0; transform: scale(1); }
-                    }
-                    @keyframes scanline {
-                        0% { top: -10%; }
-                        50% { top: 110%; }
-                        100% { top: -10%; }
-                    }
-                    @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-                    
-                    .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
-                    
-                    /* Holographic Scanline Overlay */
-                    .project-image-wrapper::before {
-                        content: ''; position: absolute; left: 0; right: 0; top: -10%; height: 2px;
-                        background: var(--accent-color);
-                        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-                        z-index: 10; pointer-events: none; opacity: 0;
-                        transition: opacity 0.3s;
-                    }
-                    
-                    /* Cyberpunk Tech Grid Overlay */
-                    .project-image-wrapper::after {
-                        content: ''; position: absolute; inset: 0;
-                        background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
-                        background-size: 100% 4px, 3px 100%;
-                        z-index: 5; pointer-events: none; opacity: 0;
-                        transition: opacity 0.5s;
-                    }
-
-                    @media (hover: hover) and (pointer: fine) {
-                        .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
-                        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-                        .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
-                        .project-card:hover .project-image-wrapper::after { opacity: 1; }
-                    }
-                </style>
+                                    <div class="project-card reveal delay-2">
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img src="images/kasflow-app.png" alt="KasFlow - Personal Cash Flow Manager Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3401,7 +3033,7 @@
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">KasFlow - Personal Cash Flow Manager</h3>
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
                             <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); "></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
                                                             <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
@@ -3415,47 +3047,7 @@
                     </a>
                 </div>
             </div>
-                                    <div class="project-card reveal delay-0" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="Unggulan, Selesai" data-desc="Jelajahin adalah asisten perjalanan cerdas bertenaga AI yang dirancang untuk memandu wisatawan menjelajahi Indonesia, dilengkapi fitur AI Travel Assistant, Itinerary Studio interaktif, ekspor PDF, eksplorasi destinasi, hingga perkiraan cuaca real-time.">
-                <style>
-                    @keyframes autoCrossfade {
-                        0%, 45% { opacity: 0; transform: scale(1); }
-                        50%, 95% { opacity: 1; transform: scale(1.05); }
-                        100% { opacity: 0; transform: scale(1); }
-                    }
-                    @keyframes scanline {
-                        0% { top: -10%; }
-                        50% { top: 110%; }
-                        100% { top: -10%; }
-                    }
-                    @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-                    
-                    .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
-                    
-                    /* Holographic Scanline Overlay */
-                    .project-image-wrapper::before {
-                        content: ''; position: absolute; left: 0; right: 0; top: -10%; height: 2px;
-                        background: var(--accent-color);
-                        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-                        z-index: 10; pointer-events: none; opacity: 0;
-                        transition: opacity 0.3s;
-                    }
-                    
-                    /* Cyberpunk Tech Grid Overlay */
-                    .project-image-wrapper::after {
-                        content: ''; position: absolute; inset: 0;
-                        background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
-                        background-size: 100% 4px, 3px 100%;
-                        z-index: 5; pointer-events: none; opacity: 0;
-                        transition: opacity 0.5s;
-                    }
-
-                    @media (hover: hover) and (pointer: fine) {
-                        .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
-                        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-                        .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
-                        .project-card:hover .project-image-wrapper::after { opacity: 1; }
-                    }
-                </style>
+                                    <div class="project-card reveal delay-0">
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img src="images/project-travel.png" alt="Jelajahin - AI Travel Assistant &amp; Itinerary Planner Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3469,7 +3061,7 @@
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">Jelajahin - AI Travel Assistant &amp; Itinerary Planner</h3>
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
                             <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); "></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
                                                             <a href="https://project-travel-six.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
@@ -3483,47 +3075,7 @@
                     </a>
                 </div>
             </div>
-                                    <div class="project-card reveal delay-1" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.2" data-category="Unggulan, Selesai" data-desc="E-MutZ KORPRI adalah sistem informasi manajemen dan rekapitulasi pemesanan seragam/atribut Mutz KORPRI untuk seluruh SKPD / ASN, mencakup pencatatan pesanan per SKPD, manajemen stok &amp; retur, statistik pemesanan real-time, cetak kwitansi, hingga export laporan data.">
-                <style>
-                    @keyframes autoCrossfade {
-                        0%, 45% { opacity: 0; transform: scale(1); }
-                        50%, 95% { opacity: 1; transform: scale(1.05); }
-                        100% { opacity: 0; transform: scale(1); }
-                    }
-                    @keyframes scanline {
-                        0% { top: -10%; }
-                        50% { top: 110%; }
-                        100% { top: -10%; }
-                    }
-                    @keyframes pulseDot { 0% { opacity: 0.3; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
-                    
-                    .auto-slideshow { animation: autoCrossfade 8s infinite ease-in-out; }
-                    
-                    /* Holographic Scanline Overlay */
-                    .project-image-wrapper::before {
-                        content: ''; position: absolute; left: 0; right: 0; top: -10%; height: 2px;
-                        background: var(--accent-color);
-                        box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
-                        z-index: 10; pointer-events: none; opacity: 0;
-                        transition: opacity 0.3s;
-                    }
-                    
-                    /* Cyberpunk Tech Grid Overlay */
-                    .project-image-wrapper::after {
-                        content: ''; position: absolute; inset: 0;
-                        background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 50%), linear-gradient(90deg, rgba(255,0,0,0.06), rgba(0,255,0,0.02), rgba(0,0,255,0.06));
-                        background-size: 100% 4px, 3px 100%;
-                        z-index: 5; pointer-events: none; opacity: 0;
-                        transition: opacity 0.5s;
-                    }
-
-                    @media (hover: hover) and (pointer: fine) {
-                        .project-card:hover .project-img, .project-card:hover .project-img-hover { transform: scale(1.1); }
-                        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-                        .project-card:hover .project-image-wrapper::before { opacity: 1; animation: scanline 3s linear infinite; }
-                        .project-card:hover .project-image-wrapper::after { opacity: 1; }
-                    }
-                </style>
+                                    <div class="project-card reveal delay-1">
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                                         <img src="images/project-emutz.png" alt="E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);">
                     
@@ -3537,7 +3089,7 @@
                         <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">E-MutZ KORPRI - Rekapitulasi Pemesanan Mutz ASN</h3>
                         <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
                             <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); animation: pulseDot 1.5s infinite alternate;"></span>
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); "></span>
                                 <span  data-i18n="proj_comp" >Selesai</span>
                             </div>
                                                             <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
@@ -3589,7 +3141,6 @@
                     <a href="images/hacktiv8-ai.jpg" target="_blank" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
                 </div>
             </div>
-
 
         </div>
     </section>
@@ -3652,7 +3203,6 @@
         </div>
     </footer>
 
-
     <!-- Terminal Panel for Replay -->
     <div class="replay-terminal" id="replayTerminal">
         <div class="replay-terminal-header">
@@ -3696,174 +3246,18 @@
         </svg>
     </div>
 
-
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Matrix Preloader Logic
-            const preloader = document.getElementById('preloader');
-            const preloaderPerc = document.getElementById('preloaderPerc');
-            const canvas = document.getElementById('matrixCanvas');
-            
-            if (preloader && canvas) {
-                const ctx = canvas.getContext('2d');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                
-                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ';
-                const fontSize = 14;
-                const columns = canvas.width / fontSize;
-                const drops = Array.from({length: columns}).fill(1);
-                
-                let isOverloaded = false;
-                
-                function drawMatrix() {
-                    if (isOverloaded) {
-                        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-                    } else {
-                        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                    }
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    ctx.fillStyle = isOverloaded ? '#fff' : 'var(--accent-color)'; // Emerald Green
-                    ctx.font = fontSize + 'px monospace';
-                    
-                    for (let i = 0; i < drops.length; i++) {
-                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                        
-                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                            drops[i] = 0;
-                        }
-                        drops[i]++;
-                    }
-                    if (!preloader.classList.contains('fade-out') || isOverloaded) {
-                        requestAnimationFrame(drawMatrix);
-                    }
-                }
-                drawMatrix();
-                
-                window.addEventListener('resize', () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                });
-
-                let progress = 0;
-                
-                // Cinematic Cyberpunk Startup Sound (Web Audio API Synthesizer)
-                function playStartupSound() {
-                    // Sound removed per user request
-                }
-
-                setTimeout(() => {
-                    const interval = setInterval(() => {
-                        progress += Math.floor(Math.random() * 5) + 2; 
-                        
-                        if (progress >= 100) {
-                            progress = 100;
-                            clearInterval(interval);
-                            
-                            if (preloaderPerc) preloaderPerc.style.display = 'none';
-                            
-                            isOverloaded = true;
-                            preloader.classList.add('overload');
-                            
-                            setTimeout(() => {
-                                preloader.classList.add('fade-out');
-                                setTimeout(() => {
-                                    preloader.style.display = 'none';
-                                    document.querySelectorAll('.reveal').forEach((el, index) => {
-                                        setTimeout(() => { el.classList.add('active'); }, index * 100);
-                                    });
-                                }, 1500);
-                            }, 500);
-                        }
-                        if(preloaderPerc && progress < 100) {
-                            preloaderPerc.innerText = progress + '%';
-                            preloaderPerc.setAttribute('data-text', progress + '%');
-                            preloaderPerc.style.setProperty('--progress', progress + '%');
-                        }
-                    }, 40);
-                }, 500);
-            }
-
-            // Global Mouse Tracker for Grid Background
-            const gridBg = document.getElementById('gridBackground');
-            window.addEventListener('mousemove', (e) => {
-                if (gridBg) {
-                    gridBg.style.setProperty('--mouse-x', `${e.clientX}px`);
-                    gridBg.style.setProperty('--mouse-y', `${e.clientY}px`);
-                }
-            });
-
-            // Scroll Progress Bar Logic
+            // Smooth Scroll Progress Bar
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById('scrollBar').style.width = scrolled + "%";
-            });
+                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+                const sb = document.getElementById('scrollProgress') || document.getElementById('scrollBar');
+                if (sb) sb.style.width = scrolled + "%";
+            }, { passive: true });
 
-            // Custom Cursor Logic
-            const cursorDot = document.getElementById('cursorDot');
-            const cursorOutline = document.getElementById('cursorOutline');
-            const cursorGlow = null;
-            
-            if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
-                let mouseX = 0, mouseY = 0;
-                let outlineX = 0, outlineY = 0;
-                let glowX = 0, glowY = 0;
-                
-                window.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                    cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-                    
-                    if (cursorDot.style.opacity !== '1') {
-                        cursorDot.style.opacity = '1';
-                        cursorOutline.style.opacity = '1';
-                        
-                    }
-                }, { passive: true });
-                
-                // Outline follows with spring physics lag
-                function animateCursor() {
-                    let distX = mouseX - outlineX;
-                    let distY = mouseY - outlineY;
-                    
-                    if (Math.abs(distX) > 0.05 || Math.abs(distY) > 0.05) {
-                        outlineX += distX * 0.2;
-                        outlineY += distY * 0.2;
-                        
-                        glowX += (mouseX - glowX) * 0.1;
-                        glowY += (mouseY - glowY) * 0.1;
-                        
-                        cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
-                        
-                    }
-                    
-                    requestAnimationFrame(animateCursor);
-                }
-                animateCursor();
-
-                // Hover magnetic effects
-                const hoverElements = document.querySelectorAll('a, button, .filter-btn, .logo, .digital-id-card');
-                hoverElements.forEach(el => {
-                    el.addEventListener('mouseenter', () => {
-                        cursorOutline.style.width = '60px';
-                        cursorOutline.style.height = '60px';
-                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-                        cursorOutline.style.backgroundColor = isLight ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)';
-                    });
-                    el.addEventListener('mouseleave', () => {
-                        cursorOutline.style.width = '40px';
-                        cursorOutline.style.height = '40px';
-                        cursorOutline.style.backgroundColor = 'transparent';
-                    });
-                });
-            }
-
-                    // Mobile Menu Toggle
+            // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const mobileOverlay = document.getElementById('mobileOverlay');
 
@@ -3895,17 +3289,7 @@
             const iconMoon = document.getElementById('icon-moon');
             const htmlElement = document.documentElement;
 
-            // Project Card Flashlight Effect (Vercel Style)
-            const pCards = document.querySelectorAll('.project-card');
-            pCards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
-                });
-            });
+            
 
             // Set initial toggle icons based on the theme already set in <head>
 
@@ -3948,314 +3332,7 @@
                 }
             }
 
-            // 🪢 Interactive Hanging 3D Lanyard ID Card with Real Physics
-            (function initLanyardPhysics() {
-                const system = document.getElementById('lanyardSystem');
-                const assembly = document.getElementById('lanyardAssembly');
-                const card = document.getElementById('digitalCard');
-                const hint = document.getElementById('lanyardHint');
-                const holoFoil = document.getElementById('cardHoloFoil');
-                const reflection = document.getElementById('cardReflection');
-                const svg = document.getElementById('lanyardSvg');
-                const pathLeft = document.getElementById('lanyardPathLeft');
-                const pathLeftFilament = document.getElementById('lanyardPathLeftFilament');
-                const pathLeftHighlight = document.getElementById('lanyardPathLeftHighlight');
-
-                const pathRight = document.getElementById('lanyardPathRight');
-                const pathRightFilament = document.getElementById('lanyardPathRightFilament');
-                const pathRightHighlight = document.getElementById('lanyardPathRightHighlight');
-
-                if (!system || !assembly || !card) return;
-
-                let sysRect = system.getBoundingClientRect();
-                let anchorX = sysRect.width / 2;
-                let anchorY = 10;
-                const restLength = 145; // Resting length of lanyard ribbon
-
-                let posX = anchorX;
-                let posY = anchorY + restLength;
-                let velX = 0;
-                let velY = 0;
-
-                let angleZ = 0;
-                let vAngleZ = 0;
-                let tiltX = 0;
-                let tiltY = 0;
-
-                let isDragging = false;
-                let dragStartClientX = 0;
-                let dragStartClientY = 0;
-                let cardStartPosX = 0;
-                let cardStartPosY = 0;
-                let lastPointerX = 0;
-                let lastPointerY = 0;
-                let pointerVelX = 0;
-                let pointerVelY = 0;
-                let lastTime = performance.now();
-                let hasInteracted = false;
-                let idleTimer = 0;
-
-                function updateDimensions() {
-                    sysRect = system.getBoundingClientRect();
-                    anchorX = sysRect.width / 2;
-                    anchorY = 10;
-                    if (svg) {
-                        svg.setAttribute('viewBox', `0 0 ${sysRect.width} ${sysRect.height}`);
-                    }
-                }
-                updateDimensions();
-                window.addEventListener('resize', updateDimensions);
-
-                let activePointerId = null;
-
-                function onPointerDown(e) {
-                    if (e.button !== undefined && e.button !== 0) return;
-
-                    isDragging = true;
-                    assembly.classList.add('is-dragging');
-                    
-                    if (!hasInteracted) {
-                        hasInteracted = true;
-                        if (hint) hint.classList.add('hidden');
-                    }
-
-                    if (e.pointerId !== undefined) {
-                        activePointerId = e.pointerId;
-                        if (assembly.setPointerCapture) {
-                            try {
-                                assembly.setPointerCapture(e.pointerId);
-                            } catch (err) {}
-                        }
-                    }
-
-                    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : posX);
-                    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : posY);
-
-                    dragStartClientX = clientX;
-                    dragStartClientY = clientY;
-                    cardStartPosX = posX;
-                    cardStartPosY = posY;
-                    lastPointerX = clientX;
-                    lastPointerY = clientY;
-                    pointerVelX = 0;
-                    pointerVelY = 0;
-                    lastTime = performance.now();
-
-                    velX = 0;
-                    velY = 0;
-                    vAngleZ = 0;
-
-                    window.addEventListener('pointermove', onPointerMove, { passive: false });
-                    window.addEventListener('pointerup', onPointerUp);
-                    window.addEventListener('pointercancel', onPointerUp);
-                    window.addEventListener('lostpointercapture', onPointerUp);
-                    window.addEventListener('touchmove', onTouchMove, { passive: false });
-                    window.addEventListener('touchend', onPointerUp);
-                    window.addEventListener('touchcancel', onPointerUp);
-                }
-
-                function onPointerMove(e) {
-                    if (!isDragging) {
-                        onPointerUp();
-                        return;
-                    }
-
-                    // Only prevent default on cancelable events while actually dragging
-                    if (e.cancelable) {
-                        e.preventDefault();
-                    }
-
-                    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : lastPointerX);
-                    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : lastPointerY);
-
-                    const dx = clientX - dragStartClientX;
-                    const dy = clientY - dragStartClientY;
-
-                    const now = performance.now();
-                    const dt = Math.max(1, now - lastTime);
-                    pointerVelX = ((clientX - lastPointerX) / dt) * 16;
-                    pointerVelY = ((clientY - lastPointerY) / dt) * 16;
-                    lastPointerX = clientX;
-                    lastPointerY = clientY;
-                    lastTime = now;
-
-                    let targetX = cardStartPosX + dx;
-                    let targetY = cardStartPosY + dy;
-
-                    // Elastic resistance if pushed above ceiling
-                    if (targetY < anchorY + 35) {
-                        targetY = anchorY + 35 + (targetY - (anchorY + 35)) * 0.2;
-                    }
-
-                    // Maximum distance constraint
-                    const distFromAnchor = Math.hypot(targetX - anchorX, targetY - anchorY);
-                    const maxDist = 340;
-                    if (distFromAnchor > maxDist) {
-                        const rad = Math.atan2(targetY - anchorY, targetX - anchorX);
-                        targetX = anchorX + Math.cos(rad) * maxDist;
-                        targetY = anchorY + Math.sin(rad) * maxDist;
-                    }
-
-                    posX = targetX;
-                    posY = targetY;
-
-                    // Dynamic tilt angles while actively dragging
-                    const deltaX = posX - anchorX;
-                    angleZ = (deltaX / 160) * 32;
-                    tiltY = Math.max(-28, Math.min(28, -pointerVelX * 2.2));
-                    tiltX = Math.max(-22, Math.min(22, pointerVelY * 2.2));
-                }
-
-                function onTouchMove(e) {
-                    if (!isDragging) {
-                        onPointerUp();
-                        return;
-                    }
-                    if (e.cancelable) e.preventDefault();
-                    onPointerMove(e);
-                }
-
-                function onPointerUp(e) {
-                    if (!isDragging) {
-                        cleanListeners();
-                        return;
-                    }
-                    isDragging = false;
-                    assembly.classList.remove('is-dragging');
-
-                    if (activePointerId !== null && assembly.releasePointerCapture) {
-                        try {
-                            assembly.releasePointerCapture(activePointerId);
-                        } catch (err) {}
-                        activePointerId = null;
-                    }
-
-                    // Impart throw momentum with damping limits
-                    velX = Math.max(-30, Math.min(30, pointerVelX * 1.3));
-                    velY = Math.max(-25, Math.min(25, pointerVelY * 1.3));
-                    vAngleZ = Math.max(-18, Math.min(18, pointerVelX * 0.8));
-
-                    cleanListeners();
-                }
-
-                function cleanListeners() {
-                    window.removeEventListener('pointermove', onPointerMove);
-                    window.removeEventListener('pointerup', onPointerUp);
-                    window.removeEventListener('pointercancel', onPointerUp);
-                    window.removeEventListener('lostpointercapture', onPointerUp);
-                    window.removeEventListener('touchmove', onTouchMove);
-                    window.removeEventListener('touchend', onPointerUp);
-                    window.removeEventListener('touchcancel', onPointerUp);
-                }
-
-                if (window.PointerEvent) {
-                    assembly.addEventListener('pointerdown', onPointerDown);
-                } else {
-                    assembly.addEventListener('touchstart', onPointerDown, { passive: false });
-                    assembly.addEventListener('mousedown', onPointerDown);
-                }
-
-                // Global safety guards so touch / pointer dragging NEVER gets stuck or locks scroll
-                window.addEventListener('blur', onPointerUp);
-                document.addEventListener('visibilitychange', () => {
-                    if (document.hidden) onPointerUp();
-                });
-
-                // 60fps Physics & Bezier Curve Animation Loop
-                function physicsLoop() {
-                    idleTimer += 0.02;
-
-                    if (!isDragging) {
-                        // Natural idle sway when undisturbed
-                        const isStationary = Math.hypot(posX - anchorX, posY - (anchorY + restLength)) < 4 && Math.abs(velX) < 0.15;
-                        const idleSwayX = isStationary ? Math.sin(idleTimer * 1.4) * 6 : 0;
-                        const idleSwayAngle = isStationary ? Math.sin(idleTimer * 1.4) * 2 : 0;
-
-                        const springK = 0.048; // Spring stiffness
-                        const damping = 0.935; // Air friction damping
-
-                        const restX = anchorX + idleSwayX;
-                        const restY = anchorY + restLength;
-
-                        const forceX = (restX - posX) * springK;
-                        const forceY = (restY - posY) * springK;
-
-                        velX = (velX + forceX) * damping;
-                        velY = (velY + forceY) * damping;
-
-                        posX += velX;
-                        posY += velY;
-
-                        // Pendulum angular spring
-                        const targetAngle = ((posX - anchorX) / 130) * 26 + idleSwayAngle;
-                        const angularForce = (targetAngle - angleZ) * 0.085;
-                        vAngleZ = (vAngleZ + angularForce) * 0.915;
-                        angleZ += vAngleZ;
-
-                        // Return 3D tilt to equilibrium
-                        tiltX += (-velY * 1.2 - tiltX) * 0.12;
-                        tiltY += (velX * 1.6 - tiltY) * 0.12;
-                    }
-
-                    // Render dynamic lanyard ribbon straps
-                    const clipX = posX;
-                    const clipY = posY + 16;
-
-                    const strapSpread = 38;
-                    const leftStartX = anchorX - strapSpread;
-                    const leftStartY = anchorY;
-                    const rightStartX = anchorX + strapSpread;
-                    const rightStartY = anchorY;
-
-                    // Elastic sag calculation for realistic cloth feel
-                    const currentDist = Math.hypot(clipX - anchorX, clipY - anchorY);
-                    const slack = Math.max(0, (restLength + 16 - currentDist) * 0.45);
-
-                    const ctrlXLeft = (leftStartX + clipX) / 2 - 12 - (velX * 0.25) - (slack * 0.3);
-                    const ctrlYLeft = (leftStartY + clipY) / 2 + 10 + slack;
-                    const dLeft = `M ${leftStartX.toFixed(1)} ${leftStartY.toFixed(1)} Q ${ctrlXLeft.toFixed(1)} ${ctrlYLeft.toFixed(1)} ${(clipX - 2).toFixed(1)} ${clipY.toFixed(1)}`;
-
-                    const ctrlXRight = (rightStartX + clipX) / 2 + 12 - (velX * 0.25) + (slack * 0.3);
-                    const ctrlYRight = (rightStartY + clipY) / 2 + 10 + slack;
-                    const dRight = `M ${rightStartX.toFixed(1)} ${rightStartY.toFixed(1)} Q ${ctrlXRight.toFixed(1)} ${ctrlYRight.toFixed(1)} ${(clipX + 2).toFixed(1)} ${clipY.toFixed(1)}`;
-
-                    if (pathLeft) pathLeft.setAttribute('d', dLeft);
-                    if (pathLeftFilament) pathLeftFilament.setAttribute('d', dLeft);
-                    if (pathLeftHighlight) pathLeftHighlight.setAttribute('d', dLeft);
-
-                    if (pathRight) pathRight.setAttribute('d', dRight);
-                    if (pathRightFilament) pathRightFilament.setAttribute('d', dRight);
-                    if (pathRightHighlight) pathRightHighlight.setAttribute('d', dRight);
-
-                    // Apply 3D transform to assembly
-                    const transX = posX - anchorX;
-                    const transY = posY;
-
-                    assembly.style.transform = `translate3d(${transX.toFixed(2)}px, ${transY.toFixed(2)}px, 0) rotateZ(${angleZ.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) rotateX(${tiltX.toFixed(2)}deg)`;
-
-                    // Holographic foil sheen update
-                    if (holoFoil) {
-                        const totalTilt = Math.abs(tiltY) + Math.abs(tiltX) + Math.abs(angleZ * 0.5);
-                        const foilOpacity = Math.min(0.55, 0.15 + (totalTilt / 45));
-                        holoFoil.style.opacity = foilOpacity.toFixed(2);
-                        holoFoil.style.backgroundPosition = `${50 + tiltY * 2.2}% ${50 + tiltX * 2.2}%`;
-                    }
-
-                    // Reflection glare update
-                    if (reflection) {
-                        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-                        const reflectColor = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.18)';
-                        const glareX = 160 + tiltY * 4;
-                        const glareY = 240 - tiltX * 4;
-                        reflection.style.opacity = Math.min(1, (Math.abs(tiltY) + Math.abs(tiltX)) / 35).toFixed(2);
-                        reflection.style.background = `radial-gradient(circle at ${glareX}px ${glareY}px, ${reflectColor}, transparent 65%)`;
-                    }
-
-                    requestAnimationFrame(physicsLoop);
-                }
-
-                requestAnimationFrame(physicsLoop);
-            })();
+            
 
             // Filters
             const filterBtns = document.querySelectorAll('.filter-btn');
@@ -4438,42 +3515,7 @@
                 });
             }
 
-            // Magnetic Buttons (Desktop only with fine pointer & hover support)
-            const isTouchOrMobile = () => window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches || !window.matchMedia('(hover: hover)').matches;
-
-            if (!isTouchOrMobile()) {
-                const magneticBtns = document.querySelectorAll('.hero-actions .btn, .hero-buttons .btn');
-                magneticBtns.forEach(btn => {
-                    btn.addEventListener('mouseenter', () => {
-                        if (isTouchOrMobile()) return;
-                        btn.style.transition = 'none';
-                    });
-                    btn.addEventListener('mousemove', (e) => {
-                        if (isTouchOrMobile()) return;
-                        const rect = btn.getBoundingClientRect();
-                        const x = e.clientX - rect.left - rect.width / 2;
-                        const y = e.clientY - rect.top - rect.height / 2;
-                        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-                    });
-                    btn.addEventListener('mouseleave', () => {
-                        btn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease, color 0.3s ease';
-                        btn.style.transform = `translate(0, 0)`;
-                    });
-                });
-            }
-
-            // Mobile Safeguard: Ensure buttons on touch/mobile never retain transform offsets
-            document.querySelectorAll('.hero-buttons .btn').forEach(btn => {
-                const resetBtn = () => {
-                    if (isTouchOrMobile()) {
-                        btn.style.transform = '';
-                        btn.style.transition = '';
-                    }
-                };
-                btn.addEventListener('touchend', resetBtn, { passive: true });
-                btn.addEventListener('touchcancel', resetBtn, { passive: true });
-                btn.addEventListener('click', resetBtn);
-            });
+            
             // Stats Counter Animation
             const statsSection = document.getElementById('stats-section');
             const counters = document.querySelectorAll('.counter');
@@ -4520,7 +3562,7 @@
                 { text: '> Writing HTML structure...', delay: 600, suffix: ' ✓', suffixClass: 't-check' },
                 { text: '> Compiling CSS & design system...', delay: 1400, suffix: ' ✓', suffixClass: 't-check' },
                 { text: '> Attaching JavaScript interactions...', delay: 2200, suffix: ' ✓', suffixClass: 't-check' },
-                { text: '> Launching animations & particles...', delay: 3100, suffix: ' ✓', suffixClass: 't-check' },
+                { text: '> Optimizing performance & assets...', delay: 3100, suffix: ' ✓', suffixClass: 't-check' },
                 { text: '> 🚀 Build complete! Welcome back.', delay: 3900 },
             ];
 
@@ -4608,7 +3650,6 @@
                 }
             })();
 
-
             function runCounters() {
                 hasCounted = false;
                 counters.forEach(counter => {
@@ -4684,26 +3725,7 @@
         });
     </script>
     
-    <!-- Vanilla Tilt 3D Effect -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <script>
-        if (typeof VanillaTilt !== 'undefined') {
-            VanillaTilt.init(document.querySelectorAll(".project-card"), {
-                max: 5,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.2,
-                scale: 1.02
-            });
-            VanillaTilt.init(document.querySelectorAll(".cert-card"), {
-                max: 8,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.15,
-                scale: 1.02
-            });
-        }
-    </script>
+    
 
     <!-- Native CSS Smooth Scroll is active instead -->
     
