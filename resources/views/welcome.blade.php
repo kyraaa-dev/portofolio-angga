@@ -277,7 +277,7 @@
         .theme-toggle {
             background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);
             width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.3s ease;
+            cursor: pointer; 
         }
         .theme-toggle:hover {
             background: var(--bg-surface-hover); border-color: var(--text-secondary);
@@ -351,11 +351,11 @@
         }
         .hero-subtitle { 
             font-size: 24px; font-weight: 400; color: var(--text-secondary); margin-bottom: 32px; 
-            transition: color 0.5s ease;
+            
         }
         .hero-description { 
             font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 48px; line-height: 1.6; 
-            transition: color 0.5s ease;
+            
         }
 
         /* 🎙️ Voice Introduction */
@@ -365,7 +365,7 @@
             padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 600;
             font-family: 'Inter', sans-serif; cursor: pointer; border: 1px solid var(--border-color);
             background: var(--bg-surface); color: var(--text-secondary);
-            transition: all 0.3s ease;
+            
         }
         .voice-lang-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
         .voice-lang-btn.active { background: var(--accent-color); border-color: var(--accent-color); color: #000; font-weight: 700; }
@@ -374,7 +374,7 @@
             background: var(--accent-glow); border: 1px solid var(--accent-glow);
             color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
             padding: 12px 22px 12px 12px; border-radius: 100px; cursor: pointer;
-            transition: all 0.3s ease; backdrop-filter: blur(8px); letter-spacing: 0.3px;
+             backdrop-filter: blur(8px); letter-spacing: 0.3px;
         }
         .voice-btn:hover { background: var(--accent-glow); border-color: var(--accent-color); transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
         .voice-btn.playing { background: var(--accent-glow); border-color: var(--accent-color); box-shadow: 0 0 20px var(--accent-glow); }
@@ -611,7 +611,7 @@
         .id-reflection {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             border-radius: 24px;
-            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 5; mix-blend-mode: overlay;
+            opacity: 0;  pointer-events: none; z-index: 5; mix-blend-mode: overlay;
         }
         .digital-id-header {
             display: flex; justify-content: space-between; align-items: flex-start;
@@ -731,7 +731,7 @@
         }
         .stat-item { 
             background: var(--bg-surface); padding: 48px 24px; text-align: center; 
-            transition: background-color 0.5s ease;
+            
         }
         .stat-item:hover { background: var(--bg-surface-hover); }
         .stat-number { font-size: 40px; font-weight: 700; margin-bottom: 8px; letter-spacing: -1px; }
@@ -790,7 +790,7 @@
         .about { padding-top: 120px; padding-bottom: 60px; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
         .about-text h2 { font-size: 36px; font-weight: 700; margin-bottom: 24px; letter-spacing: -1px; }
-        .about-text p { font-size: 18px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; transition: color 0.5s ease; }
+        .about-text p { font-size: 18px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px;  }
         .about-visual { 
             position: relative; border-radius: 16px; overflow: hidden; padding: 0; 
             background: var(--bg-surface); border: 1px solid var(--border-color); 
@@ -959,7 +959,7 @@
             font-family: 'Inter', sans-serif; padding: 12px 20px; border-radius: 100px;
             cursor: pointer; backdrop-filter: blur(10px); transform: translateZ(0);
             box-shadow: 0 0 20px var(--accent-glow);
-            transition: all 0.3s ease; letter-spacing: 0.5px;
+             letter-spacing: 0.5px;
         }
         .replay-btn:hover {
             background: var(--accent-color); color: #000;
@@ -1000,7 +1000,7 @@
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
             color: #fff; font-size: 13px; font-weight: 600; font-family: 'Inter', sans-serif;
             padding: 8px 16px; border-radius: 100px; cursor: pointer;
-            backdrop-filter: blur(10px); transform: translateZ(0); transition: all 0.3s ease;
+            backdrop-filter: blur(10px); transform: translateZ(0); 
         }
         .replay-skip:hover { background: rgba(255,255,255,0.2); }
 
@@ -1087,20 +1087,22 @@
 
         /* Project Modal */
         .project-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: all 0.4s ease; padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
         }
-        [data-theme="light"] .project-modal-overlay { background: rgba(255,255,255,0.4); }
-        .project-modal-overlay.active { opacity: 1; visibility: visible; }
+        [data-theme="light"] .project-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .project-modal-overlay.active { display: flex !important; }
         .project-modal-content {
             background: var(--bg-surface); border: 1px solid var(--border-color);
             padding: 40px; border-radius: 20px; max-width: 600px; width: 100%;
-            transform: none; transition: opacity 0.2s ease;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative;
         }
-        .project-modal-overlay.active .project-modal-content { transform: none; }
+        
         .project-modal-close {
             position: absolute; top: 24px; right: 24px; background: none; border: none;
             color: var(--text-secondary); cursor: pointer; transition: color 0.2s ease;
@@ -1115,7 +1117,7 @@
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
             border-radius: 50%; background: var(--bg-surface); z-index: 9999; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; transition: all 0.3s ease;
+            opacity: 0; visibility: hidden; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(20px); border: 1px solid var(--border-color);
         }
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -1124,7 +1126,7 @@
         .progress-ring__circle { stroke-dasharray: 138.2; stroke-dashoffset: 138.2; transition: stroke-dashoffset 0.1s linear; }
 
         .about-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-        .code-snippet { font-family: monospace; font-size: 15px; color: var(--text-primary); line-height: 1.7; transition: color 0.5s ease;}
+        .code-snippet { font-family: monospace; font-size: 15px; color: var(--text-primary); line-height: 1.7; }
         .code-snippet span.keyword { color: #c678dd; font-weight: 600; }
         .code-snippet span.string { color: #98c379; }
         .code-snippet span.function { color: #61afef; }
@@ -1147,7 +1149,7 @@
             left: 20px;
             width: 2px;
             background: var(--border-color);
-            transition: background-color 0.5s ease;
+            
         }
         @media (min-width: 768px) {
             .timeline::before {
@@ -1175,7 +1177,7 @@
             transform: translateX(-50%);
             box-shadow: 0 0 10px rgba(0, 255, 249, 0.5);
             z-index: 2;
-            transition: all 0.3s ease;
+            
         }
         .timeline-item:hover .timeline-dot {
             background: var(--accent-color);
@@ -1242,13 +1244,13 @@
         .projects { padding-top: 120px; padding-bottom: 120px; }
         .section-header { margin-bottom: 64px; }
         .section-title { font-size: 42px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; }
-        .section-description { font-size: 18px; color: var(--text-secondary); max-width: 600px; transition: color 0.5s ease;}
+        .section-description { font-size: 18px; color: var(--text-secondary); max-width: 600px; }
         
         .filters { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
         .filter-btn { 
             background: transparent; border: 1px solid var(--border-color); border-radius: 8px; 
             padding: 8px 20px; font-size: 14px; font-weight: 500; color: var(--text-secondary); 
-            cursor: pointer; transition: all 0.2s; 
+            cursor: pointer;  
         }
         .filter-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
         .filter-btn.active { 
@@ -1275,33 +1277,26 @@
             border-color: var(--accent-color); background: var(--bg-surface-hover);
             transform: none !important;
         }
-        /* Flashlight Effect */
-        .project-card::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 0;
-        }
-        [data-theme="light"] .project-card::after {
-            }
-        .project-card:hover::after { opacity: 1; }
+        
         
         .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; position: relative; z-index: 1; }
         .project-tag { 
             font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; 
             background: var(--border-color); color: var(--text-secondary); letter-spacing: 0.5px;
-            border: 1px solid var(--border-color); transition: background-color 0.5s ease;
+            border: 1px solid var(--border-color); 
         }
         
         .project-logo { 
-            margin-bottom: 40px; color: var(--text-primary); opacity: 0.8; transition: opacity 0.3s; position: relative; z-index: 1;
+            margin-bottom: 40px; color: var(--text-primary); opacity: 0.8;  position: relative; z-index: 1;
         }
         .project-card:hover .project-logo { opacity: 1; }
         /* invert logos in light mode automatically to stay visible */
-        .project-logo svg { filter: var(--filter-invert); transition: filter 0.5s ease;}
+        .project-logo svg { filter: var(--filter-invert); }
         
-        .project-footer { margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.5s ease; position: relative; z-index: 1; }
-        .project-title { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--text-primary); transition: color 0.5s ease;}
+        .project-footer { margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 24px; display: flex; justify-content: space-between; align-items: center;  position: relative; z-index: 1; }
+        .project-title { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--text-primary); }
         .project-link { 
-            color: var(--text-secondary); transition: color 0.2s; display: flex; align-items: center;
+            color: var(--text-secondary);  display: flex; align-items: center;
         }
         .project-link:hover { color: var(--text-primary); }
 
@@ -1349,7 +1344,7 @@
             flex-direction: column;
             cursor: crosshair;
             position: relative;
-            animation: float-terminal 6s ease-in-out infinite;
+            
         }
         
         /* CRT Scanlines Overlay */
@@ -1434,7 +1429,7 @@
         }
         @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         .social-links { display: flex; gap: 16px; }
-        .social-links a { color: var(--text-secondary); transition: all 0.3s ease; display: flex; }
+        .social-links a { color: var(--text-secondary);  display: flex; }
         .social-links a:hover { color: var(--text-primary); transform: translateY(-2px); }
         
         .status-badge {
@@ -1474,7 +1469,7 @@
             position: absolute;
             inset: 0;
             opacity: 0;
-            transition: opacity 0.3s;
+            
             z-index: -1;
             pointer-events: none;
         }
@@ -1572,7 +1567,7 @@
             font-weight: 600;
             color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            
         }
         .cert-link:hover {
             color: var(--accent-color);
@@ -1931,14 +1926,29 @@
             .marquee-section { box-shadow: none !important; }
         }
     
-        /* Static Project Card - No Animation */
-        .project-card { transform: none !important; }
-        .project-card:hover { transform: none !important; }
-        .project-card:hover .project-img { transform: none !important; }
-        .project-card:hover .project-action-btn { background: var(--text-primary) !important; color: var(--bg-base) !important; }
-        .project-card:hover .project-img-hover { opacity: 1; }
-        
-    </style>
+        /* Zero Animation Enforcement for Selected Projects & Modals */
+        #projects,
+        #projects *,
+        .project-grid,
+        .project-card,
+        .project-card *,
+        .filter-btn,
+        .project-modal-overlay,
+        .project-modal-content,
+        .project-modal-content * {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+        }
+        .project-card {
+            border: 1px solid var(--border-color) !important;
+            box-shadow: none !important;
+        }
+        .project-card:hover {
+            border-color: var(--accent-color) !important;
+            box-shadow: none !important;
+        }
+        </style>
 
     <!-- Prevent Theme Flash & Reset Merdeka Mode -->
     <script>
@@ -2111,7 +2121,7 @@
         }
         .footer-socials a {
             color: var(--text-secondary);
-            transition: all 0.3s ease;
+            
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2963,11 +2973,9 @@
                 <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
                     @php
                         $imageName = 'project-korpri.png';
-                        $hoverImageName = null;
                         if (str_contains(strtolower($project->title), 'duta')) {
                             $imageName = 'duta-korpri.png';
-                            $hoverImageName = 'duta-korpri-2026.png';
-                        } elseif (str_contains(strtolower($project->title), 'kasflow')) {
+                            } elseif (str_contains(strtolower($project->title), 'kasflow')) {
                             $imageName = 'kasflow-app.png';
                         } elseif (str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
                             $imageName = 'project-travel.png';
@@ -2977,10 +2985,6 @@
                     @endphp
                     <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); ">
                     
-                    @if($hoverImageName)
-                        <img src="images/{{ $hoverImageName }}" alt="{{ $project->title }} Alternate" class="project-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; filter: brightness(1.1) contrast(0.95); pointer-events: none; opacity: 0; ">
-                    @endif
-
                     <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
                     <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
                     @php
@@ -3000,7 +3004,7 @@
                                 <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
                             </div>
                             @if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel') || str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap'))
-                                <a href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; transition: all 0.3s ease;">
+                                <a href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; ">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
                                     {{ str_contains($project->link, 'github.com') ? 'Lihat Project' : 'Klik untuk Demo' }}
                                 </a>
@@ -3009,7 +3013,7 @@
                             @endif
                         </div>
                     </div>
-                    <a href="{{ $project->link }}" @if($project->link != '#') target="_blank" rel="noopener noreferrer" @endif class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); transition: all 0.3s ease;">
+                    <a href="{{ $project->link }}" @if($project->link != '#') target="_blank" rel="noopener noreferrer" @endif class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); ">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
@@ -3257,7 +3261,7 @@
 
                     const filter = e.currentTarget.getAttribute('data-filter');
                     const pGrid = document.querySelector('.project-grid');
-                    if (pGrid) pGrid.scrollTo({ left: 0, behavior: 'smooth' });
+                    if (pGrid) pGrid.scrollTo({ left: 0 });
                     
                     projectCards.forEach(card => {
                         const categories = card.getAttribute('data-category');
@@ -3313,7 +3317,7 @@
             const modalDescEl = document.getElementById('modalDesc');
             const modalDescText = modalDescEl ? modalDescEl.textContent.trim() : "";
             
-            pCards.forEach(card => {
+            projectCards.forEach(card => {
                 card.style.cursor = 'pointer';
                 card.addEventListener('click', () => {
                     const title = card.querySelector('.project-title').textContent.trim();
@@ -3398,6 +3402,7 @@
                 window.addEventListener('scroll', () => {
                     if (!isBttScrolling) {
                         window.requestAnimationFrame(() => {
+                            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                             const scrollTotal = window.scrollY || document.documentElement.scrollTop;
                             const scrollPercent = docHeight > 0 ? scrollTotal / docHeight : 0;
                             const offset = circumference - scrollPercent * circumference;
