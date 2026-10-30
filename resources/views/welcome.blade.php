@@ -82,7 +82,7 @@
             --mesh-opacity: 1;
             --font-family: 'Inter', sans-serif;
         }
-        html { scrollbar-color: var(--accent-color) var(--bg-base); scrollbar-width: thin; scroll-behavior: smooth; }
+        html { scrollbar-color: var(--accent-color) var(--bg-base); scrollbar-width: thin;  }
 
         [data-theme="light"] {
             --bg-base: #ffffff;
@@ -315,9 +315,7 @@
                 linear-gradient(var(--border-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
             background-size: 50px 50px;
-            opacity: 0.25;
-            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+            contain: strict; transform: translateZ(0); will-change: transform;
         }
 
         .nav-links { display: none; gap: 32px; align-items: center; }
@@ -452,22 +450,24 @@
             filter: drop-shadow(0 6px 16px rgba(0,0,0,0.65));
         }
 
-        /* Card Assembly (Card + Hardware) */
+        /* Draggable Assembly (Card + Hardware) */
         .lanyard-card-assembly {
             position: absolute;
             top: 0;
             left: 50%;
             width: 320px;
             margin-left: -160px;
-            transform: translateY(145px);
+            transform-origin: 160px 24px;
+            cursor: grab;
             z-index: 20;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            touch-action: none;
         }
-        .lanyard-card-assembly:hover {
-            transform: translateY(140px);
+        .lanyard-card-assembly:active,
+        .lanyard-card-assembly.is-dragging {
+            cursor: grabbing;
         }
 
         /* Monolithic Minimalist Titanium Clamp & Wire Loop */
@@ -1005,346 +1005,9 @@
         .replay-skip:hover { background: rgba(255,255,255,0.2); }
 
         /* Replay animation classes */
-        .replay-hiding .reveal { opacity: 0 !important; transform: translateY(30px) !important; transition: all 0.5s ease !important; }
-        .replay-hiding .reveal.active { opacity: 0 !important; transform: translateY(30px) !important; }
-        
-        /* Orbit Ecosystem */
-        .orbit-section {
-            padding: 80px 0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .orbit-container {
-            position: relative;
-            width: 400px;
-            height: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px auto;
-        }
-        .orbit-center {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 800;
-            font-size: 24px;
-            color: var(--bg-base);
-            box-shadow: 0 0 40px rgba(0, 255, 249, 0.4);
-            z-index: 10;
-        }
-        .orbit-ring {
-            position: absolute;
-            border-radius: 50%;
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            }
-        [data-theme="light"] .orbit-ring {
-            border-color: rgba(0, 0, 0, 0.15);
-        }
-        .orbit-ring-1 { width: 220px; height: 220px; animation-duration: 15s; }
-        .orbit-ring-2 { width: 340px; height: 340px; animation-duration: 25s; animation-direction: reverse; }
-        .orbit-ring-3 { width: 460px; height: 460px; animation-duration: 35s; }
-        
-        .orbit-item {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 50%; left: 50%;
-            transform-origin: center;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-primary);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .orbit-item.rev {
-            /* Reverse the rotation so text/logo stays upright */
-            }
-        
-
-        
-        
-
-        /* Responsive Orbit */
-        @media (max-width: 768px) {
-            .orbit-container { transform: translateX(-50%) scale(0.6) !important; left: 50% !important; margin: -20px 0 -20px 0 !important; position: relative !important; transform-origin: center center !important; }
-            .orbit-section {
-                padding: 40px 0;
-            }
-        }
-
-        /* Project Modal */
-        .project-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
-        }
-        [data-theme="light"] .project-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
-        }
-        .project-modal-overlay.active { display: flex !important; }
-        .project-modal-content {
-            background: var(--bg-surface); border: 1px solid var(--border-color);
-            padding: 40px; border-radius: 20px; max-width: 600px; width: 100%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative;
-        }
-        
-        .project-modal-close {
-            position: absolute; top: 24px; right: 24px; background: none; border: none;
-            color: var(--text-secondary); cursor: pointer; transition: color 0.2s ease;
-        }
-        .project-modal-close:hover { color: var(--text-primary); }
-        .project-modal-logo { margin-bottom: 24px; text-align: left; }
-        .project-modal-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.4; }
-        .project-modal-desc { color: var(--text-secondary); line-height: 1.8; font-size: 16px; margin-bottom: 24px; }
-
-        /* Back to Top Progress Ring */
-        .back-to-top {
-            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
-            border-radius: 50%; background: var(--bg-surface); z-index: 9999; cursor: pointer;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(20px); border: 1px solid var(--border-color);
-        }
-        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 15px 35px var(--accent-glow); }
-        .progress-ring { position: absolute; top: -1px; left: -1px; transform: rotate(-90deg); }
-        .progress-ring__circle { stroke-dasharray: 138.2; stroke-dashoffset: 138.2; transition: stroke-dashoffset 0.1s linear; }
-
-        .about-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-        .code-snippet { font-family: monospace; font-size: 15px; color: var(--text-primary); line-height: 1.7; }
-        .code-snippet span.keyword { color: #c678dd; font-weight: 600; }
-        .code-snippet span.string { color: #98c379; }
-        .code-snippet span.function { color: #61afef; }
-        .code-snippet span.property { color: #e5c07b; }
-
-        /* Projects */
-        /* Timeline */
-        .experience { padding-top: 120px; padding-bottom: 120px; }
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 20px;
-            width: 2px;
-            background: var(--border-color);
-            
-        }
-        @media (min-width: 768px) {
-            .timeline::before {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 48px;
-            width: 100%;
-        }
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 20px;
-            top: 16px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--bg-base);
-            border: 2px solid var(--accent-color);
-            transform: translateX(-50%);
-            box-shadow: 0 0 10px rgba(0, 255, 249, 0.5);
-            z-index: 2;
-            
-        }
-        .timeline-item:hover .timeline-dot {
-            background: var(--accent-color);
-            box-shadow: 0 0 20px rgba(0, 255, 249, 0.8);
-            transform: translateX(-50%) scale(1.2);
-        }
-        @media (min-width: 768px) {
-            .timeline-dot {
-                left: 50%;
-            }
-        }
-        .timeline-content {
-            margin-left: 50px;
-            padding: 24px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .timeline-item:hover .timeline-content {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        [data-theme="dark"] .timeline-item:hover .timeline-content {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        @media (min-width: 768px) {
-            .timeline-content {
-                width: 45%;
-                margin-left: 0;
-            }
-            .timeline-item:nth-child(odd) .timeline-content {
-                margin-left: auto;
-            }
-            .timeline-item:nth-child(even) .timeline-content {
-                text-align: right;
-            }
-        }
-        .timeline-date {
-            font-size: 14px;
-            color: var(--accent-color);
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .timeline-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-        .timeline-subtitle {
-            font-size: 15px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-        .timeline-desc {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .projects { padding-top: 120px; padding-bottom: 120px; }
-        .section-header { margin-bottom: 64px; }
-        .section-title { font-size: 42px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; }
-        .section-description { font-size: 18px; color: var(--text-secondary); max-width: 600px; }
-        
-        .filters { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
-        .filter-btn { 
-            background: transparent; border: 1px solid var(--border-color); border-radius: 8px; 
-            padding: 8px 20px; font-size: 14px; font-weight: 500; color: var(--text-secondary); 
-            cursor: pointer;  
-        }
-        .filter-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
-        .filter-btn.active { 
-            background: var(--text-primary); color: var(--bg-base); border-color: var(--text-primary); 
-        }
-        .filter-btn .badge { opacity: 0.7; font-size: 12px; margin-left: 6px; }
-        
-        .project-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
-        }
-        .project-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 16px; 
-            padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
-            position: relative; overflow: hidden;
-            transform: none !important;
-            transition: border-color 0.2s ease, background 0.2s ease;
-        }
-        .project-card > * {
-            transform: none;
-        }
-        .project-card:hover { 
-            border-color: var(--accent-color); background: var(--bg-surface-hover);
-            transform: none !important;
-        }
-        
-        
-        .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; position: relative; z-index: 1; }
-        .project-tag { 
-            font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; 
-            background: var(--border-color); color: var(--text-secondary); letter-spacing: 0.5px;
-            border: 1px solid var(--border-color); 
-        }
-        
-        .project-logo { 
-            margin-bottom: 40px; color: var(--text-primary); opacity: 0.8;  position: relative; z-index: 1;
-        }
-        .project-card:hover .project-logo { opacity: 1; }
-        /* invert logos in light mode automatically to stay visible */
-        .project-logo svg { filter: var(--filter-invert); }
-        
-        .project-footer { margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 24px; display: flex; justify-content: space-between; align-items: center;  position: relative; z-index: 1; }
-        .project-title { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--text-primary); }
-        .project-link { 
-            color: var(--text-secondary);  display: flex; align-items: center;
-        }
-        .project-link:hover { color: var(--text-primary); }
-
-        /* Contact Section */
-        .contact { padding-top: 120px; margin-top: 60px; padding-bottom: 120px; }
-        .contact-card {
-            background: var(--bg-surface); border: 1px solid var(--border-color);
-            border-radius: 24px; padding: 64px; position: relative; overflow: hidden;
-            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px;
-            transition: background-color 0.5s ease, border-color 0.5s ease;
-        }
-        .contact-card::before {
-            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 100%; height: 200%;
-            opacity: 0.5; pointer-events: none; transition: background 0.5s ease;
-        }
-        .contact-content { flex: 1; min-width: 320px; max-width: 800px; position: relative; z-index: 1; text-align: center; margin: 0 auto; }
-        
-        /* Contact Form Styles */
-        .contact-layout { display: flex; flex-direction: column; gap: 32px; margin-top: 40px; width: 100%; margin-left: 0; align-items: center; }
-        .telegram-form { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 600px; }
-        .contact-sidebar { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 24px; width: 100%; flex-wrap: wrap; }
-        
-        /* Contact Terminal */
-        .contact-terminal-wrapper {
-            flex: 1; min-width: 300px; max-width: 450px;
-            perspective: 1000px;
-            display: flex;
-            align-items: stretch;
-            margin-top: 40px; /* Align with form */
-        }
-        .contact-terminal { will-change: transform;
-            background: rgba(10, 15, 25, 0.65); /* More transparent for glassmorphism */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.02);
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
-            height: 100%;
-            width: 100%;
-            min-height: 380px;
-            display: flex;
-            flex-direction: column;
-            cursor: crosshair;
-            position: relative;
-            
+        .replay-hiding .reveal {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
         
         /* CRT Scanlines Overlay */
@@ -1607,8 +1270,8 @@
 
         /* Smooth Reveal */
         .reveal {
-            opacity: 0; transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); will-change: opacity, transform;
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
@@ -3164,14 +2827,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Smooth Scroll Progress Bar
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-                const sb = document.getElementById('scrollProgress') || document.getElementById('scrollBar');
-                if (sb) sb.style.width = scrolled + "%";
-            }, { passive: true });
+            
 
             // Mobile Menu Toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
@@ -3247,6 +2903,320 @@
                     iconMoon.style.display = 'none';
                 }
             }
+
+            // 🪢 Ultra-Smooth Interactive Hanging 3D Lanyard ID Card (Performance-Optimized)
+            (function initLanyardPhysics() {
+                const system = document.getElementById('lanyardSystem');
+                const assembly = document.getElementById('lanyardAssembly');
+                const card = document.getElementById('digitalCard');
+                const svg = document.getElementById('lanyardSvg');
+                const holoFoil = document.getElementById('cardHoloFoil');
+
+                const pathLeft = document.getElementById('lanyardPathLeft');
+                const pathLeftFilament = document.getElementById('lanyardPathLeftFilament');
+                const pathLeftHighlight = document.getElementById('lanyardPathLeftHighlight');
+
+                const pathRight = document.getElementById('lanyardPathRight');
+                const pathRightFilament = document.getElementById('lanyardPathRightFilament');
+                const pathRightHighlight = document.getElementById('lanyardPathRightHighlight');
+
+                if (!system || !assembly || !card) return;
+
+                let sysRect = system.getBoundingClientRect();
+                let anchorX = sysRect.width / 2;
+                let anchorY = 10;
+                const restLength = 145;
+
+                let posX = anchorX;
+                let posY = anchorY + restLength;
+                let velX = 0;
+                let velY = 0;
+
+                let angleZ = 0;
+                let vAngleZ = 0;
+                let tiltX = 0;
+                let tiltY = 0;
+
+                let isDragging = false;
+                let dragStartClientX = 0;
+                let dragStartClientY = 0;
+                let cardStartPosX = 0;
+                let cardStartPosY = 0;
+                let lastPointerX = 0;
+                let lastPointerY = 0;
+                let pointerVelX = 0;
+                let pointerVelY = 0;
+                let lastTime = performance.now();
+
+                let isRunning = false;
+                let animFrameId = null;
+                let isVisible = true;
+
+                function updateDimensions() {
+                    sysRect = system.getBoundingClientRect();
+                    anchorX = sysRect.width / 2;
+                    anchorY = 10;
+                    if (svg) {
+                        svg.setAttribute('viewBox', `0 0 ${sysRect.width} ${sysRect.height}`);
+                    }
+                    if (!isDragging && !isRunning) {
+                        posX = anchorX;
+                        posY = anchorY + restLength;
+                        render(0, 0, 0, 0);
+                    }
+                }
+                updateDimensions();
+                window.addEventListener('resize', updateDimensions, { passive: true });
+
+                const observer = new IntersectionObserver((entries) => {
+                    isVisible = entries[0].isIntersecting;
+                    if (!isVisible && isRunning) {
+                        stopLoop();
+                    } else if (isVisible && !isRunning && (isDragging || Math.hypot(posX - anchorX, posY - (anchorY + restLength)) > 1)) {
+                        startLoop();
+                    }
+                }, { threshold: 0.05 });
+                observer.observe(system);
+
+                function startLoop() {
+                    if (!isRunning && isVisible) {
+                        isRunning = true;
+                        lastTime = performance.now();
+                        animFrameId = requestAnimationFrame(step);
+                    }
+                }
+
+                function stopLoop() {
+                    isRunning = false;
+                    if (animFrameId) {
+                        cancelAnimationFrame(animFrameId);
+                        animFrameId = null;
+                    }
+                }
+
+                function render(currentAngleZ, currentTiltY, currentTiltX, currentVelX) {
+                    const clipX = posX;
+                    const clipY = posY + 16;
+
+                    const strapSpread = 38;
+                    const leftStartX = anchorX - strapSpread;
+                    const leftStartY = anchorY;
+                    const rightStartX = anchorX + strapSpread;
+                    const rightStartY = anchorY;
+
+                    const currentDist = Math.hypot(clipX - anchorX, clipY - anchorY);
+                    const slack = Math.max(0, (restLength + 16 - currentDist) * 0.45);
+
+                    const ctrlXLeft = (leftStartX + clipX) / 2 - 12 - (currentVelX * 0.25) - (slack * 0.3);
+                    const ctrlYLeft = (leftStartY + clipY) / 2 + 10 + slack;
+                    const dLeft = `M ${leftStartX.toFixed(1)} ${leftStartY.toFixed(1)} Q ${ctrlXLeft.toFixed(1)} ${ctrlYLeft.toFixed(1)} ${(clipX - 2).toFixed(1)} ${clipY.toFixed(1)}`;
+
+                    const ctrlXRight = (rightStartX + clipX) / 2 + 12 - (currentVelX * 0.25) + (slack * 0.3);
+                    const ctrlYRight = (rightStartY + clipY) / 2 + 10 + slack;
+                    const dRight = `M ${rightStartX.toFixed(1)} ${rightStartY.toFixed(1)} Q ${ctrlXRight.toFixed(1)} ${ctrlYRight.toFixed(1)} ${(clipX + 2).toFixed(1)} ${clipY.toFixed(1)}`;
+
+                    if (pathLeft) pathLeft.setAttribute('d', dLeft);
+                    if (pathLeftFilament) pathLeftFilament.setAttribute('d', dLeft);
+                    if (pathLeftHighlight) pathLeftHighlight.setAttribute('d', dLeft);
+
+                    if (pathRight) pathRight.setAttribute('d', dRight);
+                    if (pathRightFilament) pathRightFilament.setAttribute('d', dRight);
+                    if (pathRightHighlight) pathRightHighlight.setAttribute('d', dRight);
+
+                    const transX = posX - anchorX;
+                    const transY = posY;
+
+                    assembly.style.transform = `translate3d(${transX.toFixed(2)}px, ${transY.toFixed(2)}px, 0) rotateZ(${currentAngleZ.toFixed(2)}deg) rotateY(${currentTiltY.toFixed(2)}deg) rotateX(${currentTiltX.toFixed(2)}deg)`;
+
+                    if (holoFoil) {
+                        const totalTilt = Math.abs(currentTiltY) + Math.abs(currentTiltX) + Math.abs(currentAngleZ * 0.5);
+                        holoFoil.style.opacity = Math.min(0.55, 0.15 + (totalTilt / 45)).toFixed(2);
+                        holoFoil.style.backgroundPosition = `${50 + currentTiltY * 2.2}% ${50 + currentTiltX * 2.2}%`;
+                    }
+                }
+
+                function step() {
+                    if (!isRunning) return;
+
+                    if (!isDragging) {
+                        const springK = 0.052;
+                        const damping = 0.925;
+
+                        const restX = anchorX;
+                        const restY = anchorY + restLength;
+
+                        const forceX = (restX - posX) * springK;
+                        const forceY = (restY - posY) * springK;
+
+                        velX = (velX + forceX) * damping;
+                        velY = (velY + forceY) * damping;
+
+                        posX += velX;
+                        posY += velY;
+
+                        const targetAngle = ((posX - anchorX) / 130) * 26;
+                        const angularForce = (targetAngle - angleZ) * 0.09;
+                        vAngleZ = (vAngleZ + angularForce) * 0.90;
+                        angleZ += vAngleZ;
+
+                        tiltX += (-velY * 1.2 - tiltX) * 0.14;
+                        tiltY += (velX * 1.6 - tiltY) * 0.14;
+
+                        const distFromRest = Math.hypot(posX - restX, posY - restY);
+                        if (distFromRest < 0.25 && Math.abs(velX) < 0.05 && Math.abs(velY) < 0.05 && Math.abs(angleZ) < 0.1) {
+                            posX = restX;
+                            posY = restY;
+                            velX = 0;
+                            velY = 0;
+                            angleZ = 0;
+                            vAngleZ = 0;
+                            tiltX = 0;
+                            tiltY = 0;
+                            render(0, 0, 0, 0);
+                            stopLoop();
+                            return;
+                        }
+                    }
+
+                    render(angleZ, tiltY, tiltX, velX);
+
+                    if (isRunning) {
+                        animFrameId = requestAnimationFrame(step);
+                    }
+                }
+
+                let activePointerId = null;
+
+                function onPointerDown(e) {
+                    if (e.button !== undefined && e.button !== 0) return;
+
+                    isDragging = true;
+                    assembly.classList.add('is-dragging');
+
+                    if (e.pointerId !== undefined) {
+                        activePointerId = e.pointerId;
+                        if (assembly.setPointerCapture) {
+                            try { assembly.setPointerCapture(e.pointerId); } catch (err) {}
+                        }
+                    }
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : posX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : posY);
+
+                    dragStartClientX = clientX;
+                    dragStartClientY = clientY;
+                    cardStartPosX = posX;
+                    cardStartPosY = posY;
+                    lastPointerX = clientX;
+                    lastPointerY = clientY;
+                    pointerVelX = 0;
+                    pointerVelY = 0;
+                    lastTime = performance.now();
+
+                    velX = 0;
+                    velY = 0;
+                    vAngleZ = 0;
+
+                    startLoop();
+
+                    window.addEventListener('pointermove', onPointerMove, { passive: false });
+                    window.addEventListener('pointerup', onPointerUp);
+                    window.addEventListener('pointercancel', onPointerUp);
+                    window.addEventListener('touchmove', onTouchMove, { passive: false });
+                    window.addEventListener('touchend', onPointerUp);
+                    window.addEventListener('touchcancel', onPointerUp);
+                }
+
+                function onPointerMove(e) {
+                    if (!isDragging) return;
+
+                    if (e.cancelable) e.preventDefault();
+
+                    const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : lastPointerX);
+                    const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : lastPointerY);
+
+                    const dx = clientX - dragStartClientX;
+                    const dy = clientY - dragStartClientY;
+
+                    const now = performance.now();
+                    const dt = Math.max(1, now - lastTime);
+                    pointerVelX = ((clientX - lastPointerX) / dt) * 16;
+                    pointerVelY = ((clientY - lastPointerY) / dt) * 16;
+                    lastPointerX = clientX;
+                    lastPointerY = clientY;
+                    lastTime = now;
+
+                    let targetX = cardStartPosX + dx;
+                    let targetY = cardStartPosY + dy;
+
+                    if (targetY < anchorY + 35) {
+                        targetY = anchorY + 35 + (targetY - (anchorY + 35)) * 0.2;
+                    }
+
+                    const distFromAnchor = Math.hypot(targetX - anchorX, targetY - anchorY);
+                    const maxDist = 340;
+                    if (distFromAnchor > maxDist) {
+                        const rad = Math.atan2(targetY - anchorY, targetX - anchorX);
+                        targetX = anchorX + Math.cos(rad) * maxDist;
+                        targetY = anchorY + Math.sin(rad) * maxDist;
+                    }
+
+                    posX = targetX;
+                    posY = targetY;
+
+                    const deltaX = posX - anchorX;
+                    angleZ = (deltaX / 160) * 32;
+                    tiltY = Math.max(-28, Math.min(28, -pointerVelX * 2.2));
+                    tiltX = Math.max(-22, Math.min(22, pointerVelY * 2.2));
+
+                    render(angleZ, tiltY, tiltX, pointerVelX);
+                }
+
+                function onTouchMove(e) {
+                    if (!isDragging) return;
+                    if (e.cancelable) e.preventDefault();
+                    onPointerMove(e);
+                }
+
+                function onPointerUp(e) {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    assembly.classList.remove('is-dragging');
+
+                    if (activePointerId !== null && assembly.releasePointerCapture) {
+                        try { assembly.releasePointerCapture(activePointerId); } catch (err) {}
+                        activePointerId = null;
+                    }
+
+                    velX = Math.max(-30, Math.min(30, pointerVelX * 1.3));
+                    velY = Math.max(-25, Math.min(25, pointerVelY * 1.3));
+                    vAngleZ = Math.max(-18, Math.min(18, pointerVelX * 0.8));
+
+                    window.removeEventListener('pointermove', onPointerMove);
+                    window.removeEventListener('pointerup', onPointerUp);
+                    window.removeEventListener('pointercancel', onPointerUp);
+                    window.removeEventListener('touchmove', onTouchMove);
+                    window.removeEventListener('touchend', onPointerUp);
+                    window.removeEventListener('touchcancel', onPointerUp);
+
+                    startLoop();
+                }
+
+                if (window.PointerEvent) {
+                    assembly.addEventListener('pointerdown', onPointerDown);
+                } else {
+                    assembly.addEventListener('touchstart', onPointerDown, { passive: false });
+                    assembly.addEventListener('mousedown', onPointerDown);
+                }
+
+                window.addEventListener('blur', onPointerUp);
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) onPointerUp();
+                });
+
+                render(0, 0, 0, 0);
+            })();
+
 
             
 
@@ -3389,24 +3359,34 @@
                 }
             });
 
-            // Back to Top Progress Ring
+            // Back to Top Progress Ring & Scroll Progress (Optimized with zero scroll reflow)
             const backToTop = document.getElementById('backToTop');
             const circle = document.querySelector('.progress-ring__circle');
+            const scrollBar = document.getElementById('scrollProgress') || document.getElementById('scrollBar');
+            
             if(circle) {
                 const radius = circle.r.baseVal.value;
                 const circumference = radius * 2 * Math.PI;
                 circle.style.strokeDasharray = `${circumference} ${circumference}`;
                 circle.style.strokeDashoffset = `${circumference}`;
 
+                let cachedDocHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                window.addEventListener('resize', () => {
+                    cachedDocHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                }, { passive: true });
+
                 let isBttScrolling = false;
                 window.addEventListener('scroll', () => {
                     if (!isBttScrolling) {
                         window.requestAnimationFrame(() => {
-                            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                             const scrollTotal = window.scrollY || document.documentElement.scrollTop;
-                            const scrollPercent = docHeight > 0 ? scrollTotal / docHeight : 0;
-                            const offset = circumference - scrollPercent * circumference;
-                            circle.style.strokeDashoffset = offset;
+                            const scrollPercent = Math.min(1, Math.max(0, scrollTotal / cachedDocHeight));
+                            
+                            if (scrollBar) {
+                                scrollBar.style.width = (scrollPercent * 100) + "%";
+                            }
+                            
+                            circle.style.strokeDashoffset = circumference - scrollPercent * circumference;
 
                             if (scrollTotal > 300) {
                                 backToTop.classList.add('visible');
