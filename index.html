@@ -316,13 +316,12 @@
         .grid-background {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;
             background-image: 
+                radial-gradient(circle at center, transparent 35%, var(--bg-base) 80%),
                 linear-gradient(var(--border-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.25;
-            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-            contain: strict; transform: translateZ(0); will-change: transform;
+            background-size: 100% 100%, 50px 50px, 50px 50px;
+            opacity: 0.35;
+            contain: strict; transform: translateZ(0);
         }
 
         .nav-links { display: none; gap: 32px; align-items: center; }
@@ -755,6 +754,7 @@
             transform: rotate(-5deg) scale(1.1); transform-origin: center; margin: 120px 0;
             box-shadow: inset 0 20px 50px rgba(0,0,0,0.5), inset 0 -20px 50px rgba(0,0,0,0.5);
             z-index: 10;
+            contain: paint;
         }
         [data-theme="light"] .marquee-section { box-shadow: inset 0 20px 50px rgba(0,0,0,0.05), inset 0 -20px 50px rgba(0,0,0,0.05); }
         .marquee-container { 
@@ -935,8 +935,7 @@
         .service-card {
             background: var(--bg-surface); border: 1px solid var(--border-color);
             border-radius: 16px; padding: 40px; position: relative; overflow: hidden;
-            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-            backdrop-filter: blur(10px); transform: translateZ(0);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .service-card::before {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -1271,13 +1270,12 @@
             display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
         }
         .project-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 16px; 
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color); border-radius: 16px; 
             padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
             position: relative; overflow: hidden;
             transform: none !important;
-            transition: border-color 0.2s ease, background 0.2s ease;
+            transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
         }
         .project-card > * {
             transform: none;
@@ -1616,8 +1614,8 @@
 
         /* Super Smooth Apple-Grade Reveal */
         .reveal {
-            opacity: 0; transform: translateY(24px);
-            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: translateY(14px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.08s; }
@@ -1912,12 +1910,10 @@
             .container { padding: 0 16px; }
         }
 
-        /* ===== PERFORMANCE: GPU Acceleration Hints ===== */
-        .reveal, .section-header, .hero, .navbar, .footer,
-        .service-card, .timeline-item, .project-card, .cert-card,
-        .contact-card, .stat-card {
+        /* ===== PERFORMANCE: GPU Compositing Optimization ===== */
+        /* Fixed overlay hardware acceleration only (Prevents 80+ layer explosion) */
+        .navbar {
             transform: translateZ(0);
-            backface-visibility: hidden;
         }
         
         /* Reduce paint complexity during scroll */
