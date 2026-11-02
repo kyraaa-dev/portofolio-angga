@@ -63,40 +63,41 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-base: #000000;
-            --bg-surface: #0a0a0a;
-            --bg-surface-hover: #111111;
-            --text-primary: #ffffff;
-            --text-secondary: #888888;
-            --accent-color: #0070f3; /* Vercel Blue */
-            --accent-glow: rgba(0, 112, 243, 0.3);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --border-hover: rgba(255, 255, 255, 0.2);
-            --glass-bg: rgba(10, 10, 10, 0.6);
-            --nav-bg: rgba(0, 0, 0, 0.7);
-            --hero-gradient: linear-gradient(to right, #FFFFFF 20%, #888888 50%, #FFFFFF 80%);
+            --bg-base: #08090d;
+            --bg-surface: #0f1118;
+            --bg-surface-hover: #161824;
+            --text-primary: #f0f2f5;
+            --text-secondary: #8a919e;
+            --accent-color: #5e6ad2; /* Linear Electric Indigo */
+            --accent-glow: rgba(94, 106, 210, 0.28);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(94, 106, 210, 0.4);
+            --glass-bg: rgba(15, 17, 24, 0.75);
+            --nav-bg: rgba(8, 9, 13, 0.85);
+            --hero-gradient: linear-gradient(135deg, #ffffff 25%, #94a3b8 65%, #5e6ad2 100%);
             --filter-invert: invert(1);
             --mesh-opacity: 1;
-            --font-family: 'Inter', sans-serif;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
         html { scrollbar-color: var(--accent-color) var(--bg-base); scrollbar-width: thin; }
 
         [data-theme="light"] {
-            --bg-base: #ffffff;
-            --bg-surface: #f9fafb;
-            --bg-surface-hover: #f3f4f6;
-            --text-primary: #000000;
-            --text-secondary: #6b7280;
-            --accent-color: #0070f3;
-            --accent-glow: rgba(0, 112, 243, 0.1);
-            --border-color: rgba(0, 0, 0, 0.1);
-            --border-hover: rgba(0, 0, 0, 0.2);
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --nav-bg: rgba(255, 255, 255, 0.8);
-            --hero-gradient: linear-gradient(to right, #000000 20%, #666666 50%, #000000 80%);
+            --bg-base: #fbfbfc;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f4f5f8;
+            --text-primary: #0d0f14;
+            --text-secondary: #5a6474;
+            --accent-color: #4f46e5;
+            --accent-glow: rgba(79, 70, 229, 0.16);
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(79, 70, 229, 0.35);
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --nav-bg: rgba(251, 251, 252, 0.88);
+            --hero-gradient: linear-gradient(135deg, #0d0f14 20%, #4b5563 60%, #4f46e5 100%);
             --filter-invert: invert(0);
             --mesh-opacity: 0.5;
         }
@@ -303,16 +304,25 @@
         ::-webkit-scrollbar-thumb { background: var(--accent-glow); border-radius: 10px; border: 2px solid var(--bg-base); }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
 
-        /* Subtle Grid Background */
+        /* Subtle Grid Background with Linear Horizon Glow */
         .grid-background {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;
             background-image: 
-                radial-gradient(circle at center, transparent 35%, var(--bg-base) 80%),
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(94, 106, 210, 0.16), transparent 70%),
+                radial-gradient(circle at center, transparent 35%, var(--bg-base) 85%),
                 linear-gradient(var(--border-color) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
-            background-size: 100% 100%, 50px 50px, 50px 50px;
-            opacity: 0.35;
+            background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+            opacity: 0.65;
             contain: strict; transform: translateZ(0);
+        }
+        [data-theme="light"] .grid-background {
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 70, 229, 0.08), transparent 70%),
+                radial-gradient(circle at center, transparent 35%, var(--bg-base) 85%),
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            opacity: 0.5;
         }
 
         .nav-links { display: none; gap: 32px; align-items: center; }
@@ -326,15 +336,15 @@
             align-items: center; text-align: center; min-height: 90vh; justify-content: center; 
         }
         .hero-badge { 
-            display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; 
+            display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; 
             border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-surface);
-            font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 32px; 
-            letter-spacing: 1px; text-transform: uppercase;
+            font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--text-secondary); margin-bottom: 32px; 
+            letter-spacing: 0.5px; text-transform: uppercase;
             transition: background-color 0.5s ease, border-color 0.5s ease;
         }
         .hero-badge::before {
-            content: ''; width: 8px; height: 8px; background: var(--accent-color); 
-            border-radius: 50%; box-shadow: 0 0 10px var(--accent-color);
+            content: ''; width: 7px; height: 7px; background: var(--accent-color); 
+            border-radius: 50%; box-shadow: 0 0 8px var(--accent-color);
         }
         .hero-title { filter: drop-shadow(0 0 20px var(--accent-glow)); 
             font-size: 80px; font-weight: 800; line-height: 1.05; margin-bottom: 24px; 
@@ -584,7 +594,7 @@
         .digital-id-card { will-change: transform;
             width: 320px;
             height: 480px;
-            background: linear-gradient(135deg, rgba(20,20,20,0.85) 0%, rgba(5,5,5,0.92) 100%);
+            background: linear-gradient(135deg, rgba(20, 23, 34, 0.92) 0%, rgba(9, 10, 15, 0.96) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-top-color: rgba(255, 255, 255, 0.25);
             border-left-color: rgba(255, 255, 255, 0.18);
@@ -653,14 +663,14 @@
             color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         .digital-id-role {
-            font-size: 13px; font-weight: 700; color: #00fff9;
+            font-size: 13px; font-weight: 700; color: var(--accent-color);
             text-transform: uppercase; letter-spacing: 4px;
         }
         .glitch-role {
             position: relative;
             display: inline-block;
-            color: #00fff9;
-            text-shadow: 0 0 10px rgba(0, 255, 249, 0.6);
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
         .glitch-text {
             position: relative;
@@ -679,7 +689,7 @@
         .id-access {
             font-size: 10px; font-weight: 700; color: #fff; letter-spacing: 2px; 
             border: 1px solid rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 4px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.05); font-family: var(--font-mono);
         }
         
         /* Light Mode Overrides for Digital ID Card */
@@ -691,7 +701,7 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,1);
         }
         [data-theme="light"] .digital-id-perspective::before {
-            background: linear-gradient(45deg, rgba(0, 112, 243, 0.15), rgba(0, 255, 249, 0.15));
+            background: linear-gradient(45deg, var(--accent-glow), rgba(99, 102, 241, 0.15));
         }
         [data-theme="light"] .digital-id-name {
             color: #111111;
@@ -735,7 +745,7 @@
         .stat-item:hover { background: var(--bg-surface-hover); }
         .stat-number { font-size: 40px; font-weight: 700; margin-bottom: 8px; letter-spacing: -1px; }
         .stat-number span { color: var(--text-secondary); }
-        .stat-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+        .stat-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; }
 
         /* High-Performance Marquee Ribbon (Flat, Contain-Paint, Zero Diagonal Resampling) */
         .marquee-section {
@@ -1035,7 +1045,7 @@
             font-weight: 800;
             font-size: 24px;
             color: var(--bg-base);
-            box-shadow: 0 0 40px rgba(0, 255, 249, 0.4);
+            box-shadow: 0 0 40px var(--accent-glow);
             z-index: 10;
         }
         .orbit-ring {
@@ -1173,13 +1183,13 @@
             background: var(--bg-base);
             border: 2px solid var(--accent-color);
             transform: translateX(-50%);
-            box-shadow: 0 0 10px rgba(0, 255, 249, 0.5);
+            box-shadow: 0 0 10px var(--accent-glow);
             z-index: 2;
             
         }
         .timeline-item:hover .timeline-dot {
             background: var(--accent-color);
-            box-shadow: 0 0 20px rgba(0, 255, 249, 0.8);
+            box-shadow: 0 0 20px var(--accent-glow);
             transform: translateX(-50%) scale(1.2);
         }
         @media (min-width: 768px) {
@@ -1247,14 +1257,17 @@
         .filters { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
         .filter-btn { 
             background: transparent; border: 1px solid var(--border-color); border-radius: 8px; 
-            padding: 8px 20px; font-size: 14px; font-weight: 500; color: var(--text-secondary); 
+            padding: 8px 18px; font-size: 13px; font-weight: 500; color: var(--text-secondary); 
             cursor: pointer;  
         }
         .filter-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
         .filter-btn.active { 
-            background: var(--text-primary); color: var(--bg-base); border-color: var(--text-primary); 
+            background: rgba(94, 106, 210, 0.12); color: var(--accent-color); border-color: var(--accent-color); 
         }
-        .filter-btn .badge { opacity: 0.7; font-size: 12px; margin-left: 6px; }
+        [data-theme="light"] .filter-btn.active {
+            background: rgba(79, 70, 229, 0.1); color: var(--accent-color); border-color: var(--accent-color);
+        }
+        .filter-btn .badge { opacity: 0.8; font-size: 11px; margin-left: 6px; font-family: var(--font-mono); }
         
         .project-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
@@ -1278,9 +1291,13 @@
         
         .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; position: relative; z-index: 1; }
         .project-tag { 
-            font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; 
-            background: var(--border-color); color: var(--text-secondary); letter-spacing: 0.5px;
+            font-family: var(--font-mono);
+            font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 6px; 
+            background: rgba(255, 255, 255, 0.04); color: var(--text-secondary); letter-spacing: 0.3px;
             border: 1px solid var(--border-color); 
+        }
+        [data-theme="light"] .project-tag {
+            background: rgba(0, 0, 0, 0.04);
         }
         
         .project-logo { 
@@ -1580,10 +1597,10 @@
         [data-theme="light"] .footer { background: #ffffff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border-top-color: rgba(0,0,0,0.05); }
         .footer-content { display: flex; justify-content: space-between; align-items: center; }
         .footer-brand { display: flex; align-items: center; gap: 12px; }
-        .footer-logo { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; font-size: 14px; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; box-shadow: 0 0 10px var(--accent-glow); letter-spacing: 2px; }
+        .footer-logo { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-weight: 700; font-size: 13px; padding: 4px 10px; border-radius: 4px; font-family: var(--font-mono); box-shadow: 0 0 10px var(--accent-glow); letter-spacing: 1.5px; }
         .blinking-cursor-logo { display: inline-block; animation: blink 1s step-end infinite; }
-        .footer-text { color: var(--text-secondary); font-size: 14px; font-weight: 500; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
-        .footer-tagline { color: var(--text-secondary); font-size: 14px; font-family: 'Courier New', monospace; }
+        .footer-text { color: var(--text-secondary); font-size: 14px; font-weight: 500; font-family: var(--font-family); letter-spacing: 0.5px; }
+        .footer-tagline { color: var(--text-secondary); font-size: 13px; font-family: var(--font-mono); }
         .accent-precision { color: var(--accent-color); font-weight: 600; text-shadow: 0 0 10px var(--accent-glow); }
         .blinking-cursor { display: inline-block; width: 8px; height: 14px; background: var(--accent-color); vertical-align: middle; margin-left: 2px; animation: blink 1s step-end infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
