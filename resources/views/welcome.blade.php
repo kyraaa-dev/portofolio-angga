@@ -1328,148 +1328,157 @@
         }
         .project-link:hover { color: var(--text-primary); }
 
-        /* Contact Section */
-        .contact { padding-top: 120px; margin-top: 60px; padding-bottom: 120px; }
+        /* Contact Section — Linear Precision Connect Dock */
+        .contact { padding-top: 88px; margin-top: 40px; padding-bottom: 96px; }
         .contact-card {
-            background: var(--bg-surface); border: 1px solid var(--border-color);
-            border-radius: 24px; padding: 64px; position: relative; overflow: hidden;
-            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 40px;
-            transition: background-color 0.5s ease, border-color 0.5s ease;
+            background-color: var(--bg-surface);
+            background-image: radial-gradient(ellipse 65% 55% at 50% 0%, rgba(94, 106, 210, 0.12), transparent 72%);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 48px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        [data-theme="light"] .contact-card {
+            background-image: radial-gradient(ellipse 65% 55% at 50% 0%, rgba(79, 70, 229, 0.06), transparent 72%);
         }
         .contact-card::before {
-            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 100%; height: 200%;
-            opacity: 0.5; pointer-events: none; transition: background 0.5s ease;
+            content: '';
+            position: absolute;
+            top: 0; left: 18%; right: 18%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(94, 106, 210, 0.65), transparent);
+            pointer-events: none;
         }
-        .contact-content { flex: 1; min-width: 320px; max-width: 800px; position: relative; z-index: 1; text-align: center; margin: 0 auto; }
-        
-        /* Contact Form Styles */
-        .contact-layout { display: flex; flex-direction: column; gap: 32px; margin-top: 40px; width: 100%; margin-left: 0; align-items: center; }
-        .telegram-form { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 600px; }
-        .contact-sidebar { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 24px; width: 100%; flex-wrap: wrap; }
-        
-        /* Contact Terminal */
-        .contact-terminal-wrapper {
-            flex: 1; min-width: 300px; max-width: 450px;
-            perspective: 1000px;
-            display: flex;
-            align-items: stretch;
-            margin-top: 40px; /* Align with form */
-        }
-        .contact-terminal { will-change: transform;
-            background: rgba(10, 15, 25, 0.65); /* More transparent for glassmorphism */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.02);
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.6s ease;
-            height: 100%;
-            width: 100%;
-            min-height: 380px;
+        .contact-connect {
             display: flex;
             flex-direction: column;
-            cursor: crosshair;
-            position: relative;
-            
-        }
-        
-        /* CRT Scanlines Overlay */
-        .contact-terminal::after {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 10;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        
-
-        .contact-terminal:hover {
-            animation-play-state: paused;
-            transform: rotateY(0) rotateX(0) translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 50px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.05);
-        }
-        [data-theme="light"] .contact-terminal { will-change: transform; background: rgba(250, 250, 250, 0.8); border-color: rgba(0,0,0,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .c-term-header {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 16px;
-            display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 32px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 920px;
+            margin: 0 auto;
         }
-        [data-theme="light"] .c-term-header { background: rgba(0, 0, 0, 0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .c-term-buttons { display: flex; gap: 8px; }
-        .c-term-buttons span { width: 12px; height: 12px; border-radius: 50%; }
-        .c-term-buttons span:nth-child(1) { background: #ff5f56; }
-        .c-term-buttons span:nth-child(2) { background: #ffbd2e; }
-        .c-term-buttons span:nth-child(3) { background: #27c93f; }
-        .c-term-title { flex: 1; text-align: center; font-family: monospace; font-size: 12px; color: var(--text-secondary); opacity: 0.8; }
-        .c-term-body {
-            padding: 20px;
-            font-family: 'Fira Code', 'Courier New', monospace;
-            font-size: 13px;
-            color: var(--accent-color);
-            flex: 1;
-            overflow-y: auto;
-            line-height: 1.6;
-        }
-        .c-term-line { display: flex; gap: 10px; margin-bottom: 8px; opacity: 0; animation: cTypeLine 0.1s forwards; }
-        .c-term-prompt { color: #34d399; font-weight: bold; }
-        .c-term-text { color: var(--text-primary); }
-        .c-term-cursor {
-            display: inline-block; width: 8px; height: 15px; background: var(--accent-color);
-            animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px;
-        }
-        @keyframes cTypeLine { to { opacity: 1; } }
-        
-        .form-group { width: 100%; position: relative; }
-        .form-input {
-            width: 100%; padding: 16px 24px; background: rgba(0, 0, 0, 0.3); 
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px;
-            color: var(--text-primary); font-family: var(--font-family); font-size: 16px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); resize: vertical; box-sizing: border-box;
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-        }
-        [data-theme="light"] .form-input { background: rgba(255, 255, 255, 0.7); border-color: rgba(0,0,0,0.1); }
-        
-        .form-input:focus { 
-            outline: none; 
-            border-color: var(--accent-color); 
-            background: rgba(0, 0, 0, 0.5); 
-            box-shadow: 0 0 0 4px var(--accent-glow), inset 0 0 20px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-        [data-theme="light"] .form-input:focus { background: #ffffff; }
-        .form-input::placeholder { color: var(--text-secondary); }
-        .btn-submit { width: 100%; justify-content: center; position: relative; overflow: hidden; }
-        .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
-        .loader {
-            border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%;
-            border-top: 2px solid #fff; width: 16px; height: 16px;
-            animation: spin 1s linear infinite; position: absolute; left: 50%; top: 50%;
-            transform: translate(-50%, -50%);
-        }
-        @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
-        .social-links { display: flex; gap: 16px; }
-        .social-links a { color: var(--text-secondary);  display: flex; }
-        .social-links a:hover { color: var(--text-primary); transform: translateY(-2px); }
-        
+
         .status-badge {
-            display: inline-flex; align-items: center; gap: 12px; padding: 12px 24px;
-            background: rgba(0, 0, 0, 0.2); border: 1px solid var(--border-color); border-radius: 100px;
-            font-size: 14px; font-weight: 500; color: var(--text-primary); position: relative; z-index: 1;
-            transition: background-color 0.5s ease, border-color 0.5s ease;
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 18px;
+            background: rgba(34, 197, 94, 0.07);
+            border: 1px solid rgba(34, 197, 94, 0.24);
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 12px; font-weight: 500;
+            letter-spacing: 0.6px; text-transform: uppercase;
+            color: var(--text-primary);
+            position: relative; z-index: 1;
+            transition: background-color 0.25s ease, border-color 0.25s ease;
         }
-        [data-theme="light"] .status-badge { background: rgba(255, 255, 255, 0.5); }
-        .pulse { 
-            width: 8px; height: 8px; background-color: var(--accent-color); border-radius: 50%; 
-            box-shadow: 0 0 0 0 var(--accent-glow); }
+        [data-theme="light"] .status-badge {
+            background: rgba(22, 163, 74, 0.08);
+            border-color: rgba(22, 163, 74, 0.25);
+        }
+        .pulse {
+            width: 8px; height: 8px; flex-shrink: 0;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2), 0 0 10px rgba(34, 197, 94, 0.55);
+        }
+
+        .contact-channels {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            width: 100%;
+        }
+        .contact-channel-card {
+            display: grid;
+            grid-template-columns: 42px 1fr auto;
+            grid-template-rows: auto auto;
+            column-gap: 14px;
+            row-gap: 20px;
+            align-items: start;
+            padding: 22px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: var(--text-primary);
+            text-align: left;
+            position: relative;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        [data-theme="light"] .contact-channel-card {
+            background: #fbfbfc;
+        }
+        .contact-channel-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-hover);
+            background: var(--bg-surface-hover);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+        }
+        [data-theme="light"] .contact-channel-card:hover {
+            background: #ffffff;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+        }
+        .channel-icon {
+            grid-column: 1; grid-row: 1;
+            width: 42px; height: 42px; border-radius: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        [data-theme="light"] .channel-icon {
+            background: rgba(0, 0, 0, 0.035);
+        }
+        .contact-channel-card:hover .channel-icon {
+            background: rgba(94, 106, 210, 0.14);
+            border-color: rgba(94, 106, 210, 0.38);
+            color: var(--accent-color);
+        }
+        .channel-arrow {
+            grid-column: 3; grid-row: 1;
+            color: var(--text-secondary);
+            display: inline-flex; align-items: center; justify-content: center;
+            padding-top: 2px;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+        }
+        .contact-channel-card:hover .channel-arrow {
+            color: var(--accent-color);
+            transform: translate(3px, -3px);
+        }
+        .channel-info {
+            grid-column: 1 / -1; grid-row: 2;
+            display: flex; flex-direction: column; gap: 4px;
+            min-width: 0;
+        }
+        .channel-name {
+            font-size: 16px; font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+        .channel-handle {
+            font-family: var(--font-mono);
+            font-size: 12px; font-weight: 400;
+            color: var(--text-secondary);
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        @media (max-width: 900px) {
+            .contact-card { padding: 36px 24px; }
+            .contact-channels { grid-template-columns: 1fr; gap: 12px; }
+            .contact-channel-card {
+                grid-template-columns: 42px minmax(0, 1fr) auto;
+                grid-template-rows: auto;
+                align-items: center;
+                row-gap: 0;
+                padding: 16px 18px;
+            }
+            .channel-info { grid-column: 2; grid-row: 1; }
+            .channel-arrow { grid-column: 3; grid-row: 1; padding-top: 0; }
+        }
         
 
         /* Footer */
@@ -1649,12 +1658,7 @@
             .nav-links { display: flex; }
         }
         @media (max-width: 1024px) {
-            .contact-card { flex-direction: column; }
-            .contact-content { max-width: 100%; }
-            .contact-terminal-wrapper { max-width: 100%; margin-top: 0; }
-            .contact-terminal { will-change: transform; animation: none; transform: none; min-height: 350px; }
-            .contact-terminal:hover { transform: translateY(-5px); }
-            .contact-card::before { right: -10%; top: -20%; width: 120%; height: 120%; }
+            .contact-card { padding: 40px 28px; }
         }
         @media (max-width: 768px) {
             h1 { font-size: 56px; line-height: 1.1; }
@@ -1779,18 +1783,9 @@
             .project-grid::-webkit-scrollbar { display: none; }
             .project-card { flex: 0 0 85% !important; scroll-snap-align: center; }
 
-            .contact-card { padding: 32px; flex-direction: column; align-items: stretch; gap: 32px; }
-            .contact-content { max-width: 100%; min-width: 100%; }
-            .contact-layout { gap: 24px; margin-top: 24px; }
-            .contact-sidebar { flex-direction: column; justify-content: center; text-align: center; gap: 20px; }
-            .contact-terminal-wrapper { max-width: 100%; min-width: 100%; margin-top: 0; }
-            .contact-terminal { will-change: transform; 
-                transform: none; 
-                min-height: 300px;
-            }
-            .contact-terminal:hover {
-                transform: translateY(-5px);
-            }
+            .contact { padding-bottom: 64px; }
+            .contact-card { padding: 28px 20px; border-radius: 18px; }
+            .contact-connect { gap: 22px; }
             .footer-content { flex-direction: column; gap: 16px; text-align: center; }
             
             /* Swipeable Certificates */
@@ -3095,40 +3090,53 @@
     <!-- Contact Section -->
     <section id="contact" class="contact container reveal">
         <div class="contact-card">
-            <div class="contact-content">
-                <h2 class="section-title text-reveal" data-i18n="contact_title">Let's build something great.</h2>
-                <p class="section-description" data-i18n="contact_desc">Available for freelance work and full-time opportunities. If you have a project that needs some creative engineering, let's talk.</p>
-                <div class="contact-layout">
-                    <form id="telegramForm" class="telegram-form" onsubmit="sendToTelegram(event)">
-                        <div class="form-group">
-                            <input type="text" id="senderName" placeholder="Nama Anda" required class="form-input" data-i18n-placeholder="contact_name">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="senderEmail" placeholder="Email Anda" required class="form-input" data-i18n-placeholder="contact_email">
-                        </div>
-                        <div class="form-group">
-                            <textarea id="senderMessage" placeholder="Tulis pesan Anda di sini..." rows="4" required class="form-input" data-i18n-placeholder="contact_msg"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
-                            <span class="btn-text" data-i18n="contact_send">Kirim Pesan</span>
-                            <svg class="send-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        </button>
-                    </form>
-                    <div class="contact-sidebar">
-                        <div class="status-badge" style="display: inline-flex;">
-                            <span class="pulse"></span>
-                            <span data-i18n="contact_avail">Tersedia untuk proyek</span>
-                        </div>
-                        <div class="social-links">
-                            <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
-                            <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                            <a href="mailto:anggawiranatafti@gmail.com" aria-label="Email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
-                        </div>
-                    </div>
+            <div class="contact-connect">
+                <div class="status-badge">
+                    <span class="pulse"></span>
+                    <span data-i18n="contact_avail">Tersedia untuk proyek</span>
+                </div>
+
+                <div class="contact-channels">
+                    <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" class="contact-channel-card" aria-label="GitHub">
+                        <span class="channel-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </span>
+                        <span class="channel-info">
+                            <span class="channel-name">GitHub</span>
+                            <span class="channel-handle">@kyraaa-dev</span>
+                        </span>
+                        <span class="channel-arrow" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer" class="contact-channel-card" aria-label="LinkedIn">
+                        <span class="channel-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </span>
+                        <span class="channel-info">
+                            <span class="channel-name">LinkedIn</span>
+                            <span class="channel-handle">in/angga-wiranata</span>
+                        </span>
+                        <span class="channel-arrow" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </span>
+                    </a>
+
+                    <a href="mailto:anggawiranatafti@gmail.com" class="contact-channel-card" aria-label="Email">
+                        <span class="channel-icon" aria-hidden="true">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </span>
+                        <span class="channel-info">
+                            <span class="channel-name">Email</span>
+                            <span class="channel-handle">anggawiranatafti@gmail.com</span>
+                        </span>
+                        <span class="channel-arrow" aria-hidden="true">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </span>
+                    </a>
                 </div>
             </div>
-            
-
         </div>
     </section>
 
@@ -4171,13 +4179,7 @@
             "cert_3_date": { id: "Diterbitkan: 2025", en: "Issued: 2025" },
             "cert_btn": { id: "Lihat Detail", en: "View Details" },
 
-            "contact_title": { id: "Mari berkolaborasi bersama.", en: "Let's build something great." },
-            "contact_desc": { id: "Tersedia untuk pekerjaan freelance dan peluang penuh waktu. Jika Anda memiliki proyek yang membutuhkan rekayasa kreatif, mari bicara.", en: "Available for freelance work and full-time opportunities. If you have a project that needs some creative engineering, let's talk." },
-            "contact_send": { id: "Kirim Pesan", en: "Send Message" },
-            "contact_avail": { id: "Tersedia untuk proyek", en: "Available for work" },
-            "contact_name": { id: "Nama Lengkap", en: "Full Name" },
-            "contact_email": { id: "Alamat Email", en: "Email Address" },
-            "contact_msg": { id: "Tulis pesan Anda di sini...", en: "Write your message here..." }
+            "contact_avail": { id: "Tersedia untuk proyek", en: "Available for projects" }
         };
 
         let currentLang = localStorage.getItem('site_lang') || 'id';
@@ -4322,92 +4324,6 @@
             // If ID, just ensure button shows ID
             if(langToggleBtn) langToggleBtn.textContent = 'ID';
         }
-        // Telegram Form Submission
-        async function sendToTelegram(e) {
-            e.preventDefault();
-            
-            const botToken = '8811902111:AAF_TB5jPYLFNxhIqs8UlQbL-G3LcCSm-3E';
-            const chatId = '713471706';
-            
-            const nameInput = document.getElementById('senderName');
-            const emailInput = document.getElementById('senderEmail');
-            const messageInput = document.getElementById('senderMessage');
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const sendIcon = submitBtn.querySelector('.send-icon');
-            const loader = submitBtn.querySelector('.loader');
-            
-            // Validate
-            if(!nameInput.value || !emailInput.value || !messageInput.value) return;
-            
-            // Set loading state
-            submitBtn.disabled = true;
-            btnText.style.opacity = '0';
-            if(sendIcon) sendIcon.style.display = 'none';
-            if(loader) loader.style.display = 'block';
-            
-            const text = `📬 *Pesan Baru dari Portfolio!*\n\n*Nama:* ${nameInput.value}\n*Email:* ${emailInput.value}\n*Pesan:*\n${messageInput.value}`;
-            
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: text,
-                        parse_mode: 'Markdown'
-                    })
-                });
-                
-                if(response.ok) {
-                    // Success Toast
-                    let toast = document.getElementById('langToast');
-                    if (!toast) {
-                        toast = document.createElement('div');
-                        toast.id = 'langToast';
-                        Object.assign(toast.style, {
-                            position: 'fixed', bottom: '30px', left: '50%', transform: 'translateX(-50%) translateY(20px)',
-                            background: 'var(--accent-glow)', color: '#fff', padding: '12px 24px', borderRadius: '30px',
-                            fontSize: '14px', fontWeight: '600', fontFamily: "'Inter', sans-serif",
-                            boxShadow: '0 10px 25px rgba(0,0,0,0.5)', border: '1px solid rgba(255, 255, 255, 0.3)',
-                            backdropFilter: 'blur(12px)', opacity: '0', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)', zIndex: '9999', pointerEvents: 'none'
-                        });
-                        document.body.appendChild(toast);
-                    }
-                    toast.style.background = 'var(--accent-glow)'; // Green for success
-                    toast.innerHTML = '<span style="margin-right: 8px;">✅</span> Pesan berhasil dikirim!';
-                    requestAnimationFrame(() => { toast.style.opacity = '1'; toast.style.transform = 'translateX(-50%) translateY(0)'; });
-                    
-                    if(toast.hideTimeout) clearTimeout(toast.hideTimeout);
-                    toast.hideTimeout = setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(20px)'; }, 4000);
-                    
-                    // Reset form
-                    e.target.reset();
-                } else {
-                    throw new Error('Gagal mengirim');
-                }
-            } catch(error) {
-                alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.');
-                console.error(error);
-            } finally {
-                // Restore button state
-                submitBtn.disabled = false;
-                btnText.style.opacity = '1';
-                if(sendIcon) sendIcon.style.display = 'inline-block';
-                if(loader) loader.style.display = 'none';
-                
-                if (currentLang === 'en') {
-                    btnText.textContent = 'Message Sent!';
-                    setTimeout(() => { btnText.textContent = 'Send Message'; }, 3000);
-                } else {
-                    btnText.textContent = 'Pesan Terkirim!';
-                    setTimeout(() => { btnText.textContent = 'Kirim Pesan'; }, 3000);
-                }
-            }
-        }
-
     </script>
 
 </body>
