@@ -917,17 +917,64 @@
             text-align: right;
         }
 
-        /* Github Heatmap */
-        .github-heatmap { margin-top: 64px; text-align: center; width: 100%; }
-        .github-heatmap h3 { font-size: 24px; font-weight: 700; color: var(--text-primary); margin-bottom: 24px; }
-        .heatmap-container { 
-            display: inline-block; padding: 24px; background: var(--bg-surface);
-            border: 1px solid var(--border-color); border-radius: 12px;
-            overflow-x: auto; max-width: 100%; box-shadow: 0 10px 30px var(--accent-glow);
-            transition: transform 0.3s ease;
+        /* Github Heatmap — Linear Precision Card */
+        .github-heatmap { margin-top: 64px; width: 100%; }
+        .heatmap-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 28px;
+            transition: border-color 0.25s ease, background-color 0.25s ease;
         }
-        .heatmap-container:hover { transform: translateY(-5px); }
-        .heatmap-container img { max-width: 100%; height: auto; display: block; }
+        .heatmap-card:hover { border-color: var(--border-hover); }
+        .heatmap-header {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 16px; flex-wrap: wrap;
+            margin-bottom: 22px; padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+        .heatmap-title-group { display: flex; align-items: center; gap: 12px; }
+        .heatmap-icon {
+            width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(94, 106, 210, 0.12);
+            border: 1px solid rgba(94, 106, 210, 0.3);
+            color: var(--accent-color);
+        }
+        .heatmap-title-text h3 {
+            font-size: 16px; font-weight: 700; color: var(--text-primary);
+            margin: 0 0 2px 0; letter-spacing: -0.01em;
+        }
+        .heatmap-sub {
+            display: block; font-size: 12.5px; color: var(--text-secondary);
+        }
+        .heatmap-profile-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 7px 13px; border-radius: 8px;
+            font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+            color: var(--text-secondary); text-decoration: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+        [data-theme="light"] .heatmap-profile-link { background: rgba(0, 0, 0, 0.03); }
+        .heatmap-profile-link:hover {
+            color: var(--accent-color); border-color: var(--border-hover);
+            background: rgba(94, 106, 210, 0.08);
+        }
+        .heatmap-container {
+            width: 100%; overflow-x: auto; padding: 6px 2px 2px;
+            scrollbar-width: thin;
+        }
+        .heatmap-img {
+            width: 100%; min-width: 640px; height: auto; display: block;
+            filter: invert(0.91) hue-rotate(180deg) saturate(1.35) brightness(1.05);
+        }
+        [data-theme="light"] .heatmap-img { filter: none; }
+        @media (max-width: 768px) {
+            .heatmap-card { padding: 20px; border-radius: 16px; }
+        }
         
         /* Services Section */
         .services { padding-top: 120px; padding-bottom: 60px; }
@@ -958,23 +1005,28 @@
         .service-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); position: relative; z-index: 1; }
         .service-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.6; position: relative; z-index: 1; }
 
-        /* ⚡ Build My Site Replay Mode */
+        /* ⚡ Build My Site Replay Mode — Minimal Linear Pill */
         .replay-btn {
-            position: fixed; bottom: 32px; left: 32px; z-index: 9000;
-            display: flex; align-items: center; gap: 10px;
-            background: rgba(0, 0, 0, 0.8); border: 1px solid var(--accent-color);
-            color: var(--accent-color); font-size: 13px; font-weight: 600;
-            font-family: 'Inter', sans-serif; padding: 12px 20px; border-radius: 100px;
-            cursor: pointer; backdrop-filter: blur(10px); transform: translateZ(0);
-            box-shadow: 0 0 20px var(--accent-glow);
-             letter-spacing: 0.5px;
+            position: fixed; bottom: 30px; left: 30px; z-index: 9000;
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--bg-surface); border: 1px solid var(--border-color);
+            color: var(--text-secondary); font-size: 12px; font-weight: 500;
+            font-family: var(--font-mono); padding: 10px 16px; border-radius: 999px;
+            cursor: pointer; transform: translateZ(0);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+            letter-spacing: 0.3px;
+            transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+        }
+        [data-theme="light"] .replay-btn {
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
         }
         .replay-btn:hover {
-            background: var(--accent-color); color: #000;
-            box-shadow: 0 0 40px var(--accent-glow); transform: translateY(-3px);
+            background: var(--bg-surface-hover); color: var(--text-primary);
+            border-color: var(--border-hover);
+            box-shadow: 0 10px 26px var(--accent-glow); transform: translateY(-2px);
         }
-        .replay-btn svg { transition: transform 0.3s ease; }
-        .replay-btn:hover svg { transform: scale(1.2); }
+        .replay-btn svg { color: var(--accent-color); transition: transform 0.2s ease; }
+        .replay-btn:hover svg { transform: scale(1.1); }
 
         .replay-terminal {
             position: fixed; bottom: 90px; left: 32px; width: 380px;
@@ -1284,15 +1336,14 @@
         .filter-btn .badge { opacity: 0.8; font-size: 11px; margin-left: 6px; font-family: var(--font-mono); }
         
         .project-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 24px; 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; 
         }
         .project-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-color); border-radius: 16px; 
-            padding: 32px; display: flex; flex-direction: column; min-height: 320px; 
-            position: relative; overflow: hidden;
+            padding: 0; display: flex; flex-direction: column;
+            position: relative; overflow: hidden; cursor: pointer;
             transform: none !important;
-            transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
         }
         .project-card > * {
             transform: none;
@@ -1301,7 +1352,122 @@
             border-color: var(--accent-color); background: var(--bg-surface-hover);
             transform: none !important;
         }
-        
+        .project-image-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-base);
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .project-img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: top center;
+        }
+        .project-body {
+            padding: 22px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 12px;
+        }
+        .project-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .project-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+        .project-status-badge.is-done {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.25);
+            color: #4ade80;
+        }
+        [data-theme="light"] .project-status-badge.is-done {
+            background: rgba(22, 163, 74, 0.08);
+            border-color: rgba(22, 163, 74, 0.25);
+            color: #15803d;
+        }
+        .project-status-badge.is-soon {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.28);
+            color: #fbbf24;
+        }
+        [data-theme="light"] .project-status-badge.is-soon {
+            background: rgba(217, 119, 6, 0.08);
+            border-color: rgba(217, 119, 6, 0.25);
+            color: #b45309;
+        }
+        .project-status-dot {
+            width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0;
+        }
+        .project-cat-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+        .project-title {
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.38;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .project-card-desc {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin: 0;
+        }
+        .project-tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 2px;
+        }
+        .project-tech-pill {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 9px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        [data-theme="light"] .project-tech-pill {
+            background: rgba(0, 0, 0, 0.035);
+        }
         
         .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; position: relative; z-index: 1; }
         .project-tag { 
@@ -1321,12 +1487,51 @@
         /* invert logos in light mode automatically to stay visible */
         .project-logo svg { filter: var(--filter-invert); }
         
-        .project-footer { margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 24px; display: flex; justify-content: space-between; align-items: center;  position: relative; z-index: 1; }
-        .project-title { font-size: 18px; font-weight: 600; line-height: 1.4; color: var(--text-primary); }
-        .project-link { 
-            color: var(--text-secondary);  display: flex; align-items: center;
+        .project-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
         }
-        .project-link:hover { color: var(--text-primary); }
+        .project-action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+        .project-action-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+        .project-soon-label {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.3px;
+        }
+        .project-link { 
+            color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center;
+        }
+        .project-action-btn {
+            width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        [data-theme="light"] .project-action-btn { background: rgba(0, 0, 0, 0.03); }
+        .project-card:hover .project-action-btn {
+            border-color: var(--border-hover);
+            color: var(--accent-color);
+            background: rgba(94, 106, 210, 0.12);
+        }
 
         /* Contact Section — Linear Precision Connect Dock */
         .contact { padding-top: 88px; margin-top: 40px; padding-bottom: 96px; }
@@ -1482,21 +1687,21 @@
         
 
         /* Footer */
-        /* Certificates */
+        /* Certificates — Balanced 2-Column Linear Grid */
         .certificates-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
             margin-top: 48px;
         }
         .cert-card {
             position: relative;
-            background: linear-gradient(145deg, var(--bg-surface) 0%, rgba(10,10,10,0.4) 100%);
+            background: var(--bg-surface);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 32px;
+            padding: 28px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
             z-index: 1;
@@ -1506,7 +1711,6 @@
             position: absolute;
             inset: 0;
             opacity: 0;
-            
             z-index: -1;
             pointer-events: none;
         }
@@ -1514,34 +1718,36 @@
             opacity: 1;
         }
         .cert-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--bg-surface-hover);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
         }
         [data-theme="light"] .cert-card:hover {
-            border-color: rgba(0,0,0,0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 20px var(--accent-glow);
+            border-color: var(--border-hover);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
         }
         .cert-image-wrapper {
             width: 100%;
-            height: 180px;
-            margin-bottom: 24px;
+            height: 220px;
+            margin-bottom: 22px;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border-color);
+            background: var(--bg-base);
             position: relative;
         }
         .cert-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background: rgba(0, 0, 0, 0.05); /* neutral letterbox background */
-            padding: 4px;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 6px;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .cert-card:hover .cert-img {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         .cert-icon-wrapper {
             width: 56px;
@@ -2679,10 +2885,13 @@
     </section>
 
     <section class="stats container reveal" id="stats-section">
+        @php
+            $statKeys = ['stat_exp', 'stat_proj', 'stat_clients', 'stat_success'];
+        @endphp
         @foreach($stats as $index => $stat)
         <div class="stat-item">
             <h3 class="stat-number"><span class="counter" data-target="{{ preg_replace('/[^0-9]/', '', $stat->number) }}">0</span><span>{{ preg_replace('/[0-9]/', '', $stat->number) }}</span></h3>
-            <p class="stat-label">{{ $stat->label }}</p>
+            <p class="stat-label" @if(isset($statKeys[$index])) data-i18n="{{ $statKeys[$index] }}" @endif>{{ $stat->label }}</p>
         </div>
         @endforeach
     </section>
@@ -2767,11 +2976,6 @@
                 <h2 class="text-reveal" data-i18n="about_title">Lebih Dekat Dengan Saya</h2>
                 <p data-i18n="about_p1">Saya adalah seorang Web Developer yang bersemangat dalam membangun antarmuka web yang modern, cepat, dan mudah diakses. Fokus saya tidak hanya pada fungsionalitas, namun juga pada estetika visual yang mampu memberikan pengalaman terbaik bagi pengguna.</p>
                 <p data-i18n="about_p2">Dengan latar belakang yang kuat di bidang teknik informatika, saya selalu berusaha untuk terus mengikuti perkembangan teknologi terbaru dan mengimplementasikannya dalam setiap proyek yang saya kerjakan.</p>
-                <a href="#contact" class="btn-collab magnetic" data-i18n="about_btn">
-                                        <span class="collab-dot"></span>
-                                        <span>Mari Berkolaborasi</span>
-                                        <svg class="collab-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                                    </a>
             </div>
             <div class="about-visual" style="padding: 32px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; ">
                 <div class="radar-wrapper" id="radarWrapper">
@@ -2854,9 +3058,25 @@
         </div>
 
         <div class="github-heatmap reveal delay-2">
-            <h3>GitHub Activity</h3>
-            <div class="heatmap-container">
-                <img src="https://ghchart.rshah.org/kyraaa-dev" alt="Angga Wiranata Github Chart" loading="lazy" decoding="async">
+            <div class="heatmap-card">
+                <div class="heatmap-header">
+                    <div class="heatmap-title-group">
+                        <span class="heatmap-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </span>
+                        <div class="heatmap-title-text">
+                            <h3 data-i18n="github_title">Aktivitas GitHub</h3>
+                            <span class="heatmap-sub" data-i18n="github_sub">Kontribusi publik selama setahun terakhir</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" class="heatmap-profile-link">
+                        <span>@kyraaa-dev</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </a>
+                </div>
+                <div class="heatmap-container">
+                    <img src="https://ghchart.rshah.org/5e6ad2/kyraaa-dev" alt="Angga Wiranata GitHub Contribution Graph" class="heatmap-img" loading="lazy" decoding="async">
+                </div>
             </div>
         </div>
     </section>
@@ -2966,82 +3186,85 @@
 
     <section id="projects" class="projects container">
         <div class="section-header">
-            <h2 class="section-title" data-i18n="proj_title">Selected Projects</h2>
-            <p class="section-description" data-i18n="proj_desc">Engineered solutions for enterprise clients and institutions.</p>
+            <h2 class="section-title" data-i18n="proj_title">Proyek Pilihan</h2>
+            <p class="section-description" data-i18n="proj_desc">Solusi terencana untuk klien perusahaan dan institusi.</p>
         </div>
         
         <div class="filters">
-            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">All <span class="badge">5</span></button>
-            <button class="filter-btn" data-filter="Unggulan" data-i18n-btn="proj_feat">Featured <span class="badge">5</span></button>
-            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Completed <span class="badge">3</span></button>
+            <button class="filter-btn active" data-filter="all" data-i18n-btn="proj_all">Semua <span class="badge">{{ count($projects) }}</span></button>
+            <button class="filter-btn" data-filter="GovTech" data-i18n-btn="proj_gov">Instansi <span class="badge">3</span></button>
+            <button class="filter-btn" data-filter="Web App" data-i18n-btn="proj_web">Web App <span class="badge">2</span></button>
+            <button class="filter-btn" data-filter="Selesai" data-i18n-btn="proj_comp">Selesai <span class="badge">3</span></button>
         </div>
 
         <div class="project-grid">
             @foreach($projects as $index => $project)
             @php
-                $filterCategories = 'Unggulan';
-                if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel') || str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
-                    $filterCategories = 'Unggulan, Selesai';
-                }
+                $lowerTitle = strtolower($project->title);
+                $isKasflow = str_contains($lowerTitle, 'kasflow');
+                $isJelajahin = str_contains($lowerTitle, 'jelajahin') || str_contains($lowerTitle, 'travel');
+                $isEmutz = str_contains($lowerTitle, 'mutz') || str_contains($lowerTitle, 'emutz') || str_contains($lowerTitle, 'rekap');
+                $isDuta = str_contains($lowerTitle, 'duta');
+                $isDone = $isKasflow || $isJelajahin || $isEmutz;
+                $isWebApp = $isKasflow || $isJelajahin;
 
+                $catLabel = $isWebApp ? 'Web App' : 'GovTech';
+                $filterCategories = $catLabel . ($isDone ? ', Selesai' : ', Unggulan');
+
+                $imageName = 'project-korpri.png';
                 $cardDesc = 'Aplikasi ini dirancang sebagai portal terpadu untuk mendigitalkan dan mempermudah pengurusan berbagai layanan, administrasi, dan kesejahteraan bagi para pegawai (anggota KORPRI).';
-                if(str_contains(strtolower($project->title), 'duta')) {
+                $techStack = ['Laravel', 'Livewire', 'MySQL', 'Tailwind'];
+
+                if ($isDuta) {
+                    $imageName = 'duta-korpri.png';
                     $cardDesc = 'Aplikasi ini adalah sebuah platform kompetisi berstandar profesional yang dirancang khusus untuk mengelola seluruh siklus ajang Duta KORPRI, mulai dari pendaftaran hingga penetapan juara.';
-                } elseif(str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
-                    $cardDesc = 'Jelajahin adalah asisten perjalanan cerdas bertenaga AI yang dirancang untuk memandu wisatawan menjelajahi Indonesia, dilengkapi fitur AI Travel Assistant, Itinerary Studio interaktif, ekspor PDF, eksplorasi destinasi, hingga perkiraan cuaca real-time.';
-                } elseif(str_contains(strtolower($project->title), 'kasflow')) {
+                    $techStack = ['Laravel', 'PHP', 'MySQL', 'Tailwind'];
+                } elseif ($isKasflow) {
+                    $imageName = 'kasflow-app.png';
                     $cardDesc = 'KasFlow adalah aplikasi manajemen arus kas pribadi yang intuitif dan modern untuk mencatat pemasukan, pengeluaran, serta melacak kesehatan finansial secara real-time.';
-                } elseif(str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
+                    $techStack = ['React', 'TypeScript', 'Tailwind'];
+                } elseif ($isJelajahin) {
+                    $imageName = 'project-travel.png';
+                    $cardDesc = 'Jelajahin adalah asisten perjalanan cerdas bertenaga AI yang dirancang untuk memandu wisatawan menjelajahi Indonesia, dilengkapi fitur AI Travel Assistant, Itinerary Studio interaktif, ekspor PDF, eksplorasi destinasi, hingga perkiraan cuaca real-time.';
+                    $techStack = ['React', 'AI API', 'Tailwind', 'Vercel'];
+                } elseif ($isEmutz) {
+                    $imageName = 'project-emutz.png';
                     $cardDesc = 'E-MutZ KORPRI adalah sistem informasi manajemen dan rekapitulasi pemesanan seragam/atribut Mutz KORPRI untuk seluruh SKPD / ASN, mencakup pencatatan pesanan per SKPD, manajemen stok & retur, statistik pemesanan real-time, cetak kwitansi, hingga export laporan data.';
+                    $techStack = ['Laravel', 'MySQL', 'Tailwind', 'Export'];
                 }
             @endphp
             <div class="project-card" data-category="{{ $filterCategories }}" data-desc="{{ $cardDesc }}">
-                <div class="project-image-wrapper" style="width: calc(100% + 64px); margin: -32px -32px 24px -32px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0;">
-                    @php
-                        $imageName = 'project-korpri.png';
-                        if (str_contains(strtolower($project->title), 'duta')) {
-                            $imageName = 'duta-korpri.png';
-                            } elseif (str_contains(strtolower($project->title), 'kasflow')) {
-                            $imageName = 'kasflow-app.png';
-                        } elseif (str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel')) {
-                            $imageName = 'project-travel.png';
-                        } elseif (str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap')) {
-                            $imageName = 'project-emutz.png';
-                        }
-                    @endphp
-                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" style="width: 100%; height: auto; display: block; object-fit: contain; filter: brightness(1.1) contrast(0.95); " loading="lazy" decoding="async">
-                    
-                    <!-- Right Side Anti-Glare Gradient (Burns highlights on the right) -->
-                    <div style="position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 30%, transparent 70%); pointer-events: none; z-index: 4;"></div>
-                    @php
-                        $catI18n = '';
-                        if($project->category == 'Berjalan') $catI18n = 'proj_prog';
-                        elseif($project->category == 'Selesai') $catI18n = 'proj_comp';
-                        elseif($project->category == 'Unggulan') $catI18n = 'proj_feat';
-                    @endphp
+                <div class="project-image-wrapper">
+                    <img src="images/{{ $imageName }}" alt="{{ $project->title }} Screenshot" class="project-img" loading="lazy" decoding="async">
                 </div>
-                
-                <div class="project-footer" style="padding-top: 0; border-top: none;">
-                    <div>
-                        <h3 class="project-title" style="font-size: 16px; font-weight: 700; line-height: 1.4;">{{ $project->title }}</h3>
-                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
-                            <div class="project-tag" style="background: var(--accent-glow); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); "></span>
-                                <span @if($catI18n) data-i18n="{{ $catI18n }}" @endif>{{ $project->category }}</span>
-                            </div>
-                            @if(str_contains(strtolower($project->title), 'kasflow') || str_contains(strtolower($project->title), 'jelajahin') || str_contains(strtolower($project->title), 'travel') || str_contains(strtolower($project->title), 'mutz') || str_contains(strtolower($project->title), 'emutz') || str_contains(strtolower($project->title), 'rekap'))
-                                <a href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" style="font-size: 12px; color: var(--accent-color); margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; border-bottom: 1px dashed var(--accent-color); padding-bottom: 2px; ">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
-                                    {{ str_contains($project->link, 'github.com') ? 'Lihat Project' : 'Klik untuk Demo' }}
-                                </a>
-                            @else
-                                <p style="font-size: 12px; color: var(--text-secondary); margin: 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">• Coming Soon</p>
-                            @endif
-                        </div>
+                <div class="project-body">
+                    <div class="project-meta">
+                        <span class="project-status-badge {{ $isDone ? 'is-done' : 'is-soon' }}">
+                            <span class="project-status-dot"></span>
+                            <span data-i18n="{{ $isDone ? 'proj_comp' : 'proj_prog' }}">{{ $isDone ? 'Selesai' : 'Berjalan' }}</span>
+                        </span>
+                        <span class="project-cat-label">{{ $catLabel }}</span>
                     </div>
-                    <a href="{{ $project->link }}" @if($project->link != '#') target="_blank" rel="noopener noreferrer" @endif class="project-link project-action-btn" aria-label="Visit project" style="background: var(--bg-surface-hover); padding: 12px; border-radius: 50%; border: 1px solid var(--border-color); ">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </a>
+                    <h3 class="project-title">{{ $project->title }}</h3>
+                    <p class="project-card-desc">{{ $cardDesc }}</p>
+                    <div class="project-tech-list">
+                        @foreach($techStack as $tech)
+                        <span class="project-tech-pill">{{ $tech }}</span>
+                        @endforeach
+                    </div>
+                    <div class="project-footer">
+                        @if($isDone && $project->link && $project->link !== '#')
+                            <a href="{{ $project->link }}" target="_blank" rel="noopener noreferrer" class="project-action-link">
+                                <span data-i18n="{{ str_contains($project->link, 'github.com') ? 'proj_repo' : 'proj_demo' }}">{{ str_contains($project->link, 'github.com') ? 'Lihat Repo' : 'Live Demo' }}</span>
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+                            </a>
+                        @else
+                            <span class="project-soon-label" data-i18n="proj_soon">Segera Hadir</span>
+                        @endif
+                        <a href="{{ $project->link }}" @if($project->link != '#') target="_blank" rel="noopener noreferrer" @endif class="project-link project-action-btn" aria-label="Buka {{ $project->title }}">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             @endforeach
@@ -3673,7 +3896,7 @@
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     anchor.addEventListener('click', function(e) {
                         const href = this.getAttribute('href');
-                        if (!href || href.startsWith('#lanyardPath')) return;
+                        if (!href || href.startsWith('#lanyardPath') || this.classList.contains('project-action-btn')) return;
                         if (href === '#' || href === '#top') {
                             e.preventDefault();
                             smoothScrollTo(0, 750);
@@ -3723,25 +3946,29 @@
             
             projectCards.forEach(card => {
                 card.style.cursor = 'pointer';
-                card.addEventListener('click', () => {
+                card.addEventListener('click', (e) => {
+                    const clickedAnchor = e.target.closest('a');
+                    if (clickedAnchor) {
+                        const href = clickedAnchor.getAttribute('href');
+                        if (href && href !== '#') return;
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
                     const title = card.querySelector('.project-title').textContent.trim();
-                    const category = card.getAttribute('data-category');
-                    const link = card.querySelector('.project-link').getAttribute('href');
+                    const category = card.getAttribute('data-category') || '';
+                    const linkEl = card.querySelector('.project-link');
+                    const link = linkEl ? linkEl.getAttribute('href') : '#';
                     const logoEl = card.querySelector('.project-logo');
                     const logoHtml = logoEl ? logoEl.innerHTML : '';
                     
-                    // Map category to translation key
-                    const categoryMap = { "Berjalan": "proj_prog", "Selesai": "proj_comp", "Unggulan": "proj_feat" };
-                    const catKey = categoryMap[category];
+                    // Map category to clean localized status label
                     const currentLang = localStorage.getItem('site_lang') || 'id';
-                    
                     const tagEl = document.getElementById('modalTag');
-                    if (catKey) {
+                    const catKey = category.includes('Selesai') ? 'proj_comp' : 'proj_prog';
+                    if (tagEl) {
                         tagEl.setAttribute('data-i18n', catKey);
                         tagEl.innerText = translations[catKey] ? translations[catKey][currentLang] : category;
-                    } else {
-                        tagEl.removeAttribute('data-i18n');
-                        tagEl.innerText = category;
                     }
                     
                     document.getElementById('modalLogo').innerHTML = logoHtml;
@@ -4109,6 +4336,11 @@
             "hero_btn_contact": { id: `Hubungi Saya <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`, en: `Contact Me <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>` },
             "lanyard_hint": { id: "Tarik & Ayunkan Kartu / Drag me!", en: "Pull & Swing Card / Drag me!" },
 
+            "stat_exp": { id: "TAHUN PENGALAMAN", en: "YEARS EXPERIENCE" },
+            "stat_proj": { id: "PROJEK DISELESAIKAN", en: "PROJECTS COMPLETED" },
+            "stat_clients": { id: "KLIEN", en: "CLIENTS" },
+            "stat_success": { id: "TINGKAT KEBERHASILAN", en: "SUCCESS RATE" },
+
             "tech_title_1": { id: "Ekosistem ", en: "Tech " },
             "tech_title_2": { id: "Teknologi", en: "Ecosystem" },
             "tech_desc": { id: "Teknologi yang berputar dan mendukung setiap project saya.", en: "The technologies orbiting and powering my every project." },
@@ -4116,7 +4348,8 @@
             "about_title": { id: "Lebih Dekat Dengan Saya", en: "Get to Know Me Closer" },
             "about_p1": { id: "Saya adalah seorang Web Developer yang bersemangat dalam membangun antarmuka web yang modern, cepat, dan mudah diakses. Fokus saya tidak hanya pada fungsionalitas, namun juga pada estetika visual yang mampu memberikan pengalaman terbaik bagi pengguna.", en: "I am a passionate Web Developer focused on building modern, fast, and accessible web interfaces. I care deeply about both functionality and visual aesthetics to deliver the best user experience." },
             "about_p2": { id: "Dengan latar belakang yang kuat di bidang teknik informatika, saya selalu berusaha untuk terus mengikuti perkembangan teknologi terbaru dan mengimplementasikannya dalam setiap proyek yang saya kerjakan.", en: "With a strong background in informatics engineering, I constantly strive to keep up with the latest technological trends and implement them into every project I build." },
-            "about_btn": { id: "Mari Berkolaborasi", en: "Let's Collaborate" },
+            "github_title": { id: "Aktivitas GitHub", en: "GitHub Activity" },
+            "github_sub": { id: "Kontribusi publik selama setahun terakhir", en: "Public contributions over the past year" },
 
             "services_title_1": { id: "Apa yang ", en: "What I " },
             "services_title_2": { id: "Saya Lakukan", en: "Do" },
@@ -4154,9 +4387,14 @@
             "proj_title": { id: "Proyek Pilihan", en: "Selected Projects" },
             "proj_desc": { id: "Solusi terencana untuk klien perusahaan dan institusi.", en: "Engineered solutions for enterprise clients and institutions." },
             "proj_all": { id: "Semua", en: "All" },
+            "proj_gov": { id: "Instansi", en: "GovTech" },
+            "proj_web": { id: "Web App", en: "Web App" },
             "proj_feat": { id: "Unggulan", en: "Featured" },
             "proj_comp": { id: "Selesai", en: "Completed" },
             "proj_prog": { id: "Berjalan", en: "In Progress" },
+            "proj_demo": { id: "Live Demo", en: "Live Demo" },
+            "proj_repo": { id: "Lihat Repo", en: "View Repo" },
+            "proj_soon": { id: "Segera Hadir", en: "Coming Soon" },
             "proj_dev_status": { id: "Tahap Pengembangan (Coming Soon)", en: "Development in Progress" },
             "proj_modal_desc": { 
                 id: "Ini adalah proyek komprehensif yang dibangun untuk memecahkan logika bisnis yang kompleks. Arsitekturnya melibatkan integrasi API backend kustom, pengalaman pengguna frontend yang mulus, dan optimasi kueri database untuk memastikan waktu muat yang cepat serta skalabilitas tinggi.", 
