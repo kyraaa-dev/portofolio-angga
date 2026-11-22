@@ -325,10 +325,34 @@
             opacity: 0.5;
         }
 
-        .nav-links { display: none; gap: 32px; align-items: center; }
-        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s ease; }
-        .nav-link:hover { color: var(--text-primary); }
-        .nav-actions { display: flex; align-items: center; justify-content: flex-end; gap: 16px; flex: 1; }
+        .nav-links { display: none; gap: 6px; align-items: center; }
+        .nav-link {
+            color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500;
+            padding: 6px 12px; border-radius: 8px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+        .nav-link:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.04); }
+        [data-theme="light"] .nav-link:hover { background: rgba(0, 0, 0, 0.04); }
+        .nav-link.active {
+            color: var(--text-primary);
+            background: rgba(94, 106, 210, 0.14);
+        }
+        [data-theme="light"] .nav-link.active {
+            color: var(--accent-color);
+            background: rgba(79, 70, 229, 0.1);
+        }
+        .nav-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex: 1; }
+        .cmd-trigger {
+            display: inline-flex; align-items: center; gap: 6px;
+            height: 36px; padding: 0 11px; border-radius: 10px;
+            background: var(--bg-surface); border: 1px solid var(--border-color);
+            color: var(--text-secondary); font-family: var(--font-mono); font-size: 11.5px; font-weight: 500;
+            cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+        }
+        .cmd-trigger:hover {
+            color: var(--text-primary); border-color: var(--border-hover); background: var(--bg-surface-hover);
+        }
+        @media (max-width: 768px) { .cmd-trigger { display: none; } }
 
         /* Hero Section */
         .hero { 
@@ -976,34 +1000,41 @@
             .heatmap-card { padding: 20px; border-radius: 16px; }
         }
         
-        /* Services Section */
-        .services { padding-top: 120px; padding-bottom: 60px; }
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; }
+        /* Services Section — Linear Craft Grid */
+        .services { padding-top: 112px; padding-bottom: 60px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
         .service-card {
             background: var(--bg-surface); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 40px; position: relative; overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 16px; padding: 32px; position: relative; overflow: hidden;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
         }
         .service-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            opacity: 0; transition: opacity 0.5s ease; pointer-events: none; z-index: 0;
+            content: ''; position: absolute; top: 0; left: 16%; right: 16%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(94, 106, 210, 0.5), transparent);
+            opacity: 0; transition: opacity 0.25s ease; pointer-events: none; z-index: 0;
         }
         .service-card:hover {
-            transform: translateY(-10px); border-color: var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: translateY(-4px); border-color: var(--border-hover);
+            background: var(--bg-surface-hover);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
         }
-        .service-card:hover::before { opacity: 0.15; }
+        [data-theme="light"] .service-card:hover {
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+        }
+        .service-card:hover::before { opacity: 1; }
         .service-icon {
-            width: 60px; height: 60px; border-radius: 12px; background: var(--accent-glow);
-            display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+            width: 48px; height: 48px; border-radius: 12px;
+            background: rgba(94, 106, 210, 0.12);
+            border: 1px solid rgba(94, 106, 210, 0.28);
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
             color: var(--accent-color); position: relative; z-index: 1;
-            transition: transform 0.4s ease, background 0.4s ease;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
         }
         .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg); background: var(--accent-color); color: #000;
+            transform: scale(1.06); background: var(--accent-color); border-color: var(--accent-color); color: #ffffff;
         }
-        .service-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); position: relative; z-index: 1; }
-        .service-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.6; position: relative; z-index: 1; }
+        .service-title { font-size: 19px; font-weight: 700; margin-bottom: 10px; color: var(--text-primary); position: relative; z-index: 1; letter-spacing: -0.01em; }
+        .service-desc { font-size: 14.5px; color: var(--text-secondary); line-height: 1.65; position: relative; z-index: 1; }
 
         /* ⚡ Build My Site Replay Mode — Minimal Linear Pill */
         .replay-btn {
@@ -1145,32 +1176,53 @@
             }
         }
 
-        /* Project Modal */
+        /* Project Modal — Linear Case-Study Preview */
         .project-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            background: rgba(5, 6, 10, 0.78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
         }
         [data-theme="light"] .project-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px;
+            background: rgba(15, 23, 42, 0.55);
         }
         .project-modal-overlay.active { display: flex !important; }
         .project-modal-content {
             background: var(--bg-surface); border: 1px solid var(--border-color);
-            padding: 40px; border-radius: 20px; max-width: 600px; width: 100%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative;
+            padding: 0; border-radius: 20px; max-width: 640px; width: 100%; max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 28px 64px rgba(0, 0, 0, 0.55); position: relative;
         }
-        
         .project-modal-close {
-            position: absolute; top: 24px; right: 24px; background: none; border: none;
-            color: var(--text-secondary); cursor: pointer; transition: color 0.2s ease;
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            width: 34px; height: 34px; border-radius: 10px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: rgba(8, 9, 13, 0.76); border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #f0f2f5; cursor: pointer;
         }
-        .project-modal-close:hover { color: var(--text-primary); }
-        .project-modal-logo { margin-bottom: 24px; text-align: left; }
-        .project-modal-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.4; }
-        .project-modal-desc { color: var(--text-secondary); line-height: 1.8; font-size: 16px; margin-bottom: 24px; }
+        .project-modal-close:hover { background: var(--accent-color); border-color: var(--accent-color); color: #ffffff; }
+        .project-modal-preview {
+            width: 100%; aspect-ratio: 16 / 10; background: var(--bg-base);
+            border-bottom: 1px solid var(--border-color); overflow: hidden;
+        }
+        .project-modal-preview img {
+            width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+        }
+        .project-modal-body {
+            padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 14px;
+        }
+        .project-modal-header {
+            display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+        }
+        .project-modal-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin: 0; letter-spacing: -0.02em; line-height: 1.35; }
+        .project-modal-desc { color: var(--text-secondary); line-height: 1.72; font-size: 14.5px; margin: 0; }
+        .project-modal-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+        .project-modal-actions {
+            margin-top: 6px; padding-top: 16px; border-top: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+        }
+        .project-modal-hint {
+            font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);
+        }
 
         /* Back to Top Progress Ring */
         .back-to-top {
@@ -1265,18 +1317,20 @@
         }
         .timeline-content {
             margin-left: 50px;
-            padding: 24px;
+            padding: 24px 26px;
             background: var(--bg-surface);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 16px;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
         }
         .timeline-item:hover .timeline-content {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--bg-surface-hover);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
         }
-        [data-theme="dark"] .timeline-item:hover .timeline-content {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        [data-theme="light"] .timeline-item:hover .timeline-content {
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
         }
         @media (min-width: 768px) {
             .timeline-content {
@@ -1291,11 +1345,17 @@
             }
         }
         .timeline-date {
-            font-size: 14px;
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
             color: var(--accent-color);
             font-weight: 600;
-            margin-bottom: 8px;
-            display: block;
+            letter-spacing: 0.4px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(94, 106, 210, 0.12);
+            border: 1px solid rgba(94, 106, 210, 0.28);
+            margin-bottom: 12px;
         }
         .timeline-title {
             font-size: 20px;
@@ -1647,14 +1707,37 @@
         .channel-arrow {
             grid-column: 3; grid-row: 1;
             color: var(--text-secondary);
-            display: inline-flex; align-items: center; justify-content: center;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
             padding-top: 2px;
             transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
         }
-        .contact-channel-card:hover .channel-arrow {
+        .contact-channel-card:hover .channel-arrow > svg {
             color: var(--accent-color);
             transform: translate(3px, -3px);
         }
+        .channel-arrow > svg {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+        }
+        .channel-copy-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+            height: 28px; padding: 0 9px; border-radius: 7px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+            cursor: pointer; position: relative; z-index: 3;
+            transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+        }
+        [data-theme="light"] .channel-copy-btn { background: rgba(0, 0, 0, 0.04); }
+        .channel-copy-btn:hover {
+            border-color: var(--accent-color); color: var(--accent-color);
+            background: rgba(94, 106, 210, 0.12);
+        }
+        .channel-copy-btn.copied {
+            border-color: rgba(34, 197, 94, 0.4); color: #4ade80;
+            background: rgba(34, 197, 94, 0.12);
+        }
+        [data-theme="light"] .channel-copy-btn.copied { color: #15803d; }
         .channel-info {
             grid-column: 1 / -1; grid-row: 2;
             display: flex; flex-direction: column; gap: 4px;
@@ -1798,9 +1881,9 @@
             border-top: 1px solid var(--border-color);
         }
         .cert-date {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
-            font-family: monospace;
+            font-family: var(--font-mono);
         }
         .cert-link {
             display: inline-flex;
@@ -2220,69 +2303,122 @@
             }
         }
 
-        /* ===== MINIMALIST TECH ECOSYSTEM ===== */
+        /* ===== MINIMALIST TECH ECOSYSTEM — Linear Hairline Pills ===== */
         .tech-ecosystem { padding-top: 40px; padding-bottom: 80px; position: relative; z-index: 2; }
         .tech-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            max-width: 900px;
+            gap: 12px;
+            max-width: 860px;
             margin: 0 auto;
-            perspective: 1000px;
         }
         .tech-pill {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 28px;
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            gap: 10px;
+            padding: 11px 20px;
+            border-radius: 999px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
             color: var(--text-secondary);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.2px;
             cursor: default;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-            transform: translateZ(0);
-        }
-        [data-theme="light"] .tech-pill {
-            background: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
-            color: var(--text-primary);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
         .tech-pill:hover {
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-2px);
             color: var(--text-primary);
-            background: var(--accent-glow);
-            border-color: var(--accent-glow);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-glow);
-            animation-play-state: paused;
+            background: var(--bg-surface-hover);
+            border-color: var(--border-hover);
         }
         .tech-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             color: var(--accent-color);
-            filter: drop-shadow(0 0 5px var(--accent-glow));
-            transition: transform 0.3s ease;
+            transition: transform 0.2s ease;
         }
-        .tech-pill:hover .tech-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-        
+        .tech-pill:hover .tech-icon { transform: scale(1.08); }
 
         @media (max-width: 768px) {
-            .tech-grid { gap: 12px; padding: 0 10px; }
-            .tech-pill { padding: 12px 20px; font-size: 14px; backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg-surface); }
-            [data-theme="light"] .tech-pill { background: #f8f9fa; }
-            .tech-pill:hover { transform: none; animation-play-state: running; }
+            .tech-grid { gap: 10px; padding: 0 6px; }
+            .tech-pill { padding: 9px 15px; font-size: 13px; }
+            .tech-pill:hover { transform: none; }
         }
+
+        /* ===== COMMAND PALETTE (Cmd + K / Ctrl + K) ===== */
+        .cmd-overlay {
+            position: fixed; inset: 0; z-index: 10050;
+            background: rgba(5, 6, 10, 0.72);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            display: none; align-items: flex-start; justify-content: center;
+            padding: 12vh 16px 24px;
+        }
+        [data-theme="light"] .cmd-overlay { background: rgba(15, 23, 42, 0.45); }
+        .cmd-overlay.active { display: flex; }
+        .cmd-dialog {
+            width: 100%; max-width: 540px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 28px 64px rgba(0, 0, 0, 0.55);
+        }
+        .cmd-input-wrap {
+            display: flex; align-items: center; gap: 12px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cmd-input-wrap svg { color: var(--text-secondary); flex-shrink: 0; }
+        .cmd-input {
+            width: 100%; background: transparent; border: none; outline: none;
+            color: var(--text-primary); font-family: var(--font-family); font-size: 15px;
+        }
+        .cmd-input::placeholder { color: var(--text-secondary); }
+        .cmd-kbd {
+            font-family: var(--font-mono); font-size: 10.5px; color: var(--text-secondary);
+            padding: 3px 7px; border-radius: 6px;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        [data-theme="light"] .cmd-kbd { background: rgba(0, 0, 0, 0.04); }
+        .cmd-list {
+            max-height: 360px; overflow-y: auto; padding: 8px;
+        }
+        .cmd-group-label {
+            font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
+            letter-spacing: 0.7px; text-transform: uppercase;
+            color: var(--text-secondary); padding: 10px 10px 6px;
+        }
+        .cmd-item {
+            width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            padding: 10px 12px; border-radius: 10px; border: none; background: transparent;
+            color: var(--text-primary); font-family: var(--font-family); font-size: 14px; font-weight: 500;
+            cursor: pointer; text-align: left;
+            transition: background-color 0.12s ease, color 0.12s ease;
+        }
+        .cmd-item-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .cmd-item svg { color: var(--text-secondary); flex-shrink: 0; }
+        .cmd-item.selected, .cmd-item:hover {
+            background: rgba(94, 106, 210, 0.14);
+            color: var(--text-primary);
+        }
+        .cmd-item.selected svg, .cmd-item:hover svg { color: var(--accent-color); }
+        .cmd-item-meta {
+            font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); flex-shrink: 0;
+        }
+        .cmd-empty {
+            padding: 28px 16px; text-align: center; font-size: 13.5px; color: var(--text-secondary);
+        }
+        .cmd-footer {
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            padding: 10px 16px; border-top: 1px solid var(--border-color);
+            font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.015);
+        }
+        [data-theme="light"] .cmd-footer { background: rgba(0, 0, 0, 0.02); }
 
         /* ===== MINIMALIST AESTHETIC FOOTER ===== */
         .footer { 
@@ -2663,7 +2799,7 @@
         }
     </style>
         
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" id="theme-color-meta" content="#08090d">
 </head>
 <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -2688,13 +2824,21 @@
             <span class="logo-text">ANGGA WIRANATA</span>
         </a>
         
-        <nav class="nav-links">
-            <a href="#" class="nav-link magnetic" data-i18n="nav_home">Beranda</a>
-            <a href="#projects" class="nav-link magnetic" data-i18n="nav_projects">Proyek</a>
-            <a href="#contact" class="nav-link magnetic" data-i18n="nav_contact">Kontak</a>
+        <nav class="nav-links" aria-label="Primary Navigation">
+            <a href="#" class="nav-link active" data-section="top" data-i18n="nav_home">Beranda</a>
+            <a href="#about" class="nav-link" data-section="about" data-i18n="nav_about">Tentang</a>
+            <a href="#projects" class="nav-link" data-section="projects" data-i18n="nav_projects">Proyek</a>
+            <a href="#certificates" class="nav-link" data-section="certificates" data-i18n="nav_certs">Sertifikat</a>
+            <a href="#contact" class="nav-link" data-section="contact" data-i18n="nav_contact">Kontak</a>
         </nav>
 
         <div class="nav-actions">
+            <!-- Command Palette Trigger -->
+            <button type="button" class="cmd-trigger" id="cmdTrigger" aria-label="Open Command Palette (Cmd+K)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span>⌘K</span>
+            </button>
+
             <!-- Language Toggle -->
             <button class="lang-toggle" id="langToggle" aria-label="Toggle Language">
                 ID
@@ -2731,8 +2875,10 @@
                 <span class="overlay-label">Navigation</span>
             </div>
             <nav class="mobile-nav-list">
-                <div class="mobile-nav-item"><a href="#" class="mobile-link magnetic" data-i18n="nav_home">Home</a></div>
+                <div class="mobile-nav-item"><a href="#" class="mobile-link magnetic" data-i18n="nav_home">Beranda</a></div>
+                <div class="mobile-nav-item"><a href="#about" class="mobile-link magnetic" data-i18n="nav_about">Tentang</a></div>
                 <div class="mobile-nav-item"><a href="#projects" class="mobile-link magnetic" data-i18n="nav_projects">Proyek</a></div>
+                <div class="mobile-nav-item"><a href="#certificates" class="mobile-link magnetic" data-i18n="nav_certs">Sertifikat</a></div>
                 <div class="mobile-nav-item"><a href="#contact" class="mobile-link magnetic" data-i18n="nav_contact">Kontak</a></div>
             </nav>
             <div class="mobile-overlay-footer">
@@ -2948,44 +3094,44 @@
     <!-- Tech Stack Glass Grid Section -->
     <section class="tech-ecosystem container reveal delay-2" id="tech">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal"><span data-i18n="tech_title_1">Tech</span> <span class="highlight" data-i18n="tech_title_2">Ecosystem</span></h2>
+            <h2 class="section-title text-reveal"><span data-i18n="tech_title_1">Ekosistem </span><span class="highlight" data-i18n="tech_title_2">Teknologi</span></h2>
             <p class="section-description" data-i18n="tech_desc">Teknologi yang berputar dan mendukung setiap project saya.</p>
         </div>
         
         <div class="tech-grid reveal">
-            <div class="tech-pill magnetic" style="--delay: 0.0s;">
+            <div class="tech-pill" style="--delay: 0.0s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                 <span>Laravel</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -0.7s;">
+            <div class="tech-pill" style="--delay: -0.7s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
                 <span>React.js</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -1.4s;">
+            <div class="tech-pill" style="--delay: -1.4s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="M8 17l4 4 4-4"></path></svg>
                 <span>Tailwind CSS</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -2.1s;">
+            <div class="tech-pill" style="--delay: -2.1s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                 <span>JavaScript</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -2.8s;">
+            <div class="tech-pill" style="--delay: -2.8s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="6.5"></line></svg>
                 <span>Figma</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -3.5s;">
+            <div class="tech-pill" style="--delay: -3.5s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                 <span>Node.js</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -4.2s;">
+            <div class="tech-pill" style="--delay: -4.2s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
                 <span>MySQL</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -4.9s;">
-                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <div class="tech-pill" style="--delay: -4.9s;">
+                <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 <span>Livewire</span>
             </div>
-            <div class="tech-pill magnetic" style="--delay: -5.6s;">
+            <div class="tech-pill" style="--delay: -5.6s;">
                 <svg class="tech-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
                 <span>Git</span>
             </div>
@@ -3107,8 +3253,8 @@
     <!-- Services Section -->
     <section id="services" class="services container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal"><span data-i18n="services_title_1">What I</span> <span class="highlight" data-i18n="services_title_2">Do</span></h2>
-            <p class="section-description" data-i18n="services_desc">Layanan & Spesialisasi</p>
+            <h2 class="section-title text-reveal"><span data-i18n="services_title_1">Apa yang </span><span class="highlight" data-i18n="services_title_2">Saya Lakukan</span></h2>
+            <p class="section-description" data-i18n="services_desc">Layanan &amp; Spesialisasi</p>
         </div>
         
         <div class="services-grid">
@@ -3138,7 +3284,7 @@
             
             <div class="service-card reveal">
                 <div class="service-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                 </div>
                 <h3 class="service-title" data-i18n="srv_api_title">API Development</h3>
                 <p class="service-desc" data-i18n="srv_api_desc">Merancang dan membangun RESTful API yang aman, cepat, dan mudah diintegrasikan dengan berbagai platform klien.</p>
@@ -3149,7 +3295,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
                 </div>
                 <h3 class="service-title" data-i18n="srv_uiux_title">UI/UX Prototyping</h3>
-                <p class="service-desc" data-i18n="srv_uiux_desc">Menerjemahkan desain dari Figma atau Adobe XD ke dalam kode yang bersih (*pixel-perfect*) dengan interaksi yang mulus.</p>
+                <p class="service-desc" data-i18n="srv_uiux_desc">Menerjemahkan desain dari Figma atau Adobe XD ke dalam kode yang bersih (pixel-perfect) dengan interaksi yang mulus.</p>
             </div>
 
             <div class="service-card reveal delay-2">
@@ -3157,7 +3303,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 </div>
                 <h3 class="service-title" data-i18n="srv_perf_title">Performance Tuning</h3>
-                <p class="service-desc" data-i18n="srv_perf_desc">Mengoptimalkan kecepatan muat halaman (*Core Web Vitals*) dan menerapkan praktik SEO terbaik agar situs Anda lebih bersinar.</p>
+                <p class="service-desc" data-i18n="srv_perf_desc">Mengoptimalkan kecepatan muat halaman (Core Web Vitals) dan menerapkan praktik SEO terbaik agar situs Anda lebih bersinar.</p>
             </div>
         </div>
     </section>
@@ -3165,8 +3311,8 @@
     <!-- Experience Timeline Section -->
     <section id="experience" class="experience container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal"><span data-i18n="exp_title_1">My</span> <span class="highlight" data-i18n="exp_title_2">Journey</span></h2>
-            <p class="section-description" data-i18n="exp_desc">Pengalaman Karir & Pendidikan</p>
+            <h2 class="section-title text-reveal"><span data-i18n="exp_title_1">Perjalanan </span><span class="highlight" data-i18n="exp_title_2">Karir</span></h2>
+            <p class="section-description" data-i18n="exp_desc">Pengalaman Karir &amp; Pendidikan</p>
         </div>
         
         <div class="timeline">
@@ -3384,8 +3530,8 @@
     <!-- Certificates Section -->
     <section id="certificates" class="certificates container reveal">
         <div class="section-header reveal">
-            <h2 class="section-title text-reveal" data-i18n="cert_title">Certifications & Awards</h2>
-            <p class="section-description" data-i18n="cert_desc">Professional certifications and recognitions that validate my expertise.</p>
+            <h2 class="section-title text-reveal" data-i18n="cert_title">Sertifikasi &amp; Penghargaan</h2>
+            <p class="section-description" data-i18n="cert_desc">Sertifikasi dan pengakuan profesional yang memvalidasi keahlian saya.</p>
         </div>
         
         <!-- Style moved to main CSS block -->
@@ -3398,10 +3544,10 @@
                 </div>
                 <h3 class="cert-title" data-i18n="cert_1_title">Intro to Software Engineering</h3>
                 <div class="cert-issuer" data-i18n="cert_1_issuer">PT Revolusi Cita Edukasi</div>
-                <p class="cert-desc" data-i18n="cert_1_desc">A 1-week certified online course offered by RevoU. Has been awarded a certificate of attendance for the Intro to Software Engineering.</p>
+                <p class="cert-desc" data-i18n="cert_1_desc">Telah dianugerahkan sertifikat kehadiran untuk kursus online bersertifikat 1 minggu yang diselenggarakan oleh RevoU.</p>
                 <div class="cert-footer">
-                    <span class="cert-date" data-i18n="cert_1_date">Issued: 24 July 2026</span>
-                    <a href="images/cert-revou.png" target="_blank" class="cert-link"><span data-i18n="cert_btn">Lihat Sertifikat</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                    <span class="cert-date" data-i18n="cert_1_date">Diterbitkan: 24 Juli 2026</span>
+                    <a href="images/cert-revou.png" target="_blank" rel="noopener noreferrer" class="cert-link"><span data-i18n="cert_btn">Lihat Detail</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
                 </div>
             </div>
 
@@ -3410,10 +3556,10 @@
                 <div class="cert-image-wrapper"><img src="images/hacktiv8-ai.jpg" alt="Hacktiv8 AI Certificate" class="cert-img" loading="lazy" decoding="async"></div>
                 <h3 class="cert-title" data-i18n="cert_2_title">AI Productivity for Developers</h3>
                 <div class="cert-issuer" data-i18n="cert_2_issuer">Hacktiv8 Indonesia</div>
-                <p class="cert-desc" data-i18n="cert_2_desc">Has completed the Maju Bareng AI program, and successfully developed a final project as part of the program requirements.</p>
+                <p class="cert-desc" data-i18n="cert_2_desc">Telah menyelesaikan program Maju Bareng AI, dan berhasil mengembangkan proyek akhir sebagai bagian dari persyaratan program.</p>
                 <div class="cert-footer">
-                    <span class="cert-date" data-i18n="cert_2_date">Issued: 2024</span>
-                    <a href="images/hacktiv8-ai.jpg" target="_blank" class="cert-link"><span data-i18n="cert_btn">View Details</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+                    <span class="cert-date" data-i18n="cert_2_date">Diterbitkan: 06 Sept 2026</span>
+                    <a href="images/hacktiv8-ai.jpg" target="_blank" rel="noopener noreferrer" class="cert-link"><span data-i18n="cert_btn">Lihat Detail</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
                 </div>
             </div>
 
@@ -3464,8 +3610,12 @@
                             <span class="channel-name">Email</span>
                             <span class="channel-handle">anggawiranatafti@gmail.com</span>
                         </span>
-                        <span class="channel-arrow" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        <span class="channel-arrow">
+                            <button type="button" class="channel-copy-btn" id="copyEmailBtn" aria-label="Salin email">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span data-i18n="copy_btn">Salin</span>
+                            </button>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         </span>
                     </a>
                 </div>
@@ -3505,20 +3655,45 @@
     <!-- Replay Skip Button -->
     <button class="replay-skip" id="replaySkip" style="display:none;">✕ Skip</button>
 
-    <div class="project-modal-overlay" id="projectModal">
+    <div class="project-modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="project-modal-content">
-            <button class="project-modal-close" id="closeModal">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <button class="project-modal-close" id="closeModal" aria-label="Tutup modal">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
-            <div class="project-modal-header">
-                <div class="project-tag" id="modalTag"></div>
+            <div class="project-modal-preview" id="modalPreview">
+                <img id="modalImg" src="" alt="Project Preview">
             </div>
-            <div class="project-modal-logo" id="modalLogo"></div>
-            <h2 class="project-modal-title" id="modalTitle"></h2>
-            <p class="project-modal-desc" id="modalDesc" data-i18n="proj_modal_desc">This is a comprehensive project built to solve complex business logic. The architecture involves custom backend API integration, seamless frontend user experience, and optimized database queries ensuring fast load times and scalability.</p>
-            <div id="modalLink" style="margin-top: 24px; display: inline-block; padding: 10px 20px; border-radius: 8px; background: rgba(255, 189, 46, 0.1); color: #ffbd2e; border: 1px solid rgba(255, 189, 46, 0.3); font-weight: 500; font-size: 14px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; margin-top: -2px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                <span data-i18n="proj_dev_status">Tahap Pengembangan (Coming Soon)</span>
+            <div class="project-modal-body">
+                <div class="project-modal-header">
+                    <div class="project-status-badge" id="modalTag"></div>
+                    <span class="project-cat-label" id="modalCat"></span>
+                </div>
+                <h2 class="project-modal-title" id="modalTitle"></h2>
+                <p class="project-modal-desc" id="modalDesc" data-i18n="proj_modal_desc">Ini adalah proyek komprehensif yang dibangun untuk memecahkan logika bisnis yang kompleks.</p>
+                <div class="project-modal-tech" id="modalTech"></div>
+                <div class="project-modal-actions">
+                    <div id="modalLink" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 10px; background: rgba(255, 189, 46, 0.1); color: #ffbd2e; border: 1px solid rgba(255, 189, 46, 0.3); font-weight: 600; font-size: 13px;">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span data-i18n="proj_dev_status">Tahap Pengembangan (Coming Soon)</span>
+                    </div>
+                    <span class="project-modal-hint">ESC</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Linear / Raycast Command Palette (Cmd+K / Ctrl+K) -->
+    <div class="cmd-overlay" id="cmdOverlay" role="dialog" aria-modal="true" aria-label="Command Palette">
+        <div class="cmd-dialog">
+            <div class="cmd-input-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" class="cmd-input" id="cmdInput" placeholder="Cari navigasi atau aksi cepat..." autocomplete="off" spellcheck="false">
+                <span class="cmd-kbd">ESC</span>
+            </div>
+            <div class="cmd-list" id="cmdList"></div>
+            <div class="cmd-footer">
+                <span>↑↓ Navigasi · ↵ Pilih</span>
+                <span>⌘K / Ctrl+K</span>
             </div>
         </div>
     </div>
@@ -3579,7 +3754,7 @@
             const initialTheme = htmlElement.getAttribute('data-theme');
             const metaThemeColorInit = document.getElementById('theme-color-meta');
             if (metaThemeColorInit) {
-                metaThemeColorInit.content = initialTheme === 'dark' ? '#000000' : '#ffffff';
+                metaThemeColorInit.content = initialTheme === 'light' ? '#fbfbfc' : '#08090d';
             }
             if (initialTheme === 'light') {
                 iconMoon.style.display = 'block';
@@ -3600,7 +3775,7 @@
                 htmlElement.setAttribute('data-theme', theme);
                 const metaThemeColor = document.getElementById('theme-color-meta');
                 if (metaThemeColor) {
-                    metaThemeColor.content = theme === 'dark' ? '#000000' : '#ffffff';
+                    metaThemeColor.content = theme === 'light' ? '#fbfbfc' : '#08090d';
                 }
 
                 localStorage.setItem('theme', theme);
@@ -4047,12 +4222,22 @@
                 }, speed);
             }
 
-            // Project Modals
+            // Project Modals (Linear Case-Study Preview + Tech Stack + ESC support)
             const projectModal = document.getElementById('projectModal');
             const closeModal = document.getElementById('closeModal');
+            const modalPreviewEl = document.getElementById('modalPreview');
+            const modalImgEl = document.getElementById('modalImg');
+            const modalCatEl = document.getElementById('modalCat');
+            const modalTechEl = document.getElementById('modalTech');
             const modalTitleEl = document.getElementById('modalTitle');
             const modalDescEl = document.getElementById('modalDesc');
             const modalDescText = modalDescEl ? modalDescEl.textContent.trim() : "";
+
+            const closeProjectModal = () => {
+                if (!projectModal || !projectModal.classList.contains('active')) return;
+                projectModal.classList.remove('active');
+                document.body.style.overflow = '';
+            };
             
             projectCards.forEach(card => {
                 card.style.cursor = 'pointer';
@@ -4069,40 +4254,58 @@
                     const category = card.getAttribute('data-category') || '';
                     const linkEl = card.querySelector('.project-link');
                     const link = linkEl ? linkEl.getAttribute('href') : '#';
-                    const logoEl = card.querySelector('.project-logo');
-                    const logoHtml = logoEl ? logoEl.innerHTML : '';
-                    
-                    // Map category to clean localized status label
+                    const cardImg = card.querySelector('.project-img');
+                    const cardCatLabel = card.querySelector('.project-cat-label');
+                    const cardTechList = card.querySelector('.project-tech-list');
+                    const isDone = category.includes('Selesai');
                     const currentLang = localStorage.getItem('site_lang') || 'id';
+
+                    if (modalPreviewEl && modalImgEl) {
+                        if (cardImg && cardImg.getAttribute('src')) {
+                            modalImgEl.src = cardImg.getAttribute('src');
+                            modalImgEl.alt = title;
+                            modalPreviewEl.style.display = 'block';
+                        } else {
+                            modalPreviewEl.style.display = 'none';
+                        }
+                    }
+
                     const tagEl = document.getElementById('modalTag');
-                    const catKey = category.includes('Selesai') ? 'proj_comp' : 'proj_prog';
+                    const catKey = isDone ? 'proj_comp' : 'proj_prog';
                     if (tagEl) {
-                        tagEl.setAttribute('data-i18n', catKey);
-                        tagEl.innerText = translations[catKey] ? translations[catKey][currentLang] : category;
+                        const statusText = translations[catKey] ? translations[catKey][currentLang] : (isDone ? 'Selesai' : 'Berjalan');
+                        tagEl.className = 'project-status-badge ' + (isDone ? 'is-done' : 'is-soon');
+                        tagEl.innerHTML = '<span class="project-status-dot"></span><span data-i18n="' + catKey + '">' + statusText + '</span>';
+                    }
+                    if (modalCatEl) {
+                        modalCatEl.textContent = cardCatLabel ? cardCatLabel.textContent.trim() : '';
+                    }
+                    if (modalTechEl) {
+                        modalTechEl.innerHTML = cardTechList ? cardTechList.innerHTML : '';
                     }
                     
-                    document.getElementById('modalLogo').innerHTML = logoHtml;
                     const modalLinkContainer = document.getElementById('modalLink');
                     if (modalLinkContainer) {
                         if (link && link !== '#') {
                             const linkLabel = link.includes('github.com')
                                 ? (currentLang === 'en' ? 'View Project on GitHub' : 'Lihat Proyek di GitHub')
                                 : (currentLang === 'en' ? 'Open Live Demo' : 'Buka Live Demo');
-                            modalLinkContainer.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg> ${linkLabel}</a>`;
-                            modalLinkContainer.style.background = 'var(--accent-glow)';
-                            modalLinkContainer.style.borderColor = 'var(--accent-glow)';
+                            modalLinkContainer.innerHTML = `<a href="${link}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-color); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 7px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14L21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg> ${linkLabel}</a>`;
+                            modalLinkContainer.style.background = 'rgba(94, 106, 210, 0.14)';
+                            modalLinkContainer.style.borderColor = 'rgba(94, 106, 210, 0.35)';
+                            modalLinkContainer.style.color = 'var(--accent-color)';
                         } else {
                             const devText = translations['proj_dev_status'] ? translations['proj_dev_status'][currentLang] : 'Tahap Pengembangan (Coming Soon)';
-                            modalLinkContainer.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; margin-top: -2px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span data-i18n="proj_dev_status">${devText}</span>`;
-                            modalLinkContainer.style.background = 'rgba(255, 189, 46, 0.1)';
-                            modalLinkContainer.style.borderColor = 'rgba(255, 189, 46, 0.3)';
+                            modalLinkContainer.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> <span data-i18n="proj_dev_status">${devText}</span>`;
+                            modalLinkContainer.style.background = 'rgba(245, 158, 11, 0.1)';
+                            modalLinkContainer.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+                            modalLinkContainer.style.color = '#fbbf24';
                         }
                     }
                     
                     projectModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                     
-                    // Set modal text instantly without scramble animations
                     if (modalTitleEl) modalTitleEl.textContent = title;
                     if (modalDescEl) {
                         const customDesc = card.getAttribute('data-desc');
@@ -4118,17 +4321,291 @@
                 });
             });
             
-            closeModal.addEventListener('click', () => {
-                projectModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            projectModal.addEventListener('click', (e) => {
-                if(e.target === projectModal) {
-                    projectModal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
+            if (closeModal) closeModal.addEventListener('click', closeProjectModal);
+            if (projectModal) {
+                projectModal.addEventListener('click', (e) => {
+                    if (e.target === projectModal) closeProjectModal();
+                });
+            }
+
+            // Shared Minimalist Toast Helper
+            const showQuickToast = (htmlMessage) => {
+                let toast = document.getElementById('langToast');
+                if (!toast) {
+                    toast = document.createElement('div');
+                    toast.id = 'langToast';
+                    Object.assign(toast.style, {
+                        position: 'fixed',
+                        bottom: '30px',
+                        left: '50%',
+                        transform: 'translateX(-50%) translateY(20px)',
+                        background: 'rgba(15, 17, 24, 0.94)',
+                        color: '#f0f2f5',
+                        padding: '11px 20px',
+                        borderRadius: '999px',
+                        fontSize: '13px',
+                        fontWeight: '600',
+                        fontFamily: "'Inter', sans-serif",
+                        boxShadow: '0 12px 28px rgba(0,0,0,0.45)',
+                        border: '1px solid rgba(94, 106, 210, 0.45)',
+                        backdropFilter: 'blur(12px)',
+                        opacity: '0',
+                        transition: 'opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                        zIndex: '10100',
+                        pointerEvents: 'none'
+                    });
+                    document.body.appendChild(toast);
                 }
-            });
+                toast.innerHTML = htmlMessage;
+                requestAnimationFrame(() => {
+                    toast.style.opacity = '1';
+                    toast.style.transform = 'translateX(-50%) translateY(0)';
+                });
+                if (toast.hideTimeout) clearTimeout(toast.hideTimeout);
+                toast.hideTimeout = setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateX(-50%) translateY(20px)';
+                }, 2600);
+            };
+
+            // 1-Click Copy Email
+            const PORTFOLIO_EMAIL = 'anggawiranatafti@gmail.com';
+            const copyEmailBtn = document.getElementById('copyEmailBtn');
+            const copyPortfolioEmail = () => {
+                const lang = localStorage.getItem('site_lang') || 'id';
+                const onCopied = () => {
+                    showQuickToast(lang === 'en'
+                        ? '✓ Email copied: <span style="font-family:var(--font-mono);color:#818cf8;margin-left:4px;">' + PORTFOLIO_EMAIL + '</span>'
+                        : '✓ Email disalin: <span style="font-family:var(--font-mono);color:#818cf8;margin-left:4px;">' + PORTFOLIO_EMAIL + '</span>');
+                    if (copyEmailBtn) {
+                        copyEmailBtn.classList.add('copied');
+                        const labelSpan = copyEmailBtn.querySelector('span');
+                        if (labelSpan) labelSpan.textContent = lang === 'en' ? 'Copied' : 'Disalin';
+                        if (copyEmailBtn._resetTimer) clearTimeout(copyEmailBtn._resetTimer);
+                        copyEmailBtn._resetTimer = setTimeout(() => {
+                            copyEmailBtn.classList.remove('copied');
+                            const curLang = localStorage.getItem('site_lang') || 'id';
+                            if (labelSpan) labelSpan.textContent = curLang === 'en' ? 'Copy' : 'Salin';
+                        }, 2000);
+                    }
+                };
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(PORTFOLIO_EMAIL).then(onCopied).catch(() => {
+                        const ta = document.createElement('textarea');
+                        ta.value = PORTFOLIO_EMAIL;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand('copy'); onCopied(); } catch (err) {}
+                        document.body.removeChild(ta);
+                    });
+                } else {
+                    const ta = document.createElement('textarea');
+                    ta.value = PORTFOLIO_EMAIL;
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); onCopied(); } catch (err) {}
+                    document.body.removeChild(ta);
+                }
+            };
+            if (copyEmailBtn) {
+                copyEmailBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    copyPortfolioEmail();
+                });
+            }
+
+            // Active Section Navbar Indicator (Zero-Overhead IntersectionObserver)
+            const navSectionLinks = document.querySelectorAll('.nav-links .nav-link[data-section]');
+            if (navSectionLinks.length > 0 && 'IntersectionObserver' in window) {
+                const setActiveNav = (sectionKey) => {
+                    navSectionLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('data-section') === sectionKey);
+                    });
+                };
+                const sectionMap = [
+                    { el: document.querySelector('.hero'), key: 'top' },
+                    { el: document.getElementById('about'), key: 'about' },
+                    { el: document.getElementById('projects'), key: 'projects' },
+                    { el: document.getElementById('certificates'), key: 'certificates' },
+                    { el: document.getElementById('contact'), key: 'contact' }
+                ].filter(item => item.el);
+
+                const navObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const found = sectionMap.find(item => item.el === entry.target);
+                            if (found) setActiveNav(found.key);
+                        }
+                    });
+                }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+
+                sectionMap.forEach(item => navObserver.observe(item.el));
+            }
+
+            // Command Palette (Cmd+K / Ctrl+K)
+            const cmdOverlay = document.getElementById('cmdOverlay');
+            const cmdInput = document.getElementById('cmdInput');
+            const cmdList = document.getElementById('cmdList');
+            const cmdTrigger = document.getElementById('cmdTrigger');
+
+            if (cmdOverlay && cmdInput && cmdList) {
+                let cmdSelectedIndex = 0;
+                let currentFilteredCommands = [];
+
+                const scrollToSection = (selector) => {
+                    if (!selector || selector === '#') {
+                        if (window.smoothScrollTo) window.smoothScrollTo(0, 700);
+                        else window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return;
+                    }
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        const targetY = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 72);
+                        if (window.smoothScrollTo) window.smoothScrollTo(targetY, 750);
+                        else window.scrollTo({ top: targetY, behavior: 'smooth' });
+                    }
+                };
+
+                const getCommands = () => {
+                    const lang = localStorage.getItem('site_lang') || 'id';
+                    const isEn = lang === 'en';
+                    const navGroup = isEn ? 'Navigation' : 'Navigasi';
+                    const actGroup = isEn ? 'Quick Actions' : 'Aksi Cepat';
+                    const icArrow = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+                    const icCopy = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+                    const icTheme = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line></svg>';
+                    const icGlobe = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>';
+                    const icExt = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>';
+                    const icZap = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>';
+
+                    return [
+                        { group: navGroup, label: isEn ? 'Home' : 'Beranda', meta: '#top', keywords: 'home beranda top atas hero', icon: icArrow, run: () => scrollToSection('#') },
+                        { group: navGroup, label: isEn ? 'About & GitHub Activity' : 'Tentang & Aktivitas GitHub', meta: '#about', keywords: 'about tentang github radar skill', icon: icArrow, run: () => scrollToSection('#about') },
+                        { group: navGroup, label: isEn ? 'Services & Specialities' : 'Layanan & Spesialisasi', meta: '#services', keywords: 'services layanan frontend backend api', icon: icArrow, run: () => scrollToSection('#services') },
+                        { group: navGroup, label: isEn ? 'Career Journey' : 'Perjalanan Karir', meta: '#experience', keywords: 'journey pengalaman karir timeline pendidikan', icon: icArrow, run: () => scrollToSection('#experience') },
+                        { group: navGroup, label: isEn ? 'Selected Projects' : 'Proyek Pilihan', meta: '#projects', keywords: 'projects proyek karya silukor sisdukor kasflow jelajahin emutz', icon: icArrow, run: () => scrollToSection('#projects') },
+                        { group: navGroup, label: isEn ? 'Certifications & Awards' : 'Sertifikasi & Penghargaan', meta: '#certificates', keywords: 'certificates sertifikat revou hacktiv8', icon: icArrow, run: () => scrollToSection('#certificates') },
+                        { group: navGroup, label: isEn ? 'Contact & Links' : 'Kontak & Tautan', meta: '#contact', keywords: 'contact kontak email github linkedin', icon: icArrow, run: () => scrollToSection('#contact') },
+                        { group: actGroup, label: isEn ? 'Copy Email Address' : 'Salin Alamat Email', meta: PORTFOLIO_EMAIL, keywords: 'copy salin email mail gmail', icon: icCopy, run: () => copyPortfolioEmail() },
+                        { group: actGroup, label: isEn ? 'Toggle Dark / Light Theme' : 'Ganti Tema Gelap / Terang', meta: 'Theme', keywords: 'theme tema dark light gelap terang mode', icon: icTheme, run: () => { if (themeToggle) themeToggle.click(); } },
+                        { group: actGroup, label: isEn ? 'Switch Language (ID / EN)' : 'Ganti Bahasa (ID / EN)', meta: isEn ? 'EN → ID' : 'ID → EN', keywords: 'language bahasa indonesia english id en', icon: icGlobe, run: () => { const lt = document.getElementById('langToggle'); if (lt) lt.click(); } },
+                        { group: actGroup, label: isEn ? 'Open GitHub Profile' : 'Buka Profil GitHub', meta: '@kyraaa-dev', keywords: 'github repo code profile', icon: icExt, run: () => window.open('https://github.com/kyraaa-dev', '_blank', 'noopener,noreferrer') },
+                        { group: actGroup, label: isEn ? 'Open LinkedIn Profile' : 'Buka Profil LinkedIn', meta: 'LinkedIn', keywords: 'linkedin profile network', icon: icExt, run: () => window.open('https://www.linkedin.com/in/angga-wiranata-320837420', '_blank', 'noopener,noreferrer') },
+                        { group: actGroup, label: isEn ? 'Run Build My Site Replay' : 'Jalankan Build My Site Replay', meta: 'Terminal', keywords: 'replay build terminal demo', icon: icZap, run: () => { const rb = document.getElementById('replayBtn'); if (rb) rb.click(); } }
+                    ];
+                };
+
+                const renderCmdList = (query = '') => {
+                    const q = query.trim().toLowerCase();
+                    const all = getCommands();
+                    currentFilteredCommands = q
+                        ? all.filter(c => (c.label + ' ' + c.meta + ' ' + c.keywords).toLowerCase().includes(q))
+                        : all;
+                    cmdSelectedIndex = 0;
+
+                    if (currentFilteredCommands.length === 0) {
+                        const isEn = (localStorage.getItem('site_lang') || 'id') === 'en';
+                        cmdList.innerHTML = '<div class="cmd-empty">' + (isEn ? 'No matching commands found.' : 'Tidak ada perintah yang cocok.') + '</div>';
+                        return;
+                    }
+
+                    let html = '';
+                    let lastGroup = '';
+                    currentFilteredCommands.forEach((cmd, idx) => {
+                        if (cmd.group !== lastGroup) {
+                            lastGroup = cmd.group;
+                            html += '<div class="cmd-group-label">' + cmd.group + '</div>';
+                        }
+                        html += '<button type="button" class="cmd-item' + (idx === 0 ? ' selected' : '') + '" data-cmd-idx="' + idx + '">' +
+                            '<span class="cmd-item-left">' + cmd.icon + '<span>' + cmd.label + '</span></span>' +
+                            '<span class="cmd-item-meta">' + cmd.meta + '</span>' +
+                            '</button>';
+                    });
+                    cmdList.innerHTML = html;
+                };
+
+                const updateCmdSelection = () => {
+                    const items = cmdList.querySelectorAll('.cmd-item');
+                    items.forEach((item, idx) => {
+                        const active = idx === cmdSelectedIndex;
+                        item.classList.toggle('selected', active);
+                        if (active) item.scrollIntoView({ block: 'nearest' });
+                    });
+                };
+
+                const openCmdPalette = () => {
+                    const isEn = (localStorage.getItem('site_lang') || 'id') === 'en';
+                    cmdInput.placeholder = isEn ? 'Search navigation or quick actions...' : 'Cari navigasi atau aksi cepat...';
+                    cmdInput.value = '';
+                    renderCmdList('');
+                    cmdOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    requestAnimationFrame(() => cmdInput.focus());
+                };
+
+                const closeCmdPalette = () => {
+                    if (!cmdOverlay.classList.contains('active')) return;
+                    cmdOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                };
+
+                const runCmdAt = (idx) => {
+                    const cmd = currentFilteredCommands[idx];
+                    if (!cmd) return;
+                    closeCmdPalette();
+                    setTimeout(() => cmd.run(), 40);
+                };
+
+                if (cmdTrigger) cmdTrigger.addEventListener('click', openCmdPalette);
+                cmdOverlay.addEventListener('click', (e) => {
+                    if (e.target === cmdOverlay) closeCmdPalette();
+                });
+                cmdInput.addEventListener('input', (e) => renderCmdList(e.target.value));
+                cmdList.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.cmd-item');
+                    if (btn) runCmdAt(parseInt(btn.getAttribute('data-cmd-idx'), 10));
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                        e.preventDefault();
+                        if (cmdOverlay.classList.contains('active')) closeCmdPalette();
+                        else {
+                            closeProjectModal();
+                            openCmdPalette();
+                        }
+                        return;
+                    }
+                    if (e.key === 'Escape') {
+                        if (cmdOverlay.classList.contains('active')) {
+                            e.preventDefault();
+                            closeCmdPalette();
+                        } else if (projectModal && projectModal.classList.contains('active')) {
+                            e.preventDefault();
+                            closeProjectModal();
+                        }
+                        return;
+                    }
+                    if (!cmdOverlay.classList.contains('active') || currentFilteredCommands.length === 0) return;
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        cmdSelectedIndex = (cmdSelectedIndex + 1) % currentFilteredCommands.length;
+                        updateCmdSelection();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        cmdSelectedIndex = (cmdSelectedIndex - 1 + currentFilteredCommands.length) % currentFilteredCommands.length;
+                        updateCmdSelection();
+                    } else if (e.key === 'Enter') {
+                        e.preventDefault();
+                        runCmdAt(cmdSelectedIndex);
+                    }
+                });
+            }
 
             // Back to Top Progress Ring (rAF-coalesced, cached doc height, zero layout thrash)
             const backToTop = document.getElementById('backToTop');
@@ -4436,9 +4913,12 @@
         // 🌐 Bilingual Translation Logic (EN/ID)
         const translations = {
             "nav_home": { id: "Beranda", en: "Home" },
+            "nav_about": { id: "Tentang", en: "About" },
             "nav_projects": { id: "Proyek", en: "Projects" },
+            "nav_certs": { id: "Sertifikat", en: "Certificates" },
             "nav_contact": { id: "Kontak", en: "Contact" },
             "nav_avail": { id: "Tersedia untuk proyek", en: "Available for work" },
+            "copy_btn": { id: "Salin", en: "Copy" },
             
             "hero_badge": { id: "PENGEMBANG WEB", en: "WEB DEVELOPER" },
             "hero_desc": { id: "Membangun aplikasi web yang efisien dan tangguh dengan estetika modern.", en: "Building efficient and robust web applications with modern aesthetics." },
