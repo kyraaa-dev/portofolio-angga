@@ -1125,13 +1125,27 @@
             position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
             border-radius: 50%; background: var(--bg-surface); z-index: 9999; cursor: pointer;
             display: flex; justify-content: center; align-items: center;
-            opacity: 0; visibility: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(20px); border: 1px solid var(--border-color);
+            opacity: 0; visibility: hidden; pointer-events: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.28); transform: translate3d(0, 16px, 0);
+            border: none;
+            contain: layout style paint;
+            will-change: transform, opacity;
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
         }
-        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .back-to-top:hover { transform: translateY(-5px); box-shadow: 0 15px 35px var(--accent-glow); }
-        .progress-ring { position: absolute; top: -1px; left: -1px; transform: rotate(-90deg); }
-        .progress-ring__circle { stroke-dasharray: 138.2; stroke-dashoffset: 138.2; transition: none; }
+        .back-to-top.visible { opacity: 1; visibility: visible; pointer-events: auto; transform: translate3d(0, 0, 0); }
+        .back-to-top:hover { transform: translate3d(0, -4px, 0); background: var(--bg-surface-hover); box-shadow: 0 12px 28px var(--accent-glow); }
+        .back-to-top .arrow-up { transition: stroke 0.2s ease, transform 0.2s ease; }
+        .back-to-top:hover .arrow-up { stroke: var(--accent-color); transform: translateY(-1px); }
+        .progress-ring { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); pointer-events: none; }
+        .progress-ring__track { stroke: var(--border-color); }
+        .progress-ring__circle {
+            stroke: var(--accent-color);
+            stroke-dasharray: 144.513;
+            stroke-dashoffset: 144.513;
+            stroke-linecap: round;
+            opacity: 0;
+            transition: none;
+        }
 
         .about-visual::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
         .code-snippet { font-family: monospace; font-size: 15px; color: var(--text-primary); line-height: 1.7; }
@@ -3260,11 +3274,12 @@
     </div>
 
     <!-- Back to Top Progress Ring -->
-    <div class="back-to-top" id="backToTop">
-        <svg class="progress-ring" width="50" height="50">
-            <circle class="progress-ring__circle" stroke="var(--text-primary)" stroke-width="3" fill="transparent" r="23" cx="25" cy="25"/>
+    <div class="back-to-top" id="backToTop" role="button" aria-label="Back to top" tabindex="0">
+        <svg class="progress-ring" width="50" height="50" viewBox="0 0 50 50" aria-hidden="true">
+            <circle class="progress-ring__track" stroke-width="2" fill="transparent" r="23" cx="25" cy="25"/>
+            <circle class="progress-ring__circle" stroke-width="2.5" fill="transparent" r="23" cx="25" cy="25"/>
         </svg>
-        <svg class="arrow-up" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: relative; z-index: 2;">
+        <svg class="arrow-up" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: relative; z-index: 2;" aria-hidden="true">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
@@ -3861,29 +3876,89 @@
                 }
             });
 
-            // Back to Top Button (State-only listener, 0 CPU/RAF overhead on scroll)
+            // Back to Top Progress Ring (rAF-coalesced, cached doc height, zero layout thrash)
             const backToTop = document.getElementById('backToTop');
             if (backToTop) {
+                const progressCircle = backToTop.querySelector('.progress-ring__circle');
+                const radius = (progressCircle && progressCircle.r && progressCircle.r.baseVal.value) ? progressCircle.r.baseVal.value : 23;
+                const circumference = 2 * Math.PI * radius;
+
+                if (progressCircle) {
+                    const dashVal = circumference.toFixed(3);
+                    progressCircle.style.strokeDasharray = dashVal + ' ' + dashVal;
+                    progressCircle.style.strokeDashoffset = dashVal;
+                }
+
                 let isBttVisible = false;
-                window.addEventListener('scroll', () => {
-                    const scrollTotal = window.scrollY || document.documentElement.scrollTop;
-                    const shouldShow = scrollTotal > 300;
+                let maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                let lastOffset = circumference;
+                let rafScheduled = false;
+
+                const recalcMaxScroll = () => {
+                    maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                };
+
+                const updateProgressRing = () => {
+                    rafScheduled = false;
+                    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+                    const shouldShow = scrollY > 300;
+
                     if (shouldShow !== isBttVisible) {
                         isBttVisible = shouldShow;
-                        if (isBttVisible) {
-                            backToTop.classList.add('visible');
-                        } else {
-                            backToTop.classList.remove('visible');
+                        backToTop.classList.toggle('visible', isBttVisible);
+                    }
+
+                    if (progressCircle && (isBttVisible || lastOffset !== circumference)) {
+                        const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+                        const offset = circumference * (1 - progress);
+                        if (Math.abs(offset - lastOffset) > 0.15 || progress === 0 || progress === 1) {
+                            lastOffset = offset;
+                            progressCircle.style.strokeDashoffset = offset.toFixed(2);
+                            progressCircle.style.opacity = progress > 0.002 ? '1' : '0';
                         }
                     }
-                }, { passive: true });
+                };
 
-                backToTop.addEventListener('click', (e) => {
+                const onScroll = () => {
+                    if (!rafScheduled) {
+                        rafScheduled = true;
+                        requestAnimationFrame(updateProgressRing);
+                    }
+                };
+
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('resize', () => {
+                    recalcMaxScroll();
+                    onScroll();
+                }, { passive: true });
+                window.addEventListener('load', () => {
+                    recalcMaxScroll();
+                    updateProgressRing();
+                }, { once: true });
+
+                if ('ResizeObserver' in window) {
+                    const bodyResizeObserver = new ResizeObserver(() => {
+                        recalcMaxScroll();
+                        onScroll();
+                    });
+                    bodyResizeObserver.observe(document.body);
+                }
+
+                updateProgressRing();
+
+                const scrollToTop = (e) => {
                     e.preventDefault();
                     if (window.smoothScrollTo) {
                         window.smoothScrollTo(0, 800);
                     } else {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                };
+
+                backToTop.addEventListener('click', scrollToTop);
+                backToTop.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        scrollToTop(e);
                     }
                 });
             }
