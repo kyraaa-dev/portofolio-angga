@@ -1716,9 +1716,7 @@
                     data-desc="Sistem Informasi Persuratan, Disposisi Berjenjang &amp; Arsip Digital DP KORPRI Kab. Banjar: agenda otomatis, paraf &amp; TTD QR publik, serta label barcode 1D+QR sesuai Perbup Banjar No. 10/2024."
                     data-desc-en="Electronic Letter, Tiered Disposition &amp; Digital Archive System for DP KORPRI Banjar Regency: automated agenda, public QR verification, and 1D+QR barcode archiving."
                     data-tags="PHP 8,MySQL,Tailwind,QR &amp; Barcode"
-                    data-link="https://sikorpri-lds.vercel.app/"
-                    data-link-label="Live Demo ▶"
-                    data-link-label-en="Live Demo ▶"
+                    data-link=""
                 >
                     <div class="project-thumb">
                         <img src="images/project-sikorpri-lds.jpg" alt="Screenshot aplikasi SIKORPRI-LDS" loading="lazy" decoding="async">
@@ -1733,7 +1731,7 @@
                         <span class="tag">QR/Barcode</span>
                     </div>
                     <div class="project-foot">
-                        <a href="https://sikorpri-lds.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-action">Live Demo ▶</a>
+                        <span class="project-soon" data-i18n="proj.done">Selesai</span>
                         <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
                     </div>
                 </article>
@@ -2069,6 +2067,7 @@
                     'proj.status.done.web': 'SELESAI · WEB APP',
                     'proj.status.done.gov': 'SELESAI · GOVTECH',
                     'proj.soon': 'Segera Hadir',
+                    'proj.done': 'Selesai',
                     'proj.hint.full': 'Klik panel untuk pratinjau',
                     'proj.hint.short': 'Pratinjau',
                     'proj.repo': 'Lihat Repo ▶',
@@ -2138,6 +2137,7 @@
                     'proj.status.done.web': 'COMPLETED · WEB APP',
                     'proj.status.done.gov': 'COMPLETED · GOVTECH',
                     'proj.soon': 'Coming Soon',
+                    'proj.done': 'Completed',
                     'proj.hint.full': 'Click panel to preview',
                     'proj.hint.short': 'Preview',
                     'proj.repo': 'View Repo ▶',
@@ -2359,6 +2359,9 @@
                     modalSoon.style.display = 'none';
                 } else {
                     modalLink.style.display = 'none';
+                    modalSoon.textContent = data.statusType === 'done'
+                        ? (currentLang === 'en' ? 'Completed' : 'Selesai')
+                        : (currentLang === 'en' ? 'Coming Soon' : 'Segera Hadir');
                     modalSoon.style.display = 'inline-block';
                 }
 

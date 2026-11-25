@@ -90,11 +90,11 @@ const anggaWiranata = {
       <p><code>Laravel 11</code> <code>Livewire</code> <code>Alpine</code> <code>MySQL</code></p>
     </td>
     <td width="50%" valign="top">
-      <a href="https://sikorpri-lds.vercel.app/"><img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-sikorpri-lds.jpg" alt="SIKORPRI-LDS" width="100%"/></a>
-      <h3 align="center"><a href="https://sikorpri-lds.vercel.app/">📨 SIKORPRI-LDS</a></h3>
+      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-sikorpri-lds.jpg" alt="SIKORPRI-LDS" width="100%"/>
+      <h3 align="center">📨 SIKORPRI-LDS</h3>
       <p align="center"><i>Electronic Letter, Disposition &amp; Digital Archive System — DP KORPRI Kab. Banjar</i></p>
       <p align="center">
-        <a href="https://sikorpri-lds.vercel.app/"><img src="https://img.shields.io/badge/Live-Vercel-000?style=flat-square&logo=vercel" alt="Live"/></a>
+        <img src="https://img.shields.io/badge/Status-Selesai-10B981?style=flat-square" alt="Selesai"/>
       </p>
       <p><code>PHP 8</code> <code>MySQL / SQLite</code> <code>Tailwind CSS</code> <code>QR &amp; Barcode</code></p>
     </td>
