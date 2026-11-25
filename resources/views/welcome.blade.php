@@ -1412,7 +1412,7 @@
                     <h1 class="hero-name">{{ $settings['name'] ?? 'ANGGA WIRANATA' }}</h1>
                     <p class="hero-role">WEB CRAFTSMAN</p>
                     <div class="bubble">
-                        Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React!
+                        Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel &amp; React!
                     </div>
                     <div class="hero-cta">
                         <a href="#projects" class="btn">LIHAT KARYA</a>
