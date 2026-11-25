@@ -3329,14 +3329,20 @@
                 modalTitle.textContent = data.title || '';
                 modalDesc.textContent = data.desc || '';
 
+                modalTags.textContent = '';
                 if (data.tags && data.tags.trim()) {
-                    modalTags.innerHTML = data.tags
-                        .split(',')
-                        .map((t) => '<span class="tag">' + t.trim() + '</span>')
-                        .join('');
+                    const frag = document.createDocumentFragment();
+                    data.tags.split(',').forEach((t) => {
+                        const clean = t.trim();
+                        if (!clean) return;
+                        const span = document.createElement('span');
+                        span.className = 'tag';
+                        span.textContent = clean;
+                        frag.appendChild(span);
+                    });
+                    modalTags.appendChild(frag);
                     modalTags.style.display = 'flex';
                 } else {
-                    modalTags.innerHTML = '';
                     modalTags.style.display = 'none';
                 }
 
