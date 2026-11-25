@@ -1365,8 +1365,8 @@
          ================================================================= -->
     <header class="nav">
         <div class="wrap nav-inner">
-            <a href="#top" class="brand" aria-label="ANGGA.DEV Beranda">
-                ANGGA<span class="brand-dot">.</span>DEV
+            <a href="#top" class="brand" aria-label="ANGGA.LAB Beranda">
+                ANGGA<span class="brand-dot">.</span>LAB
             </a>
 
             <nav class="nav-links" aria-label="Navigasi Utama">
