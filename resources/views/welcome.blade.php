@@ -10,11 +10,11 @@
     <!-- Primary Meta Tags -->
     <title>{{ $settings['name'] ?? 'ANGGA WIRANATA' }} | Web Craftsman — Edisi Manga</title>
     <meta name="title" content="{{ $settings['name'] ?? 'ANGGA WIRANATA' }} | Web Craftsman — Edisi Manga">
-    <meta name="description" content="{{ $settings['description'] ?? 'Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React.' }}">
-    <meta name="keywords" content="Web Developer, Web Craftsman, Software Engineer, Frontend Developer, Laravel, React, Portfolio, Angga Wiranata, Programmer Indonesia">
+    <meta name="description" content="{{ $settings['description'] ?? 'Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React — Portofolio Angga Wiranata (ANGGA.LAB).' }}">
+    <meta name="keywords" content="Web Developer, Web Craftsman, Software Engineer, Frontend Developer, Laravel, React, Portfolio, Angga Wiranata, ANGGA.LAB, Programmer Indonesia">
     <meta name="author" content="{{ $settings['name'] ?? 'ANGGA WIRANATA' }}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://anggawiranata.my.id/">
+    <link rel="canonical" href="https://kyraaadev.pages.dev/">
     <meta name="theme-color" id="theme-color-meta" content="#f6f1e4">
 
     <!-- Schema.org JSON-LD for Google -->
@@ -26,25 +26,25 @@
         "@@type": "Person",
         "name": "{{ $settings['name'] ?? 'ANGGA WIRANATA' }}",
         "jobTitle": "Web Craftsman (Full-stack Developer)",
-        "url": "https://anggawiranata.my.id/",
-        "image": "https://anggawiranata.my.id/images/profile.jpg",
+        "url": "https://kyraaadev.pages.dev/",
+        "image": "https://kyraaadev.pages.dev/images/profile.jpg",
         "sameAs": [
           "https://github.com/kyraaa-dev",
           "https://www.linkedin.com/in/angga-wiranata-320837420",
           "https://www.instagram.com/_anggawiranata"
         ],
-        "description": "Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React."
+        "description": "Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React — Portofolio Angga Wiranata (ANGGA.LAB)."
       }
     }
     </script>
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://anggawiranata.my.id/">
-    <meta property="og:site_name" content="Angga Wiranata Portfolio">
+    <meta property="og:url" content="https://kyraaadev.pages.dev/">
+    <meta property="og:site_name" content="ANGGA.LAB — Angga Wiranata">
     <meta property="og:title" content="{{ $settings['name'] ?? 'ANGGA WIRANATA' }} | Web Craftsman — Edisi Manga">
-    <meta property="og:description" content="{{ $settings['description'] ?? 'Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React.' }}">
-    <meta property="og:image" content="https://anggawiranata.my.id/images/og-image.png">
+    <meta property="og:description" content="{{ $settings['description'] ?? 'Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React — Portofolio Angga Wiranata (ANGGA.LAB).' }}">
+    <meta property="og:image" content="https://kyraaadev.pages.dev/images/og-image.png?v=3">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -52,10 +52,10 @@
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://anggawiranata.my.id/">
+    <meta property="twitter:url" content="https://kyraaadev.pages.dev/">
     <meta property="twitter:title" content="{{ $settings['name'] ?? 'ANGGA WIRANATA' }} | Web Craftsman — Edisi Manga">
-    <meta property="twitter:description" content="{{ $settings['description'] ?? 'Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React.' }}">
-    <meta property="twitter:image" content="https://anggawiranata.my.id/images/og-image.png">
+    <meta property="twitter:description" content="{{ $settings['description'] ?? 'Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React — Portofolio Angga Wiranata (ANGGA.LAB).' }}">
+    <meta property="twitter:image" content="https://kyraaadev.pages.dev/images/og-image.png?v=3">
 
     <!-- Favicon & Search Icons -->
     <link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48x48.png">
@@ -2527,14 +2527,14 @@
                     data-status="BERJALAN · GOVTECH"
                     data-status-en="ONGOING · GOVTECH"
                     data-status-type="active"
-                    data-img="images/project-korpri.png"
+                    data-img="images/project-korpri.jpg"
                     data-desc="Sistem Informasi Layanan Usulan Keanggotaan KORPRI. Portal terpadu untuk mendigitalkan layanan, administrasi, dan kesejahteraan anggota KORPRI."
                     data-desc-en="KORPRI Membership Proposal Information System. An integrated portal to digitize member services, administration, and welfare."
                     data-tags="Laravel,Livewire,MySQL,Tailwind"
                     data-link=""
                 >
                     <div class="project-thumb">
-                        <img src="images/project-korpri.png" alt="Screenshot aplikasi SILUKOR" loading="lazy" decoding="async">
+                        <img src="images/project-korpri.jpg" alt="Screenshot aplikasi SILUKOR" loading="lazy" decoding="async">
                     </div>
                     <span class="stamp is-active" data-i18n="proj.status.active">BERJALAN · GOVTECH</span>
                     <h3>SILUKOR</h3>
@@ -2551,7 +2551,7 @@
                     </div>
                 </article>
 
-                <!-- Proyek 2: SISDUKOR (Lebar 2 Kolom) -->
+                <!-- Proyek 3: SISDUKOR (Lebar 2 Kolom) -->
                 <article
                     class="panel project-card"
                     data-filter-tags="govtech berjalan"
@@ -2559,14 +2559,14 @@
                     data-status="BERJALAN · GOVTECH"
                     data-status-en="ONGOING · GOVTECH"
                     data-status-type="active"
-                    data-img="images/duta-korpri.png"
+                    data-img="images/duta-korpri.jpg"
                     data-desc="Sistem Informasi Duta KORPRI: platform kompetisi berstandar profesional mulai dari pendaftaran, penilaian, hingga penetapan juara."
                     data-desc-en="KORPRI Ambassador Information System: a professional competition platform covering registration, judging, and winner selection."
                     data-tags="Laravel,PHP,MySQL"
                     data-link=""
                 >
                     <div class="project-thumb">
-                        <img src="images/duta-korpri.png" alt="Screenshot aplikasi SISDUKOR" loading="lazy" decoding="async">
+                        <img src="images/duta-korpri.jpg" alt="Screenshot aplikasi SISDUKOR" loading="lazy" decoding="async">
                     </div>
                     <span class="stamp is-active" data-i18n="proj.status.active">BERJALAN · GOVTECH</span>
                     <h3>SISDUKOR</h3>
@@ -2582,7 +2582,7 @@
                     </div>
                 </article>
 
-                <!-- Proyek 3: KasFlow (Lebar 2 Kolom) -->
+                <!-- Proyek 4: KasFlow (Lebar 2 Kolom) -->
                 <article
                     class="panel project-card"
                     data-filter-tags="webapp selesai"
@@ -2590,7 +2590,7 @@
                     data-status="SELESAI · WEB APP"
                     data-status-en="COMPLETED · WEB APP"
                     data-status-type="done"
-                    data-img="images/kasflow-app.png"
+                    data-img="images/kasflow-app.jpg"
                     data-desc="Manajemen arus kas pribadi: catat pemasukan, pengeluaran, dan pantau kesehatan finansial secara real-time."
                     data-desc-en="Personal cash flow manager: record income, expenses, and monitor your financial health in real time."
                     data-tags="React,TypeScript,Tailwind"
@@ -2599,7 +2599,7 @@
                     data-link-label-en="Live Demo ▶"
                 >
                     <div class="project-thumb">
-                        <img src="images/kasflow-app.png" alt="Screenshot aplikasi KasFlow" loading="lazy" decoding="async">
+                        <img src="images/kasflow-app.jpg" alt="Screenshot aplikasi KasFlow" loading="lazy" decoding="async">
                     </div>
                     <span class="stamp is-done" data-i18n="proj.status.done.web">SELESAI · WEB APP</span>
                     <h3>KasFlow</h3>

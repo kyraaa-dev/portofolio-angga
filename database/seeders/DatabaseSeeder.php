@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // Seed Settings
         \App\Models\Setting::create(['key' => 'name', 'value' => 'ANGGA WIRANATA']);
-        \App\Models\Setting::create(['key' => 'title', 'value' => 'Web Developer']);
-        \App\Models\Setting::create(['key' => 'description', 'value' => 'Membangun aplikasi web yang efisien dan mudah digunakan, dengan fokus pada ekosistem Laravel dan React.']);
+        \App\Models\Setting::create(['key' => 'title', 'value' => 'Web Craftsman']);
+        \App\Models\Setting::create(['key' => 'description', 'value' => 'Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React — Portofolio Angga Wiranata (ANGGA.LAB).']);
         \App\Models\Setting::create(['key' => 'logo_initials', 'value' => 'AW']);
         
         // Seed Stats
