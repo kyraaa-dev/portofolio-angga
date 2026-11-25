@@ -461,35 +461,301 @@
             display: none;
             width: 42px;
             padding: 0;
+            position: relative;
+        }
+        .menu-btn.is-open {
+            background: var(--red);
+            color: var(--on-red);
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0 var(--ink);
+        }
+        .menu-bars {
+            width: 20px;
+            height: 15px;
+            position: relative;
+            display: block;
+        }
+        .menu-bars span {
+            position: absolute;
+            right: 0;
+            height: 3px;
+            background: currentColor;
+            border-radius: 1px;
+            transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.16s ease, width 0.18s ease, top 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .menu-bars span:nth-child(1) {
+            top: 0;
+            width: 20px;
+        }
+        .menu-bars span:nth-child(2) {
+            top: 6px;
+            width: 15px;
+        }
+        .menu-bars span:nth-child(3) {
+            top: 12px;
+            width: 20px;
+        }
+        .menu-btn:hover .menu-bars span:nth-child(2) {
+            width: 20px;
+        }
+        .menu-btn.is-open .menu-bars span:nth-child(1) {
+            top: 6px;
+            width: 20px;
+            transform: rotate(45deg);
+        }
+        .menu-btn.is-open .menu-bars span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .menu-btn.is-open .menu-bars span:nth-child(3) {
+            top: 6px;
+            width: 20px;
+            transform: rotate(-45deg);
+        }
+
+        /* Mobile Manga Table-of-Contents Slide-In Drawer */
+        .mobile-drawer-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 690;
+            background-color: rgba(17, 17, 17, 0.72);
+            background-image: radial-gradient(rgba(246, 241, 228, 0.09) 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.22s ease, visibility 0.22s ease;
+        }
+        .mobile-drawer-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
         .mobile-drawer {
-            display: none;
-            border-top: 3px solid var(--ink);
-            background: var(--panel);
-            padding: 12px 18px 16px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(86vw, 340px);
+            z-index: 700;
+            background-color: var(--paper);
+            background-image: radial-gradient(var(--tone) 1.1px, transparent 1.1px);
+            background-size: 10px 10px;
+            border-left: 4px solid var(--ink);
+            box-shadow: -8px 0 0 var(--ink);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            transform: translate3d(104%, 0, 0);
+            visibility: hidden;
+            pointer-events: none;
+            will-change: transform;
+            transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.24s ease;
         }
         .mobile-drawer.open {
-            display: block;
+            transform: translate3d(0, 0, 0);
+            visibility: visible;
+            pointer-events: auto;
+        }
+        .drawer-head {
+            position: relative;
+            overflow: hidden;
+            background: var(--panel);
+            border-bottom: 4px solid var(--ink);
+            padding: 16px 18px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .drawer-head::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 72% 72% at 32% 50%, var(--panel) 32%, transparent 94%),
+                repeating-conic-gradient(from 0deg at 32% 50%, var(--tone) 0deg 2deg, transparent 2deg 10deg);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .drawer-head > * {
+            position: relative;
+            z-index: 1;
+        }
+        .drawer-head-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .drawer-kicker {
+            display: inline-block;
+            align-self: flex-start;
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            letter-spacing: 0.08em;
+            background: var(--red);
+            color: var(--on-red);
+            padding: 2px 9px 1px;
+            border: 2px solid var(--ink);
+            box-shadow: 2px 2px 0 var(--ink);
+            line-height: 1.1;
+        }
+        [data-theme="dark"] .drawer-kicker {
+            text-shadow: 1px 1px 0 #111111;
+        }
+        .drawer-brand {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            color: var(--ink);
+        }
+        .drawer-close {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--paper);
+            color: var(--ink);
+            border: 3px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
+        }
+        .drawer-close:hover {
+            background: var(--red);
+            color: var(--on-red);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--ink);
         }
         .mobile-drawer-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 9px;
+            padding: 16px 16px 14px;
+            flex: 1;
         }
-        .mobile-drawer-links a {
-            display: block;
-            padding: 10px 14px;
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            letter-spacing: 0.05em;
-            background: var(--paper);
+        .drawer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--panel);
+            color: var(--ink);
             border: 3px solid var(--ink);
-            box-shadow: 3px 3px 0 var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease, color 0.12s ease;
         }
-        .mobile-drawer-links a:hover,
-        .mobile-drawer-links a.active {
+        .drawer-item:hover,
+        .drawer-item.active {
             background: var(--red);
             color: var(--on-red);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+        [data-theme="dark"] .drawer-item.active {
+            text-shadow: 1px 1px 0 #111111;
+        }
+        .drawer-ch {
+            flex-shrink: 0;
+            min-width: 54px;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.94rem;
+            letter-spacing: 0.06em;
+            background: var(--ink);
+            color: var(--panel);
+            padding: 3px 7px 2px;
+            border: 2px solid var(--ink);
+            transform: skew(-8deg);
+            line-height: 1.1;
+        }
+        .drawer-ch > span {
+            display: inline-block;
+            transform: skew(8deg);
+        }
+        .drawer-item:hover .drawer-ch,
+        .drawer-item.active .drawer-ch {
+            background: var(--panel);
+            color: var(--ink);
+            text-shadow: none;
+        }
+        .drawer-label {
+            font-family: var(--font-display);
+            font-size: 1.32rem;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            flex: 1;
+        }
+        .drawer-page {
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            letter-spacing: 0.06em;
+            opacity: 0.72;
+            flex-shrink: 0;
+        }
+        .drawer-item:hover .drawer-page,
+        .drawer-item.active .drawer-page {
+            opacity: 1;
+        }
+        .drawer-foot {
+            margin-top: auto;
+            padding: 14px 16px 18px;
+            border-top: 3px dashed var(--ink);
+            background: var(--panel);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .drawer-status-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .drawer-sfx {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--red);
+            -webkit-text-stroke: 1px var(--ink);
+            paint-order: stroke fill;
+            transform: rotate(-6deg);
+            line-height: 1;
+        }
+        .drawer-status-text {
+            font-family: var(--font-display);
+            font-size: 0.98rem;
+            letter-spacing: 0.06em;
+            color: var(--ink);
+        }
+        .drawer-socials {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        .drawer-social {
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            letter-spacing: 0.05em;
+            padding: 6px 4px 4px;
+            background: var(--paper);
+            color: var(--ink);
+            border: 2.5px solid var(--ink);
+            box-shadow: 2px 2px 0 var(--ink);
+            transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+        }
+        .drawer-social:hover {
+            background: var(--red);
+            color: var(--on-red);
+            transform: translate(-1px, -1px);
         }
 
         /* =====================================================================
@@ -1850,22 +2116,75 @@
                     <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <span class="theme-btn-label" id="themeLabel">GELAP</span>
                 </button>
-                <button type="button" class="menu-btn" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <button type="button" class="menu-btn" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobileDrawer">
+                    <span class="menu-bars" aria-hidden="true"><span></span><span></span><span></span></span>
                 </button>
             </div>
         </div>
+    </header>
 
-        <div class="mobile-drawer" id="mobileDrawer" aria-label="Menu Mobile">
-            <div class="mobile-drawer-links">
-                <a href="#top" data-section="top" data-i18n="nav.home">Beranda</a>
-                <a href="#about" data-section="about" data-i18n="nav.about">Tentang</a>
-                <a href="#projects" data-section="projects" data-i18n="nav.projects">Proyek</a>
-                <a href="#certs" data-section="certs" data-i18n="nav.certs">Sertifikat</a>
-                <a href="#contact" data-section="contact" data-i18n="nav.contact">Kontak</a>
+    <!-- Mobile Manga Table-of-Contents Drawer + Backdrop -->
+    <div class="mobile-drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Daftar isi menu mobile" aria-hidden="true">
+        <div class="drawer-head">
+            <div class="drawer-head-info">
+                <span class="drawer-kicker" data-i18n="drawer.kicker">VOL. 01 · DAFTAR ISI</span>
+                <span class="drawer-brand">ANGGA<span class="brand-dot">.</span>LAB</span>
+            </div>
+            <button type="button" class="drawer-close" id="drawerClose" aria-label="Tutup menu navigasi">✕</button>
+        </div>
+
+        <nav class="mobile-drawer-links" aria-label="Navigasi Bab Mobile">
+            <a href="#top" class="drawer-item active" data-drawer="top">
+                <span class="drawer-ch"><span>EP.01</span></span>
+                <span class="drawer-label" data-i18n="nav.home">Beranda</span>
+                <span class="drawer-page">P.01 ▶</span>
+            </a>
+            <a href="#about" class="drawer-item" data-drawer="about">
+                <span class="drawer-ch"><span data-i18n="ch1.num">BAB 1</span></span>
+                <span class="drawer-label" data-i18n="nav.about">Tentang</span>
+                <span class="drawer-page">P.02 ▶</span>
+            </a>
+            <a href="#services" class="drawer-item" data-drawer="services">
+                <span class="drawer-ch"><span data-i18n="ch2.num">BAB 2</span></span>
+                <span class="drawer-label" data-i18n="nav.services">Layanan</span>
+                <span class="drawer-page">P.03 ▶</span>
+            </a>
+            <a href="#experience" class="drawer-item" data-drawer="experience">
+                <span class="drawer-ch"><span data-i18n="ch3.num">BAB 3</span></span>
+                <span class="drawer-label" data-i18n="nav.career">Karir</span>
+                <span class="drawer-page">P.04 ▶</span>
+            </a>
+            <a href="#projects" class="drawer-item" data-drawer="projects">
+                <span class="drawer-ch"><span data-i18n="ch4.num">BAB 4</span></span>
+                <span class="drawer-label" data-i18n="nav.projects">Proyek</span>
+                <span class="drawer-page">P.05 ▶</span>
+            </a>
+            <a href="#certs" class="drawer-item" data-drawer="certs">
+                <span class="drawer-ch"><span data-i18n="ch5.num">BAB 5</span></span>
+                <span class="drawer-label" data-i18n="nav.certs">Sertifikat</span>
+                <span class="drawer-page">P.06 ▶</span>
+            </a>
+            <a href="#contact" class="drawer-item" data-drawer="contact">
+                <span class="drawer-ch"><span data-i18n="drawer.end">PENUTUP</span></span>
+                <span class="drawer-label" data-i18n="nav.contact">Kontak</span>
+                <span class="drawer-page">P.07 ▶</span>
+            </a>
+        </nav>
+
+        <div class="drawer-foot">
+            <div class="drawer-status-row">
+                <span class="drawer-sfx" aria-hidden="true">ドン!</span>
+                <span class="drawer-status-text" data-i18n="drawer.status">SIAP KOLABORASI PROYEK BARU!</span>
+            </div>
+            <div class="drawer-socials">
+                <a href="mailto:anggawiranatafti@gmail.com" class="drawer-social">EMAIL</a>
+                <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" class="drawer-social">GITHUB</a>
+                <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer" class="drawer-social">IN</a>
+                <a href="https://www.instagram.com/_anggawiranata" target="_blank" rel="noopener noreferrer" class="drawer-social">IG</a>
             </div>
         </div>
-    </header>
+    </aside>
 
     <main class="wrap">
         <!-- =============================================================
@@ -2508,6 +2827,9 @@
             const langOpts = document.querySelectorAll('.lang-opt[data-lang]');
             const menuToggle = document.getElementById('menuToggle');
             const mobileDrawer = document.getElementById('mobileDrawer');
+            const drawerBackdrop = document.getElementById('drawerBackdrop');
+            const drawerClose = document.getElementById('drawerClose');
+            const drawerItems = document.querySelectorAll('.drawer-item[data-drawer]');
             const modalCloseBtn = document.getElementById('modalClose');
             const backToTopBtn = document.getElementById('backToTop');
             const chapterRail = document.getElementById('chapterRail');
@@ -2518,9 +2840,14 @@
                 id: {
                     'nav.home': 'Beranda',
                     'nav.about': 'Tentang',
+                    'nav.services': 'Layanan',
+                    'nav.career': 'Karir',
                     'nav.projects': 'Proyek',
                     'nav.certs': 'Sertifikat',
                     'nav.contact': 'Kontak',
+                    'drawer.kicker': 'VOL. 01 · DAFTAR ISI',
+                    'drawer.end': 'PENUTUP',
+                    'drawer.status': 'SIAP KOLABORASI PROYEK BARU!',
                     'hero.kicker': 'EPISODE 01 — PENGEMBANG WEB',
                     'hero.bubble': 'Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React!',
                     'hero.cta.work': 'LIHAT KARYA',
@@ -2602,9 +2929,14 @@
                 en: {
                     'nav.home': 'Home',
                     'nav.about': 'About',
+                    'nav.services': 'Services',
+                    'nav.career': 'Career',
                     'nav.projects': 'Projects',
                     'nav.certs': 'Certificates',
                     'nav.contact': 'Contact',
+                    'drawer.kicker': 'VOL. 01 · CONTENTS',
+                    'drawer.end': 'OUTRO',
+                    'drawer.status': 'OPEN FOR NEW PROJECTS!',
                     'hero.kicker': 'EPISODE 01 — WEB DEVELOPER',
                     'hero.bubble': 'Crafting fast, clean, and distinctive modern web apps with Laravel & React!',
                     'hero.cta.work': 'VIEW WORK',
@@ -2693,6 +3025,8 @@
                     themeAria: 'Ganti tema terang atau gelap',
                     langAria: 'Pilih bahasa',
                     menuAria: 'Buka menu navigasi',
+                    drawerCloseAria: 'Tutup menu navigasi',
+                    drawerAria: 'Daftar isi menu mobile',
                     modalCloseAria: 'Tutup pratinjau',
                     backToTopAria: 'Kembali ke atas',
                     railAria: 'Daftar bab manga',
@@ -2718,6 +3052,8 @@
                     themeAria: 'Toggle light or dark theme',
                     langAria: 'Select language',
                     menuAria: 'Open navigation menu',
+                    drawerCloseAria: 'Close navigation menu',
+                    drawerAria: 'Mobile navigation menu',
                     modalCloseAria: 'Close preview',
                     backToTopAria: 'Back to top',
                     railAria: 'Manga chapter index',
@@ -2790,6 +3126,8 @@
                 if (langSwitch) langSwitch.setAttribute('aria-label', ui.langAria);
                 if (themeToggle) themeToggle.setAttribute('aria-label', ui.themeAria);
                 if (menuToggle) menuToggle.setAttribute('aria-label', ui.menuAria);
+                if (drawerClose) drawerClose.setAttribute('aria-label', ui.drawerCloseAria);
+                if (mobileDrawer) mobileDrawer.setAttribute('aria-label', ui.drawerAria);
                 if (modalCloseBtn) modalCloseBtn.setAttribute('aria-label', ui.modalCloseAria);
                 if (backToTopBtn) backToTopBtn.setAttribute('aria-label', ui.backToTopAria);
                 if (chapterRail) chapterRail.setAttribute('aria-label', ui.railAria);
@@ -2835,9 +3173,9 @@
                     spawnSfx(e, 'ピカッ!');
                 } else if (e.target.closest('.lang-opt')) {
                     spawnSfx(e, 'ポン!');
-                } else if (e.target.closest('.filter-btn')) {
+                } else if (e.target.closest('.filter-btn, #menuToggle, #drawerClose')) {
                     spawnSfx(e, 'シュッ!');
-                } else if (e.target.closest('.btn, .project-action, .project-card, .rail-item')) {
+                } else if (e.target.closest('.btn, .project-action, .project-card, .rail-item, .drawer-item')) {
                     spawnSfx(e);
                 }
             });
@@ -2860,22 +3198,40 @@
                 });
             }
 
-            // Mobile Menu Drawer
+            // Mobile Manga Table-of-Contents Slide-In Drawer
+            const modal = document.getElementById('readerModal');
+            const setDrawerOpen = (open) => {
+                if (!mobileDrawer || !menuToggle) return;
+                mobileDrawer.classList.toggle('open', open);
+                mobileDrawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+                if (drawerBackdrop) drawerBackdrop.classList.toggle('open', open);
+                menuToggle.classList.toggle('is-open', open);
+                menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                if (open) {
+                    document.body.style.overflow = 'hidden';
+                } else if (!modal || !modal.classList.contains('open')) {
+                    document.body.style.overflow = '';
+                }
+            };
+
             if (menuToggle && mobileDrawer) {
                 menuToggle.addEventListener('click', () => {
-                    const open = mobileDrawer.classList.toggle('open');
-                    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    setDrawerOpen(!mobileDrawer.classList.contains('open'));
                 });
+                if (drawerClose) drawerClose.addEventListener('click', () => setDrawerOpen(false));
+                if (drawerBackdrop) drawerBackdrop.addEventListener('click', () => setDrawerOpen(false));
                 mobileDrawer.querySelectorAll('a').forEach((link) => {
-                    link.addEventListener('click', () => {
-                        mobileDrawer.classList.remove('open');
-                        menuToggle.setAttribute('aria-expanded', 'false');
-                    });
+                    link.addEventListener('click', () => setDrawerOpen(false));
                 });
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 820 && mobileDrawer.classList.contains('open')) {
+                        setDrawerOpen(false);
+                    }
+                }, { passive: true });
             }
 
             // Active Section Indicator & Manga Chapter Tracker (Zero Scroll-Listener Overhead)
-            const navLinks = document.querySelectorAll('.nav-link[data-section], .mobile-drawer-links a[data-section]');
+            const navLinks = document.querySelectorAll('.nav-link[data-section]');
             if ('IntersectionObserver' in window) {
                 const setActive = (id) => {
                     const navKey = (id === 'services' || id === 'experience') ? 'about' : id;
@@ -2884,6 +3240,9 @@
                     });
                     railItems.forEach((item) => {
                         item.classList.toggle('active', item.getAttribute('data-rail') === id);
+                    });
+                    drawerItems.forEach((item) => {
+                        item.classList.toggle('active', item.getAttribute('data-drawer') === id);
                     });
                     const idx = CHAPTER_IDS.indexOf(id);
                     if (idx !== -1) {
@@ -2924,7 +3283,6 @@
             });
 
             // Full-Page Manga Reader Modal (Projects & Certificates)
-            const modal = document.getElementById('readerModal');
             const modalClose = modalCloseBtn;
             const modalStamp = document.getElementById('modalStamp');
             const modalImg = document.getElementById('modalImg');
@@ -3025,7 +3383,10 @@
                 });
             }
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeModal();
+                if (e.key === 'Escape') {
+                    closeModal();
+                    if (mobileDrawer && mobileDrawer.classList.contains('open')) setDrawerOpen(false);
+                }
             });
 
             // 1-Click Copy Email + Toast
