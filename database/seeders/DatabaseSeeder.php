@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         
         // Seed Stats
         \App\Models\Stat::create(['number' => '2+', 'label' => 'TAHUN PENGALAMAN']);
-        \App\Models\Stat::create(['number' => '5', 'label' => 'PROJEK DISELESAIKAN']);
+        \App\Models\Stat::create(['number' => '6', 'label' => 'PROJEK DISELESAIKAN']);
         \App\Models\Stat::create(['number' => '1+', 'label' => 'KLIEN']);
         \App\Models\Stat::create(['number' => '95%', 'label' => 'TINGKAT KEBERHASILAN']);
 
@@ -63,6 +63,12 @@ class DatabaseSeeder extends Seeder
             'category' => 'Selesai',
             'logo_svg' => '<svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>',
             'link' => 'https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan'
+        ]);
+        \App\Models\Project::create([
+            'title' => 'SIKORPRI-LDS - Sistem Persuratan, Disposisi & Arsip Digital KORPRI',
+            'category' => 'Selesai',
+            'logo_svg' => '<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
+            'link' => 'https://sikorpri-lds.vercel.app/'
         ]);
     }
 }

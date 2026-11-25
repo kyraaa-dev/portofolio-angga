@@ -1541,7 +1541,7 @@
             <!-- Statistik (4 Kolom — Data Pasti) -->
             <div class="stats-grid" aria-label="Ringkasan Statistik">
                 <div class="panel stat-box">
-                    <span class="stat-num">{{ isset($projects) && count($projects) ? str_pad(count($projects), 2, '0', STR_PAD_LEFT) : '05' }}</span>
+                    <span class="stat-num">{{ isset($projects) && count($projects) ? str_pad(count($projects), 2, '0', STR_PAD_LEFT) : '06' }}</span>
                     <span class="stat-label" data-i18n="stat.projects">PROYEK PILIHAN</span>
                 </div>
                 <div class="panel stat-box">
@@ -1687,7 +1687,7 @@
         </section>
 
         <!-- =============================================================
-             BAB 4 — PROYEK PILIHAN (Grid 6 Kolom: 4+2 / 2+2+2)
+             BAB 4 — PROYEK PILIHAN (Grid 6 Kolom: 2+2+2 / 2+2+2)
              ============================================================= -->
         <section id="projects" aria-labelledby="ch-projects">
             <div class="chapter">
@@ -1697,16 +1697,50 @@
             </div>
 
             <div class="project-filters" role="group" aria-label="Filter proyek">
-                <button type="button" class="filter-btn active" data-filter="all" data-i18n="filter.all">SEMUA (5)</button>
-                <button type="button" class="filter-btn" data-filter="govtech">GOVTECH (3)</button>
+                <button type="button" class="filter-btn active" data-filter="all" data-i18n="filter.all">SEMUA (6)</button>
+                <button type="button" class="filter-btn" data-filter="govtech">GOVTECH (4)</button>
                 <button type="button" class="filter-btn" data-filter="webapp">WEB APP (2)</button>
-                <button type="button" class="filter-btn" data-filter="selesai" data-i18n="filter.done">SELESAI (3)</button>
+                <button type="button" class="filter-btn" data-filter="selesai" data-i18n="filter.done">SELESAI (4)</button>
             </div>
 
             <div class="projects-grid" id="projectsGrid">
-                <!-- Proyek 1: SILUKOR (Lebar 4 Kolom) -->
+                <!-- Proyek 1: SIKORPRI-LDS (Lebar 2 Kolom) -->
                 <article
-                    class="panel project-card span-4"
+                    class="panel project-card"
+                    data-filter-tags="govtech selesai"
+                    data-title="SIKORPRI-LDS"
+                    data-status="SELESAI · GOVTECH"
+                    data-status-en="COMPLETED · GOVTECH"
+                    data-status-type="done"
+                    data-img="images/project-sikorpri-lds.jpg"
+                    data-desc="Sistem Informasi Persuratan, Disposisi Berjenjang &amp; Arsip Digital DP KORPRI Kab. Banjar: agenda otomatis, paraf &amp; TTD QR publik, serta label barcode 1D+QR sesuai Perbup Banjar No. 10/2024."
+                    data-desc-en="Electronic Letter, Tiered Disposition &amp; Digital Archive System for DP KORPRI Banjar Regency: automated agenda, public QR verification, and 1D+QR barcode archiving."
+                    data-tags="PHP 8,MySQL,Tailwind,QR &amp; Barcode"
+                    data-link="https://sikorpri-lds.vercel.app/"
+                    data-link-label="Live Demo ▶"
+                    data-link-label-en="Live Demo ▶"
+                >
+                    <div class="project-thumb">
+                        <img src="images/project-sikorpri-lds.jpg" alt="Screenshot aplikasi SIKORPRI-LDS" loading="lazy" decoding="async">
+                    </div>
+                    <span class="stamp is-done" data-i18n="proj.status.done.gov">SELESAI · GOVTECH</span>
+                    <h3>SIKORPRI-LDS</h3>
+                    <p class="project-desc" data-i18n="proj.6.desc">Sistem Persuratan, Disposisi Berjenjang &amp; Arsip Barcode 1D+QR untuk DP KORPRI Kab. Banjar.</p>
+                    <div class="tag-list">
+                        <span class="tag">PHP 8</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Tailwind</span>
+                        <span class="tag">QR/Barcode</span>
+                    </div>
+                    <div class="project-foot">
+                        <a href="https://sikorpri-lds.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-action">Live Demo ▶</a>
+                        <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
+                    </div>
+                </article>
+
+                <!-- Proyek 2: SILUKOR (Lebar 2 Kolom) -->
+                <article
+                    class="panel project-card"
                     data-filter-tags="govtech berjalan"
                     data-title="SILUKOR"
                     data-status="BERJALAN · GOVTECH"
@@ -1732,7 +1766,7 @@
                     </div>
                     <div class="project-foot">
                         <span class="project-soon" data-i18n="proj.soon">Segera Hadir</span>
-                        <span class="project-open-hint" data-i18n="proj.hint.full">Klik panel untuk pratinjau</span>
+                        <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
                     </div>
                 </article>
 
@@ -2029,8 +2063,8 @@
                     'career.4.desc': 'Melanjutkan studi magister untuk memperdalam keahlian di bidang ilmu komputer.',
                     'ch4.num': 'BAB 4',
                     'ch4.title': 'PROYEK PILIHAN',
-                    'filter.all': 'SEMUA (5)',
-                    'filter.done': 'SELESAI (3)',
+                    'filter.all': 'SEMUA (6)',
+                    'filter.done': 'SELESAI (4)',
                     'proj.status.active': 'BERJALAN · GOVTECH',
                     'proj.status.done.web': 'SELESAI · WEB APP',
                     'proj.status.done.gov': 'SELESAI · GOVTECH',
@@ -2043,6 +2077,7 @@
                     'proj.3.desc': 'Manajemen arus kas pribadi: catat pemasukan, pengeluaran, dan pantau kesehatan finansial real-time.',
                     'proj.4.desc': 'Asisten perjalanan AI untuk menjelajahi Indonesia: Itinerary Studio interaktif, ekspor PDF, cuaca real-time.',
                     'proj.5.desc': 'Rekapitulasi pemesanan Mutz ASN per SKPD: stok & retur, cetak kwitansi, ekspor laporan.',
+                    'proj.6.desc': 'Sistem Persuratan, Disposisi Berjenjang & Arsip Barcode 1D+QR untuk DP KORPRI Kab. Banjar.',
                     'ch5.num': 'BAB 5',
                     'ch5.title': 'SERTIFIKASI',
                     'cert.1.date': '24 JULI 2026',
@@ -2097,8 +2132,8 @@
                     'career.4.desc': 'Pursuing a Master\'s degree to deepen expertise in computer science.',
                     'ch4.num': 'CH. 04',
                     'ch4.title': 'FEATURED PROJECTS',
-                    'filter.all': 'ALL (5)',
-                    'filter.done': 'COMPLETED (3)',
+                    'filter.all': 'ALL (6)',
+                    'filter.done': 'COMPLETED (4)',
                     'proj.status.active': 'ONGOING · GOVTECH',
                     'proj.status.done.web': 'COMPLETED · WEB APP',
                     'proj.status.done.gov': 'COMPLETED · GOVTECH',
@@ -2111,6 +2146,7 @@
                     'proj.3.desc': 'Personal cash flow tracker: record income, expenses, and monitor financial health in real time.',
                     'proj.4.desc': 'AI travel companion for exploring Indonesia: interactive Itinerary Studio, PDF export, real-time weather.',
                     'proj.5.desc': 'ASN Mutz uniform ordering recap per department: stock & returns, receipt printing, report export.',
+                    'proj.6.desc': 'Electronic Letter, Tiered Disposition & 1D+QR Barcode Archive System for DP KORPRI Banjar Regency.',
                     'ch5.num': 'CH. 05',
                     'ch5.title': 'CERTIFICATIONS',
                     'cert.1.date': '24 JULY 2026',

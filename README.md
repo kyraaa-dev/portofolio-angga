@@ -95,6 +95,18 @@ Repositori resmi **Personal Portfolio Website** milik **Angga Wiranata**. Dibang
       <p><b>Tech:</b> <code>Laravel 11</code> <code>Livewire</code> <code>MySQL</code></p>
     </td>
     <td width="50%" valign="top">
+      <a href="https://sikorpri-lds.vercel.app/" target="_blank">
+        <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-sikorpri-lds.jpg" alt="SIKORPRI-LDS Preview" width="100%" style="border-radius: 8px;"/>
+      </a>
+      <h3 align="center">📨 SIKORPRI-LDS</h3>
+      <p align="center"><b>Sistem Persuratan, Disposisi &amp; Arsip Digital KORPRI</b></p>
+      <p align="center">
+        <a href="https://sikorpri-lds.vercel.app/" target="_blank">
+          <img src="https://img.shields.io/badge/%E2%96%B6%20Live%20Demo-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Live Demo"/>
+        </a>
+      </p>
+      <p>Sistem tata naskah elektronik DP KORPRI Kab. Banjar dengan disposisi berjenjang, paraf/TTD QR publik, serta label arsip barcode 1D+QR sesuai Perbup Banjar No. 10/2024.</p>
+      <p><b>Tech:</b> <code>PHP 8</code> <code>MySQL / SQLite</code> <code>Tailwind CSS</code> <code>QR &amp; Barcode</code></p>
     </td>
   </tr>
 </table>
