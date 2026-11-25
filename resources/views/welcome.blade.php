@@ -1530,10 +1530,12 @@
             position: fixed;
             right: max(20px, env(safe-area-inset-right, 20px));
             bottom: max(20px, env(safe-area-inset-bottom, 20px));
-            width: 52px;
-            height: 52px;
+            width: 58px;
+            height: 58px;
+            padding: 0;
             border-radius: 50%;
             background: var(--panel);
+            color: var(--ink);
             border: 3px solid var(--ink);
             box-shadow: 4px 4px 0 var(--ink);
             z-index: 600;
@@ -1545,9 +1547,9 @@
             visibility: hidden;
             pointer-events: none;
             transform: translate3d(0, 14px, 0);
-            contain: layout style paint;
+            contain: layout style;
             will-change: transform, opacity;
-            transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+            transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease, box-shadow 0.14s ease, color 0.14s ease;
         }
         .back-to-top.visible {
             opacity: 1;
@@ -1558,20 +1560,30 @@
         .back-to-top:hover {
             transform: translate3d(-2px, -2px, 0);
             box-shadow: 6px 6px 0 var(--ink);
+            color: var(--red);
+        }
+        .back-to-top.is-complete {
+            color: var(--red);
         }
         .progress-ring {
             position: absolute;
-            inset: -3px;
-            width: calc(100% + 6px);
-            height: calc(100% + 6px);
+            inset: 0;
+            width: 100%;
+            height: 100%;
             transform: rotate(-90deg);
             pointer-events: none;
+            overflow: visible;
+        }
+        .progress-ring__track {
+            stroke: var(--tone);
+            fill: none;
         }
         .progress-ring__circle {
             stroke: var(--red);
-            stroke-dasharray: 144.513;
-            stroke-dashoffset: 144.513;
-            stroke-linecap: butt;
+            fill: none;
+            stroke-dasharray: 135.088;
+            stroke-dashoffset: 135.088;
+            stroke-linecap: round;
             opacity: 0;
             transition: none;
         }
@@ -2803,10 +2815,11 @@
 
     <!-- Back-to-Top Progress Ring (Manga Edition) -->
     <button type="button" class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
-        <svg class="progress-ring" width="52" height="52" viewBox="0 0 50 50" aria-hidden="true">
-            <circle class="progress-ring__circle" stroke-width="3" fill="transparent" r="23" cx="25" cy="25" />
+        <svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52" aria-hidden="true">
+            <circle class="progress-ring__track" stroke-width="5" r="21.5" cx="26" cy="26" />
+            <circle class="progress-ring__circle" stroke-width="5" r="21.5" cx="26" cy="26" />
         </svg>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:2;" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="position:relative;z-index:2;" aria-hidden="true">
             <line x1="12" y1="19" x2="12" y2="5"></line>
             <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
@@ -3434,7 +3447,7 @@
             const backToTop = backToTopBtn;
             if (backToTop) {
                 const circle = backToTop.querySelector('.progress-ring__circle');
-                const radius = (circle && circle.r && circle.r.baseVal.value) ? circle.r.baseVal.value : 23;
+                const radius = (circle && circle.r && circle.r.baseVal.value) ? circle.r.baseVal.value : 21.5;
                 const circumference = 2 * Math.PI * radius;
 
                 if (circle) {
@@ -3444,6 +3457,7 @@
                 }
 
                 let visible = false;
+                let complete = false;
                 let maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
                 let lastOffset = circumference;
                 let rafPending = false;
@@ -3455,18 +3469,23 @@
                 const update = () => {
                     rafPending = false;
                     const y = window.scrollY || document.documentElement.scrollTop || 0;
-                    const shouldShow = y > 280;
+                    const shouldShow = y > 160;
                     if (shouldShow !== visible) {
                         visible = shouldShow;
                         backToTop.classList.toggle('visible', visible);
                     }
+                    const progress = Math.min(1, Math.max(0, y / maxScroll));
+                    const isComplete = progress >= 0.985;
+                    if (isComplete !== complete) {
+                        complete = isComplete;
+                        backToTop.classList.toggle('is-complete', complete);
+                    }
                     if (circle && (visible || lastOffset !== circumference)) {
-                        const progress = Math.min(1, Math.max(0, y / maxScroll));
                         const offset = circumference * (1 - progress);
-                        if (Math.abs(offset - lastOffset) > 0.15 || progress === 0 || progress === 1) {
+                        if (Math.abs(offset - lastOffset) > 0.05 || progress === 0 || progress === 1) {
                             lastOffset = offset;
                             circle.style.strokeDashoffset = offset.toFixed(2);
-                            circle.style.opacity = progress > 0.002 ? '1' : '0';
+                            circle.style.opacity = progress > 0.005 ? '1' : '0';
                         }
                     }
                 };
