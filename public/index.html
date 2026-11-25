@@ -572,8 +572,8 @@
         }
         .char-portrait-wrap {
             position: relative;
-            width: 210px;
-            height: 210px;
+            width: min(100%, 270px);
+            aspect-ratio: 4 / 5;
             border: 4px solid var(--ink);
             box-shadow: 6px 6px 0 var(--ink);
             background: var(--paper);
@@ -583,18 +583,23 @@
             justify-content: center;
         }
         .char-portrait-img {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center top;
-            filter: grayscale(100%) contrast(1.24) brightness(1.03);
-            transition: filter 0.18s ease;
+            object-position: center 85%;
+            filter: contrast(1.06) saturate(1.05);
+            transition: filter 0.18s ease, transform 0.22s ease;
         }
         .hero-char-panel:hover .char-portrait-img {
-            filter: grayscale(35%) contrast(1.1);
+            filter: contrast(1.12) saturate(1.14);
+            transform: scale(1.03);
         }
         .char-monogram-fallback {
             display: none;
+            position: relative;
+            z-index: 1;
             font-family: var(--font-display);
             font-size: 5.5rem;
             color: var(--ink);
@@ -611,14 +616,15 @@
             position: absolute;
             top: 8px;
             left: 8px;
-            background: var(--red);
-            color: var(--on-red);
+            z-index: 2;
+            background: var(--panel);
+            color: var(--ink);
             font-family: var(--font-display);
             font-size: 1.1rem;
             letter-spacing: 0.06em;
             padding: 3px 8px 1px;
             border: 2.5px solid var(--ink);
-            box-shadow: 2px 2px 0 var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
             line-height: 1.1;
         }
         .char-bottom-row {
@@ -1451,10 +1457,11 @@
 
                     <div class="char-portrait-wrap" id="portraitWrap">
                         <img
-                            src="images/profile.jpg"
+                            src="images/profile.jpg?v=2"
                             alt="Foto profil Angga Wiranata"
                             class="char-portrait-img"
                             decoding="async"
+                            fetchpriority="high"
                             onerror="this.parentElement.classList.add('is-fallback')"
                         >
                         <span class="char-monogram-fallback" aria-hidden="true">AW</span>
