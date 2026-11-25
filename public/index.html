@@ -887,24 +887,36 @@
             box-shadow: 9px 9px 0 var(--ink);
         }
         .project-thumb {
+            position: relative;
             width: 100%;
             aspect-ratio: 16 / 10;
             border: 3px solid var(--ink);
-            background: var(--paper);
+            background-color: var(--paper);
+            background-image: radial-gradient(var(--tone) 1px, transparent 1px);
+            background-size: 9px 9px;
             overflow: hidden;
         }
         .project-card.span-4 .project-thumb {
-            aspect-ratio: 21 / 9;
+            aspect-ratio: 16 / 7;
         }
         .projects-grid.is-filtered .project-card.span-4 .project-thumb {
             aspect-ratio: 16 / 10;
         }
         .project-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top center;
-            filter: grayscale(100%) contrast(1.22) brightness(1.02);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-sizing: content-box;
+            max-width: calc(100% - 24px);
+            max-height: calc(100% - 24px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            background: var(--panel);
+            filter: grayscale(100%) contrast(1.18) brightness(1.02);
             transition: filter 0.18s ease;
         }
         .project-card:hover .project-thumb img {
@@ -1160,14 +1172,24 @@
         .modal-media {
             width: 100%;
             border: 3px solid var(--ink);
-            background: var(--paper);
+            background-color: var(--paper);
+            background-image: radial-gradient(var(--tone) 1px, transparent 1px);
+            background-size: 9px 9px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
         .modal-media img {
-            width: 100%;
-            max-height: 360px;
+            max-width: 100%;
+            max-height: 420px;
+            width: auto;
+            height: auto;
             object-fit: contain;
-            background: var(--paper);
+            border: 2px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            background: var(--panel);
         }
         .modal-desc {
             color: var(--mute);
