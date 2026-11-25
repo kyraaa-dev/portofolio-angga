@@ -1429,6 +1429,382 @@
             }
         }
 
+        /* =====================================================================
+           MANGA EDITION EXTRAS (Folio, Tategaki, Status Sheet, SFX, Rail, Omake)
+           ===================================================================== */
+        .chapter-folio {
+            flex-shrink: 0;
+            font-family: var(--font-display);
+            font-size: 0.98rem;
+            letter-spacing: 0.08em;
+            padding: 2px 9px 1px;
+            border: 2.5px solid var(--ink);
+            background: var(--panel);
+            color: var(--ink);
+            box-shadow: 2px 2px 0 var(--ink);
+            line-height: 1.15;
+        }
+        .contact-folio {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            z-index: 2;
+        }
+        .manga-margin-text {
+            display: none;
+        }
+        .chapter-rail {
+            display: none;
+        }
+        @media (min-width: 1260px) {
+            .manga-margin-text {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                position: fixed;
+                left: 14px;
+                top: 50%;
+                transform: translateY(-50%);
+                writing-mode: vertical-rl;
+                text-orientation: mixed;
+                font-family: var(--font-body);
+                font-size: 0.72rem;
+                font-weight: 700;
+                letter-spacing: 0.22em;
+                color: var(--ink);
+                opacity: 0.36;
+                border-left: 2px solid var(--tone);
+                padding-left: 6px;
+                pointer-events: none;
+                user-select: none;
+                z-index: 40;
+            }
+            .chapter-rail {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+                position: fixed;
+                right: 16px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 450;
+                background: var(--panel);
+                border: 3px solid var(--ink);
+                box-shadow: 4px 4px 0 var(--ink);
+                padding: 8px 6px;
+            }
+        }
+        .rail-page {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
+            color: var(--panel);
+            background: var(--ink);
+            padding: 2px 6px 1px;
+            line-height: 1.15;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+        .rail-item {
+            width: 36px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            letter-spacing: 0.05em;
+            color: var(--ink);
+            background: var(--paper);
+            border: 2px solid var(--ink);
+            transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
+        }
+        .rail-item:hover {
+            transform: translate(-2px, -1px);
+            box-shadow: 2px 2px 0 var(--ink);
+        }
+        .rail-item.active {
+            background: var(--red);
+            color: var(--on-red);
+            transform: translate(-2px, -1px);
+            box-shadow: 3px 3px 0 var(--ink);
+        }
+        [data-theme="dark"] .rail-item.active {
+            text-shadow: 1px 1px 0 #111111;
+        }
+
+        /* Character Status Sheet (Omake in BAB 1) */
+        .status-sheet {
+            margin-top: 20px;
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow: hidden;
+        }
+        .status-sheet::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(var(--tone) 1px, transparent 1px);
+            background-size: 10px 10px;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .status-sheet > * {
+            position: relative;
+            z-index: 1;
+        }
+        .status-sheet-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--ink);
+        }
+        .status-sheet-title-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+        .status-kicker {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            background: var(--red);
+            color: var(--on-red);
+            padding: 3px 10px 2px;
+            border: 2.5px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            line-height: 1.1;
+        }
+        [data-theme="dark"] .status-kicker {
+            text-shadow: 1px 1px 0 #111111;
+        }
+        .status-sheet-head h3 {
+            font-size: 1.65rem;
+        }
+        .status-rank-badge {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.08em;
+            background: var(--ink);
+            color: var(--panel);
+            padding: 3px 11px 2px;
+            border: 2px solid var(--ink);
+        }
+        .status-sheet-body {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+        .stat-meters {
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+        .stat-meter-row {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .stat-meter-meta {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .stat-meter-name {
+            font-family: var(--font-display);
+            font-size: 1.12rem;
+            letter-spacing: 0.06em;
+            color: var(--ink);
+        }
+        .stat-meter-val {
+            font-family: var(--font-display);
+            font-size: 0.98rem;
+            letter-spacing: 0.06em;
+            color: var(--mute);
+        }
+        .stat-meter-val.is-max {
+            color: var(--red);
+        }
+        .stat-meter-track {
+            width: 100%;
+            height: 15px;
+            border: 2.5px solid var(--ink);
+            background: var(--panel);
+            box-shadow: 2px 2px 0 var(--ink);
+            overflow: hidden;
+        }
+        .stat-meter-fill {
+            height: 100%;
+            width: var(--val, 80%);
+            background-color: var(--ink);
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent 0 5px,
+                var(--panel) 5px 7px
+            );
+            border-right: 2px solid var(--ink);
+        }
+        .stat-meter-fill.is-accent {
+            background-color: var(--red);
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent 0 5px,
+                rgba(255, 255, 255, 0.28) 5px 7px
+            );
+            border-right: none;
+        }
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .spec-box {
+            background: var(--panel);
+            border: 2.5px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            padding: 11px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .spec-label {
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            letter-spacing: 0.08em;
+            color: var(--red);
+        }
+        .spec-value {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.35;
+        }
+
+        /* Author's Note / Omake Corner */
+        .omake-note {
+            margin-top: 24px;
+            background: var(--panel);
+            border: 3px dashed var(--ink);
+            box-shadow: 6px 6px 0 var(--ink);
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .omake-avatar {
+            flex-shrink: 0;
+            width: 74px;
+            height: 74px;
+            border: 3px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            background: var(--paper);
+            overflow: hidden;
+        }
+        .omake-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 68% 58%;
+            filter: contrast(1.06) saturate(1.05);
+        }
+        .omake-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0;
+        }
+        .omake-kicker {
+            display: inline-block;
+            align-self: flex-start;
+            font-family: var(--font-display);
+            font-size: 0.96rem;
+            letter-spacing: 0.08em;
+            background: var(--ink);
+            color: var(--panel);
+            padding: 2px 10px 1px;
+        }
+        .omake-text {
+            font-size: 0.92rem;
+            color: var(--mute);
+            line-height: 1.6;
+        }
+        .omake-sign {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.06em;
+            color: var(--red);
+        }
+
+        /* Interactive Click SFX Burst */
+        .sfx-burst {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1200;
+            pointer-events: none;
+            user-select: none;
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            color: var(--red);
+            -webkit-text-stroke: 1.5px var(--ink);
+            paint-order: stroke fill;
+            text-shadow: 3px 3px 0 var(--ink);
+            will-change: transform, opacity;
+            animation: sfxPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes sfxPop {
+            0% {
+                opacity: 0;
+                transform: translate3d(-50%, -40%, 0) scale(0.55) rotate(-12deg);
+            }
+            24% {
+                opacity: 1;
+                transform: translate3d(-50%, -95%, 0) scale(1.15) rotate(-7deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(-50%, -175%, 0) scale(0.95) rotate(-3deg);
+            }
+        }
+
+        @media (max-width: 820px) {
+            .status-sheet-body {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 520px) {
+            .chapter-folio {
+                margin-left: auto;
+            }
+            .chapter-line {
+                order: 3;
+            }
+            .status-sheet {
+                padding: 18px;
+            }
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+            .omake-note {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 18px;
+                gap: 14px;
+            }
+        }
+
         /* Accessibility: Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             html {
@@ -1567,6 +1943,7 @@
                 <span class="chapter-num"><span data-i18n="ch1.num">BAB 1</span></span>
                 <h2 id="ch-about" data-i18n="ch1.title">LEBIH DEKAT DENGAN SAYA</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
+                <span class="chapter-folio" aria-hidden="true">P.02</span>
             </div>
 
             <div class="about-grid">
@@ -1602,6 +1979,90 @@
                     </div>
                 </article>
             </div>
+
+            <!-- Bonus Omake: Kartu Statistik Karakter -->
+            <article class="panel status-sheet" aria-labelledby="ch-status-sheet">
+                <div class="status-sheet-head">
+                    <div class="status-sheet-title-wrap">
+                        <span class="status-kicker" data-i18n="status.kicker">BONUS · STATUS SHEET</span>
+                        <h3 id="ch-status-sheet" data-i18n="status.title">PROFIL KARAKTER</h3>
+                    </div>
+                    <span class="status-rank-badge">RANK S · LV. 05</span>
+                </div>
+
+                <div class="status-sheet-body">
+                    <div class="stat-meters">
+                        <div class="stat-meter-row">
+                            <div class="stat-meter-meta">
+                                <span class="stat-meter-name">LARAVEL &amp; PHP</span>
+                                <span class="stat-meter-val">95 / 100</span>
+                            </div>
+                            <div class="stat-meter-track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Laravel and PHP 95%">
+                                <div class="stat-meter-fill" style="--val: 95%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-meter-row">
+                            <div class="stat-meter-meta">
+                                <span class="stat-meter-name">REACT &amp; TYPESCRIPT</span>
+                                <span class="stat-meter-val">88 / 100</span>
+                            </div>
+                            <div class="stat-meter-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="React and TypeScript 88%">
+                                <div class="stat-meter-fill" style="--val: 88%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-meter-row">
+                            <div class="stat-meter-meta">
+                                <span class="stat-meter-name">UI/UX &amp; TAILWIND</span>
+                                <span class="stat-meter-val">90 / 100</span>
+                            </div>
+                            <div class="stat-meter-track" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="UI/UX and Tailwind 90%">
+                                <div class="stat-meter-fill" style="--val: 90%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-meter-row">
+                            <div class="stat-meter-meta">
+                                <span class="stat-meter-name">MYSQL &amp; REST API</span>
+                                <span class="stat-meter-val">86 / 100</span>
+                            </div>
+                            <div class="stat-meter-track" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="MySQL and REST API 86%">
+                                <div class="stat-meter-fill" style="--val: 86%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-meter-row">
+                            <div class="stat-meter-meta">
+                                <span class="stat-meter-name" data-i18n="status.coffee">BAHAN BAKAR KOPI</span>
+                                <span class="stat-meter-val is-max">MAX!!</span>
+                            </div>
+                            <div class="stat-meter-track" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Coffee Fuel MAX">
+                                <div class="stat-meter-fill is-accent" style="--val: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spec-grid">
+                        <div class="spec-box">
+                            <span class="spec-label" data-i18n="spec.class.label">KELAS</span>
+                            <span class="spec-value" data-i18n="spec.class.val">Full-Stack Craftsman</span>
+                        </div>
+                        <div class="spec-box">
+                            <span class="spec-label" data-i18n="spec.base.label">MARKAS</span>
+                            <span class="spec-value" data-i18n="spec.base.val">Kab. Banjar, Indonesia</span>
+                        </div>
+                        <div class="spec-box">
+                            <span class="spec-label" data-i18n="spec.weapon.label">SENJATA UTAMA</span>
+                            <span class="spec-value" data-i18n="spec.weapon.val">Laravel · React · MySQL</span>
+                        </div>
+                        <div class="spec-box">
+                            <span class="spec-label" data-i18n="spec.quest.label">MISI AKTIF</span>
+                            <span class="spec-value" data-i18n="spec.quest.val">Studi S2 M.Kom &amp; Freelance</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
         </section>
 
         <!-- =============================================================
@@ -1612,6 +2073,7 @@
                 <span class="chapter-num"><span data-i18n="ch2.num">BAB 2</span></span>
                 <h2 id="ch-services" data-i18n="ch2.title">APA YANG SAYA LAKUKAN</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
+                <span class="chapter-folio" aria-hidden="true">P.03</span>
             </div>
 
             <div class="services-grid">
@@ -1656,6 +2118,7 @@
                 <span class="chapter-num"><span data-i18n="ch3.num">BAB 3</span></span>
                 <h2 id="ch-experience" data-i18n="ch3.title">PERJALANAN KARIR</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
+                <span class="chapter-folio" aria-hidden="true">P.04</span>
             </div>
 
             <div class="panel career-strip">
@@ -1694,6 +2157,7 @@
                 <span class="chapter-num"><span data-i18n="ch4.num">BAB 4</span></span>
                 <h2 id="ch-projects" data-i18n="ch4.title">PROYEK PILIHAN</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
+                <span class="chapter-folio" aria-hidden="true">P.05</span>
             </div>
 
             <div class="project-filters" role="group" aria-label="Filter proyek">
@@ -1908,6 +2372,7 @@
                 <span class="chapter-num"><span data-i18n="ch5.num">BAB 5</span></span>
                 <h2 id="ch-certs" data-i18n="ch5.title">SERTIFIKASI</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
+                <span class="chapter-folio" aria-hidden="true">P.06</span>
             </div>
 
             <div class="certs-grid">
@@ -1942,6 +2407,7 @@
              ============================================================= -->
         <section id="contact" class="contact-section" aria-labelledby="ch-contact">
             <div class="panel speedlines contact-panel">
+                <span class="chapter-folio contact-folio" aria-hidden="true">P.07</span>
                 <span class="sfx contact-sfx" aria-hidden="true">ドン!</span>
                 <h2 id="ch-contact" class="contact-title" data-i18n="contact.title">BERSAMBUNG...?</h2>
                 <p class="contact-sub" data-i18n="contact.sub">Tersedia untuk proyek baru. Mari tulis bab berikutnya bersama!</p>
@@ -1955,6 +2421,18 @@
                     Salin alamat email: anggawiranatafti@gmail.com
                 </button>
             </div>
+
+            <!-- Pojok Catatan Mangaka (Author's Note / Omake Corner) -->
+            <aside class="omake-note" aria-label="Catatan Mangaka">
+                <div class="omake-avatar">
+                    <img src="images/profile.jpg?v=2" alt="Avatar Angga Wiranata" loading="lazy" decoding="async">
+                </div>
+                <div class="omake-content">
+                    <span class="omake-kicker" data-i18n="omake.kicker">CATATAN MANGAKA · OMAKE</span>
+                    <p class="omake-text" data-i18n="omake.text">Terima kasih sudah membaca sampai halaman terakhir! Portofolio ini diracik sendiri tanpa framework berat supaya terasa ringan seperti membalik halaman komik. Butuh bantuan bangun aplikasi Laravel, React, atau sistem instansi? Kirim pesan saja — kopi sudah siap!</p>
+                    <span class="omake-sign" data-i18n="omake.sign">— ANGGA WIRANATA · ANGGA.LAB VOL. 01</span>
+                </div>
+            </aside>
         </section>
     </main>
 
@@ -1989,6 +2467,21 @@
         </div>
     </div>
 
+    <!-- Margin Vertikal Jepang (Tategaki — Desktop Wide Only) -->
+    <div class="manga-margin-text" aria-hidden="true">アンガ・ウィラナタ 作品集 — VOL.01</div>
+
+    <!-- Indikator Bab & Halaman Mengambang (Manga Chapter Tracker — Desktop Wide Only) -->
+    <nav class="chapter-rail" id="chapterRail" aria-label="Daftar bab manga">
+        <span class="rail-page" id="railPage">HAL. 1/7</span>
+        <a href="#top" class="rail-item active" data-rail="top" title="Episode 01 — Beranda">EP</a>
+        <a href="#about" class="rail-item" data-rail="about" title="Bab 1 — Tentang">01</a>
+        <a href="#services" class="rail-item" data-rail="services" title="Bab 2 — Layanan">02</a>
+        <a href="#experience" class="rail-item" data-rail="experience" title="Bab 3 — Karir">03</a>
+        <a href="#projects" class="rail-item" data-rail="projects" title="Bab 4 — Proyek">04</a>
+        <a href="#certs" class="rail-item" data-rail="certs" title="Bab 5 — Sertifikasi">05</a>
+        <a href="#contact" class="rail-item" data-rail="contact" title="Penutup — Kontak">END</a>
+    </nav>
+
     <!-- Back-to-Top Progress Ring (Manga Edition) -->
     <button type="button" class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
         <svg class="progress-ring" width="52" height="52" viewBox="0 0 50 50" aria-hidden="true">
@@ -2017,6 +2510,9 @@
             const mobileDrawer = document.getElementById('mobileDrawer');
             const modalCloseBtn = document.getElementById('modalClose');
             const backToTopBtn = document.getElementById('backToTop');
+            const chapterRail = document.getElementById('chapterRail');
+            const railPage = document.getElementById('railPage');
+            const railItems = document.querySelectorAll('.rail-item[data-rail]');
 
             const I18N = {
                 id: {
@@ -2040,6 +2536,17 @@
                     'about.dev.p2': 'Berbekal gelar S.Kom di bidang teknik informatika dan kini menempuh S2 (M.Kom), saya terus mengikuti teknologi terbaru dan menerapkannya di setiap proyek.',
                     'about.skills.title': 'JURUS ANDALAN',
                     'about.skills.p': 'Teknologi yang mendukung setiap proyek saya — dari arsitektur backend Laravel hingga antarmuka reaktif React dan Tailwind CSS.',
+                    'status.kicker': 'BONUS · STATUS SHEET',
+                    'status.title': 'PROFIL KARAKTER',
+                    'status.coffee': 'BAHAN BAKAR KOPI',
+                    'spec.class.label': 'KELAS',
+                    'spec.class.val': 'Full-Stack Craftsman',
+                    'spec.base.label': 'MARKAS',
+                    'spec.base.val': 'Kab. Banjar, Indonesia',
+                    'spec.weapon.label': 'SENJATA UTAMA',
+                    'spec.weapon.val': 'Laravel · React · MySQL',
+                    'spec.quest.label': 'MISI AKTIF',
+                    'spec.quest.val': 'Studi S2 M.Kom & Freelance',
                     'ch2.num': 'BAB 2',
                     'ch2.title': 'APA YANG SAYA LAKUKAN',
                     'srv.1': 'Antarmuka web interaktif dan mulus dengan teknologi modern berperforma tinggi.',
@@ -2086,6 +2593,9 @@
                     'contact.title': 'BERSAMBUNG...?',
                     'contact.sub': 'Tersedia untuk proyek baru. Mari tulis bab berikutnya bersama!',
                     'contact.copy': 'Salin alamat email: anggawiranatafti@gmail.com',
+                    'omake.kicker': 'CATATAN MANGAKA · OMAKE',
+                    'omake.text': 'Terima kasih sudah membaca sampai halaman terakhir! Portofolio ini diracik sendiri tanpa framework berat supaya terasa ringan seperti membalik halaman komik. Butuh bantuan bangun aplikasi Laravel, React, atau sistem instansi? Kirim pesan saja — kopi sudah siap!',
+                    'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)',
                     'modal.close': 'TUTUP [ESC]'
                 },
@@ -2110,6 +2620,17 @@
                     'about.dev.p2': 'Holding a Bachelor\'s degree in Computer Science (S.Kom) and currently pursuing a Master\'s degree (M.Kom), I continuously embrace modern technologies and apply them across every project.',
                     'about.skills.title': 'SIGNATURE MOVES',
                     'about.skills.p': 'Core technologies powering my projects — from robust Laravel backend architecture to reactive React and Tailwind CSS interfaces.',
+                    'status.kicker': 'OMAKE · STATUS SHEET',
+                    'status.title': 'CHARACTER STATUS',
+                    'status.coffee': 'COFFEE FUEL',
+                    'spec.class.label': 'CLASS',
+                    'spec.class.val': 'Full-Stack Craftsman',
+                    'spec.base.label': 'HOME BASE',
+                    'spec.base.val': 'Banjar Regency, Indonesia',
+                    'spec.weapon.label': 'MAIN WEAPON',
+                    'spec.weapon.val': 'Laravel · React · MySQL',
+                    'spec.quest.label': 'ACTIVE QUEST',
+                    'spec.quest.val': 'M.Kom Master\'s & Freelance',
                     'ch2.num': 'CH. 02',
                     'ch2.title': 'WHAT I DO',
                     'srv.1': 'Smooth, interactive web interfaces powered by modern high-performance technologies.',
@@ -2156,6 +2677,9 @@
                     'contact.title': 'TO BE CONTINUED...?',
                     'contact.sub': 'Available for new projects. Let\'s write the next chapter together!',
                     'contact.copy': 'Copy email address: anggawiranatafti@gmail.com',
+                    'omake.kicker': 'AUTHOR\'S NOTE · OMAKE',
+                    'omake.text': 'Thanks for reading all the way to the final page! This portfolio was hand-crafted without heavy frameworks so it feels as snappy as flipping through manga pages. Need help building a Laravel, React, or institutional web app? Drop me a message — coffee\'s already brewed!',
+                    'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — THE END (FOR NOW)',
                     'modal.close': 'CLOSE [ESC]'
                 }
@@ -2171,9 +2695,21 @@
                     menuAria: 'Buka menu navigasi',
                     modalCloseAria: 'Tutup pratinjau',
                     backToTopAria: 'Kembali ke atas',
+                    railAria: 'Daftar bab manga',
+                    pagePrefix: 'HAL.',
+                    railTitles: {
+                        top: 'Episode 01 — Beranda',
+                        about: 'Bab 1 — Tentang',
+                        services: 'Bab 2 — Layanan',
+                        experience: 'Bab 3 — Karir',
+                        projects: 'Bab 4 — Proyek',
+                        certs: 'Bab 5 — Sertifikasi',
+                        contact: 'Penutup — Kontak'
+                    },
                     previewAlt: 'Pratinjau',
                     openFallback: 'BUKA ▶',
-                    copiedPrefix: 'Email disalin: '
+                    copiedPrefix: 'Email disalin: ',
+                    sfxCopied: 'コピー!'
                 },
                 en: {
                     docTitle: 'ANGGA WIRANATA | Web Craftsman — Manga Edition',
@@ -2184,13 +2720,33 @@
                     menuAria: 'Open navigation menu',
                     modalCloseAria: 'Close preview',
                     backToTopAria: 'Back to top',
+                    railAria: 'Manga chapter index',
+                    pagePrefix: 'P.',
+                    railTitles: {
+                        top: 'Episode 01 — Home',
+                        about: 'Ch. 01 — About',
+                        services: 'Ch. 02 — Services',
+                        experience: 'Ch. 03 — Career',
+                        projects: 'Ch. 04 — Projects',
+                        certs: 'Ch. 05 — Certificates',
+                        contact: 'Outro — Contact'
+                    },
                     previewAlt: 'Preview',
                     openFallback: 'OPEN ▶',
-                    copiedPrefix: 'Email copied: '
+                    copiedPrefix: 'Email copied: ',
+                    sfxCopied: 'COPIED!'
                 }
             };
 
             let currentLang = html.getAttribute('data-lang') === 'en' ? 'en' : 'id';
+            const CHAPTER_IDS = ['top', 'about', 'services', 'experience', 'projects', 'certs', 'contact'];
+            let activePageNum = 1;
+
+            const syncRailPage = () => {
+                if (!railPage) return;
+                const ui = UI_TEXT[currentLang] || UI_TEXT.id;
+                railPage.textContent = ui.pagePrefix + ' ' + activePageNum + '/' + CHAPTER_IDS.length;
+            };
 
             const syncThemeUI = (theme) => {
                 const isDark = theme === 'dark';
@@ -2223,16 +2779,68 @@
                     btn.setAttribute('aria-pressed', active ? 'true' : 'false');
                 });
 
+                railItems.forEach((item) => {
+                    const id = item.getAttribute('data-rail');
+                    if (id && ui.railTitles[id]) {
+                        item.setAttribute('title', ui.railTitles[id]);
+                        item.setAttribute('aria-label', ui.railTitles[id]);
+                    }
+                });
+
                 if (langSwitch) langSwitch.setAttribute('aria-label', ui.langAria);
                 if (themeToggle) themeToggle.setAttribute('aria-label', ui.themeAria);
                 if (menuToggle) menuToggle.setAttribute('aria-label', ui.menuAria);
                 if (modalCloseBtn) modalCloseBtn.setAttribute('aria-label', ui.modalCloseAria);
                 if (backToTopBtn) backToTopBtn.setAttribute('aria-label', ui.backToTopAria);
+                if (chapterRail) chapterRail.setAttribute('aria-label', ui.railAria);
 
+                syncRailPage();
                 syncThemeUI(html.getAttribute('data-theme') || 'light');
             };
 
             applyLang(currentLang);
+
+            // Interactive Click SFX Burst (GPU-Only, Respects Reduced Motion)
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const defaultSfxPool = ['ドン!', 'カチッ!', 'ババン!'];
+            let sfxIdx = 0;
+
+            const spawnSfx = (e, label) => {
+                if (prefersReducedMotion) return;
+                let x = e && typeof e.clientX === 'number' ? e.clientX : 0;
+                let y = e && typeof e.clientY === 'number' ? e.clientY : 0;
+                if (x === 0 && y === 0 && e && e.currentTarget && e.currentTarget.getBoundingClientRect) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    x = rect.left + rect.width / 2;
+                    y = rect.top + rect.height / 2;
+                }
+                const burst = document.createElement('span');
+                burst.className = 'sfx-burst';
+                burst.setAttribute('aria-hidden', 'true');
+                burst.textContent = label || defaultSfxPool[sfxIdx++ % defaultSfxPool.length];
+                burst.style.left = x + 'px';
+                burst.style.top = y + 'px';
+                document.body.appendChild(burst);
+                const cleanup = () => { if (burst.parentNode) burst.parentNode.removeChild(burst); };
+                burst.addEventListener('animationend', cleanup, { once: true });
+                setTimeout(cleanup, 520);
+            };
+
+            document.addEventListener('click', (e) => {
+                if (prefersReducedMotion) return;
+                const ui = UI_TEXT[currentLang] || UI_TEXT.id;
+                if (e.target.closest('#copyEmailBtn')) {
+                    spawnSfx(e, ui.sfxCopied);
+                } else if (e.target.closest('#themeToggle')) {
+                    spawnSfx(e, 'ピカッ!');
+                } else if (e.target.closest('.lang-opt')) {
+                    spawnSfx(e, 'ポン!');
+                } else if (e.target.closest('.filter-btn')) {
+                    spawnSfx(e, 'シュッ!');
+                } else if (e.target.closest('.btn, .project-action, .project-card, .rail-item')) {
+                    spawnSfx(e);
+                }
+            });
 
             langOpts.forEach((btn) => {
                 btn.addEventListener('click', () => {
@@ -2266,15 +2874,24 @@
                 });
             }
 
-            // Active Section Indicator (Zero Scroll-Listener Overhead)
+            // Active Section Indicator & Manga Chapter Tracker (Zero Scroll-Listener Overhead)
             const navLinks = document.querySelectorAll('.nav-link[data-section], .mobile-drawer-links a[data-section]');
-            if (navLinks.length && 'IntersectionObserver' in window) {
-                const setActive = (key) => {
+            if ('IntersectionObserver' in window) {
+                const setActive = (id) => {
+                    const navKey = (id === 'services' || id === 'experience') ? 'about' : id;
                     navLinks.forEach((a) => {
-                        a.classList.toggle('active', a.getAttribute('data-section') === key);
+                        a.classList.toggle('active', a.getAttribute('data-section') === navKey);
                     });
+                    railItems.forEach((item) => {
+                        item.classList.toggle('active', item.getAttribute('data-rail') === id);
+                    });
+                    const idx = CHAPTER_IDS.indexOf(id);
+                    if (idx !== -1) {
+                        activePageNum = idx + 1;
+                        syncRailPage();
+                    }
                 };
-                const sections = ['top', 'about', 'projects', 'certs', 'contact']
+                const sections = CHAPTER_IDS
                     .map((id) => ({ id, el: document.getElementById(id) }))
                     .filter((s) => s.el);
 
