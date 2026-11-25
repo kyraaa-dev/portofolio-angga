@@ -67,7 +67,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kosugi+Maru&display=swap" rel="stylesheet">
 
-    <!-- Prevent Theme Flash (Follows System Preference by Default) -->
+    <!-- Prevent Theme & Language Flash (Follows Saved Preference) -->
     <script>
         (function() {
             try {
@@ -77,6 +77,10 @@
                 document.documentElement.setAttribute('data-theme', theme);
                 var meta = document.getElementById('theme-color-meta');
                 if (meta) meta.setAttribute('content', theme === 'dark' ? '#121212' : '#f6f1e4');
+                var savedLang = localStorage.getItem('manga_lang');
+                var lang = (savedLang === 'en' || savedLang === 'id') ? savedLang : 'id';
+                document.documentElement.lang = lang;
+                document.documentElement.setAttribute('data-lang', lang);
             } catch (e) {}
         })();
     </script>
@@ -385,6 +389,48 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+        .lang-switch {
+            display: inline-flex;
+            align-items: stretch;
+            height: 40px;
+            background: var(--panel);
+            border: 3px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            overflow: hidden;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .lang-switch:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--ink);
+        }
+        .lang-opt {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 11px;
+            border: none;
+            background: transparent;
+            color: var(--ink);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            cursor: pointer;
+            transition: background-color 0.12s ease, color 0.12s ease;
+        }
+        .lang-opt + .lang-opt {
+            border-left: 2.5px solid var(--ink);
+        }
+        .lang-opt:hover:not(.active) {
+            background: var(--paper);
+        }
+        .lang-opt.active {
+            background: var(--red);
+            color: var(--on-red);
+        }
+        [data-theme="dark"] .lang-opt.active {
+            text-shadow: 1px 1px 0 #111111;
         }
         .theme-btn,
         .menu-btn {
@@ -1365,6 +1411,19 @@
             .stat-num--long {
                 font-size: 1.75rem;
             }
+            .brand {
+                font-size: 1.7rem;
+            }
+            .nav-actions {
+                gap: 6px;
+            }
+            .lang-opt {
+                padding: 0 9px;
+                font-size: 0.98rem;
+            }
+            .theme-btn {
+                padding: 0 10px;
+            }
             .theme-btn-label {
                 display: none;
             }
@@ -1398,14 +1457,18 @@
             </a>
 
             <nav class="nav-links" aria-label="Navigasi Utama">
-                <a href="#top" class="nav-link active" data-section="top">Beranda</a>
-                <a href="#about" class="nav-link" data-section="about">Tentang</a>
-                <a href="#projects" class="nav-link" data-section="projects">Proyek</a>
-                <a href="#certs" class="nav-link" data-section="certs">Sertifikat</a>
-                <a href="#contact" class="nav-link" data-section="contact">Kontak</a>
+                <a href="#top" class="nav-link active" data-section="top" data-i18n="nav.home">Beranda</a>
+                <a href="#about" class="nav-link" data-section="about" data-i18n="nav.about">Tentang</a>
+                <a href="#projects" class="nav-link" data-section="projects" data-i18n="nav.projects">Proyek</a>
+                <a href="#certs" class="nav-link" data-section="certs" data-i18n="nav.certs">Sertifikat</a>
+                <a href="#contact" class="nav-link" data-section="contact" data-i18n="nav.contact">Kontak</a>
             </nav>
 
             <div class="nav-actions">
+                <div class="lang-switch" id="langSwitch" role="group" aria-label="Pilih bahasa">
+                    <button type="button" class="lang-opt active" data-lang="id" aria-pressed="true">ID</button>
+                    <button type="button" class="lang-opt" data-lang="en" aria-pressed="false">EN</button>
+                </div>
                 <button type="button" class="theme-btn" id="themeToggle" aria-label="Ganti tema terang atau gelap">
                     <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                     <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -1419,11 +1482,11 @@
 
         <div class="mobile-drawer" id="mobileDrawer" aria-label="Menu Mobile">
             <div class="mobile-drawer-links">
-                <a href="#top" data-section="top">Beranda</a>
-                <a href="#about" data-section="about">Tentang</a>
-                <a href="#projects" data-section="projects">Proyek</a>
-                <a href="#certs" data-section="certs">Sertifikat</a>
-                <a href="#contact" data-section="contact">Kontak</a>
+                <a href="#top" data-section="top" data-i18n="nav.home">Beranda</a>
+                <a href="#about" data-section="about" data-i18n="nav.about">Tentang</a>
+                <a href="#projects" data-section="projects" data-i18n="nav.projects">Proyek</a>
+                <a href="#certs" data-section="certs" data-i18n="nav.certs">Sertifikat</a>
+                <a href="#contact" data-section="contact" data-i18n="nav.contact">Kontak</a>
             </div>
         </div>
     </header>
@@ -1436,15 +1499,15 @@
             <div class="hero-grid">
                 <!-- Panel Judul + Speedlines -->
                 <div class="panel speedlines hero-title-panel">
-                    <span class="kicker">EPISODE 01 — PENGEMBANG WEB</span>
+                    <span class="kicker" data-i18n="hero.kicker">EPISODE 01 — PENGEMBANG WEB</span>
                     <h1 class="hero-name">ANGGA WIRANATA</h1>
                     <p class="hero-role">WEB CRAFTSMAN</p>
-                    <div class="bubble">
+                    <div class="bubble" data-i18n="hero.bubble">
                         Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel &amp; React!
                     </div>
                     <div class="hero-cta">
-                        <a href="#projects" class="btn">LIHAT KARYA</a>
-                        <a href="#contact" class="btn alt">HUBUNGI SAYA</a>
+                        <a href="#projects" class="btn" data-i18n="hero.cta.work">LIHAT KARYA</a>
+                        <a href="#contact" class="btn alt" data-i18n="hero.cta.contact">HUBUNGI SAYA</a>
                     </div>
                 </div>
 
@@ -1479,19 +1542,19 @@
             <div class="stats-grid" aria-label="Ringkasan Statistik">
                 <div class="panel stat-box">
                     <span class="stat-num">05</span>
-                    <span class="stat-label">PROYEK PILIHAN</span>
+                    <span class="stat-label" data-i18n="stat.projects">PROYEK PILIHAN</span>
                 </div>
                 <div class="panel stat-box">
                     <span class="stat-num">02</span>
-                    <span class="stat-label">SERTIFIKAT</span>
+                    <span class="stat-label" data-i18n="stat.certs">SERTIFIKAT</span>
                 </div>
                 <div class="panel stat-box">
                     <span class="stat-num">2022</span>
-                    <span class="stat-label">MULAI FREELANCE</span>
+                    <span class="stat-label" data-i18n="stat.freelance">MULAI FREELANCE</span>
                 </div>
                 <div class="panel stat-box">
                     <span class="stat-num stat-num--long">S.Kom ➜ M.Kom</span>
-                    <span class="stat-label">S2 SEDANG DITEMPUH</span>
+                    <span class="stat-label" data-i18n="stat.study">S2 SEDANG DITEMPUH</span>
                 </div>
             </div>
         </section>
@@ -1501,16 +1564,16 @@
              ============================================================= -->
         <section id="about" aria-labelledby="ch-about">
             <div class="chapter">
-                <span class="chapter-num"><span>BAB 1</span></span>
-                <h2 id="ch-about">LEBIH DEKAT DENGAN SAYA</h2>
+                <span class="chapter-num"><span data-i18n="ch1.num">BAB 1</span></span>
+                <h2 id="ch-about" data-i18n="ch1.title">LEBIH DEKAT DENGAN SAYA</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
             </div>
 
             <div class="about-grid">
                 <article class="panel about-card">
-                    <h3>SANG DEVELOPER</h3>
-                    <p>Saya Web Developer yang bersemangat membangun antarmuka web yang modern, cepat, dan mudah diakses. Fokus saya bukan hanya fungsionalitas, tetapi juga estetika visual yang memberi pengalaman terbaik bagi pengguna.</p>
-                    <p>Berbekal gelar S.Kom di bidang teknik informatika dan kini menempuh S2 (M.Kom), saya terus mengikuti teknologi terbaru dan menerapkannya di setiap proyek.</p>
+                    <h3 data-i18n="about.dev.title">SANG DEVELOPER</h3>
+                    <p data-i18n="about.dev.p1">Saya Web Developer yang bersemangat membangun antarmuka web yang modern, cepat, dan mudah diakses. Fokus saya bukan hanya fungsionalitas, tetapi juga estetika visual yang memberi pengalaman terbaik bagi pengguna.</p>
+                    <p data-i18n="about.dev.p2">Berbekal gelar S.Kom di bidang teknik informatika dan kini menempuh S2 (M.Kom), saya terus mengikuti teknologi terbaru dan menerapkannya di setiap proyek.</p>
                     <div class="tag-list">
                         <span class="tag">Frontend</span>
                         <span class="tag">Backend</span>
@@ -1522,8 +1585,8 @@
                 </article>
 
                 <article class="panel about-card">
-                    <h3>JURUS ANDALAN</h3>
-                    <p>Teknologi yang mendukung setiap proyek saya — dari arsitektur backend Laravel hingga antarmuka reaktif React dan Tailwind CSS.</p>
+                    <h3 data-i18n="about.skills.title">JURUS ANDALAN</h3>
+                    <p data-i18n="about.skills.p">Teknologi yang mendukung setiap proyek saya — dari arsitektur backend Laravel hingga antarmuka reaktif React dan Tailwind CSS.</p>
                     <div class="tag-list">
                         <span class="tag">Laravel</span>
                         <span class="tag">React.js</span>
@@ -1546,8 +1609,8 @@
              ============================================================= -->
         <section id="services" aria-labelledby="ch-services">
             <div class="chapter">
-                <span class="chapter-num"><span>BAB 2</span></span>
-                <h2 id="ch-services">APA YANG SAYA LAKUKAN</h2>
+                <span class="chapter-num"><span data-i18n="ch2.num">BAB 2</span></span>
+                <h2 id="ch-services" data-i18n="ch2.title">APA YANG SAYA LAKUKAN</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
             </div>
 
@@ -1555,32 +1618,32 @@
                 <article class="panel service-card">
                     <span class="service-num">01</span>
                     <h3>Frontend Architecture</h3>
-                    <p>Antarmuka web interaktif dan mulus dengan teknologi modern berperforma tinggi.</p>
+                    <p data-i18n="srv.1">Antarmuka web interaktif dan mulus dengan teknologi modern berperforma tinggi.</p>
                 </article>
                 <article class="panel service-card">
                     <span class="service-num">02</span>
                     <h3>Responsive Design</h3>
-                    <p>Tampil sempurna di Mobile, Tablet, dan Desktop.</p>
+                    <p data-i18n="srv.2">Tampil sempurna di Mobile, Tablet, dan Desktop.</p>
                 </article>
                 <article class="panel service-card">
                     <span class="service-num">03</span>
                     <h3>Backend Integration</h3>
-                    <p>Menghubungkan antarmuka dengan database dan API pihak ketiga.</p>
+                    <p data-i18n="srv.3">Menghubungkan antarmuka dengan database dan API pihak ketiga.</p>
                 </article>
                 <article class="panel service-card">
                     <span class="service-num">04</span>
                     <h3>API Development</h3>
-                    <p>RESTful API yang aman, cepat, dan mudah diintegrasikan.</p>
+                    <p data-i18n="srv.4">RESTful API yang aman, cepat, dan mudah diintegrasikan.</p>
                 </article>
                 <article class="panel service-card">
                     <span class="service-num">05</span>
                     <h3>UI/UX Prototyping</h3>
-                    <p>Desain Figma atau Adobe XD menjadi kode bersih yang pixel-perfect.</p>
+                    <p data-i18n="srv.5">Desain Figma atau Adobe XD menjadi kode bersih yang pixel-perfect.</p>
                 </article>
                 <article class="panel service-card">
                     <span class="service-num">06</span>
                     <h3>Performance Tuning</h3>
-                    <p>Core Web Vitals dan praktik SEO terbaik agar situs Anda lebih bersinar.</p>
+                    <p data-i18n="srv.6">Core Web Vitals dan praktik SEO terbaik agar situs Anda lebih bersinar.</p>
                 </article>
             </div>
         </section>
@@ -1590,35 +1653,35 @@
              ============================================================= -->
         <section id="experience" aria-labelledby="ch-experience">
             <div class="chapter">
-                <span class="chapter-num"><span>BAB 3</span></span>
-                <h2 id="ch-experience">PERJALANAN KARIR</h2>
+                <span class="chapter-num"><span data-i18n="ch3.num">BAB 3</span></span>
+                <h2 id="ch-experience" data-i18n="ch3.title">PERJALANAN KARIR</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
             </div>
 
             <div class="panel career-strip">
                 <article class="career-cell">
                     <span class="career-badge">2016 – 2020</span>
-                    <h3>S1 Teknik Informatika</h3>
+                    <h3 data-i18n="career.1.title">S1 Teknik Informatika</h3>
                     <p class="career-org">Universitas Islam Kalimantan MAB</p>
-                    <p class="career-desc">Lulus dengan gelar S.Kom, fokus pada rekayasa perangkat lunak dan sistem informasi.</p>
+                    <p class="career-desc" data-i18n="career.1.desc">Lulus dengan gelar S.Kom, fokus pada rekayasa perangkat lunak dan sistem informasi.</p>
                 </article>
                 <article class="career-cell">
                     <span class="career-badge">2022</span>
-                    <h3>Pengadministrasian Umum</h3>
+                    <h3 data-i18n="career.2.title">Pengadministrasian Umum</h3>
                     <p class="career-org">DP KORPRI Kab. Banjar</p>
-                    <p class="career-desc">Administrasi umum, pengelolaan data, dan dukungan operasional instansi.</p>
+                    <p class="career-desc" data-i18n="career.2.desc">Administrasi umum, pengelolaan data, dan dukungan operasional instansi.</p>
                 </article>
                 <article class="career-cell">
-                    <span class="career-badge">2022 – SEKARANG</span>
+                    <span class="career-badge" data-i18n="career.3.badge">2022 – SEKARANG</span>
                     <h3>Freelance Web Developer</h3>
                     <p class="career-org">Self-Employed</p>
-                    <p class="career-desc">Mengembangkan aplikasi web modern dengan Laravel dan ekosistem JS.</p>
+                    <p class="career-desc" data-i18n="career.3.desc">Mengembangkan aplikasi web modern dengan Laravel dan ekosistem JS.</p>
                 </article>
                 <article class="career-cell">
                     <span class="career-badge is-levelup">LEVEL UP!</span>
-                    <h3>S2 Magister Komputer</h3>
-                    <p class="career-org">Gelar M.Kom (sedang ditempuh)</p>
-                    <p class="career-desc">Melanjutkan studi magister untuk memperdalam keahlian di bidang ilmu komputer.</p>
+                    <h3 data-i18n="career.4.title">S2 Magister Komputer</h3>
+                    <p class="career-org" data-i18n="career.4.org">Gelar M.Kom (sedang ditempuh)</p>
+                    <p class="career-desc" data-i18n="career.4.desc">Melanjutkan studi magister untuk memperdalam keahlian di bidang ilmu komputer.</p>
                 </article>
             </div>
         </section>
@@ -1628,16 +1691,16 @@
              ============================================================= -->
         <section id="projects" aria-labelledby="ch-projects">
             <div class="chapter">
-                <span class="chapter-num"><span>BAB 4</span></span>
-                <h2 id="ch-projects">PROYEK PILIHAN</h2>
+                <span class="chapter-num"><span data-i18n="ch4.num">BAB 4</span></span>
+                <h2 id="ch-projects" data-i18n="ch4.title">PROYEK PILIHAN</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
             </div>
 
             <div class="project-filters" role="group" aria-label="Filter proyek">
-                <button type="button" class="filter-btn active" data-filter="all">SEMUA (5)</button>
+                <button type="button" class="filter-btn active" data-filter="all" data-i18n="filter.all">SEMUA (5)</button>
                 <button type="button" class="filter-btn" data-filter="govtech">GOVTECH (3)</button>
                 <button type="button" class="filter-btn" data-filter="webapp">WEB APP (2)</button>
-                <button type="button" class="filter-btn" data-filter="selesai">SELESAI (3)</button>
+                <button type="button" class="filter-btn" data-filter="selesai" data-i18n="filter.done">SELESAI (3)</button>
             </div>
 
             <div class="projects-grid" id="projectsGrid">
@@ -1647,18 +1710,20 @@
                     data-filter-tags="govtech berjalan"
                     data-title="SILUKOR"
                     data-status="BERJALAN · GOVTECH"
+                    data-status-en="ONGOING · GOVTECH"
                     data-status-type="active"
                     data-img="images/project-korpri.png"
                     data-desc="Sistem Informasi Layanan Usulan Keanggotaan KORPRI. Portal terpadu untuk mendigitalkan layanan, administrasi, dan kesejahteraan anggota KORPRI."
+                    data-desc-en="KORPRI Membership Proposal Information System. An integrated portal to digitize member services, administration, and welfare."
                     data-tags="Laravel,Livewire,MySQL,Tailwind"
                     data-link=""
                 >
                     <div class="project-thumb">
                         <img src="images/project-korpri.png" alt="Screenshot aplikasi SILUKOR" loading="lazy" decoding="async">
                     </div>
-                    <span class="stamp is-active">BERJALAN · GOVTECH</span>
+                    <span class="stamp is-active" data-i18n="proj.status.active">BERJALAN · GOVTECH</span>
                     <h3>SILUKOR</h3>
-                    <p class="project-desc">Sistem Informasi Layanan Usulan Keanggotaan KORPRI. Portal terpadu untuk mendigitalkan layanan, administrasi, dan kesejahteraan anggota.</p>
+                    <p class="project-desc" data-i18n="proj.1.desc">Sistem Informasi Layanan Usulan Keanggotaan KORPRI. Portal terpadu untuk mendigitalkan layanan, administrasi, dan kesejahteraan anggota.</p>
                     <div class="tag-list">
                         <span class="tag">Laravel</span>
                         <span class="tag">Livewire</span>
@@ -1666,8 +1731,8 @@
                         <span class="tag">Tailwind</span>
                     </div>
                     <div class="project-foot">
-                        <span class="project-soon">Segera Hadir</span>
-                        <span class="project-open-hint">Klik panel untuk pratinjau</span>
+                        <span class="project-soon" data-i18n="proj.soon">Segera Hadir</span>
+                        <span class="project-open-hint" data-i18n="proj.hint.full">Klik panel untuk pratinjau</span>
                     </div>
                 </article>
 
@@ -1677,26 +1742,28 @@
                     data-filter-tags="govtech berjalan"
                     data-title="SISDUKOR"
                     data-status="BERJALAN · GOVTECH"
+                    data-status-en="ONGOING · GOVTECH"
                     data-status-type="active"
                     data-img="images/duta-korpri.png"
                     data-desc="Sistem Informasi Duta KORPRI: platform kompetisi berstandar profesional mulai dari pendaftaran, penilaian, hingga penetapan juara."
+                    data-desc-en="KORPRI Ambassador Information System: a professional competition platform covering registration, judging, and winner selection."
                     data-tags="Laravel,PHP,MySQL"
                     data-link=""
                 >
                     <div class="project-thumb">
                         <img src="images/duta-korpri.png" alt="Screenshot aplikasi SISDUKOR" loading="lazy" decoding="async">
                     </div>
-                    <span class="stamp is-active">BERJALAN · GOVTECH</span>
+                    <span class="stamp is-active" data-i18n="proj.status.active">BERJALAN · GOVTECH</span>
                     <h3>SISDUKOR</h3>
-                    <p class="project-desc">Sistem Informasi Duta KORPRI: pendaftaran, penilaian, hingga penetapan juara.</p>
+                    <p class="project-desc" data-i18n="proj.2.desc">Sistem Informasi Duta KORPRI: pendaftaran, penilaian, hingga penetapan juara.</p>
                     <div class="tag-list">
                         <span class="tag">Laravel</span>
                         <span class="tag">PHP</span>
                         <span class="tag">MySQL</span>
                     </div>
                     <div class="project-foot">
-                        <span class="project-soon">Segera Hadir</span>
-                        <span class="project-open-hint">Pratinjau</span>
+                        <span class="project-soon" data-i18n="proj.soon">Segera Hadir</span>
+                        <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
                     </div>
                 </article>
 
@@ -1706,19 +1773,22 @@
                     data-filter-tags="webapp selesai"
                     data-title="KasFlow"
                     data-status="SELESAI · WEB APP"
+                    data-status-en="COMPLETED · WEB APP"
                     data-status-type="done"
                     data-img="images/kasflow-app.png"
                     data-desc="Manajemen arus kas pribadi: catat pemasukan, pengeluaran, dan pantau kesehatan finansial secara real-time."
+                    data-desc-en="Personal cash flow manager: record income, expenses, and monitor your financial health in real time."
                     data-tags="React,TypeScript,Tailwind"
                     data-link="https://kyraaa-dev.github.io/kasflow-app/"
                     data-link-label="Live Demo ▶"
+                    data-link-label-en="Live Demo ▶"
                 >
                     <div class="project-thumb">
                         <img src="images/kasflow-app.png" alt="Screenshot aplikasi KasFlow" loading="lazy" decoding="async">
                     </div>
-                    <span class="stamp is-done">SELESAI · WEB APP</span>
+                    <span class="stamp is-done" data-i18n="proj.status.done.web">SELESAI · WEB APP</span>
                     <h3>KasFlow</h3>
-                    <p class="project-desc">Manajemen arus kas pribadi: catat pemasukan, pengeluaran, dan pantau kesehatan finansial real-time.</p>
+                    <p class="project-desc" data-i18n="proj.3.desc">Manajemen arus kas pribadi: catat pemasukan, pengeluaran, dan pantau kesehatan finansial real-time.</p>
                     <div class="tag-list">
                         <span class="tag">React</span>
                         <span class="tag">TypeScript</span>
@@ -1726,7 +1796,7 @@
                     </div>
                     <div class="project-foot">
                         <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank" rel="noopener noreferrer" class="project-action">Live Demo ▶</a>
-                        <span class="project-open-hint">Pratinjau</span>
+                        <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
                     </div>
                 </article>
 
@@ -1736,19 +1806,22 @@
                     data-filter-tags="webapp selesai"
                     data-title="Jelajahin"
                     data-status="SELESAI · WEB APP"
+                    data-status-en="COMPLETED · WEB APP"
                     data-status-type="done"
                     data-img="images/project-travel.png"
                     data-desc="Asisten perjalanan AI untuk menjelajahi Indonesia: dilengkapi Itinerary Studio interaktif, ekspor PDF, eksplorasi destinasi, hingga cuaca real-time."
+                    data-desc-en="AI travel assistant for exploring Indonesia: featuring an interactive Itinerary Studio, PDF export, destination discovery, and real-time weather."
                     data-tags="React,AI API,Vercel"
                     data-link="https://project-travel-six.vercel.app/"
                     data-link-label="Live Demo ▶"
+                    data-link-label-en="Live Demo ▶"
                 >
                     <div class="project-thumb">
                         <img src="images/project-travel.png" alt="Screenshot aplikasi Jelajahin" loading="lazy" decoding="async">
                     </div>
-                    <span class="stamp is-done">SELESAI · WEB APP</span>
+                    <span class="stamp is-done" data-i18n="proj.status.done.web">SELESAI · WEB APP</span>
                     <h3>Jelajahin</h3>
-                    <p class="project-desc">Asisten perjalanan AI untuk menjelajahi Indonesia: Itinerary Studio interaktif, ekspor PDF, cuaca real-time.</p>
+                    <p class="project-desc" data-i18n="proj.4.desc">Asisten perjalanan AI untuk menjelajahi Indonesia: Itinerary Studio interaktif, ekspor PDF, cuaca real-time.</p>
                     <div class="tag-list">
                         <span class="tag">React</span>
                         <span class="tag">AI API</span>
@@ -1756,7 +1829,7 @@
                     </div>
                     <div class="project-foot">
                         <a href="https://project-travel-six.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-action">Live Demo ▶</a>
-                        <span class="project-open-hint">Pratinjau</span>
+                        <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
                     </div>
                 </article>
 
@@ -1766,27 +1839,30 @@
                     data-filter-tags="govtech selesai"
                     data-title="E-MutZ KORPRI"
                     data-status="SELESAI · GOVTECH"
+                    data-status-en="COMPLETED · GOVTECH"
                     data-status-type="done"
                     data-img="images/project-emutz.png"
                     data-desc="Rekapitulasi pemesanan seragam & atribut Mutz ASN per SKPD: pencatatan pesanan, manajemen stok & retur, cetak kwitansi, dan ekspor laporan data."
+                    data-desc-en="ASN Mutz uniform & attribute ordering system per government unit: order tracking, stock & return management, receipt printing, and report export."
                     data-tags="Laravel,MySQL,Export"
                     data-link="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan"
                     data-link-label="Lihat Repo ▶"
+                    data-link-label-en="View Repo ▶"
                 >
                     <div class="project-thumb">
                         <img src="images/project-emutz.png" alt="Screenshot aplikasi E-MutZ KORPRI" loading="lazy" decoding="async">
                     </div>
-                    <span class="stamp is-done">SELESAI · GOVTECH</span>
+                    <span class="stamp is-done" data-i18n="proj.status.done.gov">SELESAI · GOVTECH</span>
                     <h3>E-MutZ KORPRI</h3>
-                    <p class="project-desc">Rekapitulasi pemesanan Mutz ASN per SKPD: stok &amp; retur, cetak kwitansi, ekspor laporan.</p>
+                    <p class="project-desc" data-i18n="proj.5.desc">Rekapitulasi pemesanan Mutz ASN per SKPD: stok &amp; retur, cetak kwitansi, ekspor laporan.</p>
                     <div class="tag-list">
                         <span class="tag">Laravel</span>
                         <span class="tag">MySQL</span>
                         <span class="tag">Export</span>
                     </div>
                     <div class="project-foot">
-                        <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" class="project-action">Lihat Repo ▶</a>
-                        <span class="project-open-hint">Pratinjau</span>
+                        <a href="https://github.com/kyraaa-dev/aplikasi-rekap-pemesanan" target="_blank" rel="noopener noreferrer" class="project-action" data-i18n="proj.repo">Lihat Repo ▶</a>
+                        <span class="project-open-hint" data-i18n="proj.hint.short">Pratinjau</span>
                     </div>
                 </article>
             </div>
@@ -1797,8 +1873,8 @@
              ============================================================= -->
         <section id="certs" aria-labelledby="ch-certs">
             <div class="chapter">
-                <span class="chapter-num"><span>BAB 5</span></span>
-                <h2 id="ch-certs">SERTIFIKASI</h2>
+                <span class="chapter-num"><span data-i18n="ch5.num">BAB 5</span></span>
+                <h2 id="ch-certs" data-i18n="ch5.title">SERTIFIKASI</h2>
                 <span class="chapter-line" aria-hidden="true"></span>
             </div>
 
@@ -1807,11 +1883,11 @@
                     <div class="cert-thumb">
                         <img src="images/cert-revou.png" alt="Sertifikat RevoU Intro to Software Engineering" loading="lazy" decoding="async">
                     </div>
-                    <span class="cert-date">24 JULI 2026</span>
+                    <span class="cert-date" data-i18n="cert.1.date">24 JULI 2026</span>
                     <h3>Intro to Software Engineering</h3>
-                    <p>PT Revolusi Cita Edukasi (RevoU). Sertifikat kehadiran kursus online 1 minggu.</p>
+                    <p data-i18n="cert.1.desc">PT Revolusi Cita Edukasi (RevoU). Sertifikat kehadiran kursus online 1 minggu.</p>
                     <div class="cert-actions">
-                        <a href="images/cert-revou.png" target="_blank" rel="noopener noreferrer" class="project-action cert-preview-trigger" data-title="Intro to Software Engineering" data-status="24 JULI 2026 · REVOU" data-img="images/cert-revou.png" data-desc="PT Revolusi Cita Edukasi (RevoU). Sertifikat kehadiran kursus online 1 minggu Intro to Software Engineering." data-link="images/cert-revou.png" data-link-label="Buka Gambar Penuh ▶">Lihat Detail ▶</a>
+                        <a href="images/cert-revou.png" target="_blank" rel="noopener noreferrer" class="project-action cert-preview-trigger" data-i18n="cert.detail" data-title="Intro to Software Engineering" data-status="24 JULI 2026 · REVOU" data-status-en="24 JULY 2026 · REVOU" data-img="images/cert-revou.png" data-desc="PT Revolusi Cita Edukasi (RevoU). Sertifikat kehadiran kursus online 1 minggu Intro to Software Engineering." data-desc-en="PT Revolusi Cita Edukasi (RevoU). Certificate of Attendance for the 1-week Intro to Software Engineering online course." data-link="images/cert-revou.png" data-link-label="Buka Gambar Penuh ▶" data-link-label-en="Open Full Image ▶">Lihat Detail ▶</a>
                     </div>
                 </article>
 
@@ -1821,9 +1897,9 @@
                     </div>
                     <span class="cert-date">06 SEPT 2026</span>
                     <h3>AI Productivity for Developers</h3>
-                    <p>Hacktiv8 Indonesia. Menyelesaikan program Maju Bareng AI beserta proyek akhirnya.</p>
+                    <p data-i18n="cert.2.desc">Hacktiv8 Indonesia. Menyelesaikan program Maju Bareng AI beserta proyek akhirnya.</p>
                     <div class="cert-actions">
-                        <a href="images/hacktiv8-ai.jpg" target="_blank" rel="noopener noreferrer" class="project-action cert-preview-trigger" data-title="AI Productivity for Developers" data-status="06 SEPT 2026 · HACKTIV8" data-img="images/hacktiv8-ai.jpg" data-desc="Hacktiv8 Indonesia. Menyelesaikan program Maju Bareng AI beserta proyek akhir sebagai syarat kelulusan." data-link="images/hacktiv8-ai.jpg" data-link-label="Buka Gambar Penuh ▶">Lihat Detail ▶</a>
+                        <a href="images/hacktiv8-ai.jpg" target="_blank" rel="noopener noreferrer" class="project-action cert-preview-trigger" data-i18n="cert.detail" data-title="AI Productivity for Developers" data-status="06 SEPT 2026 · HACKTIV8" data-status-en="06 SEPT 2026 · HACKTIV8" data-img="images/hacktiv8-ai.jpg" data-desc="Hacktiv8 Indonesia. Menyelesaikan program Maju Bareng AI beserta proyek akhir sebagai syarat kelulusan." data-desc-en="Hacktiv8 Indonesia. Completed the Maju Bareng AI program and final capstone project as a graduation requirement." data-link="images/hacktiv8-ai.jpg" data-link-label="Buka Gambar Penuh ▶" data-link-label-en="Open Full Image ▶">Lihat Detail ▶</a>
                     </div>
                 </article>
             </div>
@@ -1835,15 +1911,15 @@
         <section id="contact" class="contact-section" aria-labelledby="ch-contact">
             <div class="panel speedlines contact-panel">
                 <span class="sfx contact-sfx" aria-hidden="true">ドン!</span>
-                <h2 id="ch-contact" class="contact-title">BERSAMBUNG...?</h2>
-                <p class="contact-sub">Tersedia untuk proyek baru. Mari tulis bab berikutnya bersama!</p>
+                <h2 id="ch-contact" class="contact-title" data-i18n="contact.title">BERSAMBUNG...?</h2>
+                <p class="contact-sub" data-i18n="contact.sub">Tersedia untuk proyek baru. Mari tulis bab berikutnya bersama!</p>
                 <div class="contact-buttons">
                     <a href="mailto:anggawiranatafti@gmail.com" class="btn">EMAIL</a>
                     <a href="https://github.com/kyraaa-dev" target="_blank" rel="noopener noreferrer" class="btn alt">GITHUB</a>
                     <a href="https://www.linkedin.com/in/angga-wiranata-320837420" target="_blank" rel="noopener noreferrer" class="btn alt">LINKEDIN</a>
                     <a href="https://www.instagram.com/_anggawiranata" target="_blank" rel="noopener noreferrer" class="btn alt">INSTAGRAM</a>
                 </div>
-                <button type="button" class="copy-email-inline" id="copyEmailBtn">
+                <button type="button" class="copy-email-inline" id="copyEmailBtn" data-i18n="contact.copy">
                     Salin alamat email: anggawiranatafti@gmail.com
                 </button>
             </div>
@@ -1855,7 +1931,7 @@
          ================================================================= -->
     <footer class="footer">
         <div class="wrap">
-            <p>&copy; 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)</p>
+            <p data-i18n="footer.text">&copy; 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)</p>
         </div>
     </footer>
 
@@ -1866,7 +1942,7 @@
         <div class="panel modal-panel">
             <div class="modal-head">
                 <span class="stamp is-done" id="modalStamp">STATUS</span>
-                <button type="button" class="modal-close" id="modalClose" aria-label="Tutup pratinjau">TUTUP [ESC]</button>
+                <button type="button" class="modal-close" id="modalClose" aria-label="Tutup pratinjau" data-i18n="modal.close">TUTUP [ESC]</button>
             </div>
             <div class="modal-media">
                 <img id="modalImg" src="" alt="Pratinjau">
@@ -1876,7 +1952,7 @@
             <div class="tag-list" id="modalTags"></div>
             <div class="modal-foot">
                 <a href="#" target="_blank" rel="noopener noreferrer" class="btn" id="modalLink" style="display:none;">LIHAT ▶</a>
-                <span class="project-soon" id="modalSoon" style="display:none;">Segera Hadir</span>
+                <span class="project-soon" id="modalSoon" style="display:none;" data-i18n="proj.soon">Segera Hadir</span>
             </div>
         </div>
     </div>
@@ -1903,17 +1979,234 @@
             const iconMoon = document.getElementById('iconMoon');
             const iconSun = document.getElementById('iconSun');
             const themeMeta = document.getElementById('theme-color-meta');
+            const langSwitch = document.getElementById('langSwitch');
+            const langOpts = document.querySelectorAll('.lang-opt[data-lang]');
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            const modalCloseBtn = document.getElementById('modalClose');
+            const backToTopBtn = document.getElementById('backToTop');
+
+            const I18N = {
+                id: {
+                    'nav.home': 'Beranda',
+                    'nav.about': 'Tentang',
+                    'nav.projects': 'Proyek',
+                    'nav.certs': 'Sertifikat',
+                    'nav.contact': 'Kontak',
+                    'hero.kicker': 'EPISODE 01 — PENGEMBANG WEB',
+                    'hero.bubble': 'Meracik web modern yang cepat, bersih, dan berkarakter dengan Laravel & React!',
+                    'hero.cta.work': 'LIHAT KARYA',
+                    'hero.cta.contact': 'HUBUNGI SAYA',
+                    'stat.projects': 'PROYEK PILIHAN',
+                    'stat.certs': 'SERTIFIKAT',
+                    'stat.freelance': 'MULAI FREELANCE',
+                    'stat.study': 'S2 SEDANG DITEMPUH',
+                    'ch1.num': 'BAB 1',
+                    'ch1.title': 'LEBIH DEKAT DENGAN SAYA',
+                    'about.dev.title': 'SANG DEVELOPER',
+                    'about.dev.p1': 'Saya Web Developer yang bersemangat membangun antarmuka web yang modern, cepat, dan mudah diakses. Fokus saya bukan hanya fungsionalitas, tetapi juga estetika visual yang memberi pengalaman terbaik bagi pengguna.',
+                    'about.dev.p2': 'Berbekal gelar S.Kom di bidang teknik informatika dan kini menempuh S2 (M.Kom), saya terus mengikuti teknologi terbaru dan menerapkannya di setiap proyek.',
+                    'about.skills.title': 'JURUS ANDALAN',
+                    'about.skills.p': 'Teknologi yang mendukung setiap proyek saya — dari arsitektur backend Laravel hingga antarmuka reaktif React dan Tailwind CSS.',
+                    'ch2.num': 'BAB 2',
+                    'ch2.title': 'APA YANG SAYA LAKUKAN',
+                    'srv.1': 'Antarmuka web interaktif dan mulus dengan teknologi modern berperforma tinggi.',
+                    'srv.2': 'Tampil sempurna di Mobile, Tablet, dan Desktop.',
+                    'srv.3': 'Menghubungkan antarmuka dengan database dan API pihak ketiga.',
+                    'srv.4': 'RESTful API yang aman, cepat, dan mudah diintegrasikan.',
+                    'srv.5': 'Desain Figma atau Adobe XD menjadi kode bersih yang pixel-perfect.',
+                    'srv.6': 'Core Web Vitals dan praktik SEO terbaik agar situs Anda lebih bersinar.',
+                    'ch3.num': 'BAB 3',
+                    'ch3.title': 'PERJALANAN KARIR',
+                    'career.1.title': 'S1 Teknik Informatika',
+                    'career.1.desc': 'Lulus dengan gelar S.Kom, fokus pada rekayasa perangkat lunak dan sistem informasi.',
+                    'career.2.title': 'Pengadministrasian Umum',
+                    'career.2.desc': 'Administrasi umum, pengelolaan data, dan dukungan operasional instansi.',
+                    'career.3.badge': '2022 – SEKARANG',
+                    'career.3.desc': 'Mengembangkan aplikasi web modern dengan Laravel dan ekosistem JS.',
+                    'career.4.title': 'S2 Magister Komputer',
+                    'career.4.org': 'Gelar M.Kom (sedang ditempuh)',
+                    'career.4.desc': 'Melanjutkan studi magister untuk memperdalam keahlian di bidang ilmu komputer.',
+                    'ch4.num': 'BAB 4',
+                    'ch4.title': 'PROYEK PILIHAN',
+                    'filter.all': 'SEMUA (5)',
+                    'filter.done': 'SELESAI (3)',
+                    'proj.status.active': 'BERJALAN · GOVTECH',
+                    'proj.status.done.web': 'SELESAI · WEB APP',
+                    'proj.status.done.gov': 'SELESAI · GOVTECH',
+                    'proj.soon': 'Segera Hadir',
+                    'proj.hint.full': 'Klik panel untuk pratinjau',
+                    'proj.hint.short': 'Pratinjau',
+                    'proj.repo': 'Lihat Repo ▶',
+                    'proj.1.desc': 'Sistem Informasi Layanan Usulan Keanggotaan KORPRI. Portal terpadu untuk mendigitalkan layanan, administrasi, dan kesejahteraan anggota.',
+                    'proj.2.desc': 'Sistem Informasi Duta KORPRI: pendaftaran, penilaian, hingga penetapan juara.',
+                    'proj.3.desc': 'Manajemen arus kas pribadi: catat pemasukan, pengeluaran, dan pantau kesehatan finansial real-time.',
+                    'proj.4.desc': 'Asisten perjalanan AI untuk menjelajahi Indonesia: Itinerary Studio interaktif, ekspor PDF, cuaca real-time.',
+                    'proj.5.desc': 'Rekapitulasi pemesanan Mutz ASN per SKPD: stok & retur, cetak kwitansi, ekspor laporan.',
+                    'ch5.num': 'BAB 5',
+                    'ch5.title': 'SERTIFIKASI',
+                    'cert.1.date': '24 JULI 2026',
+                    'cert.1.desc': 'PT Revolusi Cita Edukasi (RevoU). Sertifikat kehadiran kursus online 1 minggu.',
+                    'cert.2.desc': 'Hacktiv8 Indonesia. Menyelesaikan program Maju Bareng AI beserta proyek akhirnya.',
+                    'cert.detail': 'Lihat Detail ▶',
+                    'contact.title': 'BERSAMBUNG...?',
+                    'contact.sub': 'Tersedia untuk proyek baru. Mari tulis bab berikutnya bersama!',
+                    'contact.copy': 'Salin alamat email: anggawiranatafti@gmail.com',
+                    'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)',
+                    'modal.close': 'TUTUP [ESC]'
+                },
+                en: {
+                    'nav.home': 'Home',
+                    'nav.about': 'About',
+                    'nav.projects': 'Projects',
+                    'nav.certs': 'Certificates',
+                    'nav.contact': 'Contact',
+                    'hero.kicker': 'EPISODE 01 — WEB DEVELOPER',
+                    'hero.bubble': 'Crafting fast, clean, and distinctive modern web apps with Laravel & React!',
+                    'hero.cta.work': 'VIEW WORK',
+                    'hero.cta.contact': 'CONTACT ME',
+                    'stat.projects': 'FEATURED PROJECTS',
+                    'stat.certs': 'CERTIFICATES',
+                    'stat.freelance': 'FREELANCING SINCE',
+                    'stat.study': 'MASTER\'S IN PROGRESS',
+                    'ch1.num': 'CH. 01',
+                    'ch1.title': 'GET TO KNOW ME',
+                    'about.dev.title': 'THE DEVELOPER',
+                    'about.dev.p1': 'I am a passionate Web Developer dedicated to building modern, fast, and accessible web interfaces. My focus goes beyond functionality — blending clean engineering with visual craft for the best user experience.',
+                    'about.dev.p2': 'Holding a Bachelor\'s degree in Computer Science (S.Kom) and currently pursuing a Master\'s degree (M.Kom), I continuously embrace modern technologies and apply them across every project.',
+                    'about.skills.title': 'SIGNATURE MOVES',
+                    'about.skills.p': 'Core technologies powering my projects — from robust Laravel backend architecture to reactive React and Tailwind CSS interfaces.',
+                    'ch2.num': 'CH. 02',
+                    'ch2.title': 'WHAT I DO',
+                    'srv.1': 'Smooth, interactive web interfaces powered by modern high-performance technologies.',
+                    'srv.2': 'Pixel-sharp layouts across Mobile, Tablet, and Desktop screens.',
+                    'srv.3': 'Connecting frontends seamlessly with databases and third-party APIs.',
+                    'srv.4': 'Secure, fast, and developer-friendly RESTful APIs built for integration.',
+                    'srv.5': 'Turning Figma or Adobe XD designs into clean, pixel-perfect code.',
+                    'srv.6': 'Core Web Vitals and SEO best practices so your website stands out.',
+                    'ch3.num': 'CH. 03',
+                    'ch3.title': 'CAREER JOURNEY',
+                    'career.1.title': 'B.Sc. in Computer Science',
+                    'career.1.desc': 'Graduated with an S.Kom degree, focusing on software engineering and information systems.',
+                    'career.2.title': 'General Administration',
+                    'career.2.desc': 'General administration, data management, and institutional operational support.',
+                    'career.3.badge': '2022 – PRESENT',
+                    'career.3.desc': 'Developing modern web applications with Laravel and the JavaScript ecosystem.',
+                    'career.4.title': 'M.Sc. in Computer Science',
+                    'career.4.org': 'M.Kom Degree (In Progress)',
+                    'career.4.desc': 'Pursuing a Master\'s degree to deepen expertise in computer science.',
+                    'ch4.num': 'CH. 04',
+                    'ch4.title': 'FEATURED PROJECTS',
+                    'filter.all': 'ALL (5)',
+                    'filter.done': 'COMPLETED (3)',
+                    'proj.status.active': 'ONGOING · GOVTECH',
+                    'proj.status.done.web': 'COMPLETED · WEB APP',
+                    'proj.status.done.gov': 'COMPLETED · GOVTECH',
+                    'proj.soon': 'Coming Soon',
+                    'proj.hint.full': 'Click panel to preview',
+                    'proj.hint.short': 'Preview',
+                    'proj.repo': 'View Repo ▶',
+                    'proj.1.desc': 'KORPRI Membership Proposal Information System. An integrated portal to digitize member services, administration, and welfare.',
+                    'proj.2.desc': 'KORPRI Ambassador Information System: registration, judging, and winner selection.',
+                    'proj.3.desc': 'Personal cash flow tracker: record income, expenses, and monitor financial health in real time.',
+                    'proj.4.desc': 'AI travel companion for exploring Indonesia: interactive Itinerary Studio, PDF export, real-time weather.',
+                    'proj.5.desc': 'ASN Mutz uniform ordering recap per department: stock & returns, receipt printing, report export.',
+                    'ch5.num': 'CH. 05',
+                    'ch5.title': 'CERTIFICATIONS',
+                    'cert.1.date': '24 JULY 2026',
+                    'cert.1.desc': 'PT Revolusi Cita Edukasi (RevoU). Certificate of Attendance for the 1-week online course.',
+                    'cert.2.desc': 'Hacktiv8 Indonesia. Completed the Maju Bareng AI program along with its capstone project.',
+                    'cert.detail': 'View Details ▶',
+                    'contact.title': 'TO BE CONTINUED...?',
+                    'contact.sub': 'Available for new projects. Let\'s write the next chapter together!',
+                    'contact.copy': 'Copy email address: anggawiranatafti@gmail.com',
+                    'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — THE END (FOR NOW)',
+                    'modal.close': 'CLOSE [ESC]'
+                }
+            };
+
+            const UI_TEXT = {
+                id: {
+                    docTitle: 'ANGGA WIRANATA | Web Craftsman — Edisi Manga',
+                    themeLight: 'TERANG',
+                    themeDark: 'GELAP',
+                    themeAria: 'Ganti tema terang atau gelap',
+                    langAria: 'Pilih bahasa',
+                    menuAria: 'Buka menu navigasi',
+                    modalCloseAria: 'Tutup pratinjau',
+                    backToTopAria: 'Kembali ke atas',
+                    previewAlt: 'Pratinjau',
+                    openFallback: 'BUKA ▶',
+                    copiedPrefix: 'Email disalin: '
+                },
+                en: {
+                    docTitle: 'ANGGA WIRANATA | Web Craftsman — Manga Edition',
+                    themeLight: 'LIGHT',
+                    themeDark: 'DARK',
+                    themeAria: 'Toggle light or dark theme',
+                    langAria: 'Select language',
+                    menuAria: 'Open navigation menu',
+                    modalCloseAria: 'Close preview',
+                    backToTopAria: 'Back to top',
+                    previewAlt: 'Preview',
+                    openFallback: 'OPEN ▶',
+                    copiedPrefix: 'Email copied: '
+                }
+            };
+
+            let currentLang = html.getAttribute('data-lang') === 'en' ? 'en' : 'id';
 
             const syncThemeUI = (theme) => {
                 const isDark = theme === 'dark';
+                const ui = UI_TEXT[currentLang] || UI_TEXT.id;
                 html.setAttribute('data-theme', theme);
                 if (themeMeta) themeMeta.setAttribute('content', isDark ? '#121212' : '#f6f1e4');
                 if (iconMoon) iconMoon.style.display = isDark ? 'none' : 'block';
                 if (iconSun) iconSun.style.display = isDark ? 'block' : 'none';
-                if (themeLabel) themeLabel.textContent = isDark ? 'TERANG' : 'GELAP';
+                if (themeLabel) themeLabel.textContent = isDark ? ui.themeLight : ui.themeDark;
             };
 
-            syncThemeUI(html.getAttribute('data-theme') || 'light');
+            const applyLang = (lang) => {
+                currentLang = lang === 'en' ? 'en' : 'id';
+                const dict = I18N[currentLang];
+                const ui = UI_TEXT[currentLang];
+                html.lang = currentLang;
+                html.setAttribute('data-lang', currentLang);
+                document.title = ui.docTitle;
+
+                document.querySelectorAll('[data-i18n]').forEach((el) => {
+                    const key = el.getAttribute('data-i18n');
+                    if (key && Object.prototype.hasOwnProperty.call(dict, key)) {
+                        el.textContent = dict[key];
+                    }
+                });
+
+                langOpts.forEach((btn) => {
+                    const active = btn.getAttribute('data-lang') === currentLang;
+                    btn.classList.toggle('active', active);
+                    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+                });
+
+                if (langSwitch) langSwitch.setAttribute('aria-label', ui.langAria);
+                if (themeToggle) themeToggle.setAttribute('aria-label', ui.themeAria);
+                if (menuToggle) menuToggle.setAttribute('aria-label', ui.menuAria);
+                if (modalCloseBtn) modalCloseBtn.setAttribute('aria-label', ui.modalCloseAria);
+                if (backToTopBtn) backToTopBtn.setAttribute('aria-label', ui.backToTopAria);
+
+                syncThemeUI(html.getAttribute('data-theme') || 'light');
+            };
+
+            applyLang(currentLang);
+
+            langOpts.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const nextLang = btn.getAttribute('data-lang');
+                    if (nextLang && nextLang !== currentLang) {
+                        applyLang(nextLang);
+                        try { localStorage.setItem('manga_lang', nextLang); } catch (e) {}
+                    }
+                });
+            });
 
             if (themeToggle) {
                 themeToggle.addEventListener('click', () => {
@@ -1924,8 +2217,6 @@
             }
 
             // Mobile Menu Drawer
-            const menuToggle = document.getElementById('menuToggle');
-            const mobileDrawer = document.getElementById('mobileDrawer');
             if (menuToggle && mobileDrawer) {
                 menuToggle.addEventListener('click', () => {
                     const open = mobileDrawer.classList.toggle('open');
@@ -1981,7 +2272,7 @@
 
             // Full-Page Manga Reader Modal (Projects & Certificates)
             const modal = document.getElementById('readerModal');
-            const modalClose = document.getElementById('modalClose');
+            const modalClose = modalCloseBtn;
             const modalStamp = document.getElementById('modalStamp');
             const modalImg = document.getElementById('modalImg');
             const modalTitle = document.getElementById('modalTitle');
@@ -1989,6 +2280,14 @@
             const modalTags = document.getElementById('modalTags');
             const modalLink = document.getElementById('modalLink');
             const modalSoon = document.getElementById('modalSoon');
+
+            const getAttr = (el, base) => {
+                if (currentLang === 'en') {
+                    const enVal = el.getAttribute(base + '-en');
+                    if (enVal !== null) return enVal;
+                }
+                return el.getAttribute(base);
+            };
 
             const closeModal = () => {
                 if (!modal || !modal.classList.contains('open')) return;
@@ -1998,10 +2297,11 @@
 
             const openModal = (data) => {
                 if (!modal) return;
+                const ui = UI_TEXT[currentLang] || UI_TEXT.id;
                 modalStamp.textContent = data.status || '';
                 modalStamp.className = 'stamp ' + (data.statusType === 'active' ? 'is-active' : 'is-done');
                 modalImg.src = data.img || '';
-                modalImg.alt = data.title || 'Pratinjau';
+                modalImg.alt = data.title || ui.previewAlt;
                 modalTitle.textContent = data.title || '';
                 modalDesc.textContent = data.desc || '';
 
@@ -2018,7 +2318,7 @@
 
                 if (data.link) {
                     modalLink.href = data.link;
-                    modalLink.textContent = data.linkLabel || 'BUKA ▶';
+                    modalLink.textContent = data.linkLabel || ui.openFallback;
                     modalLink.style.display = 'inline-flex';
                     modalSoon.style.display = 'none';
                 } else {
@@ -2035,13 +2335,13 @@
                     if (e.target.closest('a[href]')) return;
                     openModal({
                         title: card.getAttribute('data-title'),
-                        status: card.getAttribute('data-status'),
+                        status: getAttr(card, 'data-status'),
                         statusType: card.getAttribute('data-status-type'),
                         img: card.getAttribute('data-img'),
-                        desc: card.getAttribute('data-desc'),
+                        desc: getAttr(card, 'data-desc'),
                         tags: card.getAttribute('data-tags'),
                         link: card.getAttribute('data-link'),
-                        linkLabel: card.getAttribute('data-link-label')
+                        linkLabel: getAttr(card, 'data-link-label')
                     });
                 });
             });
@@ -2051,13 +2351,13 @@
                     e.preventDefault();
                     openModal({
                         title: trigger.getAttribute('data-title'),
-                        status: trigger.getAttribute('data-status'),
+                        status: getAttr(trigger, 'data-status'),
                         statusType: 'done',
                         img: trigger.getAttribute('data-img'),
-                        desc: trigger.getAttribute('data-desc'),
+                        desc: getAttr(trigger, 'data-desc'),
                         tags: '',
                         link: trigger.getAttribute('data-link'),
-                        linkLabel: trigger.getAttribute('data-link-label')
+                        linkLabel: getAttr(trigger, 'data-link-label')
                     });
                 });
             });
@@ -2087,7 +2387,8 @@
             if (copyBtn) {
                 copyBtn.addEventListener('click', () => {
                     const email = 'anggawiranatafti@gmail.com';
-                    const done = () => showToast('Email disalin: ' + email);
+                    const ui = UI_TEXT[currentLang] || UI_TEXT.id;
+                    const done = () => showToast(ui.copiedPrefix + email);
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(email).then(done).catch(() => {
                             const ta = document.createElement('textarea');
@@ -2113,7 +2414,7 @@
             }
 
             // Back-to-Top Progress Ring (rAF-Coalesced, Cached Height, Zero Layout Thrash)
-            const backToTop = document.getElementById('backToTop');
+            const backToTop = backToTopBtn;
             if (backToTop) {
                 const circle = backToTop.querySelector('.progress-ring__circle');
                 const radius = (circle && circle.r && circle.r.baseVal.value) ? circle.r.baseVal.value : 23;
