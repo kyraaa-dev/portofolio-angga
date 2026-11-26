@@ -2083,10 +2083,225 @@
             }
         }
 
+        /* =====================================================================
+           MANGA EDITION LOADING SCREEN (Tankōbon Cover Lift — Zero Lag)
+           ===================================================================== */
+        .manga-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background-color: var(--paper);
+            background-image: radial-gradient(var(--tone) 1.25px, transparent 1.25px);
+            background-size: 11px 11px;
+            border-bottom: 5px solid var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+            transition: transform 0.44s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+        .manga-loader::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(ellipse 52% 52% at 50% 50%, var(--paper) 22%, transparent 90%),
+                repeating-conic-gradient(from 0deg at 50% 50%, var(--tone) 0deg 2deg, transparent 2deg 9deg);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .manga-loader.is-done {
+            transform: translate3d(0, -104%, 0);
+            pointer-events: none;
+        }
+        .manga-loader.is-hidden {
+            display: none !important;
+        }
+        .loader-panel {
+            position: relative;
+            z-index: 1;
+            width: min(92vw, 440px);
+            background: var(--panel);
+            border: 4px solid var(--ink);
+            box-shadow: 9px 9px 0 var(--ink);
+            padding: 24px 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            animation: loaderCardIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes loaderCardIn {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 14px, 0) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+        }
+        .loader-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .loader-ep {
+            display: inline-block;
+            background: var(--red);
+            color: var(--on-red);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 0.08em;
+            padding: 3px 12px 2px;
+            border: 2.5px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            transform: skew(-8deg);
+            line-height: 1.1;
+        }
+        [data-theme="dark"] .loader-ep {
+            text-shadow: 1px 1px 0 #111111;
+        }
+        .loader-ep > span {
+            display: inline-block;
+            transform: skew(8deg);
+        }
+        .loader-top-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .loader-vol {
+            font-family: var(--font-display);
+            font-size: 0.96rem;
+            letter-spacing: 0.08em;
+            padding: 2px 9px 1px;
+            border: 2px solid var(--ink);
+            background: var(--paper);
+            color: var(--ink);
+        }
+        .loader-sfx {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            line-height: 1;
+            color: var(--red);
+            -webkit-text-stroke: 1.5px var(--ink);
+            paint-order: stroke fill;
+            text-shadow: 3px 3px 0 var(--ink);
+            transform: rotate(-10deg);
+            animation: loaderSfxBeat 0.55s ease-in-out infinite alternate;
+        }
+        @keyframes loaderSfxBeat {
+            from { transform: rotate(-10deg) scale(1); }
+            to { transform: rotate(-6deg) scale(1.08); }
+        }
+        .loader-brand-wrap {
+            text-align: center;
+            padding: 6px 0 4px;
+            border-top: 2px dashed var(--ink);
+            border-bottom: 2px dashed var(--ink);
+        }
+        .loader-brand {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 11vw, 3.7rem);
+            letter-spacing: 0.06em;
+            line-height: 1;
+            color: var(--ink);
+            text-shadow: 4px 4px 0 var(--paper), 7px 7px 0 var(--tone);
+        }
+        .loader-sub {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--mute);
+        }
+        .loader-bar-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .loader-meta {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .loader-status {
+            font-family: var(--font-display);
+            font-size: 1.08rem;
+            letter-spacing: 0.07em;
+            color: var(--ink);
+        }
+        .loader-pct {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            letter-spacing: 0.06em;
+            color: var(--red);
+        }
+        .loader-track {
+            width: 100%;
+            height: 18px;
+            border: 3px solid var(--ink);
+            background: var(--paper);
+            box-shadow: 3px 3px 0 var(--ink);
+            overflow: hidden;
+        }
+        .loader-fill {
+            width: 100%;
+            height: 100%;
+            background-color: var(--red);
+            background-image: repeating-linear-gradient(
+                -45deg,
+                transparent 0 6px,
+                rgba(255, 255, 255, 0.28) 6px 9px
+            );
+            transform-origin: left center;
+            transform: scaleX(0);
+            will-change: transform;
+        }
+        .loader-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-top: 2px;
+        }
+        .loader-jp {
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--mute);
+        }
+        .loader-skip {
+            font-family: var(--font-display);
+            font-size: 0.96rem;
+            letter-spacing: 0.06em;
+            padding: 3px 10px 2px;
+            background: var(--paper);
+            color: var(--ink);
+            border: 2.5px solid var(--ink);
+            box-shadow: 2px 2px 0 var(--ink);
+            cursor: pointer;
+            transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+        }
+        .loader-skip:hover {
+            background: var(--red);
+            color: var(--on-red);
+            transform: translate(-1px, -1px);
+        }
+
         /* Accessibility: Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
+            }
+            .manga-loader {
+                display: none !important;
             }
             *, *::before, *::after {
                 transition-duration: 0.01ms !important;
@@ -2098,8 +2313,41 @@
             }
         }
     </style>
+    <noscript><style>.manga-loader{display:none!important;}</style></noscript>
 </head>
 <body>
+
+    <!-- =================================================================
+         MANGA EDITION LOADING SCREEN (Tankōbon Cover Opening)
+         ================================================================= -->
+    <div class="manga-loader" id="mangaLoader" role="status" aria-live="polite" aria-label="Memuat portofolio">
+        <div class="loader-panel">
+            <div class="loader-top">
+                <span class="loader-ep"><span>EPISODE 01</span></span>
+                <div class="loader-top-right">
+                    <span class="loader-vol">VOL. 01</span>
+                    <span class="loader-sfx" aria-hidden="true">ドン!</span>
+                </div>
+            </div>
+            <div class="loader-brand-wrap">
+                <div class="loader-brand">ANGGA<span class="brand-dot">.</span>LAB</div>
+                <div class="loader-sub">ANGGA WIRANATA · WEB CRAFTSMAN</div>
+            </div>
+            <div class="loader-bar-wrap">
+                <div class="loader-meta">
+                    <span class="loader-status" id="loaderStatus">MEMUAT HALAMAN...</span>
+                    <span class="loader-pct" id="loaderPct">00%</span>
+                </div>
+                <div class="loader-track">
+                    <div class="loader-fill" id="loaderFill"></div>
+                </div>
+            </div>
+            <div class="loader-foot">
+                <span class="loader-jp" aria-hidden="true">アンガ・ウィラナタ 作品集</span>
+                <button type="button" class="loader-skip" id="loaderSkip">LEWATI ▶</button>
+            </div>
+        </div>
+    </div>
 
     <!-- =================================================================
          NAVIGASI
@@ -2829,6 +3077,61 @@
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script>
+        (function() {
+            const loader = document.getElementById('mangaLoader');
+            if (!loader) return;
+            const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduced) {
+                loader.classList.add('is-hidden');
+                return;
+            }
+            const fill = document.getElementById('loaderFill');
+            const pctEl = document.getElementById('loaderPct');
+            const statusEl = document.getElementById('loaderStatus');
+            const skipBtn = document.getElementById('loaderSkip');
+            const isEn = document.documentElement.getAttribute('data-lang') === 'en';
+            const stages = isEn
+                ? ['LOADING PAGES...', 'OPENING PANELS...', 'READY! ドン!']
+                : ['MEMUAT HALAMAN...', 'MEMBUKA PANEL...', 'SIAP! ドン!'];
+            if (statusEl) statusEl.textContent = stages[0];
+            if (skipBtn) skipBtn.textContent = isEn ? 'SKIP ▶' : 'LEWATI ▶';
+
+            document.body.style.overflow = 'hidden';
+            let dismissed = false;
+            const finish = () => {
+                if (dismissed) return;
+                dismissed = true;
+                loader.classList.add('is-done');
+                document.body.style.overflow = '';
+                const hide = () => loader.classList.add('is-hidden');
+                loader.addEventListener('transitionend', hide, { once: true });
+                setTimeout(hide, 550);
+            };
+
+            if (skipBtn) skipBtn.addEventListener('click', finish);
+
+            const duration = 950;
+            const start = performance.now();
+            const step = (now) => {
+                if (dismissed) return;
+                const t = Math.min(1, (now - start) / duration);
+                const eased = 1 - Math.pow(1 - t, 3);
+                const pct = Math.round(eased * 100);
+                if (fill) fill.style.transform = 'scaleX(' + eased.toFixed(4) + ')';
+                if (pctEl) pctEl.textContent = (pct < 10 ? '0' : '') + pct + '%';
+                if (statusEl) {
+                    statusEl.textContent = pct >= 95 ? stages[2] : (pct >= 45 ? stages[1] : stages[0]);
+                }
+                if (t < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    setTimeout(finish, 160);
+                }
+            };
+            requestAnimationFrame(step);
+            setTimeout(finish, 2400);
+        })();
+
         document.addEventListener('DOMContentLoaded', () => {
             const html = document.documentElement;
             const themeToggle = document.getElementById('themeToggle');
