@@ -50,7 +50,7 @@ Repositori resmi **Personal Portfolio Website** milik **Angga Wiranata**. Dibang
     </td>
     <td width="50%" valign="top">
       <a href="https://kyraaa-dev.github.io/kasflow-app/" target="_blank">
-        <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/kasflow-app.png" alt="KasFlow Preview" width="100%" style="border-radius: 8px;"/>
+        <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/kasflow-app.jpg" alt="KasFlow Preview" width="100%" style="border-radius: 8px;"/>
       </a>
       <h3 align="center">💰 KasFlow</h3>
       <p align="center"><b>Personal Cash Flow Manager</b></p>
@@ -79,7 +79,7 @@ Repositori resmi **Personal Portfolio Website** milik **Angga Wiranata**. Dibang
       <p><b>Tech:</b> <code>PHP</code> <code>MySQL / TiDB Cloud</code> <code>Chart.js</code> <code>Bootstrap</code></p>
     </td>
     <td width="50%" valign="top">
-      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-korpri.png" alt="SILUKOR Preview" width="100%" style="border-radius: 8px;"/>
+      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-korpri.jpg" alt="SILUKOR Preview" width="100%" style="border-radius: 8px;"/>
       <h3 align="center">🏛️ SILUKOR</h3>
       <p align="center"><b>Sistem Layanan Usulan Keanggotaan KORPRI</b></p>
       <p>Portal digitalisasi terpadu untuk pengurusan layanan administrasi dan fasilitas ASN KORPRI daerah.</p>
@@ -88,7 +88,7 @@ Repositori resmi **Personal Portfolio Website** milik **Angga Wiranata**. Dibang
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/duta-korpri.png" alt="SISDUKOR Preview" width="100%" style="border-radius: 8px;"/>
+      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/duta-korpri.jpg" alt="SISDUKOR Preview" width="100%" style="border-radius: 8px;"/>
       <h3 align="center">👑 SISDUKOR</h3>
       <p align="center"><b>Sistem Informasi Duta KORPRI</b></p>
       <p>Platform kompetisi digital untuk pendaftaran, penilaian juri multi-kriteria, dan penentuan juara pemilihan Duta KORPRI.</p>

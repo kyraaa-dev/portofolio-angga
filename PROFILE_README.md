@@ -56,7 +56,7 @@ const anggaWiranata = {
       <p><code>React</code> <code>Vite</code> <code>Gemini AI</code> <code>jsPDF</code></p>
     </td>
     <td width="50%" valign="top">
-      <a href="https://kyraaa-dev.github.io/kasflow-app/"><img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/kasflow-app.png" alt="KasFlow" width="100%"/></a>
+      <a href="https://kyraaa-dev.github.io/kasflow-app/"><img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/kasflow-app.jpg" alt="KasFlow" width="100%"/></a>
       <h3 align="center"><a href="https://kyraaa-dev.github.io/kasflow-app/">💰 KasFlow</a></h3>
       <p align="center"><i>Visual cash flow tracking made simple</i></p>
       <p align="center">
@@ -76,7 +76,7 @@ const anggaWiranata = {
       <p><code>PHP</code> <code>MySQL</code> <code>Chart.js</code> <code>Bootstrap</code></p>
     </td>
     <td width="50%" valign="top">
-      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-korpri.png" alt="SILUKOR" width="100%"/>
+      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/project-korpri.jpg" alt="SILUKOR" width="100%"/>
       <h3 align="center">🏛️ SILUKOR</h3>
       <p align="center"><i>KORPRI membership management portal</i></p>
       <p><code>Laravel</code> <code>MySQL</code> <code>Tailwind</code> <code>REST API</code></p>
@@ -84,7 +84,7 @@ const anggaWiranata = {
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/duta-korpri.png" alt="SISDUKOR" width="100%"/>
+      <img src="https://raw.githubusercontent.com/kyraaa-dev/portofolio-angga/main/public/images/duta-korpri.jpg" alt="SISDUKOR" width="100%"/>
       <h3 align="center">👑 SISDUKOR</h3>
       <p align="center"><i>Ambassador competition judging platform</i></p>
       <p><code>Laravel 11</code> <code>Livewire</code> <code>Alpine</code> <code>MySQL</code></p>

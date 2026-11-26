@@ -1,234 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" data-theme="light" data-lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 | SYSTEM FAILURE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>404 | HALAMAN HILANG — ANGGA.LAB</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#f6f1e4" id="theme-color-meta">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('manga_theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = (saved === 'dark' || saved === 'light') ? saved : (prefersDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+                var meta = document.getElementById('theme-color-meta');
+                if (meta) meta.setAttribute('content', theme === 'dark' ? '#121212' : '#f6f1e4');
+                var lang = localStorage.getItem('manga_lang') === 'en' ? 'en' : 'id';
+                document.documentElement.lang = lang;
+                document.documentElement.setAttribute('data-lang', lang);
+            } catch (e) {}
+        })();
+    </script>
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --text-primary: #f8fafc;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
+            --paper: #f6f1e4;
+            --ink: #111111;
+            --panel: #fffdf6;
+            --red: #e63946;
+            --tone: rgba(17, 17, 17, 0.16);
+            --mute: #444444;
+            --on-red: #fffdf6;
+            --font-display: 'Bangers', Impact, 'Arial Black', sans-serif;
+            --font-body: 'Kosugi Maru', 'Trebuchet MS', system-ui, -apple-system, sans-serif;
         }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
+        [data-theme="dark"] {
+            --paper: #121212;
+            --ink: #f2efe6;
+            --panel: #1c1c1c;
+            --red: #ff5a66;
+            --tone: rgba(242, 239, 230, 0.14);
+            --mute: #c9c5ba;
+            --on-red: #ffffff;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            font-family: var(--font-body);
+            color: var(--ink);
+            background-color: var(--paper);
+            background-image: radial-gradient(var(--tone) 1.1px, transparent 1.1px);
+            background-size: 16px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            padding: 24px;
             position: relative;
+            overflow-x: hidden;
         }
-
-        /* Matrix Background */
-        .grid-bg {
-            position: absolute;
-            width: 200vw;
-            height: 200vh;
-            background-image: 
-                linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
-            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 20s linear infinite;
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-conic-gradient(from 0deg at 50% 50%, var(--tone) 0deg 1.4deg, transparent 1.4deg 11deg);
+            opacity: 0.25;
+            pointer-events: none;
         }
-
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px) translateZ(-200px); }
-        }
-
-        .container {
+        .panel {
             position: relative;
-            z-index: 10;
+            z-index: 1;
+            width: min(100%, 540px);
+            background: var(--panel);
+            border: 4px solid var(--ink);
+            box-shadow: 9px 9px 0 var(--ink);
+            padding: 30px 28px 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            max-width: 600px;
-            padding: 40px;
+            gap: 16px;
         }
-
-        .glitch-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 120px;
-            font-weight: 900;
-            margin: 0;
-            line-height: 1;
-            letter-spacing: -5px;
-            position: relative;
-            color: var(--text-primary);
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        /* Glitch Effect */
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
+        .top-row {
             width: 100%;
-            height: 100%;
-            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px dashed var(--ink);
         }
-
-        .glitch::before {
-            left: 3px;
-            text-shadow: -2px 0 var(--accent-red);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
+        .badge {
+            display: inline-block;
+            background: var(--red);
+            color: var(--on-red);
+            font-family: var(--font-display);
+            font-size: 1.08rem;
+            letter-spacing: 0.08em;
+            padding: 3px 12px 2px;
+            border: 2.5px solid var(--ink);
+            box-shadow: 3px 3px 0 var(--ink);
+            transform: skew(-8deg);
         }
-
-        .glitch::after {
-            left: -3px;
-            text-shadow: -2px 0 var(--accent-green);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        .badge > span { display: inline-block; transform: skew(8deg); }
+        [data-theme="dark"] .badge { text-shadow: 1px 1px 0 #111111; }
+        .sfx {
+            font-family: var(--font-display);
+            font-size: 1.9rem;
+            line-height: 1;
+            color: var(--red);
+            -webkit-text-stroke: 1.5px var(--ink);
+            paint-order: stroke fill;
+            text-shadow: 3px 3px 0 var(--ink);
+            transform: rotate(-8deg);
+            user-select: none;
         }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(78px, 9999px, 86px, 0); }
-            5% { clip: rect(13px, 9999px, 8px, 0); }
-            10% { clip: rect(61px, 9999px, 87px, 0); }
-            15% { clip: rect(45px, 9999px, 15px, 0); }
-            20% { clip: rect(98px, 9999px, 16px, 0); }
-            25% { clip: rect(2px, 9999px, 4px, 0); }
-            30% { clip: rect(31px, 9999px, 58px, 0); }
-            35% { clip: rect(82px, 9999px, 30px, 0); }
-            40% { clip: rect(21px, 9999px, 92px, 0); }
-            45% { clip: rect(47px, 9999px, 25px, 0); }
-            50% { clip: rect(6px, 9999px, 94px, 0); }
-            55% { clip: rect(99px, 9999px, 55px, 0); }
-            60% { clip: rect(49px, 9999px, 60px, 0); }
-            65% { clip: rect(86px, 9999px, 9px, 0); }
-            70% { clip: rect(70px, 9999px, 36px, 0); }
-            75% { clip: rect(27px, 9999px, 81px, 0); }
-            80% { clip: rect(17px, 9999px, 46px, 0); }
-            85% { clip: rect(92px, 9999px, 18px, 0); }
-            90% { clip: rect(51px, 9999px, 66px, 0); }
-            95% { clip: rect(74px, 9999px, 20px, 0); }
-            100% { clip: rect(35px, 9999px, 84px, 0); }
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(5.2rem, 18vw, 7.6rem);
+            line-height: 0.92;
+            letter-spacing: 0.06em;
+            color: var(--ink);
+            text-shadow: 5px 5px 0 var(--paper), 9px 9px 0 var(--tone);
+            margin-top: 4px;
         }
-
-        @keyframes glitch-anim2 {
-            0% { clip: rect(36px, 9999px, 7px, 0); }
-            5% { clip: rect(98px, 9999px, 22px, 0); }
-            10% { clip: rect(12px, 9999px, 56px, 0); }
-            15% { clip: rect(68px, 9999px, 38px, 0); }
-            20% { clip: rect(41px, 9999px, 83px, 0); }
-            25% { clip: rect(7px, 9999px, 14px, 0); }
-            30% { clip: rect(82px, 9999px, 91px, 0); }
-            35% { clip: rect(25px, 9999px, 50px, 0); }
-            40% { clip: rect(96px, 9999px, 2px, 0); }
-            45% { clip: rect(54px, 9999px, 76px, 0); }
-            50% { clip: rect(18px, 9999px, 64px, 0); }
-            55% { clip: rect(88px, 9999px, 49px, 0); }
-            60% { clip: rect(3px, 9999px, 31px, 0); }
-            65% { clip: rect(61px, 9999px, 98px, 0); }
-            70% { clip: rect(44px, 9999px, 12px, 0); }
-            75% { clip: rect(73px, 9999px, 87px, 0); }
-            80% { clip: rect(15px, 9999px, 53px, 0); }
-            85% { clip: rect(90px, 9999px, 28px, 0); }
-            90% { clip: rect(39px, 9999px, 71px, 0); }
-            95% { clip: rect(8px, 9999px, 45px, 0); }
-            100% { clip: rect(66px, 9999px, 95px, 0); }
+        .bubble {
+            position: relative;
+            background: var(--paper);
+            border: 3px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            padding: 12px 18px;
+            font-size: 0.96rem;
+            line-height: 1.55;
+            color: var(--ink);
+            max-width: 420px;
         }
-
-        p.desc {
-            color: #94a3b8;
-            font-size: 18px;
-            margin-bottom: 40px;
-            line-height: 1.6;
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 4px;
         }
-
-        .terminal {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 8px;
-            font-family: monospace;
-            text-align: left;
-            margin-bottom: 40px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-        }
-
-        .terminal p {
-            margin: 5px 0;
-            color: var(--accent-green);
-        }
-        .terminal .error { color: var(--accent-red); }
-        
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: var(--accent-green);
-            color: var(--bg-dark);
-            padding: 16px 32px;
-            border-radius: 100px;
+            justify-content: center;
+            gap: 8px;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            letter-spacing: 0.06em;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            padding: 10px 22px 8px;
+            background: var(--red);
+            color: var(--on-red);
+            border: 3px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
         }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.6);
-            background: #34d399;
+        [data-theme="dark"] .btn { text-shadow: 1.5px 1.5px 0 #111111; }
+        .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+        .foot {
+            width: 100%;
+            margin-top: 6px;
+            padding-top: 12px;
+            border-top: 2px dashed var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            color: var(--mute);
         }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 80px; }
-        }
+        .dot { color: var(--red); }
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-    
-    <div class="container">
-        <div class="glitch-wrapper">
-            <h1 class="glitch" data-text="404">404</h1>
+    <main class="panel">
+        <div class="top-row">
+            <span class="badge"><span id="errBadge">BAB 404 · HALAMAN HILANG</span></span>
+            <span class="sfx" aria-hidden="true">ガーン!</span>
         </div>
-        
-        <div class="terminal">
-            <p>> initializing system diagnostic...</p>
-            <p class="error">> ERROR: Destination coordinates lost.</p>
-            <p>> Attempting to locate requested sector...</p>
-            <p class="error">> FAILED. Sector does not exist.</p>
-            <p>> Awaiting user input_</p>
+        <h1>404</h1>
+        <p class="bubble" id="errMsg">Halaman komik yang kamu cari tidak ditemukan atau sudah dipindahkan ke bab lain.</p>
+        <div class="actions">
+            <a href="{{ url('/') }}" class="btn" id="errCta">◀ KEMBALI KE BERANDA</a>
         </div>
-
-        <p class="desc">Whoops! Sepertinya Anda tersesat di dimensi lain. Halaman yang Anda cari tidak dapat ditemukan di dalam sistem ini.</p>
-        
-        <a href="/" class="btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Kembali ke Beranda
-        </a>
-    </div>
-
+        <div class="foot">
+            <span>ANGGA<span class="dot">.</span>LAB · VOL. 01</span>
+            <span>P.404</span>
+        </div>
+    </main>
     <script>
-        // Blinking cursor in terminal
-        const terminal = document.querySelector('.terminal');
-        setInterval(() => {
-            const lastP = terminal.lastElementChild;
-            if(lastP.innerHTML.endsWith('_')) {
-                lastP.innerHTML = lastP.innerHTML.slice(0, -1) + '&nbsp;';
-            } else {
-                lastP.innerHTML = lastP.innerHTML.slice(0, -6) + '_';
-            }
-        }, 500);
+        (function() {
+            if (document.documentElement.getAttribute('data-lang') !== 'en') return;
+            document.title = '404 | PAGE NOT FOUND — ANGGA.LAB';
+            var b = document.getElementById('errBadge');
+            var m = document.getElementById('errMsg');
+            var c = document.getElementById('errCta');
+            if (b) b.textContent = 'CH. 404 · MISSING PAGE';
+            if (m) m.textContent = 'The manga page you are looking for could not be found or moved to another chapter.';
+            if (c) c.textContent = '◀ BACK TO HOME';
+        })();
     </script>
 </body>
 </html>
