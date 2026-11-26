@@ -339,6 +339,25 @@
             border-bottom: 4px solid var(--ink);
             padding-top: env(safe-area-inset-top, 0px);
         }
+        .read-progress {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -4px;
+            height: 4px;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2;
+        }
+        .read-progress-fill {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: var(--red);
+            transform-origin: left center;
+            transform: scaleX(0);
+            will-change: transform;
+        }
         .nav-inner {
             min-height: var(--nav-h);
             display: flex;
@@ -2677,6 +2696,170 @@
             transform: translate(-1px, -1px);
         }
 
+        /* =====================================================================
+           MANGA SCROLL REVEAL ANIMATIONS (GPU-Only · Zero Hover Conflict)
+           ===================================================================== */
+        .service-card:nth-child(odd) { --sr-rot: -0.6deg; }
+        .service-card:nth-child(even) { --sr-rot: 0.6deg; }
+        .stamp { --sr-rot: -3deg; }
+        .contact-sfx { --sr-rot: -8deg; }
+        .footer-seal { --sr-rot: -6deg; }
+
+        /* 1. Manga Panel Snap-In */
+        .sr-hidden {
+            opacity: 0;
+        }
+        .sr-play {
+            animation: mangaPanelSnap 0.46s cubic-bezier(0.22, 1, 0.36, 1) var(--sr-delay, 0ms) backwards;
+        }
+        @keyframes mangaPanelSnap {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 26px, 0) scale(0.975) rotate(var(--sr-rot, 0deg));
+            }
+            72% {
+                opacity: 1;
+                transform: translate3d(0, -2px, 0) scale(1.004) rotate(var(--sr-rot, 0deg));
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1) rotate(var(--sr-rot, 0deg));
+            }
+        }
+
+        /* Career Strip Cells Stagger inside Panel */
+        .career-strip.sr-play .career-cell {
+            animation: mangaCellSlide 0.42s cubic-bezier(0.22, 1, 0.36, 1) var(--cell-delay, 0ms) backwards;
+        }
+        .career-strip.sr-play .career-cell:nth-child(1) { --cell-delay: 40ms; }
+        .career-strip.sr-play .career-cell:nth-child(2) { --cell-delay: 110ms; }
+        .career-strip.sr-play .career-cell:nth-child(3) { --cell-delay: 180ms; }
+        .career-strip.sr-play .career-cell:nth-child(4) { --cell-delay: 250ms; }
+        @keyframes mangaCellSlide {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 14px, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        /* 2. Chapter Header Ink Slash */
+        .chapter.sr-ch-hidden .chapter-num,
+        .chapter.sr-ch-hidden h2,
+        .chapter.sr-ch-hidden .chapter-folio {
+            opacity: 0;
+        }
+        .chapter.sr-ch-hidden .chapter-line {
+            transform-origin: left center;
+            transform: scaleX(0);
+        }
+        .chapter.sr-ch-play .chapter-num {
+            animation: mangaChapterPop 0.38s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+        .chapter.sr-ch-play h2 {
+            animation: mangaChapterTitle 0.38s cubic-bezier(0.22, 1, 0.36, 1) 55ms backwards;
+        }
+        .chapter.sr-ch-play .chapter-line {
+            transform-origin: left center;
+            animation: mangaInkSlash 0.54s cubic-bezier(0.16, 1, 0.3, 1) 90ms backwards;
+        }
+        .chapter.sr-ch-play .chapter-folio {
+            animation: mangaFolioPop 0.32s cubic-bezier(0.22, 1, 0.36, 1) 290ms backwards;
+        }
+        @keyframes mangaChapterPop {
+            0% {
+                opacity: 0;
+                transform: translate3d(-18px, 0, 0) skew(-10deg) scale(0.88);
+            }
+            70% {
+                opacity: 1;
+                transform: translate3d(2px, 0, 0) skew(-10deg) scale(1.03);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) skew(-10deg) scale(1);
+            }
+        }
+        @keyframes mangaChapterTitle {
+            0% {
+                opacity: 0;
+                transform: translate3d(-14px, 0, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes mangaInkSlash {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+        @keyframes mangaFolioPop {
+            0% {
+                opacity: 0;
+                transform: translate3d(10px, 0, 0) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+        }
+
+        /* 3. Character Status Sheet Power-Up Bars */
+        .status-sheet.sr-hidden .stat-meter-fill {
+            transform-origin: left center;
+            transform: scaleX(0);
+        }
+        .status-sheet.sr-play .stat-meter-fill {
+            transform-origin: left center;
+            animation: mangaPowerBar 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--bar-delay, 120ms) backwards;
+        }
+        .status-sheet.sr-play .stat-meter-row:nth-child(1) .stat-meter-fill { --bar-delay: 120ms; }
+        .status-sheet.sr-play .stat-meter-row:nth-child(2) .stat-meter-fill { --bar-delay: 200ms; }
+        .status-sheet.sr-play .stat-meter-row:nth-child(3) .stat-meter-fill { --bar-delay: 280ms; }
+        .status-sheet.sr-play .stat-meter-row:nth-child(4) .stat-meter-fill { --bar-delay: 360ms; }
+        .status-sheet.sr-play .stat-meter-row:nth-child(5) .stat-meter-fill { --bar-delay: 450ms; }
+        @keyframes mangaPowerBar {
+            0% {
+                transform: scaleX(0);
+            }
+            100% {
+                transform: scaleX(1);
+            }
+        }
+
+        /* 4. Stamp Slam (Project Stamps, Contact SFX & Footer 完 Seal) */
+        .project-card.sr-play .stamp {
+            animation: mangaStampSlam 0.42s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--sr-delay, 0ms) + 170ms) backwards;
+        }
+        .contact-panel.sr-play .contact-sfx {
+            animation: mangaStampSlam 0.46s cubic-bezier(0.22, 1, 0.36, 1) 140ms backwards;
+        }
+        .footer-main.sr-play .footer-seal {
+            animation: mangaStampSlam 0.46s cubic-bezier(0.22, 1, 0.36, 1) 180ms backwards;
+        }
+        @keyframes mangaStampSlam {
+            0% {
+                opacity: 0;
+                transform: scale(1.55) rotate(calc(var(--sr-rot, -3deg) - 10deg));
+            }
+            65% {
+                opacity: 1;
+                transform: scale(0.94) rotate(calc(var(--sr-rot, -3deg) + 1.5deg));
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(var(--sr-rot, -3deg));
+            }
+        }
+
         /* Accessibility: Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             html {
@@ -2684,6 +2867,15 @@
             }
             .manga-loader {
                 display: none !important;
+            }
+            .sr-hidden,
+            .chapter.sr-ch-hidden .chapter-num,
+            .chapter.sr-ch-hidden h2,
+            .chapter.sr-ch-hidden .chapter-folio,
+            .chapter.sr-ch-hidden .chapter-line,
+            .status-sheet.sr-hidden .stat-meter-fill {
+                opacity: 1 !important;
+                transform: none !important;
             }
             *, *::before, *::after {
                 transition-duration: 0.01ms !important;
@@ -2762,6 +2954,9 @@
                     <span class="menu-bars" aria-hidden="true"><span></span><span></span><span></span></span>
                 </button>
             </div>
+        </div>
+        <div class="read-progress" aria-hidden="true">
+            <span class="read-progress-fill" id="readProgressFill"></span>
         </div>
     </header>
 
@@ -4126,6 +4321,55 @@
                 sections.forEach((s) => observer.observe(s.el));
             }
 
+            // Manga Scroll Animations (1-4: Panel Snap-In, Chapter Ink Slash, Status Power-Up & Stamp Slam)
+            if ('IntersectionObserver' in window && !prefersReducedMotion) {
+                const armReveal = (el, hiddenCls, playCls, delayMs) => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.94) return;
+                    if (delayMs) el.style.setProperty('--sr-delay', delayMs + 'ms');
+                    el.classList.add(hiddenCls);
+                    el.setAttribute('data-sr-play', playCls);
+                    el.setAttribute('data-sr-hidden', hiddenCls);
+                    revealObserver.observe(el);
+                };
+
+                const revealObserver = new IntersectionObserver((entries, obs) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        const el = entry.target;
+                        const hiddenCls = el.getAttribute('data-sr-hidden');
+                        const playCls = el.getAttribute('data-sr-play');
+                        if (hiddenCls) el.classList.remove(hiddenCls);
+                        if (playCls) el.classList.add(playCls);
+                        obs.unobserve(el);
+                    });
+                }, { threshold: 0.04, rootMargin: '0px 0px -12px 0px' });
+
+                document.querySelectorAll('.chapter').forEach((ch) => {
+                    armReveal(ch, 'sr-ch-hidden', 'sr-ch-play', 0);
+                });
+
+                const revealGroups = [
+                    { sel: '.stat-box', step: 55, mod: 4 },
+                    { sel: '.about-card', step: 75, mod: 2 },
+                    { sel: '.status-sheet', step: 0, mod: 1 },
+                    { sel: '.service-card', step: 55, mod: 3 },
+                    { sel: '.career-strip', step: 0, mod: 1 },
+                    { sel: '.project-filters', step: 0, mod: 1 },
+                    { sel: '.project-card', step: 65, mod: 3 },
+                    { sel: '.cert-card', step: 80, mod: 2 },
+                    { sel: '.contact-panel, .omake-note', step: 90, mod: 2 },
+                    { sel: '.footer-main, .footer-bottom', step: 70, mod: 2 }
+                ];
+
+                revealGroups.forEach((grp) => {
+                    document.querySelectorAll(grp.sel).forEach((el, idx) => {
+                        const delay = grp.step ? (idx % grp.mod) * grp.step : 0;
+                        armReveal(el, 'sr-hidden', 'sr-play', delay);
+                    });
+                });
+            }
+
             // Project Category Filter
             const filterBtns = document.querySelectorAll('.filter-btn');
             const projectsGrid = document.getElementById('projectsGrid');
@@ -4141,6 +4385,10 @@
                         const tags = card.getAttribute('data-filter-tags') || '';
                         const visible = filter === 'all' || tags.includes(filter);
                         card.style.display = visible ? 'flex' : 'none';
+                        if (visible && card.classList.contains('sr-hidden')) {
+                            card.classList.remove('sr-hidden');
+                            card.classList.add('sr-play');
+                        }
                     });
                 });
             });
@@ -4299,7 +4547,8 @@
                 });
             }
 
-            // Back-to-Top Progress Ring (rAF-Coalesced, Cached Height, Zero Layout Thrash)
+            // Back-to-Top Progress Ring & Top Reading Ink Bar (rAF-Coalesced, Cached Height, Zero Layout Thrash)
+            const readProgressFill = document.getElementById('readProgressFill');
             const backToTop = backToTopBtn;
             if (backToTop) {
                 const circle = backToTop.querySelector('.progress-ring__circle');
@@ -4331,6 +4580,9 @@
                         backToTop.classList.toggle('visible', visible);
                     }
                     const progress = Math.min(1, Math.max(0, y / maxScroll));
+                    if (readProgressFill) {
+                        readProgressFill.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+                    }
                     const isComplete = progress >= 0.985;
                     if (isComplete !== complete) {
                         complete = isComplete;
