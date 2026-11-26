@@ -1589,7 +1589,7 @@
         }
 
         /* =====================================================================
-           MANGA BGM MINI-PLAYER (KANA-BOON — Silhouette · Official Embed)
+           MANGA BGM MINI-PLAYER (KANA-BOON — Silhouette · Official YouTube)
            ===================================================================== */
         .bgm-fab {
             position: fixed;
@@ -1621,7 +1621,7 @@
         [data-theme="dark"] .bgm-fab.is-open {
             text-shadow: 1px 1px 0 #111111;
         }
-        .bgm-fab.is-loaded:not(.is-open) {
+        .bgm-fab.is-playing:not(.is-open) {
             border-color: var(--ink);
             box-shadow: 4px 4px 0 var(--red);
         }
@@ -1644,13 +1644,13 @@
         .bgm-eq span:nth-child(3) {
             transform: scaleY(0.55);
         }
-        .bgm-fab.is-loaded .bgm-eq span {
+        .bgm-fab.is-playing .bgm-eq span {
             animation: bgmBounce 0.72s ease-in-out infinite alternate;
         }
-        .bgm-fab.is-loaded .bgm-eq span:nth-child(2) {
+        .bgm-fab.is-playing .bgm-eq span:nth-child(2) {
             animation-delay: 0.18s;
         }
-        .bgm-fab.is-loaded .bgm-eq span:nth-child(3) {
+        .bgm-fab.is-playing .bgm-eq span:nth-child(3) {
             animation-delay: 0.34s;
         }
         @keyframes bgmBounce {
@@ -1730,7 +1730,13 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .bgm-min-btn {
+        .bgm-deck-actions {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .bgm-act-btn {
             flex-shrink: 0;
             width: 32px;
             height: 32px;
@@ -1742,42 +1748,19 @@
             border: 2.5px solid var(--ink);
             box-shadow: 2px 2px 0 var(--ink);
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1;
             cursor: pointer;
             transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease;
         }
-        .bgm-min-btn:hover {
-            background: var(--red);
-            color: var(--on-red);
-            transform: translate(-1px, -1px);
-        }
-        .bgm-tabs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-bottom: 3px solid var(--ink);
-            background: var(--panel);
-        }
-        .bgm-tab {
-            padding: 7px 8px 5px;
-            border: none;
-            background: transparent;
-            color: var(--ink);
-            font-family: var(--font-display);
-            font-size: 0.96rem;
-            letter-spacing: 0.06em;
-            cursor: pointer;
-            transition: background-color 0.12s ease, color 0.12s ease;
-        }
-        .bgm-tab + .bgm-tab {
-            border-left: 3px solid var(--ink);
-        }
-        .bgm-tab:hover:not(.active) {
-            background: var(--paper);
-        }
-        .bgm-tab.active {
+        .bgm-act-btn:hover {
             background: var(--ink);
             color: var(--panel);
+            transform: translate(-1px, -1px);
+        }
+        .bgm-act-btn.is-stop:hover {
+            background: var(--red);
+            color: var(--on-red);
         }
         .bgm-frame-wrap {
             padding: 10px;
@@ -1785,6 +1768,7 @@
         }
         .bgm-frame-slot {
             width: 100%;
+            aspect-ratio: 16 / 9;
             border: 2.5px solid var(--ink);
             background: #121212;
             overflow: hidden;
@@ -1792,15 +1776,9 @@
         }
         .bgm-frame-slot iframe {
             width: 100%;
+            height: 100%;
             border: 0;
             display: block;
-        }
-        .bgm-frame-slot.is-spotify iframe {
-            height: 152px;
-        }
-        .bgm-frame-slot.is-youtube iframe {
-            aspect-ratio: 16 / 9;
-            height: auto;
         }
         .bgm-hint {
             margin-top: 8px;
@@ -3291,8 +3269,8 @@
         <a href="#contact" class="rail-item" data-rail="contact" title="Penutup — Kontak">END</a>
     </nav>
 
-    <!-- Manga BGM Floating Trigger & Expandable Deck (KANA-BOON — Silhouette) -->
-    <button type="button" class="bgm-fab" id="bgmToggle" aria-label="Buka pemutar musik BGM Silhouette — KANA-BOON" aria-expanded="false" aria-controls="bgmDeck">
+    <!-- Manga BGM Floating Trigger & Expandable Deck (KANA-BOON — Silhouette · YouTube) -->
+    <button type="button" class="bgm-fab" id="bgmToggle" aria-label="Putar atau buka pemutar musik BGM Silhouette — KANA-BOON" aria-expanded="false" aria-controls="bgmDeck">
         <span class="bgm-eq" aria-hidden="true"><span></span><span></span><span></span></span>
         <span>♪ BGM</span>
         <span class="bgm-track-mini">SILHOUETTE</span>
@@ -3301,18 +3279,17 @@
     <aside class="bgm-deck" id="bgmDeck" aria-label="Pemutar musik BGM Silhouette — KANA-BOON" aria-hidden="true">
         <div class="bgm-deck-head">
             <div class="bgm-deck-meta">
-                <span class="bgm-kicker" data-i18n="bgm.kicker">BGM · ANIME OP</span>
+                <span class="bgm-kicker" data-i18n="bgm.kicker">BGM · YOUTUBE</span>
                 <span class="bgm-title">SILHOUETTE — KANA-BOON</span>
             </div>
-            <button type="button" class="bgm-min-btn" id="bgmMinimize" aria-label="Sembunyikan panel musik">—</button>
-        </div>
-        <div class="bgm-tabs" role="tablist" aria-label="Sumber musik">
-            <button type="button" class="bgm-tab active" data-bgm-src="spotify" role="tab" aria-selected="true">SPOTIFY</button>
-            <button type="button" class="bgm-tab" data-bgm-src="youtube" role="tab" aria-selected="false">YOUTUBE FULL</button>
+            <div class="bgm-deck-actions">
+                <button type="button" class="bgm-act-btn" id="bgmMinimize" aria-label="Sembunyikan panel musik" title="Minimize">—</button>
+                <button type="button" class="bgm-act-btn is-stop" id="bgmStop" aria-label="Matikan musik BGM" title="Stop">✕</button>
+            </div>
         </div>
         <div class="bgm-frame-wrap">
-            <div class="bgm-frame-slot is-spotify" id="bgmFrameSlot"></div>
-            <p class="bgm-hint" data-i18n="bgm.hint">Klik ▶ lalu tekan — untuk tutup panel sambil musik tetap berjalan.</p>
+            <div class="bgm-frame-slot" id="bgmFrameSlot"></div>
+            <p class="bgm-hint" data-i18n="bgm.hint">Otomatis diputar &amp; loop. Tekan — untuk sembunyikan panel (musik tetap jalan), atau ✕ untuk berhenti.</p>
         </div>
     </aside>
 
@@ -3494,8 +3471,8 @@
                     'omake.kicker': 'CATATAN MANGAKA · OMAKE',
                     'omake.text': 'Terima kasih sudah membaca sampai halaman terakhir! Portofolio ini diracik sendiri tanpa framework berat supaya terasa ringan seperti membalik halaman komik. Butuh bantuan bangun aplikasi Laravel, React, atau sistem instansi? Kirim pesan saja — kopi sudah siap!',
                     'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
-                    'bgm.kicker': 'BGM · ANIME OP',
-                    'bgm.hint': 'Klik ▶ lalu tekan — untuk tutup panel sambil musik tetap berjalan.',
+                    'bgm.kicker': 'BGM · YOUTUBE',
+                    'bgm.hint': 'Otomatis diputar & loop. Tekan — untuk sembunyikan panel (musik tetap jalan), atau ✕ untuk berhenti.',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)',
                     'modal.close': 'TUTUP [ESC]'
                 },
@@ -3585,8 +3562,8 @@
                     'omake.kicker': 'AUTHOR\'S NOTE · OMAKE',
                     'omake.text': 'Thanks for reading all the way to the final page! This portfolio was hand-crafted without heavy frameworks so it feels as snappy as flipping through manga pages. Need help building a Laravel, React, or institutional web app? Drop me a message — coffee\'s already brewed!',
                     'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
-                    'bgm.kicker': 'BGM · ANIME OP',
-                    'bgm.hint': 'Press ▶ then tap — to minimize while music keeps playing.',
+                    'bgm.kicker': 'BGM · YOUTUBE',
+                    'bgm.hint': 'Auto-plays & loops. Tap — to minimize while music keeps playing, or ✕ to stop.',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — THE END (FOR NOW)',
                     'modal.close': 'CLOSE [ESC]'
                 }
@@ -3605,8 +3582,9 @@
                     modalCloseAria: 'Tutup pratinjau',
                     backToTopAria: 'Kembali ke atas',
                     railAria: 'Daftar bab manga',
-                    bgmOpenAria: 'Buka pemutar musik BGM Silhouette — KANA-BOON',
+                    bgmOpenAria: 'Putar atau buka pemutar musik BGM Silhouette — KANA-BOON',
                     bgmMinAria: 'Sembunyikan panel musik',
+                    bgmStopAria: 'Matikan musik BGM',
                     pagePrefix: 'HAL.',
                     railTitles: {
                         top: 'Episode 01 — Beranda',
@@ -3634,8 +3612,9 @@
                     modalCloseAria: 'Close preview',
                     backToTopAria: 'Back to top',
                     railAria: 'Manga chapter index',
-                    bgmOpenAria: 'Open BGM music player Silhouette — KANA-BOON',
+                    bgmOpenAria: 'Play or toggle BGM music player Silhouette — KANA-BOON',
                     bgmMinAria: 'Minimize music panel',
+                    bgmStopAria: 'Stop BGM music',
                     pagePrefix: 'P.',
                     railTitles: {
                         top: 'Episode 01 — Home',
@@ -3656,8 +3635,8 @@
             const bgmToggle = document.getElementById('bgmToggle');
             const bgmDeck = document.getElementById('bgmDeck');
             const bgmMinimize = document.getElementById('bgmMinimize');
+            const bgmStop = document.getElementById('bgmStop');
             const bgmFrameSlot = document.getElementById('bgmFrameSlot');
-            const bgmTabs = document.querySelectorAll('.bgm-tab[data-bgm-src]');
 
             let currentLang = html.getAttribute('data-lang') === 'en' ? 'en' : 'id';
             const CHAPTER_IDS = ['top', 'about', 'services', 'experience', 'projects', 'certs', 'contact'];
@@ -3718,6 +3697,7 @@
                 if (chapterRail) chapterRail.setAttribute('aria-label', ui.railAria);
                 if (bgmToggle) bgmToggle.setAttribute('aria-label', ui.bgmOpenAria);
                 if (bgmMinimize) bgmMinimize.setAttribute('aria-label', ui.bgmMinAria);
+                if (bgmStop) bgmStop.setAttribute('aria-label', ui.bgmStopAria);
 
                 syncRailPage();
                 syncThemeUI(html.getAttribute('data-theme') || 'light');
@@ -3725,68 +3705,87 @@
 
             applyLang(currentLang);
 
-            // Manga BGM Mini-Player (Lazy Official Spotify / YouTube Embed, Minimize Keeps Audio Playing)
-            const BGM_SOURCES = {
-                spotify: {
-                    cls: 'bgm-frame-slot is-spotify',
-                    title: 'Spotify — KANA-BOON Silhouette',
-                    src: 'https://open.spotify.com/embed/track/21z1GxeHjfD3qkaF5CgCTO?utm_source=generator&theme=0',
-                    allow: 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
-                },
-                youtube: {
-                    cls: 'bgm-frame-slot is-youtube',
-                    title: 'YouTube — KANA-BOON Silhouette Official Music Video',
-                    src: 'https://www.youtube-nocookie.com/embed/ZFoJYI7Q4iA?rel=0&modestbranding=1',
-                    allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                }
-            };
-            let bgmMountedSrc = null;
+            // Manga BGM Mini-Player (Official YouTube Instant Auto-Play & Loop, Minimize Keeps Audio Playing)
+            const BGM_YT_ID = 'ZFoJYI7Q4iA';
+            let bgmIframe = null;
 
-            const mountBgmSource = (key) => {
-                if (!bgmFrameSlot || !BGM_SOURCES[key]) return;
-                if (bgmMountedSrc === key) return;
-                const cfg = BGM_SOURCES[key];
-                bgmFrameSlot.className = cfg.cls;
-                bgmFrameSlot.textContent = '';
+            const setBgmPlaying = (playing) => {
+                if (bgmToggle) bgmToggle.classList.toggle('is-playing', playing);
+            };
+
+            const mountBgmYoutube = () => {
+                if (!bgmFrameSlot || bgmIframe) return;
+                const params = new URLSearchParams({
+                    autoplay: '1',
+                    loop: '1',
+                    playlist: BGM_YT_ID,
+                    rel: '0',
+                    modestbranding: '1',
+                    playsinline: '1',
+                    enablejsapi: '1'
+                });
+                if (window.location && /^https?:\/\//.test(window.location.origin)) {
+                    params.set('origin', window.location.origin);
+                }
                 const iframe = document.createElement('iframe');
-                iframe.src = cfg.src;
-                iframe.title = cfg.title;
-                iframe.allow = cfg.allow;
-                iframe.loading = 'lazy';
+                iframe.src = 'https://www.youtube-nocookie.com/embed/' + BGM_YT_ID + '?' + params.toString();
+                iframe.title = 'YouTube — KANA-BOON Silhouette Official Music Video';
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
                 iframe.referrerPolicy = 'strict-origin-when-cross-origin';
                 iframe.setAttribute('allowfullscreen', '');
-                bgmFrameSlot.appendChild(iframe);
-                bgmMountedSrc = key;
-                if (bgmToggle) bgmToggle.classList.add('is-loaded');
-                bgmTabs.forEach((tab) => {
-                    const active = tab.getAttribute('data-bgm-src') === key;
-                    tab.classList.toggle('active', active);
-                    tab.setAttribute('aria-selected', active ? 'true' : 'false');
+                iframe.addEventListener('load', () => {
+                    try {
+                        iframe.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1 }), 'https://www.youtube-nocookie.com');
+                    } catch (err) {}
                 });
+                bgmFrameSlot.textContent = '';
+                bgmFrameSlot.appendChild(iframe);
+                bgmIframe = iframe;
+                setBgmPlaying(true);
             };
 
             const setBgmOpen = (open) => {
                 if (!bgmDeck || !bgmToggle) return;
-                if (open && !bgmMountedSrc) mountBgmSource('spotify');
                 bgmDeck.classList.toggle('open', open);
                 bgmDeck.setAttribute('aria-hidden', open ? 'false' : 'true');
                 bgmToggle.classList.toggle('is-open', open);
                 bgmToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             };
 
+            const stopBgm = () => {
+                if (bgmFrameSlot) bgmFrameSlot.textContent = '';
+                bgmIframe = null;
+                setBgmPlaying(false);
+                setBgmOpen(false);
+            };
+
+            window.addEventListener('message', (e) => {
+                if (!bgmIframe) return;
+                if (e.origin !== 'https://www.youtube-nocookie.com' && e.origin !== 'https://www.youtube.com') return;
+                if (typeof e.data !== 'string') return;
+                try {
+                    const msg = JSON.parse(e.data);
+                    if (msg && msg.event === 'infoDelivery' && msg.info && typeof msg.info.playerState === 'number') {
+                        setBgmPlaying(msg.info.playerState === 1 || msg.info.playerState === 3);
+                    }
+                } catch (err) {}
+            });
+
             if (bgmToggle && bgmDeck) {
                 bgmToggle.addEventListener('click', () => {
-                    setBgmOpen(!bgmDeck.classList.contains('open'));
+                    if (!bgmIframe) {
+                        setBgmOpen(true);
+                        mountBgmYoutube();
+                    } else {
+                        setBgmOpen(!bgmDeck.classList.contains('open'));
+                    }
                 });
                 if (bgmMinimize) {
                     bgmMinimize.addEventListener('click', () => setBgmOpen(false));
                 }
-                bgmTabs.forEach((tab) => {
-                    tab.addEventListener('click', () => {
-                        const key = tab.getAttribute('data-bgm-src');
-                        if (key) mountBgmSource(key);
-                    });
-                });
+                if (bgmStop) {
+                    bgmStop.addEventListener('click', stopBgm);
+                }
             }
 
             // Interactive Click SFX Burst (GPU-Only, Respects Reduced Motion)
@@ -3822,7 +3821,7 @@
                     spawnSfx(e, ui.sfxCopied);
                 } else if (e.target.closest('#themeToggle')) {
                     spawnSfx(e, 'ピカッ!');
-                } else if (e.target.closest('#bgmToggle, .bgm-tab')) {
+                } else if (e.target.closest('#bgmToggle, #bgmStop')) {
                     spawnSfx(e, '♪ ジャン!');
                 } else if (e.target.closest('.lang-opt')) {
                     spawnSfx(e, 'ポン!');
