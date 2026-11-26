@@ -2553,6 +2553,76 @@
             color: var(--on-red);
             transform: translate(-1px, -1px);
         }
+        .loader-enter-wrap {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+        }
+        .manga-loader.is-ready .loader-enter-wrap {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+        .loader-enter-inner {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 2px 4px 6px;
+        }
+        .loader-enter-btn {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px 10px;
+            background: var(--red);
+            color: var(--on-red);
+            border: 3px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--ink);
+            font-family: var(--font-display);
+            font-size: 1.42rem;
+            letter-spacing: 0.08em;
+            line-height: 1.1;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        [data-theme="dark"] .loader-enter-btn {
+            text-shadow: 1.5px 1.5px 0 #111111;
+        }
+        .loader-enter-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--ink);
+        }
+        .loader-enter-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--ink);
+        }
+        .loader-mute-btn {
+            background: transparent;
+            border: none;
+            border-bottom: 1.5px dashed var(--mute);
+            color: var(--mute);
+            font-family: var(--font-body);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            padding: 2px 2px;
+            cursor: pointer;
+            transition: color 0.12s ease, border-color 0.12s ease;
+        }
+        .loader-mute-btn:hover {
+            color: var(--ink);
+            border-bottom-color: var(--ink);
+        }
+        .manga-loader.is-ready .loader-skip {
+            display: none;
+        }
+        .manga-loader.is-ready .loader-foot {
+            justify-content: center;
+        }
 
         /* =====================================================================
            MANGA SCROLL REVEAL ANIMATIONS (GPU-Only · Zero Hover Conflict)
@@ -2772,6 +2842,12 @@
                 </div>
                 <div class="loader-track">
                     <div class="loader-fill" id="loaderFill"></div>
+                </div>
+            </div>
+            <div class="loader-enter-wrap" aria-hidden="true" id="loaderEnterWrap">
+                <div class="loader-enter-inner">
+                    <button type="button" class="loader-enter-btn" id="loaderEnter">▶ BUKA PORTOFOLIO ♪</button>
+                    <button type="button" class="loader-mute-btn" id="loaderMuteEnter">Masuk tanpa suara</button>
                 </div>
             </div>
             <div class="loader-foot">
@@ -3560,35 +3636,76 @@
             const pctEl = document.getElementById('loaderPct');
             const statusEl = document.getElementById('loaderStatus');
             const skipBtn = document.getElementById('loaderSkip');
+            const enterWrap = document.getElementById('loaderEnterWrap');
+            const enterBtn = document.getElementById('loaderEnter');
+            const muteEnterBtn = document.getElementById('loaderMuteEnter');
             const isEn = document.documentElement.getAttribute('data-lang') === 'en';
             const stages = isEn
                 ? ['LOADING PAGES...', 'OPENING PANELS...', 'READY! ドン!']
                 : ['MEMUAT HALAMAN...', 'MEMBUKA PANEL...', 'SIAP! ドン!'];
             if (statusEl) statusEl.textContent = stages[0];
             if (skipBtn) skipBtn.textContent = isEn ? 'SKIP ▶' : 'LEWATI ▶';
+            if (enterBtn) enterBtn.textContent = isEn ? '▶ ENTER PORTFOLIO ♪' : '▶ BUKA PORTOFOLIO ♪';
+            if (muteEnterBtn) muteEnterBtn.textContent = isEn ? 'Enter without sound' : 'Masuk tanpa suara';
 
             document.body.style.overflow = 'hidden';
+            let ready = false;
             let dismissed = false;
-            const finish = () => {
+
+            const markReady = () => {
+                if (ready || dismissed) return;
+                ready = true;
+                if (fill) fill.style.transform = 'scaleX(1)';
+                if (pctEl) pctEl.textContent = '100%';
+                if (statusEl) statusEl.textContent = stages[2];
+                if (enterWrap) enterWrap.setAttribute('aria-hidden', 'false');
+                loader.classList.add('is-ready');
+                if (enterBtn) {
+                    try { enterBtn.focus({ preventScroll: true }); } catch (e) {}
+                }
+            };
+
+            const finish = (withSound) => {
                 if (dismissed) return;
                 dismissed = true;
                 window.__mangaLoaderDone = true;
+                window.__mangaBgmUserMuted = !withSound;
+                window.removeEventListener('keydown', onLoaderKey);
+                if (withSound) {
+                    if (typeof window.__mangaStartBgm === 'function') {
+                        window.__mangaStartBgm();
+                    } else {
+                        const a = document.getElementById('bgmAudio');
+                        if (a) {
+                            a.volume = 0.6;
+                            try { a.play(); } catch (e) {}
+                        }
+                    }
+                }
                 loader.classList.add('is-done');
                 document.body.style.overflow = '';
                 const hide = () => loader.classList.add('is-hidden');
                 loader.addEventListener('transitionend', hide, { once: true });
                 setTimeout(hide, 550);
-                if (typeof window.__mangaStartBgm === 'function') {
-                    window.__mangaStartBgm();
-                }
             };
 
-            if (skipBtn) skipBtn.addEventListener('click', finish);
+            const onLoaderKey = (e) => {
+                if (!ready || dismissed || e.target === muteEnterBtn) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    finish(true);
+                }
+            };
+            window.addEventListener('keydown', onLoaderKey);
 
-            const duration = 950;
+            if (skipBtn) skipBtn.addEventListener('click', () => finish(true));
+            if (enterBtn) enterBtn.addEventListener('click', () => finish(true));
+            if (muteEnterBtn) muteEnterBtn.addEventListener('click', () => finish(false));
+
+            const duration = 820;
             const start = performance.now();
             const step = (now) => {
-                if (dismissed) return;
+                if (dismissed || ready) return;
                 const t = Math.min(1, (now - start) / duration);
                 const eased = 1 - Math.pow(1 - t, 3);
                 const pct = Math.round(eased * 100);
@@ -3600,11 +3717,11 @@
                 if (t < 1) {
                     requestAnimationFrame(step);
                 } else {
-                    setTimeout(finish, 160);
+                    markReady();
                 }
             };
             requestAnimationFrame(step);
-            setTimeout(finish, 2400);
+            setTimeout(markReady, 1800);
         })();
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -3947,10 +4064,10 @@
                 syncBgmUI();
             };
 
-            // Manga BGM Local Audio (Auto-Play After Loading Screen + 1-Tap Gesture Fallback & Fade-In)
-            const BGM_TARGET_VOL = 0.5;
+            // Manga BGM Local Audio (Instant Play on Cover Enter + Fade-In & 1-Click Toggle)
+            const BGM_TARGET_VOL = 0.6;
             let bgmFadeRaf = null;
-            let bgmUserPaused = false;
+            let bgmUserPaused = Boolean(window.__mangaBgmUserMuted);
             let bgmUnlockArmed = false;
 
             const syncBgmUI = () => {
@@ -4048,8 +4165,12 @@
             };
 
             const startBgmAuto = () => {
+                if (window.__mangaBgmUserMuted) {
+                    bgmUserPaused = true;
+                    return;
+                }
                 if (!bgmAudio || bgmUserPaused || !bgmAudio.paused) return;
-                playBgm(750).then((ok) => {
+                playBgm(300).then((ok) => {
                     if (!ok && !bgmUserPaused) armBgmUnlock();
                 });
             };
