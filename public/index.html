@@ -1422,20 +1422,171 @@
         }
 
         /* =====================================================================
-           FOOTER
+           FOOTER — MANGA COLOPHON (奥付) COMPACT
            ===================================================================== */
         .footer {
-            margin-top: 48px;
+            margin-top: 52px;
             border-top: 4px solid var(--ink);
-            background: var(--panel);
-            padding: 20px 0;
-            text-align: center;
+            background-color: var(--panel);
+            background-image: radial-gradient(var(--tone) 1px, transparent 1px);
+            background-size: 12px 12px;
+            padding: 26px 0 calc(24px + env(safe-area-inset-bottom, 0px));
         }
-        .footer p {
+        .footer-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px 24px;
+            flex-wrap: wrap;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .footer-brand-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .footer-logo {
             font-family: var(--font-display);
-            font-size: 1.25rem;
+            font-size: 1.65rem;
+            letter-spacing: 0.06em;
+            line-height: 1;
+            color: var(--ink);
+            transition: color 0.14s ease;
+        }
+        .footer-logo:hover {
+            color: var(--red);
+        }
+        .footer-vol {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+            background: var(--ink);
+            color: var(--panel);
+            padding: 2px 8px 1px;
+            line-height: 1.2;
+        }
+        .footer-meta {
+            font-size: 0.84rem;
+            color: var(--mute);
+            line-height: 1.45;
+        }
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .footer-nav-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+        .footer-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px 14px;
+        }
+        .footer-nav a {
+            font-family: var(--font-display);
+            font-size: 1.04rem;
             letter-spacing: 0.06em;
             color: var(--ink);
+            padding: 2px 2px 1px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+        }
+        .footer-nav a:hover {
+            color: var(--red);
+            border-bottom-color: var(--red);
+            transform: translateY(-1px);
+        }
+        .footer-craft {
+            font-size: 0.8rem;
+            color: var(--mute);
+        }
+        .footer-seal {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            background: var(--panel);
+            color: var(--red);
+            border: 3px solid var(--red);
+            box-shadow: 3px 3px 0 var(--ink);
+            transform: rotate(-6deg);
+            user-select: none;
+            transition: transform 0.16s ease;
+        }
+        .footer-seal:hover {
+            transform: rotate(0deg) scale(1.04);
+        }
+        .footer-seal-kanji {
+            font-family: var(--font-body);
+            font-size: 1.38rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .footer-seal-sub {
+            font-family: var(--font-display);
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+            line-height: 1;
+        }
+        .footer-bottom {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 2px dashed var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px 16px;
+            flex-wrap: wrap;
+        }
+        .footer-copy {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            letter-spacing: 0.06em;
+            color: var(--ink);
+        }
+        .footer-domain {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--mute);
+        }
+        @media (max-width: 1259px) {
+            .footer {
+                padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+            }
+        }
+        @media (max-width: 720px) {
+            .footer-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .footer-nav-col {
+                align-items: flex-start;
+                text-align: left;
+            }
+            .footer-copy {
+                font-size: 1.02rem;
+            }
         }
 
         /* =====================================================================
@@ -3247,11 +3398,38 @@
     </main>
 
     <!-- =================================================================
-         FOOTER
+         FOOTER — MANGA COLOPHON (奥付) COMPACT
          ================================================================= -->
     <footer class="footer">
         <div class="wrap">
-            <p data-i18n="footer.text">&copy; 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)</p>
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-brand-row">
+                        <a href="#top" class="footer-logo">ANGGA.LAB</a>
+                        <span class="footer-vol">VOL. 01 · 奥付</span>
+                    </div>
+                    <p class="footer-meta" data-i18n="footer.meta">Kab. Banjar, Indonesia · Web Craftsman &amp; Full-Stack Dev</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-nav-col">
+                        <nav class="footer-nav" id="footerNav" aria-label="Navigasi cepat footer">
+                            <a href="#top" data-i18n="nav.home">Beranda</a>
+                            <a href="#about" data-i18n="nav.about">Tentang</a>
+                            <a href="#projects" data-i18n="nav.projects">Proyek</a>
+                            <a href="#certs" data-i18n="nav.certs">Sertifikat</a>
+                        </nav>
+                        <span class="footer-craft" data-i18n="footer.craft">Diracik dengan tinta, kopi &amp; kode — Edisi Manga</span>
+                    </div>
+                    <div class="footer-seal" aria-hidden="true" title="Tamat (Sementara)">
+                        <span class="footer-seal-kanji">完</span>
+                        <span class="footer-seal-sub">FIN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copy" data-i18n="footer.text">&copy; 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)</p>
+                <span class="footer-domain">anggawiranata.my.id</span>
+            </div>
         </div>
     </footer>
 
@@ -3498,6 +3676,8 @@
                     'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
                     'bgm.kicker': 'BGM · YOUTUBE',
                     'bgm.hint': 'Otomatis diputar & loop. Tekan — untuk sembunyikan panel (musik tetap jalan), atau ✕ untuk berhenti.',
+                    'footer.meta': 'Kab. Banjar, Indonesia · Web Craftsman & Full-Stack Dev',
+                    'footer.craft': 'Diracik dengan tinta, kopi & kode — Edisi Manga',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)',
                     'modal.close': 'TUTUP [ESC]'
                 },
@@ -3589,6 +3769,8 @@
                     'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
                     'bgm.kicker': 'BGM · YOUTUBE',
                     'bgm.hint': 'Auto-plays & loops. Tap — to minimize while music keeps playing, or ✕ to stop.',
+                    'footer.meta': 'Banjar Regency, Indonesia · Web Craftsman & Full-Stack Dev',
+                    'footer.craft': 'Crafted with ink, coffee & code — Manga Edition',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — THE END (FOR NOW)',
                     'modal.close': 'CLOSE [ESC]'
                 }
@@ -3610,6 +3792,7 @@
                     bgmOpenAria: 'Putar atau buka pemutar musik BGM Silhouette — KANA-BOON',
                     bgmMinAria: 'Sembunyikan panel musik',
                     bgmStopAria: 'Matikan musik BGM',
+                    footerNavAria: 'Navigasi cepat footer',
                     pagePrefix: 'HAL.',
                     railTitles: {
                         top: 'Episode 01 — Beranda',
@@ -3640,6 +3823,7 @@
                     bgmOpenAria: 'Play or toggle BGM music player Silhouette — KANA-BOON',
                     bgmMinAria: 'Minimize music panel',
                     bgmStopAria: 'Stop BGM music',
+                    footerNavAria: 'Footer quick links',
                     pagePrefix: 'P.',
                     railTitles: {
                         top: 'Episode 01 — Home',
@@ -3662,6 +3846,7 @@
             const bgmMinimize = document.getElementById('bgmMinimize');
             const bgmStop = document.getElementById('bgmStop');
             const bgmFrameSlot = document.getElementById('bgmFrameSlot');
+            const footerNav = document.getElementById('footerNav');
 
             let currentLang = html.getAttribute('data-lang') === 'en' ? 'en' : 'id';
             const CHAPTER_IDS = ['top', 'about', 'services', 'experience', 'projects', 'certs', 'contact'];
@@ -3723,6 +3908,7 @@
                 if (bgmToggle) bgmToggle.setAttribute('aria-label', ui.bgmOpenAria);
                 if (bgmMinimize) bgmMinimize.setAttribute('aria-label', ui.bgmMinAria);
                 if (bgmStop) bgmStop.setAttribute('aria-label', ui.bgmStopAria);
+                if (footerNav) footerNav.setAttribute('aria-label', ui.footerNavAria);
 
                 syncRailPage();
                 syncThemeUI(html.getAttribute('data-theme') || 'light');
@@ -3852,7 +4038,7 @@
                     spawnSfx(e, 'ポン!');
                 } else if (e.target.closest('.filter-btn, #menuToggle, #drawerClose')) {
                     spawnSfx(e, 'シュッ!');
-                } else if (e.target.closest('.btn, .project-action, .project-card, .rail-item, .drawer-item')) {
+                } else if (e.target.closest('.btn, .project-action, .project-card, .rail-item, .drawer-item, .footer-nav a')) {
                     spawnSfx(e);
                 }
             });
