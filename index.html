@@ -1589,88 +1589,75 @@
         }
 
         /* =====================================================================
-           MANGA BGM MINI-PLAYER (KANA-BOON — Silhouette · Official YouTube)
+           MANGA BGM MINI-PLAYER (KANA-BOON — Silhouette · Docked in Right Rail)
            ===================================================================== */
-        .bgm-fab {
-            position: fixed;
-            left: max(20px, env(safe-area-inset-left, 20px));
-            bottom: max(20px, env(safe-area-inset-bottom, 20px));
-            height: 48px;
-            padding: 0 14px;
+        .rail-divider {
+            display: none;
+        }
+        .rail-bgm {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background: var(--panel);
             color: var(--ink);
             border: 3px solid var(--ink);
-            box-shadow: 4px 4px 0 var(--ink);
-            z-index: 600;
+            box-shadow: 3px 3px 0 var(--ink);
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            font-family: var(--font-display);
-            font-size: 1.05rem;
-            letter-spacing: 0.06em;
-            transition: transform 0.14s ease, box-shadow 0.14s ease, background-color 0.14s ease, color 0.14s ease;
+            transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
         }
-        .bgm-fab:hover,
-        .bgm-fab.is-open {
+        .rail-bgm:hover {
+            transform: translate(-2px, -1px);
+            box-shadow: 4px 4px 0 var(--ink);
+            color: var(--red);
+        }
+        .rail-bgm.is-open {
             background: var(--red);
             color: var(--on-red);
-            transform: translate3d(-2px, -2px, 0);
-            box-shadow: 6px 6px 0 var(--ink);
+            transform: translate(-2px, -1px);
+            box-shadow: 3px 3px 0 var(--ink);
         }
-        [data-theme="dark"] .bgm-fab.is-open {
-            text-shadow: 1px 1px 0 #111111;
+        .rail-bgm.is-playing:not(.is-open) {
+            background: var(--ink);
+            color: var(--panel);
+            box-shadow: 3px 3px 0 var(--red);
         }
-        .bgm-fab.is-playing:not(.is-open) {
-            border-color: var(--ink);
-            box-shadow: 4px 4px 0 var(--red);
-        }
-        .bgm-eq {
-            display: inline-flex;
+        .rail-bgm .bgm-eq {
+            display: none;
             align-items: flex-end;
-            gap: 2.5px;
-            height: 14px;
+            gap: 2px;
+            height: 12px;
         }
-        .bgm-eq span {
-            width: 3px;
+        .rail-bgm .bgm-eq span {
+            width: 2.5px;
             height: 100%;
             background: currentColor;
             transform-origin: bottom center;
-            transform: scaleY(0.35);
-        }
-        .bgm-eq span:nth-child(2) {
-            transform: scaleY(0.8);
-        }
-        .bgm-eq span:nth-child(3) {
-            transform: scaleY(0.55);
-        }
-        .bgm-fab.is-playing .bgm-eq span {
             animation: bgmBounce 0.72s ease-in-out infinite alternate;
         }
-        .bgm-fab.is-playing .bgm-eq span:nth-child(2) {
+        .rail-bgm .bgm-eq span:nth-child(2) {
             animation-delay: 0.18s;
         }
-        .bgm-fab.is-playing .bgm-eq span:nth-child(3) {
+        .rail-bgm .bgm-eq span:nth-child(3) {
             animation-delay: 0.34s;
+        }
+        .rail-bgm.is-playing .bgm-note {
+            display: none;
+        }
+        .rail-bgm.is-playing .bgm-eq {
+            display: inline-flex;
         }
         @keyframes bgmBounce {
             0% { transform: scaleY(0.28); }
             100% { transform: scaleY(1); }
         }
-        .bgm-track-mini {
-            font-family: var(--font-body);
-            font-size: 0.74rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            opacity: 0.78;
-            padding-left: 8px;
-            border-left: 2px solid currentColor;
-        }
         .bgm-deck {
             position: fixed;
-            left: max(20px, env(safe-area-inset-left, 20px));
-            bottom: calc(max(20px, env(safe-area-inset-bottom, 20px)) + 58px);
-            width: min(calc(100vw - 40px), 348px);
+            right: max(20px, env(safe-area-inset-right, 20px));
+            bottom: calc(max(20px, env(safe-area-inset-bottom, 20px)) + 120px);
+            width: min(calc(100vw - 40px), 336px);
             z-index: 610;
             background: var(--panel);
             border: 4px solid var(--ink);
@@ -1682,7 +1669,7 @@
             visibility: hidden;
             pointer-events: none;
             transform: translate3d(0, 14px, 0) scale(0.97);
-            transform-origin: bottom left;
+            transform-origin: bottom right;
             will-change: transform, opacity;
             transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -1691,6 +1678,39 @@
             visibility: visible;
             pointer-events: auto;
             transform: translate3d(0, 0, 0) scale(1);
+        }
+        @media (min-width: 1260px) {
+            .rail-divider {
+                display: block;
+                width: 24px;
+                height: 0;
+                border-top: 2px dashed var(--tone);
+                margin: 2px 0;
+            }
+            .rail-bgm {
+                width: 36px;
+                height: 28px;
+                background: var(--paper);
+                border: 2px solid var(--ink);
+                box-shadow: none;
+            }
+            .rail-bgm:hover {
+                box-shadow: 2px 2px 0 var(--ink);
+            }
+            .rail-bgm.is-playing:not(.is-open) {
+                box-shadow: 2px 2px 0 var(--red);
+            }
+            .bgm-deck {
+                right: 84px;
+                top: 50%;
+                bottom: auto;
+                width: 336px;
+                transform: translate3d(14px, -50%, 0) scale(0.97);
+                transform-origin: right center;
+            }
+            .bgm-deck.open {
+                transform: translate3d(0, -50%, 0) scale(1);
+            }
         }
         .bgm-deck-head {
             display: flex;
@@ -1785,15 +1805,6 @@
             font-size: 0.76rem;
             color: var(--mute);
             line-height: 1.45;
-        }
-        @media (max-width: 520px) {
-            .bgm-fab {
-                height: 46px;
-                padding: 0 12px;
-            }
-            .bgm-track-mini {
-                display: none;
-            }
         }
 
         /* Toast Notification */
@@ -1940,6 +1951,16 @@
             display: none;
         }
         .chapter-rail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed;
+            right: calc(max(20px, env(safe-area-inset-right, 20px)) + 8px);
+            bottom: calc(max(20px, env(safe-area-inset-bottom, 20px)) + 68px);
+            z-index: 600;
+        }
+        .rail-page,
+        .rail-item {
             display: none;
         }
         @media (min-width: 1260px) {
@@ -1966,19 +1987,22 @@
                 z-index: 40;
             }
             .chapter-rail {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
                 gap: 6px;
-                position: fixed;
                 right: 16px;
                 top: 50%;
+                bottom: auto;
                 transform: translateY(-50%);
                 z-index: 450;
                 background: var(--panel);
                 border: 3px solid var(--ink);
                 box-shadow: 4px 4px 0 var(--ink);
                 padding: 8px 6px;
+            }
+            .rail-page {
+                display: block;
+            }
+            .rail-item {
+                display: inline-flex;
             }
         }
         .rail-page {
@@ -1995,7 +2019,6 @@
         .rail-item {
             width: 36px;
             height: 28px;
-            display: inline-flex;
             align-items: center;
             justify-content: center;
             font-family: var(--font-display);
@@ -3257,7 +3280,7 @@
     <!-- Margin Vertikal Jepang (Tategaki — Desktop Wide Only) -->
     <div class="manga-margin-text" aria-hidden="true">アンガ・ウィラナタ 作品集 — VOL.01</div>
 
-    <!-- Indikator Bab & Halaman Mengambang (Manga Chapter Tracker — Desktop Wide Only) -->
+    <!-- Indikator Bab, Halaman & Tombol BGM Minimalis (Manga Chapter Rail — Sisi Kanan) -->
     <nav class="chapter-rail" id="chapterRail" aria-label="Daftar bab manga">
         <span class="rail-page" id="railPage">HAL. 1/7</span>
         <a href="#top" class="rail-item active" data-rail="top" title="Episode 01 — Beranda">EP</a>
@@ -3267,14 +3290,16 @@
         <a href="#projects" class="rail-item" data-rail="projects" title="Bab 4 — Proyek">04</a>
         <a href="#certs" class="rail-item" data-rail="certs" title="Bab 5 — Sertifikasi">05</a>
         <a href="#contact" class="rail-item" data-rail="contact" title="Penutup — Kontak">END</a>
+        <span class="rail-divider" aria-hidden="true"></span>
+        <button type="button" class="rail-bgm" id="bgmToggle" title="BGM: Silhouette — KANA-BOON" aria-label="Putar atau buka pemutar musik BGM Silhouette — KANA-BOON" aria-expanded="false" aria-controls="bgmDeck">
+            <svg class="bgm-note" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+            <span class="bgm-eq" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
     </nav>
-
-    <!-- Manga BGM Floating Trigger & Expandable Deck (KANA-BOON — Silhouette · YouTube) -->
-    <button type="button" class="bgm-fab" id="bgmToggle" aria-label="Putar atau buka pemutar musik BGM Silhouette — KANA-BOON" aria-expanded="false" aria-controls="bgmDeck">
-        <span class="bgm-eq" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span>♪ BGM</span>
-        <span class="bgm-track-mini">SILHOUETTE</span>
-    </button>
 
     <aside class="bgm-deck" id="bgmDeck" aria-label="Pemutar musik BGM Silhouette — KANA-BOON" aria-hidden="true">
         <div class="bgm-deck-head">
