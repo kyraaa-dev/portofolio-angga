@@ -1740,7 +1740,7 @@
         }
 
         /* =====================================================================
-           MANGA BGM MINI-PLAYER (KANA-BOON — Silhouette · Docked in Right Rail)
+           MANGA BGM MINIMALIST TOGGLE (Local Audio · Docked in Right Rail)
            ===================================================================== */
         .rail-divider {
             display: none;
@@ -1764,16 +1764,22 @@
             box-shadow: 4px 4px 0 var(--ink);
             color: var(--red);
         }
-        .rail-bgm.is-open {
+        .rail-bgm.is-awaiting {
+            border-color: var(--red);
+            color: var(--red);
+            animation: bgmReadyPulse 1.5s ease-in-out infinite;
+        }
+        .rail-bgm.is-playing {
             background: var(--red);
             color: var(--on-red);
-            transform: translate(-2px, -1px);
+            border-color: var(--ink);
             box-shadow: 3px 3px 0 var(--ink);
         }
-        .rail-bgm.is-playing:not(.is-open) {
-            background: var(--ink);
-            color: var(--panel);
-            box-shadow: 3px 3px 0 var(--red);
+        .rail-bgm.is-playing:hover {
+            color: var(--on-red);
+        }
+        [data-theme="dark"] .rail-bgm.is-playing {
+            text-shadow: 1px 1px 0 #111111;
         }
         .rail-bgm .bgm-eq {
             display: none;
@@ -1804,31 +1810,9 @@
             0% { transform: scaleY(0.28); }
             100% { transform: scaleY(1); }
         }
-        .bgm-deck {
-            position: fixed;
-            right: max(20px, env(safe-area-inset-right, 20px));
-            bottom: calc(max(20px, env(safe-area-inset-bottom, 20px)) + 120px);
-            width: min(calc(100vw - 40px), 336px);
-            z-index: 610;
-            background: var(--panel);
-            border: 4px solid var(--ink);
-            box-shadow: 7px 7px 0 var(--ink);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translate3d(0, 14px, 0) scale(0.97);
-            transform-origin: bottom right;
-            will-change: transform, opacity;
-            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .bgm-deck.open {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            transform: translate3d(0, 0, 0) scale(1);
+        @keyframes bgmReadyPulse {
+            0%, 100% { box-shadow: 3px 3px 0 var(--ink); }
+            50% { box-shadow: 3px 3px 0 var(--red); }
         }
         @media (min-width: 1260px) {
             .rail-divider {
@@ -1845,117 +1829,10 @@
                 border: 2px solid var(--ink);
                 box-shadow: none;
             }
-            .rail-bgm:hover {
+            .rail-bgm:hover,
+            .rail-bgm.is-playing {
                 box-shadow: 2px 2px 0 var(--ink);
             }
-            .rail-bgm.is-playing:not(.is-open) {
-                box-shadow: 2px 2px 0 var(--red);
-            }
-            .bgm-deck {
-                right: 84px;
-                top: 50%;
-                bottom: auto;
-                width: 336px;
-                transform: translate3d(14px, -50%, 0) scale(0.97);
-                transform-origin: right center;
-            }
-            .bgm-deck.open {
-                transform: translate3d(0, -50%, 0) scale(1);
-            }
-        }
-        .bgm-deck-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 11px 12px;
-            background-color: var(--paper);
-            background-image: radial-gradient(var(--tone) 1px, transparent 1px);
-            background-size: 8px 8px;
-            border-bottom: 3px solid var(--ink);
-        }
-        .bgm-deck-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-width: 0;
-        }
-        .bgm-kicker {
-            display: inline-block;
-            align-self: flex-start;
-            font-family: var(--font-display);
-            font-size: 0.84rem;
-            letter-spacing: 0.08em;
-            background: var(--red);
-            color: var(--on-red);
-            padding: 1px 7px 0;
-            border: 2px solid var(--ink);
-            line-height: 1.2;
-        }
-        .bgm-title {
-            font-family: var(--font-display);
-            font-size: 1.15rem;
-            letter-spacing: 0.05em;
-            color: var(--ink);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .bgm-deck-actions {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-        .bgm-act-btn {
-            flex-shrink: 0;
-            width: 32px;
-            height: 32px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--panel);
-            color: var(--ink);
-            border: 2.5px solid var(--ink);
-            box-shadow: 2px 2px 0 var(--ink);
-            font-family: var(--font-display);
-            font-size: 1.1rem;
-            line-height: 1;
-            cursor: pointer;
-            transition: transform 0.12s ease, background-color 0.12s ease, color 0.12s ease;
-        }
-        .bgm-act-btn:hover {
-            background: var(--ink);
-            color: var(--panel);
-            transform: translate(-1px, -1px);
-        }
-        .bgm-act-btn.is-stop:hover {
-            background: var(--red);
-            color: var(--on-red);
-        }
-        .bgm-frame-wrap {
-            padding: 10px;
-            background: var(--panel);
-        }
-        .bgm-frame-slot {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: 2.5px solid var(--ink);
-            background: #121212;
-            overflow: hidden;
-            line-height: 0;
-        }
-        .bgm-frame-slot iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-        }
-        .bgm-hint {
-            margin-top: 8px;
-            font-size: 0.76rem;
-            color: var(--mute);
-            line-height: 1.45;
         }
 
         /* Toast Notification */
@@ -3642,7 +3519,7 @@
         <a href="#certs" class="rail-item" data-rail="certs" title="Bab 5 — Sertifikasi">05</a>
         <a href="#contact" class="rail-item" data-rail="contact" title="Penutup — Kontak">END</a>
         <span class="rail-divider" aria-hidden="true"></span>
-        <button type="button" class="rail-bgm" id="bgmToggle" title="BGM: Silhouette — KANA-BOON" aria-label="Putar atau buka pemutar musik BGM Silhouette — KANA-BOON" aria-expanded="false" aria-controls="bgmDeck">
+        <button type="button" class="rail-bgm" id="bgmToggle" title="BGM: Putar / Jeda" aria-label="Putar musik BGM" aria-pressed="false">
             <svg class="bgm-note" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M9 18V5l12-2v13"></path>
                 <circle cx="6" cy="18" r="3"></circle>
@@ -3652,22 +3529,7 @@
         </button>
     </nav>
 
-    <aside class="bgm-deck" id="bgmDeck" aria-label="Pemutar musik BGM Silhouette — KANA-BOON" aria-hidden="true">
-        <div class="bgm-deck-head">
-            <div class="bgm-deck-meta">
-                <span class="bgm-kicker" data-i18n="bgm.kicker">BGM · YOUTUBE</span>
-                <span class="bgm-title">SILHOUETTE — KANA-BOON</span>
-            </div>
-            <div class="bgm-deck-actions">
-                <button type="button" class="bgm-act-btn" id="bgmMinimize" aria-label="Sembunyikan panel musik" title="Minimize">—</button>
-                <button type="button" class="bgm-act-btn is-stop" id="bgmStop" aria-label="Matikan musik BGM" title="Stop">✕</button>
-            </div>
-        </div>
-        <div class="bgm-frame-wrap">
-            <div class="bgm-frame-slot" id="bgmFrameSlot"></div>
-            <p class="bgm-hint" data-i18n="bgm.hint">Otomatis diputar &amp; loop. Tekan — untuk sembunyikan panel (musik tetap jalan), atau ✕ untuk berhenti.</p>
-        </div>
-    </aside>
+    <audio id="bgmAudio" src="audio/bgm.mp3" preload="auto" loop></audio>
 
     <!-- Back-to-Top Progress Ring (Manga Edition) -->
     <button type="button" class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
@@ -3691,6 +3553,7 @@
             const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             if (reduced) {
                 loader.classList.add('is-hidden');
+                window.__mangaLoaderDone = true;
                 return;
             }
             const fill = document.getElementById('loaderFill');
@@ -3709,11 +3572,15 @@
             const finish = () => {
                 if (dismissed) return;
                 dismissed = true;
+                window.__mangaLoaderDone = true;
                 loader.classList.add('is-done');
                 document.body.style.overflow = '';
                 const hide = () => loader.classList.add('is-hidden');
                 loader.addEventListener('transitionend', hide, { once: true });
                 setTimeout(hide, 550);
+                if (typeof window.__mangaStartBgm === 'function') {
+                    window.__mangaStartBgm();
+                }
             };
 
             if (skipBtn) skipBtn.addEventListener('click', finish);
@@ -3847,8 +3714,6 @@
                     'omake.kicker': 'CATATAN MANGAKA · OMAKE',
                     'omake.text': 'Terima kasih sudah membaca sampai halaman terakhir! Portofolio ini diracik sendiri tanpa framework berat supaya terasa ringan seperti membalik halaman komik. Butuh bantuan bangun aplikasi Laravel, React, atau sistem instansi? Kirim pesan saja — kopi sudah siap!',
                     'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
-                    'bgm.kicker': 'BGM · YOUTUBE',
-                    'bgm.hint': 'Otomatis diputar & loop. Tekan — untuk sembunyikan panel (musik tetap jalan), atau ✕ untuk berhenti.',
                     'footer.meta': 'Kab. Banjar, Indonesia · Web Craftsman & Full-Stack Dev',
                     'footer.craft': 'Diracik dengan tinta, kopi & kode — Edisi Manga',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — TAMAT (SEMENTARA)',
@@ -3940,8 +3805,6 @@
                     'omake.kicker': 'AUTHOR\'S NOTE · OMAKE',
                     'omake.text': 'Thanks for reading all the way to the final page! This portfolio was hand-crafted without heavy frameworks so it feels as snappy as flipping through manga pages. Need help building a Laravel, React, or institutional web app? Drop me a message — coffee\'s already brewed!',
                     'omake.sign': '— ANGGA WIRANATA · ANGGA.LAB VOL. 01',
-                    'bgm.kicker': 'BGM · YOUTUBE',
-                    'bgm.hint': 'Auto-plays & loops. Tap — to minimize while music keeps playing, or ✕ to stop.',
                     'footer.meta': 'Banjar Regency, Indonesia · Web Craftsman & Full-Stack Dev',
                     'footer.craft': 'Crafted with ink, coffee & code — Manga Edition',
                     'footer.text': '© 2026 ANGGA WIRANATA, S.KOM. — THE END (FOR NOW)',
@@ -3962,9 +3825,10 @@
                     modalCloseAria: 'Tutup pratinjau',
                     backToTopAria: 'Kembali ke atas',
                     railAria: 'Daftar bab manga',
-                    bgmOpenAria: 'Putar atau buka pemutar musik BGM Silhouette — KANA-BOON',
-                    bgmMinAria: 'Sembunyikan panel musik',
-                    bgmStopAria: 'Matikan musik BGM',
+                    bgmPlayAria: 'Putar musik BGM',
+                    bgmPauseAria: 'Jeda musik BGM',
+                    bgmPlayTitle: 'BGM: Klik untuk Putar',
+                    bgmPauseTitle: 'BGM: Sedang Diputar (Klik untuk Jeda)',
                     footerNavAria: 'Navigasi cepat footer',
                     pagePrefix: 'HAL.',
                     railTitles: {
@@ -3993,9 +3857,10 @@
                     modalCloseAria: 'Close preview',
                     backToTopAria: 'Back to top',
                     railAria: 'Manga chapter index',
-                    bgmOpenAria: 'Play or toggle BGM music player Silhouette — KANA-BOON',
-                    bgmMinAria: 'Minimize music panel',
-                    bgmStopAria: 'Stop BGM music',
+                    bgmPlayAria: 'Play BGM music',
+                    bgmPauseAria: 'Pause BGM music',
+                    bgmPlayTitle: 'BGM: Click to Play',
+                    bgmPauseTitle: 'BGM: Playing (Click to Pause)',
                     footerNavAria: 'Footer quick links',
                     pagePrefix: 'P.',
                     railTitles: {
@@ -4015,10 +3880,7 @@
             };
 
             const bgmToggle = document.getElementById('bgmToggle');
-            const bgmDeck = document.getElementById('bgmDeck');
-            const bgmMinimize = document.getElementById('bgmMinimize');
-            const bgmStop = document.getElementById('bgmStop');
-            const bgmFrameSlot = document.getElementById('bgmFrameSlot');
+            const bgmAudio = document.getElementById('bgmAudio');
             const footerNav = document.getElementById('footerNav');
 
             let currentLang = html.getAttribute('data-lang') === 'en' ? 'en' : 'id';
@@ -4078,99 +3940,141 @@
                 if (modalCloseBtn) modalCloseBtn.setAttribute('aria-label', ui.modalCloseAria);
                 if (backToTopBtn) backToTopBtn.setAttribute('aria-label', ui.backToTopAria);
                 if (chapterRail) chapterRail.setAttribute('aria-label', ui.railAria);
-                if (bgmToggle) bgmToggle.setAttribute('aria-label', ui.bgmOpenAria);
-                if (bgmMinimize) bgmMinimize.setAttribute('aria-label', ui.bgmMinAria);
-                if (bgmStop) bgmStop.setAttribute('aria-label', ui.bgmStopAria);
                 if (footerNav) footerNav.setAttribute('aria-label', ui.footerNavAria);
 
                 syncRailPage();
                 syncThemeUI(html.getAttribute('data-theme') || 'light');
+                syncBgmUI();
             };
+
+            // Manga BGM Local Audio (Auto-Play After Loading Screen + 1-Tap Gesture Fallback & Fade-In)
+            const BGM_TARGET_VOL = 0.5;
+            let bgmFadeRaf = null;
+            let bgmUserPaused = false;
+            let bgmUnlockArmed = false;
+
+            const syncBgmUI = () => {
+                if (!bgmToggle || !bgmAudio) return;
+                const ui = UI_TEXT[currentLang] || UI_TEXT.id;
+                const playing = !bgmAudio.paused && !bgmAudio.ended;
+                bgmToggle.classList.toggle('is-playing', playing);
+                if (playing) bgmToggle.classList.remove('is-awaiting');
+                bgmToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+                bgmToggle.setAttribute('aria-label', playing ? ui.bgmPauseAria : ui.bgmPlayAria);
+                bgmToggle.setAttribute('title', playing ? ui.bgmPauseTitle : ui.bgmPlayTitle);
+            };
+
+            const fadeBgmIn = (durationMs) => {
+                if (!bgmAudio) return;
+                if (bgmFadeRaf) cancelAnimationFrame(bgmFadeRaf);
+                bgmAudio.volume = 0;
+                const start = performance.now();
+                const step = (now) => {
+                    if (bgmAudio.paused) return;
+                    const t = Math.min(1, (now - start) / durationMs);
+                    bgmAudio.volume = +(t * BGM_TARGET_VOL).toFixed(3);
+                    if (t < 1) {
+                        bgmFadeRaf = requestAnimationFrame(step);
+                    } else {
+                        bgmFadeRaf = null;
+                    }
+                };
+                bgmFadeRaf = requestAnimationFrame(step);
+            };
+
+            const disarmBgmUnlock = () => {
+                if (!bgmUnlockArmed) return;
+                bgmUnlockArmed = false;
+                window.removeEventListener('pointerdown', onFirstGesture, true);
+                window.removeEventListener('click', onFirstGesture, true);
+                window.removeEventListener('keydown', onFirstGesture, true);
+                if (bgmToggle) bgmToggle.classList.remove('is-awaiting');
+            };
+
+            const playBgm = (fadeMs) => {
+                if (!bgmAudio) return Promise.resolve(false);
+                bgmAudio.volume = 0;
+                const p = bgmAudio.play();
+                if (p && typeof p.then === 'function') {
+                    return p.then(() => {
+                        disarmBgmUnlock();
+                        fadeBgmIn(fadeMs || 650);
+                        syncBgmUI();
+                        return true;
+                    }).catch(() => {
+                        syncBgmUI();
+                        return false;
+                    });
+                }
+                disarmBgmUnlock();
+                fadeBgmIn(fadeMs || 650);
+                syncBgmUI();
+                return Promise.resolve(true);
+            };
+
+            const pauseBgm = () => {
+                if (!bgmAudio) return;
+                bgmUserPaused = true;
+                disarmBgmUnlock();
+                if (bgmFadeRaf) {
+                    cancelAnimationFrame(bgmFadeRaf);
+                    bgmFadeRaf = null;
+                }
+                bgmAudio.pause();
+                syncBgmUI();
+            };
+
+            function onFirstGesture(e) {
+                if (bgmUserPaused || !bgmAudio || !bgmAudio.paused) {
+                    disarmBgmUnlock();
+                    return;
+                }
+                if (e && e.target && e.target.closest && e.target.closest('#bgmToggle')) {
+                    disarmBgmUnlock();
+                    return;
+                }
+                playBgm(500).then((ok) => {
+                    if (ok) disarmBgmUnlock();
+                });
+            }
+
+            const armBgmUnlock = () => {
+                if (bgmUnlockArmed || bgmUserPaused) return;
+                bgmUnlockArmed = true;
+                if (bgmToggle) bgmToggle.classList.add('is-awaiting');
+                window.addEventListener('pointerdown', onFirstGesture, { capture: true, passive: true });
+                window.addEventListener('click', onFirstGesture, { capture: true, passive: true });
+                window.addEventListener('keydown', onFirstGesture, { capture: true, passive: true });
+            };
+
+            const startBgmAuto = () => {
+                if (!bgmAudio || bgmUserPaused || !bgmAudio.paused) return;
+                playBgm(750).then((ok) => {
+                    if (!ok && !bgmUserPaused) armBgmUnlock();
+                });
+            };
+
+            window.__mangaStartBgm = startBgmAuto;
+
+            if (bgmAudio) {
+                bgmAudio.addEventListener('play', syncBgmUI);
+                bgmAudio.addEventListener('pause', syncBgmUI);
+                bgmAudio.addEventListener('ended', syncBgmUI);
+            }
+
+            if (bgmToggle && bgmAudio) {
+                bgmToggle.addEventListener('click', () => {
+                    if (bgmAudio.paused) {
+                        bgmUserPaused = false;
+                        playBgm(400);
+                    } else {
+                        pauseBgm();
+                    }
+                });
+            }
 
             applyLang(currentLang);
-
-            // Manga BGM Mini-Player (Official YouTube Instant Auto-Play & Loop, Minimize Keeps Audio Playing)
-            const BGM_YT_ID = 'ZFoJYI7Q4iA';
-            let bgmIframe = null;
-
-            const setBgmPlaying = (playing) => {
-                if (bgmToggle) bgmToggle.classList.toggle('is-playing', playing);
-            };
-
-            const mountBgmYoutube = () => {
-                if (!bgmFrameSlot || bgmIframe) return;
-                const params = new URLSearchParams({
-                    autoplay: '1',
-                    loop: '1',
-                    playlist: BGM_YT_ID,
-                    rel: '0',
-                    modestbranding: '1',
-                    playsinline: '1',
-                    enablejsapi: '1'
-                });
-                if (window.location && /^https?:\/\//.test(window.location.origin)) {
-                    params.set('origin', window.location.origin);
-                }
-                const iframe = document.createElement('iframe');
-                iframe.src = 'https://www.youtube-nocookie.com/embed/' + BGM_YT_ID + '?' + params.toString();
-                iframe.title = 'YouTube — KANA-BOON Silhouette Official Music Video';
-                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-                iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-                iframe.setAttribute('allowfullscreen', '');
-                iframe.addEventListener('load', () => {
-                    try {
-                        iframe.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1 }), 'https://www.youtube-nocookie.com');
-                    } catch (err) {}
-                });
-                bgmFrameSlot.textContent = '';
-                bgmFrameSlot.appendChild(iframe);
-                bgmIframe = iframe;
-                setBgmPlaying(true);
-            };
-
-            const setBgmOpen = (open) => {
-                if (!bgmDeck || !bgmToggle) return;
-                bgmDeck.classList.toggle('open', open);
-                bgmDeck.setAttribute('aria-hidden', open ? 'false' : 'true');
-                bgmToggle.classList.toggle('is-open', open);
-                bgmToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            };
-
-            const stopBgm = () => {
-                if (bgmFrameSlot) bgmFrameSlot.textContent = '';
-                bgmIframe = null;
-                setBgmPlaying(false);
-                setBgmOpen(false);
-            };
-
-            window.addEventListener('message', (e) => {
-                if (!bgmIframe) return;
-                if (e.origin !== 'https://www.youtube-nocookie.com' && e.origin !== 'https://www.youtube.com') return;
-                if (typeof e.data !== 'string') return;
-                try {
-                    const msg = JSON.parse(e.data);
-                    if (msg && msg.event === 'infoDelivery' && msg.info && typeof msg.info.playerState === 'number') {
-                        setBgmPlaying(msg.info.playerState === 1 || msg.info.playerState === 3);
-                    }
-                } catch (err) {}
-            });
-
-            if (bgmToggle && bgmDeck) {
-                bgmToggle.addEventListener('click', () => {
-                    if (!bgmIframe) {
-                        setBgmOpen(true);
-                        mountBgmYoutube();
-                    } else {
-                        setBgmOpen(!bgmDeck.classList.contains('open'));
-                    }
-                });
-                if (bgmMinimize) {
-                    bgmMinimize.addEventListener('click', () => setBgmOpen(false));
-                }
-                if (bgmStop) {
-                    bgmStop.addEventListener('click', stopBgm);
-                }
-            }
+            if (window.__mangaLoaderDone) startBgmAuto();
 
             // Interactive Click SFX Burst (GPU-Only, Respects Reduced Motion)
             const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4205,7 +4109,7 @@
                     spawnSfx(e, ui.sfxCopied);
                 } else if (e.target.closest('#themeToggle')) {
                     spawnSfx(e, 'ピカッ!');
-                } else if (e.target.closest('#bgmToggle, #bgmStop')) {
+                } else if (e.target.closest('#bgmToggle')) {
                     spawnSfx(e, '♪ ジャン!');
                 } else if (e.target.closest('.lang-opt')) {
                     spawnSfx(e, 'ポン!');
