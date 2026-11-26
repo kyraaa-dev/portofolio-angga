@@ -339,25 +339,6 @@
             border-bottom: 4px solid var(--ink);
             padding-top: env(safe-area-inset-top, 0px);
         }
-        .read-progress {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -4px;
-            height: 4px;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 2;
-        }
-        .read-progress-fill {
-            display: block;
-            width: 100%;
-            height: 100%;
-            background: var(--red);
-            transform-origin: left center;
-            transform: scaleX(0);
-            will-change: transform;
-        }
         .nav-inner {
             min-height: var(--nav-h);
             display: flex;
@@ -2955,9 +2936,6 @@
                 </button>
             </div>
         </div>
-        <div class="read-progress" aria-hidden="true">
-            <span class="read-progress-fill" id="readProgressFill"></span>
-        </div>
     </header>
 
     <!-- Mobile Manga Table-of-Contents Drawer + Backdrop -->
@@ -4547,8 +4525,7 @@
                 });
             }
 
-            // Back-to-Top Progress Ring & Top Reading Ink Bar (rAF-Coalesced, Cached Height, Zero Layout Thrash)
-            const readProgressFill = document.getElementById('readProgressFill');
+            // Back-to-Top Progress Ring (rAF-Coalesced, Cached Height, Zero Layout Thrash)
             const backToTop = backToTopBtn;
             if (backToTop) {
                 const circle = backToTop.querySelector('.progress-ring__circle');
@@ -4580,9 +4557,6 @@
                         backToTop.classList.toggle('visible', visible);
                     }
                     const progress = Math.min(1, Math.max(0, y / maxScroll));
-                    if (readProgressFill) {
-                        readProgressFill.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
-                    }
                     const isComplete = progress >= 0.985;
                     if (isComplete !== complete) {
                         complete = isComplete;
